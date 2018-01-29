@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="doctor-portlet/docroot/WEB-INF/src"/>
+	<classpathentry kind="lib" path="doctor-portlet/docroot/js/fusioncharts_bk/export-handlers/java-export-handler/fcexporter.jar"/>
+	<classpathentry kind="lib" path="doctor-portlet/docroot/js/fusioncharts/export-handlers/java-export-handler/fcexporter.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="output" path="doctor-portlet/docroot/WEB-INF/classes"/>
+</classpath>

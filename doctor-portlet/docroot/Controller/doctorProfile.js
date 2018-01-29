@@ -128,4 +128,11 @@ $(document).ready(function() {
 		$(".span-text-doctor-exp").removeAttr("style");
 		$(".btn-cancel-edit-exp").css("display", "none");
 	});
+	
+	
+	
+	
+	
+	
+	
 });

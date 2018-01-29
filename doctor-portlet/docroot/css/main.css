@@ -1,0 +1,18 @@
+span.red{ color:red; }
+.ibox-title,.modal-header{ 
+	padding:1px 10px !important;
+	background-color: rgb(0, 206, 215) !important; 
+	border-color: rgb(0, 206, 215)  !important;}
+.ibox-content {
+	background-color: #fff;
+	border: 1px solid border-color: rgb(0, 206, 215);
+	color: inherit;
+	margin-bottom: 5px;
+	padding: 0 15px;
+}
+
+.modal.large {
+	width: 80%;
+	margin-left: -40%;
+	top: 0px;
+}

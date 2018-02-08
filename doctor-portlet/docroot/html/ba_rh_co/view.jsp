@@ -59,9 +59,7 @@
 				<div class="row-fluid " id="">
 					<div class="form-group span3">
 						<label for="" class="control-label">ชื่อ Case</label> 
-						<select>
-							<option>-- ทั้งหมด --</option>
-						</select>
+						<input type="text"/>
 					</div>
 					<div class="form-group span3">
 						<label for="" class="control-label">ประเภท Case</label> 

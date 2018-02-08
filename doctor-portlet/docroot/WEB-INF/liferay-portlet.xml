@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
-
+     
 <liferay-portlet-app>
-	<portlet>
+	<portlet>                      
 		<portlet-name>doctor</portlet-name>
-		<icon>/icon.png</icon>
+		<icon>/icon.png</icon>     
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>doctor-portlet</css-class-wrapper>
-	</portlet>
-	<portlet>
+	</portlet>     
+	<portlet>                    
 		<portlet-name>doctor-profile</portlet-name>
 		<icon>/icon.png</icon>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
@@ -32,11 +32,13 @@
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
-	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>	     
+	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>		      
+	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>	      
+	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>	         
 	    <footer-portlet-javascript>/Controller/doctorProfile.js</footer-portlet-javascript>
 		<css-class-wrapper>doctor-profile-portlet</css-class-wrapper>
 	</portlet>                             
-	<portlet>  
+	<portlet>     
 		<portlet-name>todolist</portlet-name>
 		<icon>/icon.png</icon>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
@@ -131,7 +133,6 @@
 	    <header-portlet-css>/css/dropify.css</header-portlet-css>
 	    <header-portlet-css>/css/bootstrap-multiselect.css</header-portlet-css>
 		<header-portlet-css>/css/main.css</header-portlet-css>
-	    <header-portlet-css>/css/doctor-portlet.css</header-portlet-css>
         <footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
         <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
@@ -161,7 +162,6 @@
 	    <header-portlet-css>/css/dropify.css</header-portlet-css>
 	    <header-portlet-css>/css/bootstrap-multiselect.css</header-portlet-css>
 		<header-portlet-css>/css/main.css</header-portlet-css>
-	    <header-portlet-css>/css/doctor-portlet.css</header-portlet-css>
         <footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
         <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
@@ -179,7 +179,7 @@
 			/js/main.js
 		</footer-portlet-javascript>
 		<css-class-wrapper>medical-procedure-portlet</css-class-wrapper>
-	</portlet>
+	</portlet> 
 	<portlet>
 		<portlet-name>b-a_-r-h_-co</portlet-name>
 		<icon>/icon.png</icon>
@@ -194,7 +194,6 @@
 	    <header-portlet-css>/css/dropify.css</header-portlet-css>
 	    <header-portlet-css>/css/bootstrap-multiselect.css</header-portlet-css>
 		<header-portlet-css>/css/main.css</header-portlet-css>
-	    <header-portlet-css>/css/doctor-portlet.css</header-portlet-css>
         <footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
         <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
@@ -227,7 +226,6 @@
 	    <header-portlet-css>/css/dropify.css</header-portlet-css>
 	    <header-portlet-css>/css/bootstrap-multiselect.css</header-portlet-css>
 		<header-portlet-css>/css/main.css</header-portlet-css>
-	    <header-portlet-css>/css/doctor-portlet.css</header-portlet-css>
         <footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
         <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
@@ -242,10 +240,10 @@
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>  	      
 	    <footer-portlet-javascript>/Controller/socialMedia.js</footer-portlet-javascript>  
 		<footer-portlet-javascript>
-			/js/main.js
+			/js/main.js   
 		</footer-portlet-javascript>
 		<css-class-wrapper>social-media-portlet</css-class-wrapper>
-	</portlet>   
+	</portlet>     
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

@@ -546,13 +546,14 @@ function getAjax(url,type,data,callback){
 /*clear field in modal*/
 function clearModal(){
 	$(".modal input[type='text'],.modal select,.modal textarea").val('');
+	$('.modal select').val('');
 	$(".modal input[type='radio'],.modal input[type='checkbox']").prop('checked', false);
 }
 
 /*get pagenation*/
 function getPagenation(target,data){
-	$prev_dis = data.current_page == 1?'disabled':'' ;
-	$next_dis = data.current_page == data.last_page?'disabled':'';
+	$prev_dis = data.prev_page_url?'':'disabled' ;
+	$next_dis = data.next_page_url?'':'disabled';
 	$next = data.current_page+1 <= data.last_page?data.current_page+1:'';
 	$html = '<li data-lp="1" class="first '+$prev_dis+'">'
 		+'<a href="javascript:void(0);"><<</a> </li>'
@@ -561,8 +562,8 @@ function getPagenation(target,data){
 			$active = data.current_page == $i ? "active":"";
 			$html+='<li data-lp="'+$i+'" class="'+$active+'"><a href="javascript:void(0);">'+$i+'</a></li>';
 		}
-	$html+= '<li data-lp="'+$next+'" class="next '+$next_dis +'" ><a href="javascript:void(0);">next</a></li>'
-		+'<li data-lp="'+data.last_page+'" class="last '+$next_dis +'"><a href="javascript:void(0);">>></a></li>';
+	$html+= '<li data-lp="'+$next+'" class="next '+$next_dis+'" ><a href="javascript:void(0);">next</a></li>'
+		+'<li data-lp="'+data.last_page+'" class="last '+$next_dis+'"><a href="javascript:void(0);">>></a></li>';
 	$(target).html($html);
 }
 

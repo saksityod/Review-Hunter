@@ -5,10 +5,10 @@ span.red{ color:red; }
 	border-color: rgb(0, 206, 215)  !important;}
 .ibox-content {
 	background-color: #fff;
-	border: 1px solid border-color: rgb(0, 206, 215);
+	border: 1px solid rgb(0, 206, 215);
 	color: inherit;
-	margin-bottom: 5px;
-	padding: 0 15px;
+	margin-bottom: 15px !important;
+    padding: 15px !important;
 }
 
 .modal.large {
@@ -16,3 +16,29 @@ span.red{ color:red; }
 	margin-left: -40%;
 	top: 0px;
 }
+.aui input[type="color"], .aui input[type="date"], .aui input[type="datetime"], .aui input[type="datetime-local"], .aui input[type="month"], .aui input[type="number"], .aui input[type="password"], .aui input[type="text"], .aui input[type="time"], .aui input[type="week"], .aui input[type="email"], .aui input[type="url"], .aui input[type="search"], .aui input[type="tel"], .aui textarea, .aui .uneditable-input{
+	
+	width: 90%;
+}
+.aui lable{ text-size:12px !important; }
+
+.aui .breadcrumbs2 {
+    background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #fff 0px, #f6f6f6 47%, #ededed 100%) repeat scroll 0 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    padding-bottom: 0px;
+}
+
+.pagingDropdown {
+    float: right;
+    padding-top: 5px;
+}
+
+.pagingText {
+    float: right;
+    padding-top: 10px;
+    margin-right: 5px;
+    }
+    
+    
+    .ui-datepicker{z-index:1251 !important;}

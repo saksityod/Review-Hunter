@@ -11,6 +11,7 @@
 		<portlet id="medical-procedure"></portlet>
 		<portlet id="b-a_-r-h_-co"></portlet>
 		<portlet id="social-media"></portlet>
+		<portlet id="writer"></portlet>
 	</category>
 	<category name="category.sample">
 		

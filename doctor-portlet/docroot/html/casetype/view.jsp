@@ -137,12 +137,12 @@
 						<div class="span12 form-horizontal p-t-xxs">
 							<div class="row-fluid p-t-xxs">
 								<form class="form-inline" >
-									<div class="form-group"
+									<div class="form-group span12"
 										style="margin-left: 5px;">
-										<label for="case_type_name" class="col-sm-2 control-label">
+										<label for="case_type_name" class="control-label">
 											Name <span class="red">*</span>
 										</label>
-										<div class="col-sm-10">
+										<div class="span6">
 											<input data-toggle="tooltip" title="Name" data-placement="top"
 												id="add_case_type_name"
 												placeholder="Case Type Name" 
@@ -201,12 +201,12 @@
 						<div class="span12 form-horizontal p-t-xxs">
 							<div class="row-fluid p-t-xxs">
 								<form class="form-inline">
-									<div class="form-group"
+									<div class="form-group span12"
 										style="margin-left: 5px;">
-										<label for="case_type_name" class="col-sm-2 control-label">
+										<label for="case_type_name" class=" control-label">
 											Name <span class="red">*</span>
 										</label>
-										<div class="col-sm-10">
+										<div class="span6">
 											<input data-toggle="tooltip" title="Name" data-placement="top"
 												id="edit_case_type_name" data-id=""
 												placeholder="Case Type Name" 
@@ -214,8 +214,8 @@
 										</div>
 									</div>
 									<div class="form-group" style="margin-left: 5px;">
-										<label for="is_active" class="col-sm-2 control-label">is Active</label>
-										<div class="col-sm-10">
+										<label for="is_active" class=" control-label">is Active</label>
+										<div class="span6">
 											<input data-toggle="tooltip"
 												title="is active" data-placement="top" 
 												id="edit_is_active"

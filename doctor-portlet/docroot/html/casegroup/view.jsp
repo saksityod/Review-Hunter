@@ -281,7 +281,7 @@ $(document).ready(function() {
 				});
 			});
 		})
-		
+		 
 		
 		$('body').on('click','.edit',function(){
 			var id = $(this).data('id');

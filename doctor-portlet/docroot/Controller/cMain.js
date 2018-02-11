@@ -545,8 +545,7 @@ function getAjax(url,type,data,callback){
 
 /*clear field in modal*/
 function clearModal(){
-	$(".modal input[type='text'],.modal select,.modal textarea").val('');
-	$('.modal select').val('');
+	$(".modal input[type='text'],.modal input[type='number'],.modal select,.modal textarea").val('');
 	$(".modal input[type='radio'],.modal input[type='checkbox']").prop('checked', false);
 }
 

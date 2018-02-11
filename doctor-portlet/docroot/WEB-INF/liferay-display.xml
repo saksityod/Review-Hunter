@@ -12,6 +12,7 @@
 		<portlet id="b-a_-r-h_-co"></portlet>
 		<portlet id="social-media"></portlet>
 		<portlet id="writer"></portlet>
+		<portlet id="case-group"></portlet>
 	</category>
 	<category name="category.sample">
 		

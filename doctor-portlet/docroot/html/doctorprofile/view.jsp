@@ -60,7 +60,7 @@ plid = layout.getPlid();
 
 						<div class="form-group pull-left span6">
 						<label>ชื่อแพทย์</label>	
-							<input data-toggle="tooltip" title="ชื่อแพทย์"
+							<input data-toggle="tooltip"
 								data-placement="top" class="span12 m-b-n ui-autocomplete-input"
 								placeholder="ชื่อแพทย์" id="doctor_name" name="doctor_name"
 								type="text">
@@ -68,7 +68,7 @@ plid = layout.getPlid();
 						<div id="drop_down_organization"
 							class="form-group pull-left span4">
 						<label>หัตถการ</label>	
-							<select data-toggle="tooltip" title="หัตถการ"
+							<select data-toggle="tooltip"
 								class="input span12 m-b-n" id="medical_procedure"
 								name="search_org">
 								<option selected value="">-- ทั้งหมด  --</option>
@@ -194,7 +194,7 @@ plid = layout.getPlid();
 							<label class="control-label">ชื่อแพทย์:<span
 								class='redFont'>*</span></label>
 							<div class="controls">
-								<input type="text" class="form-control input-sm span12 validation"
+								<input type="text" class="form-control input-sm validation"
 									placeholder="" name="from_doctor_name" id="from_doctor_name">
 							</div>
 						</div>
@@ -224,7 +224,7 @@ plid = layout.getPlid();
 						<div class="form-group p-xxs">
 							<label class="control-label">ความเชี่ยวชาญ:<span class='redFont'>*</span></label>
 							<div class="controls">
-								<textarea rows="4" cols="50" class="form-control input-sm span12 validation" 
+								<textarea rows="4" cols="50" class="form-control input-sm validation" 
 									name="from_doctor_exp" id="from_doctor_exp"></textarea>
 							</div>
 						</div>

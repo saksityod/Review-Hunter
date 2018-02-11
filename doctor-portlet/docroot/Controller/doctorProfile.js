@@ -78,7 +78,7 @@ $(document).ready(function() {
 						$method = $btn_del.data("method")
 						$url = $plRoute+"/destroy_"+$method;
 						$data = {arr : JSON.stringify($arr)};
-						$callback = function(rs){
+						getAjax($url,'post',$data,function(rs){
 							if(rs.status == 200){
 				 				$.each(jQuery.parseJSON(rs.data),function(i,v){
 				 					$("table."+$method+"-table tr[data-id='"+v+"']").remove();
@@ -88,8 +88,7 @@ $(document).ready(function() {
 								callFlashSlide("ไม่สามารถลบข้อมูลได้",'error');
 							}
 			 				$('#confrimModal').modal('hide');
-						};
-						getAjax($url,'post',$data,$callback);
+						});
 					}
 			    });
 			}
@@ -109,7 +108,7 @@ $(document).ready(function() {
 				$url = $plRoute+"/destroy_doctor";
 				$data = {id : $id };
 				console.log($data);
-				$callback = function(rs){
+				getAjax($url,'post',$data,function(rs){
 					if(rs.status == 200){
 		 				getList($perpage,1,getDataToAjax());
 		 				callFlashSlide("ลบข้อมูล  Doctor สำเร็จ.",'success');
@@ -117,8 +116,7 @@ $(document).ready(function() {
 						callFlashSlide("ไม่สามารถลบข้อมูลได้",'error');
 					}
 	 				$('#confrimModal').modal('hide');
-				};
-				getAjax($url,'post',$data,$callback);
+				});
 			});
 		    
 		});
@@ -130,7 +128,7 @@ $(document).ready(function() {
 			$id = $(this).closest('tr').data('id');
 			$url = $plRoute+"/get_doctor";	
 			$data = {doctor_id:$id};
-			$callback = function(rs){
+			getAjax($url,'get',$data,function(rs){
 				console.log(rs);
 				 if(rs.status == 200){
 					$procedure =[];
@@ -180,8 +178,7 @@ $(document).ready(function() {
 				}else{
 					callFlashSlide("ไม่สามารถโหลดข้อมูลได้",'error');
 				}
-			}
-			getAjax($url,'get',$data,$callback);
+			});
 			
 		});
 		
@@ -189,15 +186,14 @@ $(document).ready(function() {
 
 		$html_year='';
 		$url = $plRoute+"/get_current_date";
-		$callback = function(rs){
+		getAjax($url,'get','',function(rs){
 			if(rs){
 				$year = parseInt(rs.split("-")[2])+543;
 				for($i = $year-20; $i <= $year;$i++ ){
 					$html_year +="<option value="+$i+">"+$i+"</option>";
 				}
 			}
-		}
-		getAjax($url,'get','',$callback);
+		});
 		
 		
 		$('body').on('click','.edu-is-use',function(){
@@ -251,9 +247,7 @@ $(document).ready(function() {
 								doctor_work		 : $arr_work
 							}
 						};
-				console.log($data);
-				$url = $plRoute+"/crud"; 
-				$callback = function(rs){
+				getAjax($plRoute+"/crud",'post',$data,function(rs){
 					console.log(rs);
 					if(rs.status == 200){
 						$('#ModalEditDetail').modal('hide');
@@ -262,8 +256,7 @@ $(document).ready(function() {
 					}else{
 						callFlashSlide("เกิดข้อผิดพลาดในการทำรายการ",'error');
 					}
-				};
-				getAjax($url,'post',$data,$callback);
+				});
 			}else{
 				callFlashSlide("กรุณากรอกข้อมูลให้ครบถ้วน",'error');
 			}
@@ -273,7 +266,6 @@ $(document).ready(function() {
 			$stat = true;
 			$('.validation').each(function(){
 	    		if($.trim($(this).val()) == ''){
-	    			console.log($(this));
 	    			$(this).focus();
 	    			$stat = false; 
 	    			return false;
@@ -291,7 +283,7 @@ $(document).ready(function() {
 		
 		function onload(){
 			$url = $plRoute+"/list_medical_procedure";
-			$callback = function(rs){
+			getAjax($url,'get','',function(rs){
 				$html = '';
 				$.each(rs,function(k,v){
 					$html += "<option value= "+v.procedure_id+">"+v.procedure_name+"</option>";
@@ -299,8 +291,7 @@ $(document).ready(function() {
 				$("#medical_procedure").append($html);
 				$("#from_medical_procedure").append($html);
 				getList($perpage,1,getDataToAjax());
-			}
-			getAjax($url,'get','',$callback);
+			});
 			
 		}
 		
@@ -308,7 +299,7 @@ $(document).ready(function() {
 		function getList($perpage,$page,data){
 			$url = $plRoute+"/list_doctor?page="+$page;
 			$data = data!=''?$.extend({perpage:$perpage},data):{perpage:$perpage};
-			$callback = function(rs){
+			getAjax($url,'get',$data,function(rs){
 				console.log(rs);
 				$html='';
 				if(rs.data.length > 0){
@@ -349,8 +340,7 @@ $(document).ready(function() {
 				$("#table_"+$appName+" tbody").html($html);
 				getPagenation("#"+$appName+"_pagination",rs);
 				$('[data-toggle="popover"]').popover();
-			}
-			getAjax($url,'get',$data,$callback);
+			});
 		}
 	
 	}

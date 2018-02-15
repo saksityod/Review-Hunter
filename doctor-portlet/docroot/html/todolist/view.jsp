@@ -90,10 +90,10 @@ plid = layout.getPlid();
 					</div>	
 					<div class="row-fluid p-t-xs">
 						<div class="form-group span3" >
-						<label class="label-control" for="">ผู้รับผิดชอบ</label>
+							<label class="label-control" for="">ผู้รับผิดชอบ</label>
 							<input data-toggle="tooltip" title="ผู้รับผิดชอบ"
 								data-placement="top" class="span12 m-b-n ui-autocomplete-input"
-								placeholder="ผู้รับผิดชอบ" id="" name=""	type="text">
+								placeholder="ผู้รับผิดชอบ" id="responsible" name="responsible"	type="text">
 						</div>
 						<div class="form-group text-right span9" style=" margin-top: 25px;">
 							<button type="button" name="btn_search" id="btn_search"	class="btn btn-info input-sm ">
@@ -109,7 +109,6 @@ plid = layout.getPlid();
 
 		</div>
 
-
 	</div>
 
 	<div class="row-fluid " id="job_status_list_content">
@@ -118,53 +117,10 @@ plid = layout.getPlid();
 				<h5>สถานะงานที่ต้องทำ</h5>
 			</div>
 
-
 			<div class="ibox-content">
 				<div class="row-fluid">
 					<div class="height-32-px"></div>
 				</div>
-				<!-- pagination start -->
-				<div class="row-fluid">
-					<div id="width-100-persen" class="span9 m-b-xs">
-
-						<span class="pagination_top m-b-none pagination"
-							id="yui_patched_v3_11_0_1_1514185894268_841"><ul
-								class="pagination bootpag"
-								id="yui_patched_v3_11_0_1_1514185894268_840">
-								<li data-lp="1" class="first disabled"><a
-									href="javascript:void(0);">←</a></li>
-								<li data-lp="1" class="prev disabled"><a
-									href="javascript:void(0);">prev</a></li>
-								<li data-lp="1" class="active"><a
-									href="javascript:void(0);">1</a></li>
-								<li data-lp="2" id="yui_patched_v3_11_0_1_1514185894268_839"><a
-									href="javascript:void(0);"
-									id="yui_patched_v3_11_0_1_1514185894268_838">2</a></li>
-								<li data-lp="3"><a href="javascript:void(0);">3</a></li>
-								<li data-lp="4"><a href="javascript:void(0);">4</a></li>
-								<li data-lp="5"><a href="javascript:void(0);">5</a></li>
-								<li data-lp="2" class="next"><a href="javascript:void(0);">next</a></li>
-								<li data-lp="6" class="last"><a href="javascript:void(0);">→</a></li>
-							</ul></span>
-
-					</div>
-					<div class="span3 object-right ResultsPerPageTop">
-
-						<div class='pagingDropdown'>
-							<select id='countPaginationTop'
-								class="form-control input-sm countPagination">
-								<option>10</option>
-								<option>20</option>
-								<option>50</option>
-								<option>100</option>
-							</select>
-
-						</div>
-						<div class='pagingText'>Results per page</div>
-
-					</div>
-				</div>
-				<!-- pagination end -->
 				<!-- start table -->
 				<div class="row-fluid" style="overflow: auto;">
 					<table class="table table-striped" id="table_job_status">
@@ -180,36 +136,14 @@ plid = layout.getPlid();
 							</tr>
 						</thead>
 						<tbody id="list_job_status">
-							<tr>
-								<td style="vertical-align: middle;">1</td>
-								<td style="vertical-align: middle;">1</td>
-								<td style="vertical-align: middle;">1</td>
-								<td style="vertical-align: middle;">1</td>
-								<td style="vertical-align: middle;">1</td>
-								<td style="vertical-align: middle;">1</td>
-								<td style="vertical-align: middle;">1</td>
-
-							</tr>
-							<tr>
-								<td style="vertical-align: middle;">1</td>
-								<td style="vertical-align: middle;">1</td>
-								<td style="vertical-align: middle;">1</td>
-								<td style="vertical-align: middle;">1</td>
-								<td style="vertical-align: middle;">1</td>
-								<td style="vertical-align: middle;">1</td>
-								<td style="vertical-align: middle;">1</td>
-
-							</tr>
 						</tbody>
 					</table>
 				</div>
-
 				<!-- end table -->
 				<!-- pagination start -->
-
 				<div class="row-fluid">
 					<div id="width-100-persen" class="span9 m-b-xs">
-
+	
 						<span class="pagination_top m-b-none pagination"
 							id="yui_patched_v3_11_0_1_1514185894268_841"><ul
 								class="pagination bootpag"
@@ -218,8 +152,7 @@ plid = layout.getPlid();
 									href="javascript:void(0);">←</a></li>
 								<li data-lp="1" class="prev disabled"><a
 									href="javascript:void(0);">prev</a></li>
-								<li data-lp="1" class="active"><a
-									href="javascript:void(0);">1</a></li>
+								<li data-lp="1" class="active"><a href="javascript:void(0);">1</a></li>
 								<li data-lp="2" id="yui_patched_v3_11_0_1_1514185894268_839"><a
 									href="javascript:void(0);"
 									id="yui_patched_v3_11_0_1_1514185894268_838">2</a></li>
@@ -229,10 +162,10 @@ plid = layout.getPlid();
 								<li data-lp="2" class="next"><a href="javascript:void(0);">next</a></li>
 								<li data-lp="6" class="last"><a href="javascript:void(0);">→</a></li>
 							</ul></span>
-
+	
 					</div>
 					<div class="span3 object-right ResultsPerPageBottom">
-
+	
 						<div class='pagingDropdown'>
 							<select id='countPaginationBottom'
 								class="form-control input-sm countPagination">
@@ -246,13 +179,450 @@ plid = layout.getPlid();
 					</div>
 				</div>
 				<!-- pagination end -->
-
 			</div>
 			<!-- content end -->
 		</div>
 	</div>
 
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+var restfulURL="";
+var serviceName="";
+
+/*#######Office#######*/
+
+/*#######Localhost#######*/
+restfulURL="http://localhost";
+serviceName="master_piece/public";
+</script>
+
+
+<script>
+/* for portlet*/
+var tokenID= [];
+var is_hr = [];
+$(document).ready(function() {
+	$('[data-toggle="tooltip"]').css({	"cursor":"pointer"});
+	$('[data-toggle="tooltip"]').tooltip({	html:true	});
+	$('[data-toggle="popover"]').popover();   
+	$(".app_url_hidden").show();
+});
+
+var checkSession = function(paramTokenID){
+	var check=true;
+	var tokenID =(paramTokenID == undefined || paramTokenID == ""  ? tokenID : paramTokenID);
+	tokenID = eval("("+tokenID+")");
+	if(tokenID==null){
+		alert("login failed");
+		callFlashSlide("login failed.");  
+		return false;
+	}
+	$.ajax({
+		url:restfulURL+"/"+serviceName+"/session",
+		type:"GET",
+		dataType:"json",
+		//data:{"plid":}
+		headers:{Authorization:"Bearer "+tokenID.token},
+		async:false,
+		success:function(data){
+			if(data['status']!="200"){
+				check=false;
+				callFlashSlide("login failed.");
+				sessionStorage.clear();
+			}else{
+				console.log("login success");
+				check=true;
+			}
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+		    if('error'==textStatus){
+		    	callFlashSlide("login failed."); 
+		    	check=false;
+		    	console.log("Error is "+textStatus);
+		    	//window.location.href = "../login.html"; 
+		    }
+		}
+		
+	});
+	return check;
+}
+ 
+var connectionServiceFn = function(username,password,plid){
+	var checkConnection=true;
+	$.ajax({
+		
+		url:restfulURL+"/"+serviceName+"/session",
+		//url:"http://localhost/"+serviceName+"/public/session",
+		type:"POST",
+		dataType:"text",
+		data:{"username":username,"password":password,"plid":plid},
+		async:false,
+		//data:{"username":"2015019","password":"2015019"},
+		error: function(jqXHR, textStatus, errorThrown) {
+			 sessionStorage.clear();
+			 checkConnection=false;
+			setTimeout(function(){
+		    	window.location.href = "../login.html"; 
+			},500);
+		},
+		success:function(data){
+			sessionStorage.setItem("tokenID",data);
+			tokenID= eval("("+ sessionStorage.getItem("tokenID")+")");
+			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+				$(".aui body *").css({'font-weight':400});
+			} 
+			if(checkSession(data)==true){
+				checkConnection=true;
+			}
+			
+		}
+	});	
+	
+	return checkConnection;
+}
+
+var flashSLideUp=function(){
+	$("#slide_status").slideUp();
+}
+
+var flashSlideInModalSlideUp=function(){
+	$(".information").slideUp();
+}
+$(document).on("click","#btnCloseSlide",function(){
+	flashSLideUp();
+});
+$(document).on("click",".btnModalClose",function(){
+	flashSlideInModalSlideUp();
+});
+
+function callFlashSlide(text,flashType){
+	if(flashType=="error"){
+		$("#slide_status_area").css("color","red");
+		$("#slide_status_area").html(text);
+	}else if(flashType=="success"){
+		$("#slide_status_area").css("color","lightgreen");
+		$("#slide_status_area").html(text);
+	}else{
+		$("#slide_status_area").html(text);
+	}
+
+	$("#slide_status").slideDown("slow");
+	setTimeout(function(){
+		$("#slide_status").slideUp();
+	},5000);
+}
+
+var callFlashSlideInModal =function(text,id,flashType){
+	var btnClose="<div class=\"btnModalClose\">×</div>";
+	if(flashType=="error"){
+		if(id!=undefined){
+			$(id).html(btnClose+""+text).show();
+		}else{
+			$("#information").html(btnClose+""+text).show();
+		}
+		
+	}else{
+		if(id!=undefined){
+			$(id).html(btnClose+""+text).show();
+		}else{
+			$("#information").html(btnClose+""+text).show();
+		}
+		setTimeout(function(){
+			if(id!=undefined){
+				$(id).hide("slow");
+			}else{
+				$("#information").hide("slow");
+			}
+		},3000);
+	}
+}
+
+var logoutFn = function(){
+	$.ajax({
+		url:restfulURL+"/"+serviceName+"/session",
+		type:"DELETE",
+		dataType:"json",
+		headers:{Authorization:"Bearer "+tokenID.token},
+		success:function(data){
+			if(data['status']=="200"){
+				window.location.href = "../login.html"; 
+				sessionStorage.setItem("tokenID","{}");
+			}
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+		    if('error'==textStatus){
+		    	window.location.href = "../login.html"; 
+		    }
+		}
+	});
+}
+
+$("#logOut").click(function(){
+	logoutFn();
+});
+ 
+/*ajax */
+function getAjax(url,type,data,callback){
+	if(checkSession(JSON.stringify(tokenID))){
+		$.ajax({
+			url:url,
+			type : type,
+			dataType : "json",
+			data : data,
+			async:false,
+			headers:{Authorization:"Bearer "+tokenID.token},
+			success : function(data,status) {
+				if(status == 'success'){
+					callback(data);
+				}else{
+					callFlashSlide(status,'error');
+				}
+			}
+		});
+	}
+}
+
+/*clear field in modal*/
+function clearModal(){
+	$(".modal input[type='text'],.modal select,.modal textarea").val('');
+	$('.modal select').val('');
+	$(".modal input[type='radio'],.modal input[type='checkbox']").prop('checked', false);
+}
+
+/*get pagenation*/
+function getPagenation(target,data){
+	$prev_dis = data.prev_page_url?'':'disabled' ;
+	$next_dis = data.next_page_url?'':'disabled';
+	$next = data.current_page+1 <= data.last_page?data.current_page+1:'';
+	$html = '<li data-lp="1" class="first '+$prev_dis+'">'
+		+'<a href="javascript:void(0);"><<</a> </li>'
+		+'<li data-lp="1" class="prev '+$prev_dis+'"> <a href="javascript:void(0);">prev</a></li>';
+		for($i=1;$i<=data.last_page;$i++){
+			$active = data.current_page == $i ? "active":"";
+			$html+='<li data-lp="'+$i+'" class="'+$active+'"><a href="javascript:void(0);">'+$i+'</a></li>';
+		}
+	$html+= '<li data-lp="'+$next+'" class="next '+$next_dis+'" ><a href="javascript:void(0);">next</a></li>'
+		+'<li data-lp="'+data.last_page+'" class="last '+$next_dis+'"><a href="javascript:void(0);">>></a></li>';
+	$(target).html($html);
+}
+
+function formatDateYMD(input) {
+    var datePart = input.match(/\d+/g);
+    var day = datePart[0];
+    var month = datePart[1];
+    var year = datePart[2];
+    return year + '-' + month + '-' + day;
+}
+
+function formatDateDMY(input) {
+    var datePart = input.split("-");
+    var day = datePart[2];
+    var month = datePart[1];
+    var year = datePart[0];
+    return day + '-' + month + '-' + year;
+}
+</script>
+
+<script>
+$(document).ready(function(){
+	var username = $('#user_portlet').val();
+	var password = $('#pass_portlet').val();
+	var plid = $('#plid_portlet').val();
+	if(username!="" && username!=null & username!=[] && username!=undefined ){
+		 if(connectionServiceFn(username,password,plid)==true){
+			 
+			 var generateDropDownList = function(url,type,request,initValue){
+			 	var html="";
+			 	
+			 	if(initValue!=undefined){
+			 		html+="<option value=''>"+initValue+"</option>";
+				}
+
+			 	$.ajax ({
+			 		url:url,
+			 		type:type ,
+			 		dataType:"json" ,
+			 		data:request,
+			 		headers:{Authorization:"Bearer "+tokenID.token},
+			 		async:false,
+			 		success:function(data){
+			 			try {
+			 			    if(Object.keys(data[0])[0] != undefined && Object.keys(data[0])[0] == "item_id"){
+			 			    	galbalDataTemp["item_id"] = [];
+			 			    	$.each(data,function(index,indexEntry){
+			 			    		galbalDataTemp["item_id"].push(indexEntry[Object.keys(indexEntry)[0]]);
+			 		 			});	
+			 			    }
+			 			}
+			 			catch(err) {
+			 			    console.log(err.message);
+			 			}
+
+			 			
+			 			$.each(data,function(index,indexEntry){
+			 				html+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1] == undefined  ?  Object.keys(indexEntry)[0]:Object.keys(indexEntry)[1]]+"</option>";	
+			 			});	
+
+			 		}
+			 	});	
+			 	return html;
+			}
+			 
+			var searchFN = function() {
+				var case_id = $("#case_name").val().split("-");
+				var job_status = $("#job_status").val();
+				var medical_procedure = $("#medical_procedure").val();
+				var doctor_id = $("#doctor_name").val().split("-");
+				var responsible = $("#responsible").val().split("-");
+			
+				case_id = case_id[0];
+				doctor_id = doctor_id[0];
+				responsible = responsible[0];
+				
+				$.ajax({
+					url:restfulURL+"/"+serviceName+"/todo/search",
+					type:"get",
+					dataType:"json",
+					async:false,
+					headers:{Authorization:"Bearer "+tokenID.token},
+					data:{
+						"patient_id":case_id,
+						"status":job_status,
+						"procedure_id":medical_procedure,
+						"doctor_id":doctor_id,
+						"user_id":responsible
+					},
+					success:function(data) {
+						console.log(data);
+						//list_data_template(data);
+					}
+				});
+			}
+			
+			$("#btn_search").click(function() {
+				searchFN();
+			});
+			
+			var list_data_template = function(data) {
+				var TRTDHTML = "";
+				var TRTDClass = "style=\"vertical-align: middle;\"";
+				$.each(data, function (key,value) {
+						TRTDHTML += 
+			                '<tr>'+
+			                '<td "'+TRTDClass+'">' + value.article_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.writer +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.procedure_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.doctor_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + formatDateDMY(value.writing_start_date) +'</td>'+
+			                '<td "'+TRTDClass+'">' + formatDateDMY(value.writing_end_date) +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.article_type_name +'</td>'+
+			                '</tr>';
+			    });
+				$('#list_job_status').html(TRTDHTML);
+			}
+			
+			$("#medical_procedure").html(generateDropDownList(
+				restfulURL+"/"+serviceName+"/todo/procedure_list",
+				"GET"
+			));
+			
+			$("#job_status").html(generateDropDownList(
+				restfulURL+"/"+serviceName+"/todo/status_list",
+				"GET"
+			));
+			
+			$("#case_name").autocomplete({
+					source: function (request, response) {
+			        	$.ajax({
+							 url:restfulURL+"/"+serviceName+"/todo/auto_patient",
+							 type:"get",
+							 dataType:"json",
+							 headers:{Authorization:"Bearer "+tokenID.token},
+							 //data:{"emp_name":request.term},
+							 data:{"patient_name":request.term},
+							 //async:false,
+			                 error: function (xhr, textStatus, errorThrown) {
+			                        console.log('Error: ' + xhr.responseText);
+			                    },
+							 success:function(data){
+									response($.map(data, function (item) {
+			                            return {
+			                                label: item.patient_id+"-"+item.patient_name,
+			                                value: item.patient_id+"-"+item.patient_name,
+			                            };
+			                        }));
+							},
+							beforeSend:function(){
+								$("body").mLoading('hide');	
+							}
+							
+						});
+			        }
+			});
+			
+			$("#doctor_name").autocomplete({
+				source: function (request, response) {
+		        	$.ajax({
+						 url:restfulURL+"/"+serviceName+"/todo/auto_doctor",
+						 type:"get",
+						 dataType:"json",
+						 headers:{Authorization:"Bearer "+tokenID.token},
+						 //data:{"emp_name":request.term},
+						 data:{"doctor_name":request.term},
+						 //async:false,
+		                 error: function (xhr, textStatus, errorThrown) {
+		                        console.log('Error: ' + xhr.responseText);
+		                    },
+						 success:function(data){
+								response($.map(data, function (item) {
+		                            return {
+		                                label: item.doctor_id+"-"+item.doctor_name,
+		                                value: item.doctor_id+"-"+item.doctor_name,
+		                            };
+		                        }));
+						},
+						beforeSend:function(){
+							$("body").mLoading('hide');	
+						}
+						
+					});
+		        }
+			});
+			
+			$("#responsible").autocomplete({
+				source: function (request, response) {
+		        	$.ajax({
+						 url:restfulURL+"/"+serviceName+"/todo/auto_user",
+						 type:"get",
+						 dataType:"json",
+						 headers:{Authorization:"Bearer "+tokenID.token},
+						 //data:{"emp_name":request.term},
+						 data:{"pic_name":request.term},
+						 //async:false,
+		                 error: function (xhr, textStatus, errorThrown) {
+		                        console.log('Error: ' + xhr.responseText);
+		                 },
+						 success:function(data){
+								response($.map(data, function (item) {
+		                            return {
+		                                label: item.userId+"-"+item.pic_name,
+		                                value: item.userId+"-"+item.pic_name,
+		                            };
+		                        }));
+						},
+						beforeSend:function(){
+							$("body").mLoading('hide');	
+						}
+						
+					});
+		        }
+			});
+		 } //end if
+	} //end if
+}); //end document
+</script>
 
 <!-- Mainly scripts -->
 <!-- <script type="text/javascript">var jQuery_1_1_3 = $.noConflict(true);</script> -->

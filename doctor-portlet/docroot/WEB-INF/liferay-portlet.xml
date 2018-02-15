@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
-      
+       
 <liferay-portlet-app>
 	<portlet>                      
 		<portlet-name>doctor</portlet-name>
@@ -9,7 +9,7 @@
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>doctor-portlet</css-class-wrapper>
 	</portlet>     
-	<portlet>                    
+	<portlet>                      
 		<portlet-name>doctor-profile</portlet-name>
 		<icon>/icon.png</icon>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
@@ -33,7 +33,7 @@
 		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>		      
-	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>	      
+	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	      
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>	         
 	    <footer-portlet-javascript>/Controller/doctorProfile.js</footer-portlet-javascript>
 		<css-class-wrapper>doctor-profile-portlet</css-class-wrapper>
@@ -89,7 +89,7 @@
 		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>			      
-	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>	      
+	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	      
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>	      
 	    <footer-portlet-javascript>/Controller/doctorTarget.js</footer-portlet-javascript>
 		<css-class-wrapper>doctortarget-portlet</css-class-wrapper> 
@@ -145,7 +145,7 @@
 		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>	      
-	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>	      
+	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	      
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>	              
 	    <footer-portlet-javascript>/Controller/caseType.js</footer-portlet-javascript>
 		<css-class-wrapper>case-type-portlet</css-class-wrapper>     
@@ -174,7 +174,7 @@
 		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>	      
-	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>	 	      
+	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	 	      
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>	             
 	    <footer-portlet-javascript>/Controller/medicalProcedure.js</footer-portlet-javascript>
 		<footer-portlet-javascript>   
@@ -183,7 +183,7 @@
 		<css-class-wrapper>medical-procedure-portlet</css-class-wrapper>
 	</portlet> 
 	<portlet>
-		<portlet-name>b-a_-r-h_-co</portlet-name>
+		<portlet-name>ba</portlet-name>
 		<icon>/icon.png</icon>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
@@ -206,14 +206,10 @@
 		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>	      
-	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>	      
-	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>     
-		    
-		<footer-portlet-javascript>
-			/js/main.js
-		</footer-portlet-javascript>
-		<css-class-wrapper>b-a_-r-h_-co-portlet</css-class-wrapper>
-	</portlet>
+	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	      
+	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
+		<css-class-wrapper>ba-portlet</css-class-wrapper>
+	</portlet> 
 	<portlet>
 		<portlet-name>social-media</portlet-name>
 		<icon>/icon.png</icon>
@@ -238,7 +234,7 @@
 		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>	      
-	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>	      
+	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	      
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>  	      
 	    <footer-portlet-javascript>/Controller/socialMedia.js</footer-portlet-javascript>  
 		<footer-portlet-javascript>
@@ -270,7 +266,7 @@
 		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>			      
-	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>	      
+	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	      
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>		      
 	    <footer-portlet-javascript>/Controller/writer.js</footer-portlet-javascript>	      
 		<css-class-wrapper>writer-portlet</css-class-wrapper>
@@ -299,12 +295,12 @@
 		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>			      
-	    <footer-portlet-javascript>/Controller/cConfig.js</footer-portlet-javascript>	      
+	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	      
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>	      
 	    <footer-portlet-javascript>/Controller/caseGroup.js</footer-portlet-javascript>
 		<css-class-wrapper>case-group-portlet</css-class-wrapper>
 	</portlet>
-	<role-mapper>
+	<role-mapper> 
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
 	</role-mapper>

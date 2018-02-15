@@ -8,6 +8,14 @@ $(document).ready(function() {
 	$(".app_url_hidden").show();
 	$("#employee_list_content").show();
 	
+	$('#alert_multi').multiselect({
+        allSelectedText: 'No option left ...',
+        maxHeight: 200,
+        onChange: function() {
+            console.log($('#alert_multi').val());
+        }
+    });
+	
 	$username = $("#user_portlet").val();
 	$password = $("#pass_portlet").val();
 	$plName = $("#plid_portlet").val();
@@ -126,7 +134,7 @@ $(document).ready(function() {
 					$("#from_doctor_name").val(rs.data.doctor.doctor_name).data('doctor_id',rs.data.doctor.doctor_id).data('doctor_name',rs.data.doctor.doctor_name);
 					$("#case_category").val(rs.data.case_type_id);
 					$("#from_medical_procedure").val(rs.data.procedure_id);
-					$("#from_year").html(getyear($current_year-20,$current_year+20)).val(rs.data.year);
+					$("#from_year").html(getyear($current_year-10,$current_year+10)).val(rs.data.year);
 					$('#form-case-month1').val(rs.data.target_month1);
 					$('#form-case-month2').val(rs.data.target_month2);
 					$('#form-case-month3').val(rs.data.target_month3);
@@ -139,6 +147,7 @@ $(document).ready(function() {
 					$('#form-case-month10').val(rs.data.target_month10);
 					$('#form-case-month11').val(rs.data.target_month11);
 					$('#form-case-month12').val(rs.data.target_month12);
+					//$('#alert_multi').val(rs.data.target_month12);
 				}
 				
 			});
@@ -216,7 +225,8 @@ $(document).ready(function() {
 							"target_month10": $('#form-case-month10').val(),
 							"target_month11": $('#form-case-month11').val(),
 							"target_month12": $('#form-case-month12').val()
-						  }
+						  },
+						  alert: $('#alert_multi').val()
 				}
 				getAjax($plRoute+"/cru",'post',$data,callback);
 				

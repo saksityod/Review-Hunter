@@ -235,7 +235,13 @@
 								<label class="">ปี</label>
 								<select class="input span12 m-b-n validate" id="from_year" name="from_year">
 								</select>
-
+							</div>
+							<div id="drop_down_organization" class="form-group pull-left span2" style="margin-left: 5px;">
+								<label class="">แจ้งเตือน</label>
+								<select class="input span12 m-b-n validate" id="alert_multi" name="alert_multi" multiple="multiple">
+									<option value="thawatchai@goingjesse.com">test mail goingjesse</option>
+									<option value="srikott@gmail.com">test mail thawatchai</option>
+								</select>
 							</div>
 
 

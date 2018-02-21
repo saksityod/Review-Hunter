@@ -39,6 +39,17 @@
 	width: 100%;
 	height: 100%;
 }
+#fileFormWorkflow {
+	width: 100%;
+	height: 100%;
+}
+.ui-autocomplete {
+	z-index:1099 !important
+}
+.aui .cus_information_area label{
+	margin-bottom: 1px;
+}
+
 </style>
 <!-- <style>
 @media ( min-width : 1200px) {
@@ -533,10 +544,7 @@
 			</div>
 			<!-- content end -->
 		</div>
-
 	</div>
-
-
 </div>
 
 <div class="row-fluid">
@@ -550,6 +558,24 @@
 			</h5>
 		</div>
 		<div class="ibox-content" style="border-color: rgb(0, 206, 215);">
+<!-- 			<!-- pagination start -->
+<!-- 				<div class="row-fluid"> -->
+<!-- 					<div id="width-100-persen" class="span9 m-b-xs"> -->
+<!-- 						<span class="pagination_top m-b-none pagination"></span> -->
+<!-- 					</div> -->
+<!-- 					<div class="span3 object-right ResultsPerPageTop"> -->
+<!-- 						<div class='pagingDropdown'> -->
+<!-- 		                	<select  id='countPaginationTop'  class="form-control input-sm countPagination"> -->
+<!-- 						        <option>10</option> -->
+<!-- 						        <option>20</option> -->
+<!-- 						        <option>50</option> -->
+<!-- 						        <option>100</option> -->
+<!-- 					        </select>           		 -->
+<!-- 		                </div> -->
+<!-- <!-- 						<div class='pagingText'>Results per page</div>                       -->
+<!-- 		        	</div> -->
+<!-- 				</div> -->
+<!-- 			<!-- pagination end -->
 			<!-- start table -->
 			<div class="row-fluid" style="overflow: auto;">
 				<table class="table table-striped" id="">
@@ -598,46 +624,24 @@
 			</div>
 			<!-- end table -->
 			
-<!-- 			<!-- pagination start --> -->
-<!-- 			<div class="row-fluid"> -->
-<!-- 				<div id="width-100-persen" class="span9 m-b-xs"> -->
-
-<!-- 					<span class="pagination_top m-b-none pagination" -->
-<!-- 						id="yui_patched_v3_11_0_1_1514185894268_841"><ul -->
-<!-- 							class="pagination bootpag" -->
-<!-- 							id="yui_patched_v3_11_0_1_1514185894268_840"> -->
-<!-- 							<li data-lp="1" class="first disabled"><a -->
-<!-- 								href="javascript:void(0);">←</a></li> -->
-<!-- 							<li data-lp="1" class="prev disabled"><a -->
-<!-- 								href="javascript:void(0);">prev</a></li> -->
-<!-- 							<li data-lp="1" class="active"><a href="javascript:void(0);">1</a></li> -->
-<!-- 							<li data-lp="2" id="yui_patched_v3_11_0_1_1514185894268_839"><a -->
-<!-- 								href="javascript:void(0);" -->
-<!-- 								id="yui_patched_v3_11_0_1_1514185894268_838">2</a></li> -->
-<!-- 							<li data-lp="3"><a href="javascript:void(0);">3</a></li> -->
-<!-- 							<li data-lp="4"><a href="javascript:void(0);">4</a></li> -->
-<!-- 							<li data-lp="5"><a href="javascript:void(0);">5</a></li> -->
-<!-- 							<li data-lp="2" class="next"><a href="javascript:void(0);">next</a></li> -->
-<!-- 							<li data-lp="6" class="last"><a href="javascript:void(0);">→</a></li> -->
-<!-- 						</ul></span> -->
-
-<!-- 				</div> -->
-<!-- 				<div class="span3 object-right ResultsPerPageBottom"> -->
-
-<!-- 					<div class='pagingDropdown'> -->
-<!-- 						<select id='countPaginationBottom' -->
-<!-- 							class="form-control input-sm countPagination"> -->
-<!-- 							<option>10</option> -->
-<!-- 							<option>20</option> -->
-<!-- 							<option>50</option> -->
-<!-- 							<option>100</option> -->
-<!-- 						</select> -->
+<!-- 				pagination start -->
+<!-- 				<div class="row-fluid"> -->
+<!-- 					<div id="width-100-persen" class="span9 m-b-xs "> -->
+<!-- 						<span class="pagination_bottom m-b-none pagination"></span> -->
 <!-- 					</div> -->
-<!-- 					<div class='pagingText'>Results per page</div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<!-- pagination end --> -->
-
+<!-- 					<div class="span3 object-right ResultsPerPageBottom"> -->
+<!-- 		            	<div class='pagingDropdown'> -->
+<!-- 		                <select  id='countPaginationBottom'  class="form-control input-sm countPagination"> -->
+<!-- 					       <option>10</option> -->
+<!-- 					                                     <option>20</option> -->
+<!-- 					                                     <option>50</option> -->
+<!-- 					                                     <option>100</option> -->
+<!-- 					                                 </select>  -->
+<!-- 			                                 	</div> -->
+<!-- 												<div class='pagingText'>Results per page</div> -->
+<!-- 		                        </div> -->
+<!-- 							</div> -->
+<!-- 							pagination end -->
 		</div>
 		<!-- content end -->
 	</div>
@@ -695,7 +699,7 @@
 							<label class="control-label">แพทย์ :</label>
 							<div class="controls">
 								<input type="text" class="form-control input-sm span12"
-									placeholder="" name="doctor" id="doctor">
+									placeholder="" name="form_doctor" id="form_doctor">
 							</div>
 						</div>
 					</div>
@@ -732,10 +736,10 @@
 					</div>
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
-							<label class="control-label"> </label>
+							<label class="control-label">แนบบทความ: </label>
 							<div class="controls">
 								<button type="button" name="btn_upload_form" id="btn_upload_form" class="btn btn-success input-sm" data-target="#ModalImportForm" data-toggle="modal" title="อัพโหลด" data-placement="top">
-								<i class="fa fa-upload"></i>&nbsp; อัพโหลด</button> <span class="countFileTargetForm"></span>
+								<i class="fa fa-upload"></i>&nbsp; เลือก</button> <span class="countFileTargetForm"></span>
 							</div>
 						</div>
 					</div>
@@ -749,6 +753,7 @@
 								<label class="control-label">จากขั้นตอน :</label>
 								<div class="controls">
 									<select class="form-control input-sm span12" id="by_step" name="by_step">
+									<option value="1">ร้องขอบทความ</option>
 								</select>
 								</div>
 							</div>
@@ -758,6 +763,7 @@
 								<label class="control-label">ไปขั้นตอน :</label>
 								<div class="controls">
 									<select class="form-control input-sm span12" id="to_step" name="to_step">
+									<input type="hidden" id="to_step_status" name="to_step_status">
 								</select>
 								</div>
 							</div>
@@ -798,10 +804,6 @@
 								<label class="control-label">แจ้งเตือน :</label>
 								<div class="controls">
 									<select class="form-control input-sm span12" id="alert_multi" name="alert_multi" multiple="multiple">
-										<option value="1">1</option>
-										<option value="12">12</option>
-										<option value="13">13</option>
-										<option value="14">14</option>
 									</select>
 								</div>
 							</div>
@@ -815,6 +817,19 @@
 									<textarea class="form-control span12" rows="4" id="remark"></textarea>
 								</div>
 							</div>
+						</div>
+						<div class="span5 form-horizontal p-t-xxs">
+							<div class="form-group p-xxs">
+								<label class="control-label">แนบเอกสาร: </label>
+								<div class="controls">
+									<button type="button" name="btn_upload_form_workflow" id="btn_upload_form_workflow" class="btn btn-primary input-sm" data-target="#ModalImportFormWorkflow" data-toggle="modal" title="อัพโหลด" data-placement="top">
+									<i class="fa fa-upload"></i>&nbsp; เลือก</button> <span class="countFileTargetFormWorkflow"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="alert alert-warning information" id="information_errors" style="display: none;height:120px; overflow-y: scroll; position:relative;">
 						</div>
 					</div>
 				</div>
@@ -838,17 +853,7 @@
 									<th style='width: auto'><strong><p class='text-center'>ผู้รับผิดชอบ</p></strong></th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td style="vertical-align: middle; text-align: center;">เสร้มจมูกซิลิโคน</td>
-									<td style="vertical-align: middle; text-align: center;">โซ</td>
-									<td style="vertical-align: middle; text-align: center;">จมูกซิลิโคน</td>
-									<td style="vertical-align: middle; text-align: center;">หมอต้น</td>
-									<td style="vertical-align: middle; text-align: center;">11/10/2017</td>
-									<td style="vertical-align: middle; text-align: center;">16/10/2017</td>
-									<td style="vertical-align: middle; text-align: center;">11/10/2017</td>
-									<td style="vertical-align: middle; text-align: center;">16/10/2017</td>
-								</tr>
+							<tbody id="workflow_history">
 							</tbody>
 						</table>
 					</div>
@@ -863,7 +868,6 @@
 				</div>
 				<!-- content end -->
 			</div>
-
 		</div>
 	</div>
 </div>
@@ -923,7 +927,7 @@
 						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span>
 					</button>
 					<!-- <i class="fa fa-laptop modal-icon"></i> -->
-					<h4 class="modal-title" id="">อัพโหลด</h4>
+					<h4 class="modal-title" id="">แนบบทความ</h4>
 					<!-- 
                 <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
                  -->      
@@ -949,8 +953,52 @@
 					<button class="btn btn-success" type="submit" id="importsubmitForm" form="fileUploadWriterForm">Upload</button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
-						<div class="alert alert-warning information" id="information"
-						style="display: none;height:120px; overflow-y: scroll; position:relative;"></div>
+<!-- 						<div class="alert alert-warning information" id="information" -->
+<!-- 						style="display: none;height:120px; overflow-y: scroll; position:relative;"></div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- Modal End  -->
+
+<!-- Modal Import file form -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalImportFormWorkflow"
+		class="modal inmodal portlet-frame" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header" style="background-color: rgb(0, 206, 215); border-color: rgb(0, 206, 215);">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span>
+					</button>
+					<!-- <i class="fa fa-laptop modal-icon"></i> -->
+					<h4 class="modal-title" id="">แนบเอกสาร</h4>
+					<!-- 
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                 -->      
+				</div>
+				<div class="modal-body">
+					<!-- content start -->
+					<!-- form start -->
+					<div class="form-group">
+					<form id="fileUploadWriterFormWorkflow">
+							<h4>File Upload</h4>
+							<div class="fileImport">
+								<input type="file" id="fileFormWorkflow" class="dropify fileUpload" accept=".xls, .xlsx, .pdf, .docx" multiple/><span></span>
+							</div>
+							<h6 class="label-content-import-export">
+							</h6>
+					</form>
+						<!-- start table -->
+					</div>
+					<!-- form End -->
+					<!-- content end -->
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-success" type="submit" id="importsubmitFormWorkflow" form="fileUploadWriterFormWorkflow">Upload</button>
+					<button data-dismiss="modal" class="btn btn-danger btnCancle"
+						type="button">Cancel</button>
+<!-- 						<div class="alert alert-warning information" id="information" -->
+<!-- 						style="display: none;height:120px; overflow-y: scroll; position:relative;"></div> -->
 				</div>
 			</div>
 		</div>
@@ -969,8 +1017,7 @@
 				style="background-color: rgb(0, 206, 215); border-color: rgb(0, 206, 215);">
 				<button data-dismiss="modal" class="close" type="button"
 					style="padding-top: 3px">
-					<span aria-hidden="true"><i class='fa fa-times'></i></span><span
-						class="sr-only">Close</span>
+					<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only">Close</span>
 				</button>
 				<h5 class="modal-title">Confirm Dialog</h5>
 			</div>
@@ -984,7 +1031,7 @@
 					<div class="form-kpi-label" align="center">
 
 						<label>Confirm to Delete Data?</label>
-						<div id="inform_on_confirm" class='information'></div>
+<!-- 						<div id="inform_on_confirm" class='information'></div> -->
 					</div>
 				</div>
 
@@ -1001,8 +1048,8 @@
 						<i class="fa fa-times-circle"></i>&nbsp;Cancel
 					</button>
 				</div>
-				<div class="alert alert-warning information" id="information"
-					style="display: none;"></div>
+<!-- 				<div class="alert alert-warning information" id="information" -->
+<!-- 					style="display: none;"></div> -->
 			</div>
 		</div>
 	</div>
@@ -1028,10 +1075,14 @@ serviceName="master_piece/public";
 
 
 
+
 <script>
 /* for portlet*/
 var tokenID= [];
-var is_hr = [];
+var roles = [];
+var userId = null;
+var screenName = null;
+
 $(document).ready(function() {
 	$('[data-toggle="tooltip"]').css({	"cursor":"pointer"});
 	$('[data-toggle="tooltip"]').tooltip({	html:true	});
@@ -1039,77 +1090,80 @@ $(document).ready(function() {
 	$(".app_url_hidden").show();
 });
 
-var checkSession = function(paramTokenID){
-	var check=true;
-	var tokenID =(paramTokenID == undefined || paramTokenID == ""  ? tokenID : paramTokenID);
+
+function checkSession(paramTokenID){
+	$chk = true;
+	tokenID = paramTokenID == undefined || paramTokenID == ""  ? tokenID : paramTokenID ;
 	tokenID = eval("("+tokenID+")");
 	if(tokenID==null){
-		alert("login failed");
-		callFlashSlide("login failed.");  
-		return false;
+		callFlashSlide("login failed.");
+		$chk = false;
 	}
 	$.ajax({
 		url:restfulURL+"/"+serviceName+"/session",
 		type:"GET",
 		dataType:"json",
-		//data:{"plid":}
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
-			if(data['status']!="200"){
-				check=false;
-				callFlashSlide("login failed.");
-				sessionStorage.clear();
+			//console.log(data)
+			if(data.status == "200"){
+				$chk = true;
+				userId = data.userID;
+				screenName = data.screenName;
+				roles = data.roles;
 			}else{
-				console.log("login success");
-				check=true;
+				callFlashSlide("login failed."); 
+				sessionStorage.clear();
+				$chk = false;
+		    	setTimeout(function(){
+		    		window.location.href = "../login.html"; 
+				},500);
 			}
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 		    if('error'==textStatus){
 		    	callFlashSlide("login failed."); 
-		    	check=false;
 		    	console.log("Error is "+textStatus);
-		    	//window.location.href = "../login.html"; 
+		    	$chk = false;
+		    	setTimeout(function(){
+		    		window.location.href = "../login.html"; 
+				},500);
 		    }
 		}
 		
 	});
-	return check;
-}
+	return $chk;
+ }
  
-var connectionServiceFn = function(username,password,plid){
-	var checkConnection=true;
+ var connectionServiceFn = function(username,password,plid){
+	$chk = true;
 	$.ajax({
-		
 		url:restfulURL+"/"+serviceName+"/session",
-		//url:"http://localhost/"+serviceName+"/public/session",
 		type:"POST",
 		dataType:"text",
 		data:{"username":username,"password":password,"plid":plid},
 		async:false,
-		//data:{"username":"2015019","password":"2015019"},
 		error: function(jqXHR, textStatus, errorThrown) {
 			 sessionStorage.clear();
-			 checkConnection=false;
-			setTimeout(function(){
-		    	window.location.href = "../login.html"; 
-			},500);
+			 $chk = false;
+		    	setTimeout(function(){
+		    		window.location.href = "../login.html"; 
+				},500);
 		},
 		success:function(data){
 			sessionStorage.setItem("tokenID",data);
-			tokenID= eval("("+ sessionStorage.getItem("tokenID")+")");
+			tokenID = eval("("+ sessionStorage.getItem("tokenID")+")");
+			console.log(data);
 			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 				$(".aui body *").css({'font-weight':400});
 			} 
-			if(checkSession(data)==true){
-				checkConnection=true;
+			if(checkSession(data)){
+				$chk = true;
 			}
-			
 		}
 	});	
-	
-	return checkConnection;
+	return $chk;
 }
 
 var flashSLideUp=function(){
@@ -1148,11 +1202,14 @@ var callFlashSlideInModal =function(text,id,flashType){
 	if(flashType=="error"){
 		if(id!=undefined){
 			$(id).html(btnClose+""+text).show();
+			
 		}else{
+			
 			$("#information").html(btnClose+""+text).show();
 		}
 		
 	}else{
+		
 		if(id!=undefined){
 			$(id).html(btnClose+""+text).show();
 		}else{
@@ -1167,6 +1224,7 @@ var callFlashSlideInModal =function(text,id,flashType){
 		},3000);
 	}
 }
+
 
 var logoutFn = function(){
 	$.ajax({
@@ -1238,11 +1296,15 @@ function getPagenation(target,data){
 }
 
 function formatDateYMD(input) {
-    var datePart = input.match(/\d+/g);
-    var day = datePart[0];
-    var month = datePart[1];
-    var year = datePart[2];
-    return year + '-' + month + '-' + day;
+	if(input == "") {
+		return null;
+	} else {
+	    var datePart = input.match(/\d+/g);
+	    var day = datePart[0];
+	    var month = datePart[1];
+	    var year = datePart[2];
+	    return year + '-' + month + '-' + day;
+	}
 }
 
 function formatDateDMY(input) {
@@ -1252,7 +1314,66 @@ function formatDateDMY(input) {
     var year = datePart[0];
     return day + '-' + month + '-' + year;
 }
+
+var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
+	
+	if(pageTotal==0){
+		pageTotal=1
+	}
+	$('.pagination_top,.pagination_bottom').off("page");
+	$('.pagination_top,.pagination_bottom').bootpag({
+	    total: pageTotal,//page Total
+	    page: pageIndex,//page index
+	    maxVisible: 5,//จำนวนปุ่ม
+	    leaps: true,
+	    firstLastUse: true,
+	    first: '←',
+	    last: '→',
+	    wrapClass: 'pagination',
+	    activeClass: 'active',
+	    disabledClass: 'disabled',
+	    nextClass: 'next',
+	    prevClass: 'prev',
+	    next: 'next',
+	    prev: 'prev',
+	    lastClass: 'last',
+	    firstClass: 'first'
+	}).on("page", function(event, num){
+		var rpp=10;
+		if($("#rpp").val()==undefined){
+			rpp=10;
+		}else{
+			rpp=$("#rpp").val();
+		}
+		
+		getData(num,rpp);
+		
+	    $(".pagingNumber").remove();
+	    var htmlPageNumber= "<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='"+num+"'>";
+	    $("body").append(htmlPageNumber);
+	   
+	}); 
+
+	$(".countPagination").off("change");
+	$(".countPagination").on("change",function(){
+
+		$("#countPaginationTop").val($(this).val());
+		$("#countPaginationBottom").val($(this).val());
+		
+		getData(1,$(this).val());
+		
+		$(".rpp").remove();
+		$(".pagingNumber").remove();
+		var htmlRrp="";
+			htmlRrp+= "<input type='hidden' id='rpp' name='rpp' class='rpp' value='"+$(this).val()+"'>";
+	        htmlRrp+="<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='1'>";
+	    $("body").append(htmlRrp);
+	});
+}
+//set paginate end 
+
 </script>
+
 
 
 
@@ -1267,17 +1388,86 @@ $(document).ready(function(){
 		 if(connectionServiceFn(username,password,plid)==true){
 			 
 			var GlobalWriterID;
+			var GlobalStageID;
+			var GlobalDataWriter;
 			var InsertUpdateForCheck = "";
 			$('.dropify').dropify();
 			
-			 function SetupDataDropDown() {
-				DropDownArticleType();
-				DropDownProcedure();
-				DropDownByStep();
-				DropDownToStep();
+			function validatetorWriter(data) {
+				var errorData="";
+				$.each(data, function(key, value) {
+					errorData += stripJsonToString(value);
+				});
+				console.log(errorData);
+				return errorData;
 			}
+			
+			var stripJsonToString= function(json){
+			    return JSON.stringify(json).replace(',', ', ').replace('[', '').replace(']', '').replace('.', "<br>").replace(/\"/g,'');
+			}
+			
+			function validatetorInformation(data) {
+				$("#information_errors").show();
+				$("#information_errors").html(data);
+			}
+			 
+			 var generateDropDownList = function(url,type,request,initValue){
+				 	var html="";
+				 	if(initValue!=undefined){
+				 		html+="<option value=''>"+initValue+"</option>";
+					}
+				 	$.ajax ({
+				 		url:url,
+				 		type:type ,
+				 		dataType:"json" ,
+				 		data:request,
+				 		headers:{Authorization:"Bearer "+tokenID.token},
+				 		async:false,
+				 		success:function(data){
+				 			try {
+				 			    if(Object.keys(data[0])[0] != undefined && Object.keys(data[0])[0] == "item_id"){
+				 			    	galbalDataTemp["item_id"] = [];
+				 			    	$.each(data,function(index,indexEntry){
+				 			    		galbalDataTemp["item_id"].push(indexEntry[Object.keys(indexEntry)[0]]);
+				 		 			});	
+				 			    }
+				 			}
+				 			catch(err) {
+				 			    console.log(err.message);
+				 			}
+
+				 			$.each(data,function(index,indexEntry){
+				 				html+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1] == undefined  ?  Object.keys(indexEntry)[0]:Object.keys(indexEntry)[1]]+"</option>";	
+				 			});
+				 		}
+				 	});	
+				 	return html;
+			}
+			 
+			function DropDownToStep() {
+					$.ajax({
+						url:restfulURL+"/"+serviceName+"/writer/action_to",
+						type:"get",
+						dataType:"json",
+						async:false,
+						data:{"stage_id":$("#by_step").val()},
+						headers:{Authorization:"Bearer "+tokenID.token},
+						success:function(data){
+							var htmlOption="";
+							var htmlOption2="";
+							$.each(data,function(index,indexEntry) {
+								htmlOption+="<option value="+indexEntry['stage_id']+">"+indexEntry['stage_name']+"</option>";
+								htmlOption2=indexEntry['status'];
+							});
+							
+							$("#to_step_status").val(htmlOption2);
+							$("#to_step").html(htmlOption);
+						}
+					});
+			}
+			DropDownToStep();
 				
-			function SearchAdvance() {
+			function getData(page,rpp) {
 				var article_ID = $("#search_article").val().split("-");
 				article_ID = (article_ID == '') ? '' : article_ID[0];
 					
@@ -1295,173 +1485,212 @@ $(document).ready(function(){
 					async:false,
 					headers:{Authorization:"Bearer "+tokenID.token},
 					data:{
-						"article_ID":article_ID,
+						"article_id":article_ID,
 						"procedure_id":procedure_id,
 						"doctor_id":doctor_id,
 						"writing_start_date":writing_start_date,
-						"writing_end_date":writing_end_date
+						"writing_end_date":writing_end_date,
+						"page":page,
+						"rpp":rpp
 					},
 					success:function(data) {
 						console.log(data);
 						list_data_template(data);
+						
+						GlobalDataWriter=data;
+						paginationSetUpFn(GlobalDataWriter['current_page'],GlobalDataWriter['last_page'],GlobalDataWriter['last_page']);
 					}
 				});
 			};
 				
 			function InsertWriter() {
-					console.log("InsertWriter")
-					$.ajax({
-						url:restfulURL+"/"+serviceName+"/writer/store",
-						type:"post",
-						dataType:"json",
-						async:false,
-						headers:{Authorization:"Bearer "+tokenID.token},
-						data:{ 
+					var doctor_id = $("#form_doctor").val().split("-");
+					doctor_id = (doctor_id == '') ? '' : doctor_id[0];
+					var writer = $("#author").val().split("-");
+					writer = (writer == '') ? null : writer[0];
+					var writer_start_date = formatDateYMD($("#start_date").val());
+					var plan_date = formatDateYMD($("#plan_date").val());
+					var complete_date = formatDateYMD($("#complete_date").val());
+					var actual_date = formatDateYMD($("#deadline_date").val());
+					var user_id = {
+							"user_id":$("#alert_multi").val()
+					}
+					
+					var data_value = {
 							"article_name":$("#article").val(),
 							"article_type_id":$("#article_type").val(),
 							"procedure_id":$("#procedure_name").val(),
-							"doctor_id":$("#doctor").val(),
-							"writer":$("#author").val(),
-							"writing_start_date":$("#start_date").val(),
-							"plan_date":$("#plan_date").val(),
-							"fileupload":"",
+							"doctor_id":doctor_id,
+							"from_user_id":writer,
+							"writing_start_date":writer_start_date,
+							"plan_date":plan_date,
+							
+							"file":datafile,
+							"alert":user_id,
+							
 							"from_stage_id":$("#by_step").val(),
 							"to_stage_id":$("#to_step").val(),
 							"to_user_id":$("#send_to").val(),
-							"writing_end_date":$("#complete_date").val(),
-							"actual_date":$("#deadline_date").val(),
-							"user_id":$("#alert_multi").val(),
+							"writing_end_date":complete_date,
+							"actual_date":actual_date,
+							"status":$("#to_step_status").val(),
 							"remark":$("#remark").val()
-						},
+					}
+					
+					var datafile = new FormData();
+					if(filesForm!=undefined) {
+						$.each(filesForm, function(key, value) {
+							console.log(value,'filesform');
+							datafile.append('article_doc-'+key, value);
+						});
+					}
+					
+					//var datafileWorkflow = new FormData();
+					if(filesFormWorkflow!=undefined) {
+						$.each(filesFormWorkflow, function(key, value) {
+							console.log(value,'fileformworkflow');
+							datafile.append('article_stage_doc-'+key, value);
+						});
+					}
+					
+					datafile.append('formdata', JSON.stringify(data_value));
+	
+					$.ajax({
+						url:restfulURL+"/"+serviceName+"/writer/cu",
+						type:"post",
+						dataType:"json",
+						//async:false,
+						processData: false, // Don't process the files
+						contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+						headers:{Authorization:"Bearer "+tokenID.token},
+						data:datafile,
 						success:function(data){
-							console.log(data);
-							callFlashSlide('Insert Success!','success')
- 							$("#ModalWriter").modal('hide');
+							console.log(data)
+							if(data.status==200) {
+								callFlashSlide('Insert Success!','success')
+	 							$("#ModalWriter").modal('hide');
+							} else if (data.status==400) {
+								console.log(data)
+								validatetorInformation(validatetorWriter(data['errors'][0]));
+							}
 						}
 					})
 			};
 				
-			function GetDataEdit() {
+			function GetDataEdit(article_id) {
 					console.log("GetDataEdit")
 					$.ajax({
-						//url:restfulURL+"/"+serviceName+"/appraisal_assignment",
+						url:restfulURL+"/"+serviceName+"/writer/show",
 						type:"get",
 						dataType:"json",
 						async:false,
 						headers:{Authorization:"Bearer "+tokenID.token},
-						data:{"data_edit":""},
+						data:{"article_id":article_id},
 						success:function(data){
 							console.log(data);
+							$("#article").val(data.article.article_name);
+							$("#article_type").val(data.article.article_type_id);
+							//$("#").val(data.article_type_name);
+							$("#procedure_name").val(data.article.procedure_id);
+							//$("#").val(data.procedure_name);
+							$("#form_doctor").val(data.article.doctor_id+'-'+data.article.doctor_name);
+							//$("#").val(data.doctor_name);
+							$("#author").val(writer_id+'-'+data.article.writer_name);
+							$("#start_date").val(formatdateDMY(data.article.writing_start_date));
+							$("#complete_date").val(formatdateDMY(data.article.writing_end_date));
+							$("#plan_date").val(formatdateDMY(data.article.plan_date));
+							$("#to_step_status").val(data.article.status);
+							list_article_history(data.article_hitory);
+							//$("#").val(data.article_path);
 						}
 					})
-			};
-				
-			function UpdateWriter() {
-					console.log("UpdateWriter")
-					$.ajax({
-						//url:restfulURL+"/"+serviceName+"/appraisal_assignment",
-						type:"get",
-						dataType:"json",
-						async:false,
-						headers:{Authorization:"Bearer "+tokenID.token},
-						data:{"data_edit":""},
-						success:function(data){
-							console.log(data);
-						}
-					})
-			};
-				
-			function DropDownSearchProcedure() {
-					$.ajax({
-						url:restfulURL+"/"+serviceName+"/writer/list_medical_procedure",
-						type:"get",
-						dataType:"json",
-						async:false,
-						//data:{"emp_code":session_emp_code},
-						headers:{Authorization:"Bearer "+tokenID.token},
-						success:function(data){
-							var htmlOption="<option value=\"\">ทั้งหมด</option>";
-							$.each(data,function(index,indexEntry){
-								htmlOption+="<option value="+indexEntry['procedure_id']+">"+indexEntry['procedure_name']+"</option>";
-							});
-							$("#search_procedure").html(htmlOption);
-						}
-					});
-			}
-			DropDownSearchProcedure();
-				
-			function DropDownProcedure() {
-					$.ajax({
-						url:restfulURL+"/"+serviceName+"/doctor_profile/list_medical_procedure",
-						type:"get",
-						dataType:"json",
-						async:false,
-						//data:{"emp_code":session_emp_code},
-						headers:{Authorization:"Bearer "+tokenID.token},
-						success:function(data){
-							var htmlOption="";
-							$.each(data,function(index,indexEntry){
-								htmlOption+="<option value="+indexEntry['procedure_id']+">"+indexEntry['procedure_name']+"</option>";
-							});
-							$("#procedure_name").html(htmlOption);
-						}
-					});
 			}
 			
-			function DropDownArticleType() {
-					$.ajax({
-						url:restfulURL+"/"+serviceName+"/writer/list_article_type",
-						type:"get",
-						dataType:"json",
-						async:false,
-						//data:{"emp_code":session_emp_code},
-						headers:{Authorization:"Bearer "+tokenID.token},
-						success:function(data){
-							var htmlOption="";
-							$.each(data,function(index,indexEntry){
-								htmlOption+="<option value="+indexEntry['article_type_id']+">"+indexEntry['article_type_name']+"</option>";
-							});
-							$("#article_type").html(htmlOption);
-						}
-					});
-			}
+			function list_article_history(data) {
+				var TRTDHTML = "";
+				var TRTDClass = "style=\"vertical-align: middle;\"";
+				$.each(data, function (key,value) {
+						TRTDHTML += 
+			                '<tr>'+
+			                '<td "'+TRTDClass+'">' + value.created_dttm +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.from_stage_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.from_user_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.to_stage_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.to_user_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.remark +'</td>'+
+			                '<td "'+TRTDClass+'">' +  +'</td>'+
+			                '<td "'+TRTDClass+'"><button type="button" id="downloadfileWorkflowHistory-' + value.article_stage_id +'" class="btn btn-primary input-sm getfileWorkflow" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
+			                '</td>'+
+			                '</tr>';
+			    });
+				$('#workflow_history').html(TRTDHTML);
+			} 
 				
-			function DropDownByStep() {
-					$.ajax({
-						url:restfulURL+"/"+serviceName+"/doctor_profile/list_medical_procedure",
-						type:"get",
-						dataType:"json",
-						async:false,
-						//data:{"emp_code":session_emp_code},
-						headers:{Authorization:"Bearer "+tokenID.token},
-						success:function(data){
-							var htmlOption="";
-							$.each(data,function(index,indexEntry){
-								htmlOption+="<option value="+indexEntry['procedure_id']+">"+indexEntry['procedure_name']+"</option>";
-							});
-							$("#by_step").html(htmlOption);
-						}
-					});
-			}
+			function UpdateWriter() {
+				var article_id = $("#article").val().split("-");
+				article_id = (article_id == '') ? '' : article_id[0];
+				var doctor_id = $("#form_doctor").val().split("-");
+				doctor_id = (doctor_id == '') ? '' : doctor_id[0];
+				var writer = $("#author").val().split("-");
+				writer = (writer == '') ? null : writer[0];
+				var writer_start_date = formatDateYMD($("#start_date").val());
+				var plan_date = formatDateYMD($("#plan_date").val());
+				var complete_date = formatDateYMD($("#complete_date").val());
+				var actual_date = formatDateYMD($("#deadline_date").val());
+				var user_id = {
+						"user_id":$("#alert_multi").val()
+				}
 				
-			function DropDownToStep() {
-					$.ajax({
-						url:restfulURL+"/"+serviceName+"/doctor_profile/list_medical_procedure",
-						type:"get",
-						dataType:"json",
-						async:false,
-						//data:{"emp_code":session_emp_code},
-						headers:{Authorization:"Bearer "+tokenID.token},
-						success:function(data){
-							var htmlOption="";
-							$.each(data,function(index,indexEntry){
-								htmlOption+="<option value="+indexEntry['procedure_id']+">"+indexEntry['procedure_name']+"</option>";
-							});
-							$("#to_step").html(htmlOption);
-						}
-					});
-			}
+				var data_value = {
+						"article_id":article_id,
+						"article_name":$("#article").val(),
+						"article_type_id":$("#article_type").val(),
+						"procedure_id":$("#procedure_name").val(),
+						"doctor_id":doctor_id,
+						"from_user_id":writer,
+						"writing_start_date":writer_start_date,
+						"plan_date":plan_date,
+						
+						"file":datafile,
+						"alert":user_id,
+						
+						"from_stage_id":$("#by_step").val(),
+						"to_stage_id":$("#to_step").val(),
+						"to_user_id":$("#send_to").val(),
+						"writing_end_date":complete_date,
+						"actual_date":actual_date,
+						"status":$("#to_step_status").val(),
+						"remark":$("#remark").val()
+				}
 				
+				var datafile = new FormData();
+				$.each(filesForm, function(key, value) {
+					console.log(value);
+					datafile.append(key, value);
+				});
+				datafile.append('formdata', JSON.stringify(data_value));
+
+				$.ajax({
+					url:restfulURL+"/"+serviceName+"/writer/cu",
+					type:"post",
+					dataType:"json",
+					//async:false,
+					processData: false, // Don't process the files
+					contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+					headers:{Authorization:"Bearer "+tokenID.token},
+					data:datafile,
+					success:function(data){
+						if(data.status==200) {
+							callFlashSlide('Update Success!','success')
+ 							$("#ModalWriter").modal('hide');
+						} else if (data.status==400) {
+							console.log(data)
+							validatetorInformation(validatetorWriter(data['errors'][0]));
+						}
+					}
+				})
+			};
+			
 			function uploadFiles(event) {
 				
 					event.stopPropagation();
@@ -1527,22 +1756,48 @@ $(document).ready(function(){
 				return false;
 			}
 			
-			function editFN(articleID) {
-				console.log("edit")
-// 				$.ajax({
-// 					url:restfulURL+"/"+serviceName+"/writer/download/"+aricleID,
-// 					type:'get',
-// 					cache: false,
-// 					dataType: 'json',
-// 					headers:{Authorization:"Bearer "+tokenID.token},
-// 					success: function(data, textStatus, jqXHR)
-// 					{
-// 						console.log(data);
-// 					}
-// 				});
-// 				return false;
+			function downloadfileWorkflowFN(stageid) {
+				console.log("downloadnaworkflow")
+				$.ajax({
+					url:restfulURL+"/"+serviceName+"/writer/download_article_stage_doc/"+stageid,
+					type:'get',
+					cache: false,
+					dataType: 'json',
+					headers:{Authorization:"Bearer "+tokenID.token},
+					success: function(data, textStatus, jqXHR)
+					{
+						console.log(data);
+					},
+					error: function(jqXHR, textStatus, errorThrown)
+					{
+						callFlashSlide('Format Error : ' + textStatus);
+					}
+				});
+				return false;
 			}
-				
+			
+			function list_data_template(data) {
+				var TRTDHTML = "";
+				var TRTDClass = "style=\"vertical-align: middle;\"";
+				$.each(data, function (key,value) {
+						TRTDHTML += 
+			                '<tr>'+
+			                '<td "'+TRTDClass+'">' + value.article_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.writer +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.procedure_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.doctor_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + formatDateDMY(value.writing_start_date) +'</td>'+
+			                '<td "'+TRTDClass+'">' + formatDateDMY(value.writing_end_date) +'</td>'+
+			                '<td "'+TRTDClass+'">' + formatDateDMY(value.plan_date) +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.article_type_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.status +'</td>'+
+			                '<td "'+TRTDClass+'"><button type="button" id="downloadfile-' + value.article_ID +'" class="btn btn-primary input-sm getfile" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
+			                '&nbsp;<button type="button" id="uploadfile-' + value.article_ID +'" class="btn btn-success input-sm getfile" data-target="#ModalImport" data-toggle="modal" title="อัพโหลด" data-placement="top"><i class="fa fa-upload"></i></button>'+
+			                '&nbsp;<button type="button" id="edit-' + value.article_ID +'" class="btn btn-warning input-sm getfile" data-target="#ModalWriter" data-toggle="modal" title="แก้ไข" data-placement="top">แก้ไข</button></td>'+
+			                '</tr>';
+			    });
+				$('#result_search_writer').html(TRTDHTML);
+			}
 				
 			//Autocomeplete
 			$("#search_article").autocomplete({
@@ -1603,7 +1858,7 @@ $(document).ready(function(){
 			        }
 			});
 				
-			$("#doctor").autocomplete({
+			$("#form_doctor").autocomplete({
 					source: function (request, response) {
 			        	$.ajax({
 							 url:restfulURL+"/"+serviceName+"/writer/list_doctor",
@@ -1631,29 +1886,26 @@ $(document).ready(function(){
 						});
 			        }
 			});
-				
-			function list_data_template(data) {
-				var TRTDHTML = "";
-				var TRTDClass = "style=\"vertical-align: middle;\"";
-				$.each(data, function (key,value) {
-						TRTDHTML += 
-			                '<tr>'+
-			                '<td "'+TRTDClass+'">' + value.article_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.writer +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.procedure_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.doctor_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + formatDateDMY(value.writing_start_date) +'</td>'+
-			                '<td "'+TRTDClass+'">' + formatDateDMY(value.writing_end_date) +'</td>'+
-			                '<td "'+TRTDClass+'">' + formatDateDMY(value.plan_date) +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.article_type_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.status +'</td>'+
-			                '<td "'+TRTDClass+'"><button type="button" id="downloadfile-' + value.article_ID +'" class="btn btn-primary input-sm getfile" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
-			                '&nbsp;<button type="button" id="uploadfile-' + value.article_ID +'" class="btn btn-success input-sm getfile" data-target="#ModalImport" data-toggle="modal" title="อัพโหลด" data-placement="top"><i class="fa fa-upload"></i></button>'+
-			                '&nbsp;<button type="button" id="edit-' + value.article_ID +'" class="btn btn-warning input-sm getfile" data-target="#ModalWriter" data-toggle="modal" title="แก้ไข" data-placement="top">แก้ไข</button></td>'+
-			                '</tr>';
-			    });
-				$('#result_search_writer').html(TRTDHTML);
-			}
+			
+			$("#search_procedure").html(generateDropDownList(
+					restfulURL+"/"+serviceName+"/writer/list_medical_procedure",
+					"GET"
+			));
+			
+			$("#procedure_name").html(generateDropDownList(
+					restfulURL+"/"+serviceName+"/doctor_profile/list_medical_procedure",
+					"GET"
+			));
+			
+			$("#article_type").html(generateDropDownList(
+					restfulURL+"/"+serviceName+"/writer/list_article_type",
+					"GET"
+			));
+			
+			$("#alert_multi").html(generateDropDownList(
+					restfulURL+"/"+serviceName+"/writer/list_article_type",
+					"GET"
+			));
 				
 			$('#alert_multi').multiselect({
 			  allSelectedText: 'No option left ...',
@@ -1675,18 +1927,19 @@ $(document).ready(function(){
 					$("#search_end_date").focus();
 					callFlashSlide('โปรดระบุถึงวันที่!','warning')
 				} else {
-					SearchAdvance();
+					getData();
 				}
 			});
 				
 			$("#btn_add").click(function(){
+				$("#author").val(userId+'-'+screenName);
+				$("#information_errors").hide();
 				InsertUpdateForCheck = "insert";
-				SetupDataDropDown();
 			});
 				
 			$("#btn_result_edit").click(function () {
+				$("#information_errors").hide();
 				InsertUpdateForCheck = "update";
-				SetupDataDropDown();
 				GetDataEdit();
 			});
 				
@@ -1702,6 +1955,7 @@ $(document).ready(function(){
 				var ufile = $(this).attr('id').split("-");
 				//var ufile = $(this).attr('id');
 				GlobalWriterID = null;
+				GlobalStageID = null;
 				$('#file').val("");
 				$(".btnModalClose").click();
 				$(".dropify-clear").click();
@@ -1709,7 +1963,20 @@ $(document).ready(function(){
 				if(ufile[0]=='downloadfile') {
 					downloadfileFN(GlobalWriterID);
 				} else if(ufile[0]=='edit') {
-					editFN(GlobalWriterID);
+					GetDataEdit(GlobalWriterID);
+				}
+				
+				if(ufile[0]=='downloadfileWorkflowHistory') {
+					GlobalStageID
+				}
+			});
+			
+			$("#workflow_history").on("click",'.getfileWorkflow',function() {
+				var ufile = $(this).attr('id').split("-");
+				GlobalStageID = null;
+				GlobalStageID = ufile[1];
+				if(ufile[0]=='downloadfileWorkflowHistory') {
+					downloadfileWorkflowFN(GlobalStageID);
 				}
 			});
 				
@@ -1723,26 +1990,46 @@ $(document).ready(function(){
 			var filesLength;
 			$('#fileForm').on('change', prepareUpload2);
 			function prepareUpload2(event) {
-				filesForm = event.target.filesForm;
-				filesLength = event.target.files.length;
+				filesForm = event.target.files;
+				if(event.target.files.length!=undefined){
+					filesLength = event.target.files.length;
+					console.log(filesForm)
+				}
+			};
+			
+			var filesFormWorkflow;
+			var filesLengthWorkflow;
+			$('#fileFormWorkflow').on('change', prepareUpload3);
+			function prepareUpload3(event) {
+				filesFormWorkflow = event.target.files;
+				if(event.target.files.length!=undefined){
+					filesLengthWorkflow = event.target.files.length;
+					console.log(filesForm)
+				}
 			};
 				
 			$('form#fileUploadWriter').on('submit', uploadFiles);
 			$('form#fileUploadWriterForm').on('submit',function(){
-				showHideFileuploadform(filesLength);
+				showHideFileuploadform('.countFileTargetForm',filesLength);
 				$("#ModalImportForm").modal('hide');
+				return false;
+			});
+			$('form#fileUploadWriterFormWorkflow').on('submit',function(){
+				showHideFileuploadform('.countFileTargetFormWorkflow',filesLengthWorkflow);
+				$("#ModalImportFormWorkflow").modal('hide');
 				return false;
 			});
 			
 			$(".dropify-clear").click(function(){
 				filesLength = 0;
+				filesLengthWorkflow = 0;
 			});
 			
-			function showHideFileuploadform(filelength) {
+			function showHideFileuploadform(classtextFiles,filelength) {
 				if(filelength>0) {
-					$(".countFileTargetForm").text(''+filelength+' Files');
+					$(""+classtextFiles+"").text(''+filelength+' Files');
 				} else {
-					$(".countFileTargetForm").text('');
+					$(""+classtextFiles+"").text('');
 				}
 			}
 			
@@ -1750,6 +2037,7 @@ $(document).ready(function(){
 	 }// end if
 });// end document
 </script>
+
 
 <!-- Mainly scripts -->
 <!-- <script type="text/javascript">var jQuery_1_1_3 = $.noConflict(true);</script> -->

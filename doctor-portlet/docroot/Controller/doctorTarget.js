@@ -228,6 +228,7 @@ $(document).ready(function() {
 						  },
 						  alert: $('#alert_multi').val()
 				}
+				console.log($data);
 				getAjax($plRoute+"/cru",'post',$data,callback);
 				
 			}else{
@@ -260,7 +261,7 @@ $(document).ready(function() {
 		
 		function getyear(min,max){
 			var html_year ='';
-			for($i = min; $i < max;$i++ ){	html_year +="<option value="+$i+">"+$i+"</option>";	}
+			for($i = min; $i < max;$i++ ){	html_year +="<option value="+($i-543)+">"+$i+"</option>";	}
 			return html_year;
 		}
 		

@@ -23,6 +23,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/eclips/util-bridges-6.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/GJ-Chokanan/git/Review-Hunter/doctor-portlet/docroot/lib/util-bridges-6.1.0.jar"/>
 	<classpathentry kind="output" path="docroot/WEB-INF/classes"/>
 </classpath>

@@ -151,8 +151,8 @@
 										</div>
 									</div>
 									<div class="form-group" style="margin-left: 5px;">
-										<label for="is_active" class="col-sm-2 control-label">is Active</label>
-										<div class="col-sm-10">
+										<label for="is_active" class="control-label">is Active</label>
+										<div class="span3">
 											<input data-toggle="tooltip"
 												title="is active" data-placement="top" 
 												id="add_is_active"

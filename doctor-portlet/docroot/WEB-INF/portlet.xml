@@ -218,12 +218,12 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>b-a_-r-h_-co</portlet-name>
-		<display-name>B A R H Co</display-name>
-		<portlet-class>com.test.BA_RH_CO</portlet-class>
+		<portlet-name>ba</portlet-name>
+		<display-name>BA</display-name>
+		<portlet-class>com.test.BA</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/ba_rh_co/view.jsp</value>
+			<value>/html/ba/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -231,8 +231,8 @@
 			<portlet-mode>view</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>B A R H Co</title>
-			<short-title>B A R H Co</short-title>
+			<title>BA</title>
+			<short-title>BA</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

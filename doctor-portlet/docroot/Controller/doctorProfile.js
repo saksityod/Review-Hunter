@@ -162,9 +162,9 @@ $(document).ready(function() {
 					$.each(rs.data.doctor_work,function(k,v){
 						$html += '<tr class="edit-exp tr-dump" data-id="'+v.doctor_work_id+'"> '
 									+'<td ><input type="checkbox" class="checkbox"> </td> '
-									+'<td><div class="display" style="text-align:center">'+v.start_year+'</div>'
+									+'<td><div class="display" style="text-align:center">'+(v.start_year+543)+'</div>'
 										+'<select style="display:none" class="input exp-start work-datepicker validation" type="text" data-default="'+v.start_year+'">'+$html_year+'</select></td> '
-									+'<td><div class="display" style="text-align:center">'+v.end_year+'</div>'
+									+'<td><div class="display" style="text-align:center">'+(v.end_year+543)+'</div>'
 										+'<select style="display:none" class="input exp-end work-datepicker validation" type="text" data-default="'+v.end_year+'">'+$html_year+'</select></td> '
 									+'<td><div class="display">'+v.company_name+'</div>'
 										+'<input style="display:none" class="input exp-comp validation" type="text" data-default="'+v.company_name+'" value="'+v.company_name+'"></td> '
@@ -188,9 +188,10 @@ $(document).ready(function() {
 		$url = $plRoute+"/get_current_date";
 		getAjax($url,'get','',function(rs){
 			if(rs){
-				$year = parseInt(rs.split("-")[2])+543;
+				$bc_year =parseInt(rs.split("-")[2]);
+				$year = $bc_year+543;
 				for($i = $year-20; $i <= $year;$i++ ){
-					$html_year +="<option value="+$i+">"+$i+"</option>";
+					$html_year +="<option value="+($i-543)+">"+$i+"</option>";
 				}
 			}
 		});
@@ -273,8 +274,6 @@ $(document).ready(function() {
 			});
 			return $stat;
 		}
-		
-		
 		
 		function getDataToAjax(){
 			$data = {search:$.trim($("#doctor_name").val()),procedure:$("#medical_procedure").val()};

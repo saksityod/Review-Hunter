@@ -121,6 +121,24 @@ plid = layout.getPlid();
 				<div class="row-fluid">
 					<div class="height-32-px"></div>
 				</div>
+				<!-- pagination start -->
+				<div class="row-fluid">
+					<div id="width-100-persen" class="span9 m-b-xs">
+						<span class="pagination_top m-b-none pagination"></span>
+					</div>
+					<div class="span3 object-right ResultsPerPageTop">
+						<div class='pagingDropdown'>
+		                	<select  id='countPaginationTop'  class="form-control input-sm countPagination">
+						        <option>10</option>
+						        <option>20</option>
+						        <option>50</option>
+						        <option>100</option>
+					        </select>           		
+		                </div>
+<!-- 						<div class='pagingText'>Results per page</div>                       -->
+		        	</div>
+				</div>
+			<!-- pagination end -->
 				<!-- start table -->
 				<div class="row-fluid" style="overflow: auto;">
 					<table class="table table-striped" id="table_job_status">
@@ -142,41 +160,35 @@ plid = layout.getPlid();
 				<!-- end table -->
 				<!-- pagination start -->
 				<div class="row-fluid">
-					<div id="width-100-persen" class="span9 m-b-xs">
-	
-						<span class="pagination_top m-b-none pagination"
-							id="yui_patched_v3_11_0_1_1514185894268_841"><ul
-								class="pagination bootpag"
-								id="yui_patched_v3_11_0_1_1514185894268_840">
-								<li data-lp="1" class="first disabled"><a
-									href="javascript:void(0);">←</a></li>
-								<li data-lp="1" class="prev disabled"><a
-									href="javascript:void(0);">prev</a></li>
-								<li data-lp="1" class="active"><a href="javascript:void(0);">1</a></li>
-								<li data-lp="2" id="yui_patched_v3_11_0_1_1514185894268_839"><a
-									href="javascript:void(0);"
-									id="yui_patched_v3_11_0_1_1514185894268_838">2</a></li>
-								<li data-lp="3"><a href="javascript:void(0);">3</a></li>
-								<li data-lp="4"><a href="javascript:void(0);">4</a></li>
-								<li data-lp="5"><a href="javascript:void(0);">5</a></li>
-								<li data-lp="2" class="next"><a href="javascript:void(0);">next</a></li>
-								<li data-lp="6" class="last"><a href="javascript:void(0);">→</a></li>
-							</ul></span>
-	
+					<div id="width-100-persen" class="span9 m-b-xs ">
+						<span class="pagination_bottom m-b-none pagination"></span>
 					</div>
 					<div class="span3 object-right ResultsPerPageBottom">
+		            	<div class='pagingDropdown'>
+		                <select  id='countPaginationBottom'  class="form-control input-sm countPagination">
+					       <option>10</option>
+					                                     <option>20</option>
+					                                     <option>50</option>
+					                                     <option>100</option>
+					                                 </select> 
+			                                 	</div>
+												<div class='pagingText'>Results per page</div>
+		                        </div>
+							</div>
+							<!-- pagination end -->
+<!-- 					<div class="span3 object-right ResultsPerPageBottom"> -->
 	
-						<div class='pagingDropdown'>
-							<select id='countPaginationBottom'
-								class="form-control input-sm countPagination">
-								<option>10</option>
-								<option>20</option>
-								<option>50</option>
-								<option>100</option>
-							</select>
-						</div>
-						<div class='pagingText'>Results per page</div>
-					</div>
+<!-- 						<div class='pagingDropdown'> -->
+<!-- 							<select id='countPaginationBottom' -->
+<!-- 								class="form-control input-sm countPagination"> -->
+<!-- 								<option>10</option> -->
+<!-- 								<option>20</option> -->
+<!-- 								<option>50</option> -->
+<!-- 								<option>100</option> -->
+<!-- 							</select> -->
+<!-- 						</div> -->
+<!-- 						<div class='pagingText'>Results per page</div> -->
+<!-- 					</div> -->
 				</div>
 				<!-- pagination end -->
 			</div>
@@ -423,6 +435,64 @@ function formatDateDMY(input) {
     var year = datePart[0];
     return day + '-' + month + '-' + year;
 }
+
+var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
+	
+	if(pageTotal==0){
+		pageTotal=1
+	}
+	$('.pagination_top,.pagination_bottom').off("page");
+	$('.pagination_top,.pagination_bottom').bootpag({
+	    total: pageTotal,//page Total
+	    page: pageIndex,//page index
+	    maxVisible: 5,//จำนวนปุ่ม
+	    leaps: true,
+	    firstLastUse: true,
+	    first: '←',
+	    last: '→',
+	    wrapClass: 'pagination',
+	    activeClass: 'active',
+	    disabledClass: 'disabled',
+	    nextClass: 'next',
+	    prevClass: 'prev',
+	    next: 'next',
+	    prev: 'prev',
+	    lastClass: 'last',
+	    firstClass: 'first'
+	}).on("page", function(event, num){
+		var rpp=10;
+		if($("#rpp").val()==undefined){
+			rpp=10;
+		}else{
+			rpp=$("#rpp").val();
+		}
+		
+		getData(num,rpp);
+		
+	    $(".pagingNumber").remove();
+	    var htmlPageNumber= "<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='"+num+"'>";
+	    $("body").append(htmlPageNumber);
+	   
+	}); 
+
+	$(".countPagination").off("change");
+	$(".countPagination").on("change",function(){
+
+		$("#countPaginationTop").val($(this).val());
+		$("#countPaginationBottom").val($(this).val());
+		
+		getData(1,$(this).val());
+		
+		$(".rpp").remove();
+		$(".pagingNumber").remove();
+		var htmlRrp="";
+			htmlRrp+= "<input type='hidden' id='rpp' name='rpp' class='rpp' value='"+$(this).val()+"'>";
+	        htmlRrp+="<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='1'>";
+	    $("body").append(htmlRrp);
+	});
+}
+//set paginate end 
+
 </script>
 
 <script>
@@ -432,7 +502,7 @@ $(document).ready(function(){
 	var plid = $('#plid_portlet').val();
 	if(username!="" && username!=null & username!=[] && username!=undefined ){
 		 if(connectionServiceFn(username,password,plid)==true){
-			 
+			 var GlobalDataTodolist;
 			 var generateDropDownList = function(url,type,request,initValue){
 			 	var html="";
 			 	
@@ -470,7 +540,7 @@ $(document).ready(function(){
 			 	return html;
 			}
 			 
-			var searchFN = function() {
+			var getData = function(page,rpp) {
 				var case_id = $("#case_name").val().split("-");
 				var job_status = $("#job_status").val();
 				var medical_procedure = $("#medical_procedure").val();
@@ -492,18 +562,19 @@ $(document).ready(function(){
 						"status":job_status,
 						"procedure_id":medical_procedure,
 						"doctor_id":doctor_id,
-						"user_id":responsible
+						"user_id":responsible,
+						"page":page,
+						"rpp":rpp
 					},
 					success:function(data) {
 						console.log(data);
-						//list_data_template(data);
+						list_data_template(data);
+						
+						GlobalDataTodolist=data;
+						paginationSetUpFn(GlobalDataTodolist['current_page'],GlobalDataTodolist['last_page'],GlobalDataTodolist['last_page']);
 					}
 				});
 			}
-			
-			$("#btn_search").click(function() {
-				searchFN();
-			});
 			
 			var list_data_template = function(data) {
 				var TRTDHTML = "";
@@ -522,6 +593,18 @@ $(document).ready(function(){
 			    });
 				$('#list_job_status').html(TRTDHTML);
 			}
+			
+			$("#result_search_writer").on("click",'.getfile',function() {
+				var ufile = $(this).attr('id').split("-");
+			});
+			
+			$("#btn_search").click(function() {
+				getData();
+			});
+			
+			$("#countPaginationBottom").change(function() {
+				getData();
+			});
 			
 			$("#medical_procedure").html(generateDropDownList(
 				restfulURL+"/"+serviceName+"/todo/procedure_list",

@@ -236,3 +236,60 @@ function formatDateDMY(input) {
     var year = datePart[0];
     return day + '-' + month + '-' + year;
 }
+
+var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
+	 
+	 if(pageTotal==0){
+	  pageTotal=1
+	 }
+	 $('.pagination_top,.pagination_bottom').off("page");
+	 $('.pagination_top,.pagination_bottom').bootpag({
+	     total: pageTotal,//page Total
+	     page: pageIndex,//page index
+	     maxVisible: 5,//จำนวนปุ่ม
+	     leaps: true,
+	     firstLastUse: true,
+	     first: '←',
+	     last: '→',
+	     wrapClass: 'pagination',
+	     activeClass: 'active',
+	     disabledClass: 'disabled',
+	     nextClass: 'next',
+	     prevClass: 'prev',
+	     next: 'next',
+	     prev: 'prev',
+	     lastClass: 'last',
+	     firstClass: 'first'
+	 }).on("page", function(event, num){
+	  var rpp=10;
+	  if($("#rpp").val()==undefined){
+	   rpp=10;
+	  }else{
+	   rpp=$("#rpp").val();
+	  }
+	  
+	  getData(num,rpp);
+	  
+	     $(".pagingNumber").remove();
+	     var htmlPageNumber= "<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='"+num+"'>";
+	     $("body").append(htmlPageNumber);
+	    
+	 }); 
+
+	 $(".countPagination").off("change");
+	 $(".countPagination").on("change",function(){
+
+	  $("#countPaginationTop").val($(this).val());
+	  $("#countPaginationBottom").val($(this).val());
+	  
+	  getData(1,$(this).val());
+	  
+	  $(".rpp").remove();
+	  $(".pagingNumber").remove();
+	  var htmlRrp="";
+	   htmlRrp+= "<input type='hidden' id='rpp' name='rpp' class='rpp' value='"+$(this).val()+"'>";
+	         htmlRrp+="<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='1'>";
+	     $("body").append(htmlRrp);
+	 });
+	}
+	//set paginate end

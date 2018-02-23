@@ -114,6 +114,10 @@ padding-top: 5px;
 .coordinate_group{ margin-bottom:15px}
 .ui-autocomplete{ z-index:1099 !important}
 .aui li{ margin-top: 5px;}
+
+.aui .btn.active, .aui .btn:active{ background: #0044cc ;color:white}
+
+
 </style>
 
 <input type="hidden" id="user_portlet" name="user_portlet"
@@ -263,7 +267,6 @@ padding-top: 5px;
 	</div>
 
 	<!-- Modal Start add -->
-
 	<div aria-hidden="true" role="dialog" class="modal inmodal  large"
 		tabindex="-1" id="modalAdd" class="modal inmodal"
 		style="display: none;">
@@ -397,11 +400,8 @@ padding-top: 5px;
 									<th width="20px"></th>
 								</tr>
 							</thead>
-							<tbody>
-							</tbody>
-						
+							<tbody></tbody>
 						</table>
-					
 					</div>
 					
 					
@@ -434,12 +434,8 @@ padding-top: 5px;
 									<th width="20px"></th>
 								</tr>
 							</thead>
-							<tbody>
-								
-							</tbody>
-						
+							<tbody></tbody>
 						</table>
-					
 					</div>
 					
 					
@@ -509,8 +505,9 @@ padding-top: 5px;
 							</div>
 						</div>
 					</div>
+					
 					<div class="row-fluid wrap" id="case_followup">
-						<div class="span8">
+						<div class="row-fluid">
 							<h4 class="">หัตถการที่ควรทำ &nbsp;&nbsp;&nbsp;&nbsp; 
 								<button class="btn btn-success modal-add" data-tr='<tr class="dump_tr">
 										<td><select class="case_followup_procedure procedure"></select></td>
@@ -569,7 +566,6 @@ padding-top: 5px;
 						</table>
 					</div>
 					
-					
 					<!-- case_social_media -->
 					<div class="row-fluid wrap" id="case_social_media">
 						<h4 class=" ">ช่องทางลงสื่อ &nbsp;&nbsp;&nbsp;&nbsp; 
@@ -602,14 +598,11 @@ padding-top: 5px;
 						</table>
 					</div>
 					
-					
 					<!-- case_coordinate -->
 					<div class="row-fluid wrap" id="case_coordinate">
 						<h4 class=" ">การประสานงานคลินิก &nbsp;&nbsp;&nbsp;&nbsp; </h4>
 						<hr/>
-						
 					</div>
-					
 					
 					<!-- case_appointment -->
 					<div class="row-fluid wrap" id="case_appointment">
@@ -676,8 +669,9 @@ padding-top: 5px;
 								<td><input class="case_contract_isOther" 	type="checkbox"></td>
 								<td><input class="case_contract_upload storeFile" multiple type="file" ></td>
 								<td>
-									<button class="btn btn-danger del-tr"><i class="fa fa-times-circle"></i></button>
+									<button class="btn btn-danger del-tr-contract"><i class="fa fa-times-circle"></i></button>
 								</td>
+								<input class="case_contract_file_name_check" type="hidden">
 								
 								
 							</tr>'>เพิ่ม</button>
@@ -758,8 +752,8 @@ padding-top: 5px;
 					<!-- case_file -->
 					<div class="row-fluid wrap" id="case_file">
 						<h4 class=" ">แฟ้ม  &nbsp;&nbsp;&nbsp;&nbsp;  
-							<button class="btn btn-info" id="btnAddFloder"  data-target="#addFolder" data-toggle="modal">สร้างแฟ้มรูป</button> 
-							<button class="btn btn-success multiUpload" data-target="#ModalImportForm" data-toggle="modal" form="fileUploadWriterForm">อัพโหลด</button>
+							<button class="btn btn-info" id="btnAddFolder"  data-target="#addFolder" data-toggle="modal">สร้างแฟ้มรูป</button> 
+							<button class="btn btn-success" id="btnUploadFile" data-target="#ModalImportForm" data-toggle="modal" form="fileUploadWriterForm">อัพโหลด</button>
 						</h4>
 						<hr/>
 						<div class="row-fluid">
@@ -767,7 +761,6 @@ padding-top: 5px;
 								<ul id="list">
 								    <li><a href="#">Home</a>
 								    <ul>
-								        
 								        
 								    </ul>
 								    </li>
@@ -870,12 +863,8 @@ padding-top: 5px;
 						<div class="row-fluid">
 							<div class="span8">
 								<label class=" ">แนบเอกสาร : </label>
-								<button class="btn btn-success" type="button"><input type="file" id="case_stage_upfile" ></button>
+								<input type="file" id="case_stage_upfile" >
 							</div>
-							<div class="span4">
-								<label class=" ">&nbsp; </label>
-								<button class="btn btn-info " id="case_stage_submit" type="button">Submit</button>
-							</div>	
 						</div>
 						
 					</div>
@@ -928,13 +917,47 @@ padding-top: 5px;
 						</button>
 					</div>
 				</div>
-				
-				
 			</div>
 		</div>
 	</div>
 	<!-- Modal End add -->
 		
+	<!-- Modal Import file form -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="ModalImportForm"
+		class="modal inmodal portlet-frame" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header" style="background-color: rgb(0, 206, 215); border-color: rgb(0, 206, 215);">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span>
+					</button>
+					<h4 class="modal-title" id="">อัพโหลดรูปภาพ</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+					<form id="fileUploadWriterForm">
+						<div class="row-fluid"> 
+							<div class=""> <label class=" ">แฟ้มหลัก: </label> 
+								<select class="folderList"></select>
+							</div>
+						</div>
+						<h4>File Upload</h4>
+						<div class="fileImport">
+							<input type="file" id="fileForm" class="dropify fileUpload" accept=".xls, .xlsx, .pdf, .docx" multiple/><span></span>
+						</div>
+						<h6 class="label-content-import-export"></h6>
+					</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-success" type="submit" id="importsubmitForm" form="fileUploadWriterForm">Upload</button>
+					<button data-dismiss="modal" class="btn btn-danger btnCancle"
+						type="button">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- Modal End  -->
 		
 	<!-- Modal Confirm Start -->
 	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal"
@@ -996,13 +1019,13 @@ padding-top: 5px;
 							<select class="main_folder"></select>
 						</div>
 						<div class=""> <label class=" ">ชื่อแฟ้ม: </label> 
-							<input type="text" id="" class="">
+							<input type="text" id="folderName" class="">
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<div align="center">
-						<button class="btn btn-success" id="btnAddFolder" type="button">
+						<button class="btn btn-success" id="btnSubmitAddFolder" type="button">
 							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;สร้าง&nbsp;&nbsp;
 						</button>&nbsp;&nbsp;
 						<button data-dismiss="modal" class="btn btn-danger" type="button">
@@ -1035,7 +1058,6 @@ $(document).ready(function() {
 			console.log(rs);
 			
 			$current_year = parseInt(rs.currentDate.split("-")[2])+543;
-			
 			$(".datepicker").each(function(){
 				$(this).closest("div").find(".datepicker_ad").val(beToad($(this).val()));
 			});
@@ -1043,113 +1065,74 @@ $(document).ready(function() {
 			var html_temp = '<option> --เลือกจังหวัด -- </option>';
 			$.each(rs.province,function(){
 				html_temp +='<option value="'+this.province_id+'">'+this.province_name+'</option>';
-			}); 
-			$('#patient_province').html(html_temp);
+			}); $('#patient_province').html(html_temp);
 			
 			$html_procedure = '';
 			$.each(rs.medicalProcedure,function(){
 				$html_procedure +='<option value="'+this.procedure_id+'">'+this.procedure_name+'</option>';
-			}); 
-			$('.procedure').html($html_procedure);
+			}); $('.procedure').html($html_procedure);
 
 			$html_doctor = '';
 			$.each(rs.doctor,function(){
 				$html_doctor +='<option value="'+this.doctor_id+'">'+this.doctor_name+'</option>';
-			}); 
-			$('.doctor').html($html_doctor );
+			}); $('.doctor').html($html_doctor );
 			
 			$html_social = '';
 			$.each(rs.socialMedia,function(){
 				$html_social +='<option value="'+this.social_media_id+'">'+this.social_media_name+'</option>';
-			}); 
-			$('.social').html($html_social);
-			
+			}); $('.social').html($html_social);
 			
 			$html_caseType = '';
 			$.each(rs.caseType,function(){
 				$html_caseType +='<option value="'+this.case_type_id+'">'+this.case_type+'</option>';
-			}); 
-			$('.casetype').html( $html_caseType);
+			}); $('.casetype').html( $html_caseType);
 			
 			$html_caseGroup = '';
 			$.each(rs.casegroup,function(){
 				$html_caseGroup +='<option value="'+this.case_group_id+'">'+this.case_group+'</option>';
-			}); 
-			$('.caseGroup').html( $html_caseGroup);
+			}); $('.caseGroup').html( $html_caseGroup);
 			
 			$html_discountType = '';
 			$.each(rs.discountType,function(){
 				$html_discountType +='<option value="'+this.discount_type_id+'">'+this.discount_type_name+'</option>';
-			}); 
-			$('.discount').html( $html_discountType );
+			}); $('.discount').html( $html_discountType );
 			
 			html_temp = '';
 			$.each(rs.nationality,function(){
 				html_temp +='<option value="'+this.nationality_id+'">'+this.nationality_name+'</option>';
-			}); 
-			$('.nationality').html( html_temp );
+			}); $('.nationality').html( html_temp );
 			
 			$html_pr = '';
 			$.each(rs.pr,function(){
 				$html_pr +='<option value="'+this.pr_id+'">'+this.pr_desc+'</option>';
-			}); 
-			$('.pr').html( $html_pr );
+			}); $('.pr').html( $html_pr );
 			
 			$html_appointment = '';
 			$.each(rs.appointmentType,function(){
 				$html_appointment +='<option value="'+this.appointment_type_id+'">'+this.appointment_type_name+'</option>';
-			}); 
-			$('.appointment').html( $html_appointment );
+			}); $('.appointment').html( $html_appointment );
 			
 			$html_articleType = '';
 			$.each(rs.articleType,function(){
 				$html_articleType +='<option value="'+this.article_type_id+'">'+this.article_type_name+'</option>';
-			}); 
-			$('.article').html( $html_articleType );
+			}); $('.article').html( $html_articleType );
 			
 			html_temp = '';
 			$.each(rs.usageType,function(k,v){
 				html_temp += "<div class='span5 coordinate_group'><label>"+v.usage_type_name+"</label><select data-usageType_id='"+v.usage_type_id+"' class='multiple case_coordinate' multiple='multiple'>";
 				$.each(v.usage_item,function(){
 					html_temp +='<option value="'+this.usage_id+'">'+this.usage_name+'</option>';
-				});
-				html_temp += "</select></div>"	;	
+				});	html_temp += "</select></div>"	;	
 			}); 
 			$('#case_coordinate').append( html_temp );
 			$('.multiple').multiSelect();
-			
-			html_temp = '';
-			$.each(rs.folder,function(){
-				html_temp +='<li><a href="#" class="folder_toggle">'+this.folder_screen_name+'</a>'
-				+'<div style="float:right;"class="span6">'
-					+'<div class="span4">ปริมาณรูป&nbsp;&nbsp;<span class="volume">0</span>&nbsp;%</div>'
-					+'<button class=" btn btn-danger del-folder pull-right">ลบ</button>'
-				+'</div><ul>';
-				if(this.sub_folder){
-					$.each(this.sub_folder,function(){
-						html_temp 	+='<li><a href="#" >'+this.folder_screen_name+'</a>'
-						+'<div style="float:right;"class="span6">'
-							+'<div class="span8"><input type="checkbox">&nbsp;&nbsp;ผ่าน</div>'
-							+'<button class=" btn btn-danger del-folder pull-right">ลบ</button>'
-						+'</div></li>';		
-					});
-					html_temp +='</ul>';
-				}
-				html_temp +='</li>';
-			}); 
-			$('#list >li > ul').html( html_temp );
-			$('.folder_toggle').click(function(){
-			    $(this).parent('li').find('ul').toggle();
-			});
-			
+			$('#list >li > ul').html( getFolder(rs.folder) );
+			$('.folder_toggle').click(function(){	$(this).parent('li').find('ul').toggle();	});
 			$('.datepicker').keydown(function(e){e.preventDefault();});
-			
 			getList('');
 		});
 		
-		$('body').on('click','.edit-list',function(){
-			$('.modal-cancel').hide();
-		});
+		$('body').on('click','.edit-list',function(){	$('.modal-cancel').hide();	});
 		
 		$('body').on('click','.modal-edit',function(){
 			$(this).closest('.wrap').find('.modal-cancel').show();
@@ -1172,9 +1155,12 @@ $(document).ready(function() {
 		/* if($roles == 'rh_co'){
 			$("#profile,#social,#surgery,#medical,#price,#social_channel,#folder,#workflow").show();
 		} */
+		var stage = $('#case_stage').data('id');
+		//if(stage == ){
+			
+		//}
 		
 		$('#addPatient').on('click', function (e) {
-			
 				$('.modal-edit,.modal-del,.modal-cancel,.wrap').hide();
 				$('#patient,#patient_social_media,#surgery_history,#patient_case,#case_followup').show();
 				$('#case_price,#case_social_media,#case_file,#case_stage,#workflow').show();
@@ -1200,29 +1186,13 @@ $(document).ready(function() {
 				$('#patient_district').html(html_district);
 			})
 		});
-		$('#patient_district').change(function(){
-			$('#patient_zipcode').text($('#patient_district option:selected').data('zipcode'));
-		});
-		$('.modal-add').click(function(){
+		$('#patient_district').change(function(){	$('#patient_zipcode').text($('#patient_district option:selected').data('zipcode'));	});
+		
+		var n_id = 0;
+		$('.modal-add').click(function(){	
+			n_id ++;
 			$(this).closest('.wrap').find('table tbody').append($(this).data('tr'));
-			var last_tr = $(this).closest('.wrap').find('tr:last-child');
-			last_tr.find('.caseType').html($html_caseType);
-			last_tr.find('.doctor').html($html_doctor);
-			last_tr.find('.procedure').html($html_procedure);
-			last_tr.find('.discount').html($html_discountType);
-			last_tr.find('.social').html($html_social);
-			last_tr.find('.pr').html($html_pr);
-			last_tr.find('.next_year').html(getyear($current_year,$current_year+10));
-			last_tr.find('.appointment').html($html_appointment);
-			last_tr.find('.datepicker').datepicker({
-                format: 'dd/mm/yyyy',
-                todayBtn: true,
-                language: 'th',            
-                thaiyear: true              
-            }).datepicker("setDate", "0").keydown(function(e){e.preventDefault();});
-			last_tr.find('.dropify').dropify();
-			
-        });
+			getBasicData($(this))   });
 		
 		$('body').on('keyup','.user',function(){
 			var search =  $(this).val();
@@ -1245,48 +1215,49 @@ $(document).ready(function() {
 			});
 		});
 		
+		
+		/* save patient */
 		$('#btnModalSubmit').click(function(){
 			$data = {
-				 	"formdata":	{
-						   "patient":{
-							     "patient_id"	: $("#modalAdd").data("patient_id")?$("#modalAdd").data("patient_id"):'',
-							     "hn_no"		: $.trim($("#patient_hnNo").val()),
-							     "patient_name"	: $.trim($("#patient_name").val()),
-							     "nick_name"	: $.trim($("#patient_nickName").val()),
-							     "birthday"		: $.trim($("#patient_birthDate").val()),
-							     "nationality_id": $("#patient_nationality").val(),
-							     "gender"		: $("#patient_gender").val(),
-							     "id_card"		: $.trim($("#patient_idCard").val()),
-							     "home_no"		: $.trim($("#patient_homeNo").val()),
-							     "moo"			: $.trim($("#patient_moo").val()),
-							     "soi"			: $.trim($("#patient_soi").val()),
-							     "road"			: $.trim($("#patient_road").val()),
-							     "province_id"	: $("#patient_province").val(),
-							     "amphur_id"	: $("#patient_amphur").val(),
-							     "district_id"	: $("#patient_district").val(),
-							     "mobile_no"	: $.trim($("#patient_mobile").val()),
-							     "telephone_no"	: $.trim($("#patient_telNo").val()),
-							     "career"		: $.trim($("#patient_career").val()),
-						   	}
-				 	}
+				"patient":{
+					"patient_id"	: $("#patient").data("id")?$("#patient").data("id"):'',
+				    "hn_no"			: $.trim($("#patient_hnNo").val()),
+				    "patient_name"	: $.trim($("#patient_name").val()),
+				    "nick_name"		: $.trim($("#patient_nickName").val()),
+				    "birthday"		: $.trim($("#patient_birthDate").val()),
+				    "nationality_id": $("#patient_nationality").val(),
+				    "gender"		: $("#patient_gender").val(),
+				    "id_card"		: $.trim($("#patient_idCard").val()),
+				    "home_no"		: $.trim($("#patient_homeNo").val()),
+				    "moo"			: $.trim($("#patient_moo").val()),
+				    "soi"			: $.trim($("#patient_soi").val()),
+				    "road"			: $.trim($("#patient_road").val()),
+				    "province_id"	: $("#patient_province").val(),
+				    "amphur_id"		: $("#patient_amphur").val(),
+				    "district_id"	: $("#patient_district").val(),
+				    "mobile_no"		: $.trim($("#patient_mobile").val()),
+				    "telephone_no"	: $.trim($("#patient_telNo").val()),
+				    "career"		: $.trim($("#patient_career").val()),
+			   	}
 			}
-			
+		
 			var social = [];
 			$('#patient_social_media table tbody tr').each(function(i,v){
 				social.push({
-					patient_media_id:$('#patient_social_media').data("patient_media_id")?$('#patient_social_media').data("patient_media_id"):'',
-					patient_id		:$("#modalAdd").data("patient_id")?$("#modalAdd").data("patient_id"):'',
+					patient_media_id:$('#patient_social_media').data("id")?$('#patient_social_media').data("id"):'',
+					patient_id		:$("#patient").data("id")?$("#patient").data("id"):'',
 					social_media_id	:$(this).find('.patient_social_media_type').val(),
 					user_link		:$.trim($(this).find('.patient_social_media_link').val()),
 					n_of_follwer	:$.trim($(this).find('.patient_social_media_follow').val()),
 				});
 			});
-			$data['formdata']['social_media'] =social; 
+			$data['social_media'] = social; 
+			
 			var surgery = [];
 			$('#surgery_history table tbody tr').each(function(i,v){
 				surgery.push({
-					history_id		:$('#surgery_history').data("history_id")?$('#surgery_history').data("history_id"):'',
-					patient_id		:$("#modalAdd").data("patient_id")?$("#modalAdd").data("patient_id"):'',
+					history_id		:$('#surgery_history').data("id")?$('#surgery_history').data("id"):'',
+					patient_id		:$("#patient").data("id")?$("#patient").data("id"):'',
 					surgery_year 	:$(this).find('.surgery_year').val(),
 					clinic_name		:$.trim($(this).find('.surgery_clinic').val()),
 					doctor_id		:$(this).find('.surgery_doctor').val(),
@@ -1294,16 +1265,17 @@ $(document).ready(function() {
 					remark			:$.trim($(this).find('.surgery_remark').val()),
 				});
 			});
-			$data['formdata']['surgery_history'] =surgery; 
-			
+			$data['surgery_history'] = surgery; 
+				
 			var supervised = '';
 			$('body .patient_case_supervisedBy').each(function(){
 				supervised+='|'+$(this).data('supervised');
 			});
-			$data['formdata']['patient_case'] ={
-				case_id 		:$('#patient_case').data('case_id')?$('#patient_case').data('case_id'):'',
-				workflow_stage_id:1,
-				patient_id		:$("#modalAdd").data("patient_id")?$("#modalAdd").data("patient_id"):'',
+			
+			$data['patient_case'] ={
+				case_id 		:$('#patient_case').data('id')?$('#patient_case').data('id'):'',
+				workflow_stage_id:$('#case_stage').data('id')?$('#case_stage').data('id'):'',
+				patient_id		:$("#patient").data("id")?$("#patient").data("id"):'',
 				procedure_id	:$('#patient_case_procedure').val(),
 				case_type_id	:$('#patient_case_caseType').val(),
 				case_group_id	:$('#patient_case_caseGroup').val(),
@@ -1317,23 +1289,23 @@ $(document).ready(function() {
 				is_good_review	:$('#patient_case_isGoodReview').prop('checked'),
 				remark			:$.trim($('#patient_case_remark').val())
 			}
-			 
+				 
 			var followup = [];
 			$('#case_followup table tbody tr').each(function(i,v){
 				followup.push({
-					followup_id		:$('#case_followup').data('followup_id')?$('#case_followup').data('followup_id'):'',
-					case_id			:$('#case_followup').data('case_id')?$('#case_followup').data('case_id'):'',
+					followup_id		:$('#case_followup').data('id')?$('#case_followup').data('id'):'',
+					case_id			:$('#patient_case').data('id')?$('#patient_case').data('id'):'',
 					procedure_id	:$(this).find('.case_followup_procedure').val(),
 					followup_year 	:$(this).find('.case_followup_year').val()
 				});
 			});
-			$data['formdata']['followup'] =followup;
+			$data['followup'] =followup;
 			
 			var price = [];
 			$('#case_price table tbody tr').each(function(i,v){
 				price.push({
-					price_id 			:$("#modalAdd").data("patient_id")?$("#modalAdd").data("patient_id"):'',
-					case_id 			:$("#case_price").data("case_id")?$("#case_price").data("case_id"):'',
+					price_id 			:$("#case_price").data("id")?$("#case_price").data("id"):'',
+					case_id 			:$("#patient_case").data("id")?$("#patient_case").data("id"):'',
 					discount_type_id 	:$(this).find('.case_price_type').val(),
 					offer_price 		:$.trim($(this).find('.case_price_offer').val()),
 					accept_price 		:$.trim($(this).find('.case_price_accept').val()),
@@ -1342,13 +1314,13 @@ $(document).ready(function() {
 					remark				:$.trim($(this).find('.case_price_remark').val())
 				});
 			});
-			$data['formdata']['case_price'] =price; 
+			$data['case_price'] =price; 
 			
 			var channel = [];
 			$('#case_social_media table tbody tr').each(function(i,v){
 				channel.push({
-					case_media_id 		:$("#case_social_media").data("social_media_id")?$("#case_social_media").data("social_media_id"):'',
-					case_id 			:$("#case_social_media").data("case_id")?$("#case_social_media").data("case_id"):'',
+					case_media_id 		:$("#case_social_media").data("id")?$("#case_social_media").data("id"):'',
+					case_id 			:$("#patient_case").data("id")?$("#patient_case").data("id"):'',
 					social_media_id 	:$('.case_social_media_social ').val(),
 					link 				:$.trim($(this).find('.case_social_media_link').val()),
 					usr_name 			:$.trim($(this).find('.case_social_media_username').val()),
@@ -1356,32 +1328,30 @@ $(document).ready(function() {
 					note 				:$.trim($(this).find('.case_social_media_remark').val())
 				});
 			});
-			$data['formdata']['case_social_media'] =channel; 
-			
-			if($("#modalAdd").data('method')!='add'){	 
-
+			$data['case_social_media'] = channel; 
+		
+			if($("#modalAdd").data('method') != 'add'){
 				var arr_coordinate = [];
 				$.each($('#case_coordinate .case_coordinate'),function(){
 					if($(this).val()){
 						$.each($(this).val(),function(k,v){ arr_coordinate.push(v);});
 					}
 				});
-				
 				var coordinate = [];
 				$.each(arr_coordinate,function(i,v){
 					coordinate.push({
-						coordinate_id 		:$("#case_coordinate").data("coordinate_id")?$("#case_coordinate").data("coordinate_id"):'',
-						case_id 			:$("#case_coordinate").data("case_id")?$("#case_coordinate").data("case_id"):'',
+						coordinate_id 		:$("#case_coordinate").data("id")?$("#case_coordinate").data("id"):'',
+						case_id 			:$("#patient_case").data("id")?$("#patient_case").data("id"):'',
 						usage_id 			:v
 					}); 
 				});
-				$data['formdata']['case_coordinate'] = coordinate;
+				$data['case_coordinate'] = coordinate;
 				
 				var appointment = [];
 				$('#case_appointment table tbody tr').each(function(i,v){
 					appointment.push({
-						appointment_id 		:$("#case_appointment").data("appointment_id")?$("#case_appointment").data("appointment_id"):'',
-						case_id 			:$("#case_appointment").data("case_id")?$("#case_appointment").data("case_id"):'',
+						appointment_id 		:$("#case_appointment").data("id")?$("#case_appointment").data("id"):'',
+						case_id 			:$("#patient_case").data("id")?$("#patient_case").data("id"):'',
 						appointment_type_id :$(this).find(".case_appointment_type").val(),
 						appointment_date 	:$(this).find(".case_appointment_date").val(),
 						doctor_id 			:$(this).find(".case_appointment_doctor").val(),
@@ -1394,15 +1364,14 @@ $(document).ready(function() {
 						remark 				:$.trim($(this).find('.case_appointment_remark').val())
 					});
 				});
-				$data['formdata']['case_appointment'] =appointment; 
+				$data['case_appointment'] =appointment; 
 				
-				var contract = [];$temp_formData = new FormData();
+				var contract = [];
 				$('#case_contract table tbody tr').each(function(i,v){
-					
 					contract.push({
-						contract_id 		:$("#case_contract").data("contract_id")?$("#case_contract").data("contract_id"):'',
-						seq_id 				:$("#case_contract").data("seq_id")?$("#case_contract").data("seq_id"):'',
-						case_id 			:$("#case_contract").data("case_id")?$("#case_contract").data("case_id"):'',
+						contract_id 		:$("#case_contract").data("id")?$("#case_contract").data("id"):'',
+						seq_id 				:$(this).find(".case_contract_no").val(),
+						case_id 			:$("#patient_case").data("id")?$("#patient_case").data("id"):'',
 						procedure_id 		:$(this).find(".case_contract_procedure").val(), 
 						contract_start_date	:$(this).find(".case_contract_startDate").val(), 
 						contract_end_date	:$(this).find(".case_contract_endDate").val(), 
@@ -1417,13 +1386,13 @@ $(document).ready(function() {
 						contract_path 		:$temp_formData
 					});
 				});
-				$data['formdata']['case_contract'] =contract;
+				$data['case_contract'] =contract;
 				
 				var pr = [];
 				$('#case_pr table tbody tr').each(function(i,v){
 					pr.push({
-						case_pr_id 		:$("#case_pr").data("pr_id")?$("#case_pr").data("pr_id"):'',
-						case_id 		:$("#case_pr").data("case_id")?$("#case_pr").data("case_id"):'',
+						case_pr_id 		:$("#case_pr").data("id")?$("#case_pr").data("id"):'',
+						case_id 		:$("#patient_case").data("id")?$("#patient_case").data("id"):'',
 						pr_id 			:$(this).find(".case_pr_pr").val(), 
 						pr_plan_date 	:$(this).find(".case_pr_planDate").val(), 
 						is_picture		:$(this).find(".case_contract_isOther").prop("checked"),
@@ -1433,28 +1402,27 @@ $(document).ready(function() {
 						pr_actual_date 	:$(this).find(".case_pr_actualDate").val(), 
 					});
 				});
-				$data['formdata']['case_pr'] =pr;
-			}
+				$data['case_pr'] =pr;
 				
-			var article = [];
-			$('#case_article table tbody tr').each(function(i,v){
-				article.push({
-					case_article_id 	:$("#case_article").data("article_id")?$("#case_article").data("article_id"):'',
-					case_id 			:$("#case_article").data("case_id")?$("#case_article").data("case_id"):'',
-					article_name 		:$.trim($(this).find('.case_article_name').val()),
-					article_type_id 	:$(this).find('.case_article_type_id').val(),
-					writer				:$.trim($(this).find('.case_article_writer').val()),
-					writing_start_date	:$(this).find('.case_article_writingStartDate').val(),
-					writing_end_date 	:$(this).find('.case_article_writingEndDate').val(),
-					plan_date 			:$(this).find('.case_article_planDate').val(),
-					article_path 		:''
+				var article = [];
+				$('#case_article table tbody tr').each(function(i,v){
+					article.push({
+						case_article_id 	:$("#case_article").data("id")?$("#case_article").data("id"):'',
+						case_id 			:$("#patient_case").data("id")?$("#patient_case").data("id"):'',
+						article_name 		:$.trim($(this).find('.case_article_name').val()),
+						article_type_id 	:$(this).find('.case_article_type_id').val(),
+						writer				:$.trim($(this).find('.case_article_writer').val()),
+						writing_start_date	:$(this).find('.case_article_writingStartDate').val(),
+						writing_end_date 	:$(this).find('.case_article_writingEndDate').val(),
+						plan_date 			:$(this).find('.case_article_planDate').val(),
+						article_path 		:''
+					});
 				});
-			});
-			$data['formdata']['case_article'] =article;
-			 
-			$data['formdata']['case_stage'] ={
-					case_stage_id 	:$('#patient_case').data('case_id')?$('#patient_case').data('case_id'):'',
-					case_id			:1,
+				$data['case_article'] =article;
+				
+				$data['case_stage'] ={
+					case_stage_id 	:$('#case_stage').data('id')?$('#case_stage').data('id'):'',
+					case_id			:$("#patient_case").data("id")?$("#patient_case").data("id"):'',
 					from_user_id	:$("#modalAdd").data("patient_id")?$("#modalAdd").data("patient_id"):'',
 					from_stage_id	:$('#patient_case_procedure').val(),
 					to_user_id		:$('#patient_case_caseType').val(),
@@ -1464,10 +1432,38 @@ $(document).ready(function() {
 					status			:$.trim($('#patient_case_suggesGroup').val()),
 					remark			:$.trim($('#patient_case_suggestedBy').val())
 				}
+			}
 			console.log($data)
-			getAjax($plRoute+'/cu','post',$data,function(rs){
-				console.log(rs);
-			});
+			
+			var FormAllData = new FormData();
+			
+			FormAllData.append('formdata', JSON.stringify($data));
+			
+			$.ajax({
+			    url:$plRoute+'/cu',
+			    type:'POST',
+			    data: FormAllData,
+			    cache: false,
+			    dataType: 'json',
+			    content:"application/json",
+			    processData: false, // Don't process the files
+			    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+			    headers:{Authorization:"Bearer "+tokenID.token},
+			    success: function(data) {
+			     console.log(data);
+			    }
+			   });
+			
+// 			getAjax($plRoute+'/cu','post',FormAllData,function(rs){
+// 				console.log(rs);
+// 			});
+		});
+		
+		
+		
+		
+		
+		
 			/* $.ajax({
 				url:$plRoute+'/cu',
 				type:'POST',
@@ -1489,7 +1485,7 @@ $(document).ready(function() {
 				}
 			}); */
 			
-		});
+		
 		
 		/* Clear modal when hide */
 		/* $('#modalAdd').on('hide', function(e){ 
@@ -1499,39 +1495,6 @@ $(document).ready(function() {
 			clearModal();
 		}); */
 		
-		$("body").on('click','.case_contract_upload',function(){
-			var thiss = $(this).closest('tr');
-		 	if(thiss.data('case-contact_id')){
-				console.log('has');
-			}else{
-				var data = {
-						contract_id			: thiss.data('contract_id')?thiss.data('contract_id'):'',
-						case_id				: $('#patient_case').data('case_id')?$('#patient_case').data('case_id'):'',
-						seq_id				: $.trim(thiss.find('.case_contract_no').val()),
-						procedure_id		: thiss.find('.case_contract_procedure').val(),
-						contract_start_date	: thiss.find('.case_contract_startDate').val(),
-						contract_end_date	: thiss.find('.case_contract_endDate').val(),
-						is_post				: thiss.find('.case_contract_isPost').prop('checked')?1:0,
-						is_usage			: thiss.find('.case_contract_isUsage').prop('checked')?1:0,
-						is_picture_vdo		: thiss.find('.case_contract_isPicture_vdo').prop('checked')?1:0,
-						is_review			: thiss.find('.case_contract_isReview').prop('checked')?1:0,
-						is_pr				: thiss.find('.case_contract_isPr').prop('checked')?1:0,
-						is_group_post		: thiss.find('.case_contract_isGroupPost').prop('checked')?1:0,
-						is_send_picture		: thiss.find('.case_contract_isSendPicture').prop('checked')?1:0,
-						is_other			: thiss.find('.case_contract_isOther').prop('checked')?1:0,
-					}
-				
-				console.log(data);
-				getAjax($plRoute+"/saveOneCaseContact",'post',{data:data},function(rs){
-					console.log(rs);
-					if(rs.status == 200){
-						thiss.data('case_contact_id',rs.data.id);	
-					}else{
-						callFlashSlide("เกิดข้อผิดพลาดในการบันทึก",'error');
-					}
-				}); 
-			}
-		})
 		
 		$('body').on('keyup','.case_price_offer,.case_price_accept',function(){
 			$(this).closest('.wrap').find('.case_price_value').text($(this).closest('.wrap').find(".case_price_offer").val()-$(this).closest('.wrap').find('.case_price_accept').val())
@@ -1562,30 +1525,230 @@ $(document).ready(function() {
 		});
 		$('body').on('click','.remove_supervisedBy',function(){$(this).parent().remove();});
 		
-		$('#btnAddFloder').click(function(){
+		$('#btnAddFolder').click(function(){
 			getAjax($plRoute+"/getFolder",'get','',function(rs){
-		        	console.log(rs);
-		        	var html_temp ='';
-		        	$.each(rs,function(){
-						html_temp +='<option data-folderName="'+this.folder_name+'" value="'+this.folder_id+'">'+this.folder_screen_name+'</option>';
-					}); 
-					$('#addFolder .main_folder').html( html_temp );
-					
-					$('#btnAddFolder').one("click", function( e ) {
+		        console.log(rs);
+		        var html_temp ='<option value="" >แฟ้มหลัก</option>';
+		        $.each(rs,function(){
+					html_temp +='<option data-folderName="'+this.folder_name+'" value="'+this.folder_id+'">'+this.folder_screen_name+'</option>';
+				}); 
+				$('#addFolder .main_folder').html( html_temp );
+			}); 
+			$('#btnSubmitAddFolder').one("click", function( e ) {
+				var folder ={
+						folder_screen_name	:	$.trim($('#folderName').val()),
+						folder_parent_id	:	$('#addFolder .main_folder').val(),
+				}
+				console.log(folder);
+				getAjax($plRoute+"/makeDirectory",'post',folder,function(rs){
+					if(rs.status == 200){
+						callFlashSlide('สร้างแฟ้มข้อมูลสำเร็จ' ,'success');
+						getAjax($plRoute+"/getFolder",'get','',function(rs){
+							$('#list >li > ul').html( getFolder(rs));
+						});
+						$('#addFolder').modal('hide');
+						$('#folderName').val('');
+					}else	callFlashSlide('เกิดข้อผิดพลาด','Error');
+				});
+			});
+		});
+		
+		$('#btnUploadFile').click(function(){
+			getAjax($plRoute+"/getFolder",'get','',function(rs){
+		        console.log(rs);
+		        var html_temp ='<option value="" >แฟ้มหลัก</option>';
+		        $.each(rs,function(){
+					html_temp +='<option data-folderName="'+this.folder_name+'" value="'+this.folder_id+'">'+this.folder_screen_name+'</option>';
+				}); 
+				$('#ModalImportForm .folderList').html( html_temp );
+			}); 
+			/* $('#btnSubmitAddFolder').one("click", function( e ) {
+				var folder ={
+						folder_screen_name	:	$.trim($('#folderName').val()),
+						folder_parent_id	:	$('#addFolder .main_folder').val(),
+				}
+				console.log(folder);
+				getAjax($plRoute+"/makeDirectory",'post',folder,function(rs){
+					if(rs.status == 200){
+						callFlashSlide('สร้างแฟ้มข้อมูลสำเร็จ' ,'success');
+						getAjax($plRoute+"/getFolder",'get','',function(rs){
+							$('#list >li > ul').html( getFolder(rs));
+						});
+						$('#addFolder').modal('hide');
+						$('#folderName').val('');
+					}else	callFlashSlide('เกิดข้อผิดพลาด','Error');
+				});
+			}); */
+		});
+		
 
-					    
-						  //$( this ).off( e );
-					});
-			});    
+		$("body").on('click','.btnIsOpen:not(.active)',function(e){
+			var thiss = $(this);
+			e.preventDefault();
+			getAjax($plRoute+"/updateFolder",'post',{folder_id:$(this).closest('li').data('folder_id'),is_open:$(this).data('value')},function(rs){
+				console.log(rs);
+				if(rs.status == 200){
+					thiss.closest('li').find('.wrap_volume').toggle();
+				}
+			});
+		});
+		
+		$("body").on('click','.isPass',function(e){
+			getAjax($plRoute+"/updateFolder",'post',{folder_id:$(this).closest('li').data('folder_id'),is_pass:$(this).prop('checked')?1:0},function(rs){
+				console.log(rs);
+			});
+		});
+		
+		$("body").on('click','.del-folder',function(e){
+			var thiss = $(this);
+			$('#btnConfirmOK').one("click", function( e ) {
+				getAjax($plRoute+"/destoryFolder",'post',{folder_id:thiss.closest('li').data('folder_id')},function(rs){
+					if(rs.status==200){ thiss.closest('li').remove();$('#confrimModal').modal('hide');}
+				});
+			});
 		});
 		
 		$(".datepicker").change(function(){
 			$(this).closest("div").find(".datepicker_ad").val(beToad($(this).val()));
 		});
 		
+		
+		function getBasicData(selector){
+			console.log(selector);
+			var last_tr = selector.closest('.wrap').find('tr:last-child');
+			last_tr.find('.caseType').html($html_caseType);
+			last_tr.find('.doctor').html($html_doctor);
+			last_tr.find('.procedure').html($html_procedure);
+			last_tr.find('.discount').html($html_discountType);
+			last_tr.find('.social').html($html_social);
+			last_tr.find('.article').html($html_articleType);
+			last_tr.find('.pr').html($html_pr);
+			last_tr.find('.next_year').html(getyear($current_year,$current_year+10));
+			last_tr.find('.appointment').html($html_appointment);
+			last_tr.find('.datepicker').datepicker({
+                format: 'dd/mm/yyyy',
+                todayBtn: true,
+                language: 'th',            
+                thaiyear: true              
+            }).datepicker("setDate", "0").keydown(function(e){e.preventDefault();});
+			last_tr.find('.dropify').dropify();
+			last_tr.find('.datepicker').each(function(){
+				$(this).closest("div").find(".datepicker_ad").val(beToad($(this).val()));
+			});
+			
+			// new files
+			last_tr.find('.storeFile').attr('id','storeFile-'+n_id);
+			last_tr.find('.case_contract_file_name_check').attr('value','storeFile-'+n_id);
+			// end new files
+		}
+		
+//new files
+		
+		$('body').on("click", ".del-tr-contract", function() {
+			this.closest('tr').remove();
+		});
+		
+		var $inputFilesName;
+		$("#case_contract").on("click",'.storeFile',function() {
+ 			var contractFiles = $(this).attr('id');
+ 			$inputFilesName = $(this).attr('id');
+ 			getFilesData(contractFiles);
+		});
+		
+		function getFilesData(data) {
+			$('#'+data).on('change', savingFilesData);
+		}
+		
+		function savingFilesData(event) {
+			var filedataInput = event.target.files;
+			createNewFormData(filedataInput);
+		}
+		
+		var FormAllData = new FormData();
+		function createNewFormData(data) {
+			$.each(data, function(key, value) {
+				console.log(value)
+				FormAllData.append($inputFilesName+'|'+key, value);
+			});
+		}
+		
+		$("#btnSubmit_contract").click(function() {
+			//console.log("test");
+			var $dataContract = {};
+			var contract = [];
+			$('#case_contract table tbody tr').each(function(i,v){
+				contract.push({
+					contract_id 		:$("#case_contract").data("contract_id")?$("#case_contract").data("contract_id"):'',
+					seq_id 				:$("#case_contract").data("seq_id")?$("#case_contract").data("seq_id"):'',
+					case_id 			:$("#case_contract").data("case_id")?$("#case_contract").data("case_id"):'',
+					procedure_id 		:$(this).find(".case_contract_procedure").val(),
+					contract_start_date	:$(this).find(".case_contract_startDate").val(),
+					contract_end_date	:$(this).find(".case_contract_endDate").val(),
+					is_post 			:$(this).find(".case_contract_isPost").prop("checked"),
+					is_usage 			:$(this).find(".case_contract_isUsage").prop("checked"),
+					is_picture_vdo 		:$(this).find(".case_contract_isPicture_vdo").prop("checked"),
+					is_review 			:$(this).find(".case_contract_isReview").prop("checked"),
+					is_pr 				:$(this).find(".case_contract_isPr").prop("checked"),
+					is_group_post 		:$(this).find(".case_contract_isGroupPost").prop("checked"),
+					is_send_picture 	:$(this).find(".case_contract_isSendPicture").prop("checked"),
+					is_other 			:$(this).find(".case_contract_isOther").prop("checked"),
+					file_name_check 	:$(this).find(".case_contract_file_name_check").val()
+				});
+			});
+			$dataContract['case_contract'] = contract;
+			
+			FormAllData.append('formdata', JSON.stringify($dataContract));
+			
+			$.ajax({
+				url:$plRoute+'/cu_contract',
+				type:'POST',
+				data: FormAllData,
+				cache: false,
+				dataType: 'json',
+				content:"application/json",
+				processData: false, // Don't process the files
+				contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+				headers:{Authorization:"Bearer "+tokenID.token},
+				success: function(data) {
+					console.log(data);
+				}
+			});
+		});
+		//end new
+		
 		function beToad(text){
 			var t = text.split("/");
 			return t[0]+"/"+t[1]+"/"+(t[2]-543);
+		}
+		
+
+		function getFolder(data){
+			var html_temp = '';
+			$.each(data,function(){
+				var isOpen = this.is_open==1?'active':'';
+				var isClose = this.is_open==0?'active':'';
+				var volume_tik = this.is_open==1?'block':'none';
+				var btnDel = $username == this.created_by?'<button class=" btn btn-danger del-folder pull-right"  data-target="#confrimModal" data-toggle="modal">ลบ</button>':'';
+				html_temp +='<li data-folder_id="'+this.folder_id+'"><a href="#" class="folder_toggle">'+this.folder_screen_name+'</a>'
+				+'<div style="float:right;"class="span6">'
+					+'<div class="span8"><div class="wrap_volume" style="display:'+volume_tik+'">ปริมาณรูป&nbsp;&nbsp;<span class="volume">0</span>&nbsp;%</div></div>'
+					+'<div class="btn-group" data-toggle="buttons-radio">'
+						+'<button type="button" data-value="1" class="btnIsOpen btn btnOpen '+isOpen+' ">เปิด</button>'
+						+'<button type="button" data-value="0" class="btnIsOpen btn btnClose '+isClose+' ">ปิด</button>'
+					+'</div>'+btnDel+'</div><ul>';
+				if(this.sub_folder){
+					$.each(this.sub_folder,function(){
+						var isPass = this.is_pass==1?'checked':'';
+						var btnDel = $username == this.created_by?'<button class=" btn btn-danger del-folder pull-right"  data-target="#confrimModal" data-toggle="modal">ลบ</button>':'';
+						html_temp 	+='<li data-folder_id="'+this.folder_id+'" ><a href="#" >'+this.folder_screen_name+'</a>'
+						+'<div style="float:right;"class="span6">'
+							+'<div class="span8"><input type="checkbox" '+isPass+' class="isPass">&nbsp;&nbsp;ผ่าน</div>'+btnDel+'</div></li>';		
+					});
+					html_temp +='</ul>';
+				}
+				html_temp +='</li>';
+			}); 
+			return html_temp;
 		}
 		
 		function validatetorWriter(data) {

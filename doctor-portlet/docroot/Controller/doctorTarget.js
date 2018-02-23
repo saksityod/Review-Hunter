@@ -8,13 +8,7 @@ $(document).ready(function() {
 	$(".app_url_hidden").show();
 	$("#employee_list_content").show();
 	
-	$('#alert_multi').multiselect({
-        allSelectedText: 'No option left ...',
-        maxHeight: 200,
-        onChange: function() {
-            console.log($('#alert_multi').val());
-        }
-    });
+	
 	
 	$username = $("#user_portlet").val();
 	$password = $("#pass_portlet").val();
@@ -98,6 +92,7 @@ $(document).ready(function() {
 		});
 		$('#btn_submit_doctor_target').click(function(){
 			$callback = function(rs){
+				console.log(rs);
 				if(rs.status == 200){
 					get_procedure_list();
 					get_year_ontarget();
@@ -194,6 +189,20 @@ $(document).ready(function() {
 			getAjax($plRoute+"/get_current_date",'get','',function(rs){
 				if(rs) $current_year = parseInt(rs.split("-")[2])+543;	
 			});
+			
+			getAjax($plRoute+"/get_user",'get','',function(rs){
+				console.log(rs);
+				$html = '';
+				$.each(rs,function(k,v){	$html += "<option value= "+v.userId+"|"+v.emailAddress+">"+v.emailAddress+"</option>";	});
+				$("#alert_multi").html($html).multiselect({
+					includeSelectAllOption: true,
+			        maxHeight: 200,
+			        onChange: function() {
+			            console.log($('#alert_multi').val());
+			        }
+			    });
+			});
+			
 			
 			$html_month = 	"<option value='1'>มกราคม</option><option value='2'>กุมภาพันธ์</option><option value='3'>มีนาคม</option>"
 							+"<option value='4'>เมษายน</option><option value='5'>พฤษภาคม</option><option value='6'>มิถุนายน</option>"

@@ -13,6 +13,14 @@
 		<portlet id="social-media"></portlet>
 		<portlet id="writer"></portlet>
 		<portlet id="case-group"></portlet>
+		<portlet id="case_confirm_report"></portlet>
+		<portlet id="case_followup_report"></portlet>
+		<portlet id="case_image_report"></portlet>
+		<portlet id="case_report"></portlet>
+		<portlet id="case_send_image_report"></portlet>
+		<portlet id="status_review_report"></portlet>
+		<portlet id="writer_report"></portlet>
+		<portlet id="writer_review_report"></portlet>
 	</category>
 	<category name="category.sample">
 		

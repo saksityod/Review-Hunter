@@ -218,23 +218,29 @@ function getPagenation(target,data){
 }
 
 function formatDateYMD(input) {
-	if(input == "") {
+	if(input == "" || input == undefined || input == null) {
 		return null;
 	} else {
 	    var datePart = input.match(/\d+/g);
 	    var day = datePart[0];
 	    var month = datePart[1];
 	    var year = datePart[2];
+	    year -= 543;
 	    return year + '-' + month + '-' + day;
 	}
 }
 
 function formatDateDMY(input) {
-    var datePart = input.split("-");
-    var day = datePart[2];
-    var month = datePart[1];
-    var year = datePart[0];
-    return day + '-' + month + '-' + year;
+	if(input == "" || input == undefined || input == null) {
+		return null;
+	} else {
+	    var datePart = input.split("-");
+	    var day = datePart[2];
+	    var month = datePart[1];
+	    var year = datePart[0];
+	    year += 543;
+	    return day + '-' + month + '-' + year;
+	}
 }
 
 var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
@@ -291,5 +297,5 @@ var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
 	         htmlRrp+="<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='1'>";
 	     $("body").append(htmlRrp);
 	 });
-	}
-	//set paginate end
+}
+//set paginate end

@@ -61,7 +61,9 @@
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
-	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>	     
+	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript> 	     
 	    <footer-portlet-javascript>/Controller/todoList.js</footer-portlet-javascript>
 		<css-class-wrapper>todolist-portlet</css-class-wrapper>
 	</portlet>
@@ -94,7 +96,7 @@
 	    <footer-portlet-javascript>/Controller/doctorTarget.js</footer-portlet-javascript>
 		<css-class-wrapper>doctortarget-portlet</css-class-wrapper> 
 	</portlet>    
-	<portlet> 
+	<portlet>  
 		<portlet-name>balibrary</portlet-name>
 		<icon>/icon.png</icon>
 		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
@@ -181,7 +183,7 @@
 			/js/main.js
 		</footer-portlet-javascript> 
 		<css-class-wrapper>medical-procedure-portlet</css-class-wrapper>
-	</portlet> 
+	</portlet>  
 	<portlet> 
 		<portlet-name>ba</portlet-name>
 		<icon>/icon.png</icon>
@@ -196,6 +198,7 @@
 	    <header-portlet-css>/css/tywMain.css</header-portlet-css>
 	    <header-portlet-css>/css/dropify.css</header-portlet-css>
 	    <header-portlet-css>/css/multi-select.css</header-portlet-css>
+	    <header-portlet-css>/css/bootstrap-multiselect.css</header-portlet-css>
 		<header-portlet-css>/css/main.css</header-portlet-css>
         <footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
         <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
@@ -205,14 +208,16 @@
 		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.multi-select.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>	
 		<footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>      
+		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	      
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>	      
 	    <footer-portlet-javascript>/Controller/ba.js</footer-portlet-javascript>
 		<css-class-wrapper>ba-portlet</css-class-wrapper> 
-	</portlet>  
+	</portlet>       
 	<portlet> 
 		<portlet-name>social-media</portlet-name>
 		<icon>/icon.png</icon>
@@ -302,6 +307,232 @@
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>	      
 	    <footer-portlet-javascript>/Controller/caseGroup.js</footer-portlet-javascript>
 		<css-class-wrapper>case-group-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>case_confirm_report</portlet-name>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
+		<header-portlet-css>/css/plugins/iCheck/custom.css</header-portlet-css>
+		<header-portlet-css>/font-awesome/css/font-awesome.css</header-portlet-css>
+		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
+	    <header-portlet-css>/css/tywMain.css</header-portlet-css>
+	    <header-portlet-css>/css/dropify.css</header-portlet-css>
+	    <header-portlet-css>/css/bootstrap-multiselect.css</header-portlet-css>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<header-portlet-css>/css/bootstrap-datepicker.css</header-portlet-css>
+        <footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/dropify.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
+	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>
+		<css-class-wrapper>
+			case_confirm_report-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>case_followup_report</portlet-name>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
+		<header-portlet-css>/css/plugins/iCheck/custom.css</header-portlet-css>
+		<header-portlet-css>/font-awesome/css/font-awesome.css</header-portlet-css>
+		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
+	    <header-portlet-css>/css/tywMain.css</header-portlet-css>
+	    <header-portlet-css>/css/dropify.css</header-portlet-css>
+	    <header-portlet-css>/css/bootstrap-multiselect.css</header-portlet-css>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<header-portlet-css>/css/bootstrap-datepicker.css</header-portlet-css>
+        <footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/dropify.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
+	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>
+		<css-class-wrapper>
+			case_followup_report-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>case_image_report</portlet-name>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
+		<header-portlet-css>/css/plugins/iCheck/custom.css</header-portlet-css>
+		<header-portlet-css>/font-awesome/css/font-awesome.css</header-portlet-css>
+		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
+	    <header-portlet-css>/css/tywMain.css</header-portlet-css>
+	    <header-portlet-css>/css/dropify.css</header-portlet-css>
+	    <header-portlet-css>/css/bootstrap-multiselect.css</header-portlet-css>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<header-portlet-css>/css/bootstrap-datepicker.css</header-portlet-css>
+        <footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/dropify.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
+	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>
+		<css-class-wrapper>case_image_report-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>case_report</portlet-name>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
+		<header-portlet-css>/css/plugins/iCheck/custom.css</header-portlet-css>
+		<header-portlet-css>/font-awesome/css/font-awesome.css</header-portlet-css>
+		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
+	    <header-portlet-css>/css/tywMain.css</header-portlet-css>
+	    <header-portlet-css>/css/dropify.css</header-portlet-css>
+	    <header-portlet-css>/css/bootstrap-multiselect.css</header-portlet-css>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<header-portlet-css>/css/bootstrap-datepicker.css</header-portlet-css>
+        <footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/dropify.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
+	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>
+		<css-class-wrapper>case_report-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>case_send_image_report</portlet-name>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
+		<header-portlet-css>/css/plugins/iCheck/custom.css</header-portlet-css>
+		<header-portlet-css>/font-awesome/css/font-awesome.css</header-portlet-css>
+		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
+	    <header-portlet-css>/css/tywMain.css</header-portlet-css>
+	    <header-portlet-css>/css/dropify.css</header-portlet-css>
+	    <header-portlet-css>/css/bootstrap-multiselect.css</header-portlet-css>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<header-portlet-css>/css/bootstrap-datepicker.css</header-portlet-css>
+        <footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/dropify.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
+	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>
+		<css-class-wrapper>
+			case_send_image_report-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>status_review_report</portlet-name>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
+		<header-portlet-css>/css/plugins/iCheck/custom.css</header-portlet-css>
+		<header-portlet-css>/font-awesome/css/font-awesome.css</header-portlet-css>
+		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
+	    <header-portlet-css>/css/tywMain.css</header-portlet-css>
+	    <header-portlet-css>/css/dropify.css</header-portlet-css>
+	    <header-portlet-css>/css/bootstrap-multiselect.css</header-portlet-css>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<header-portlet-css>/css/bootstrap-datepicker.css</header-portlet-css>
+        <footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/dropify.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
+	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>
+		<css-class-wrapper>
+			status_review_report-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>writer_report</portlet-name>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
+		<header-portlet-css>/css/plugins/iCheck/custom.css</header-portlet-css>
+		<header-portlet-css>/font-awesome/css/font-awesome.css</header-portlet-css>
+		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
+	    <header-portlet-css>/css/tywMain.css</header-portlet-css>
+	    <header-portlet-css>/css/dropify.css</header-portlet-css>
+	    <header-portlet-css>/css/bootstrap-multiselect.css</header-portlet-css>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<header-portlet-css>/css/bootstrap-datepicker.css</header-portlet-css>
+        <footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/dropify.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
+	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>
+		<css-class-wrapper>writer_report-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>writer_review_report</portlet-name>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap.min.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap2.3.2/css/bootstrap-responsive.min.css</header-portlet-css>
+		<header-portlet-css>/css/plugins/iCheck/custom.css</header-portlet-css>
+		<header-portlet-css>/font-awesome/css/font-awesome.css</header-portlet-css>
+		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
+		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
+		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
+	    <header-portlet-css>/css/tywMain.css</header-portlet-css>
+	    <header-portlet-css>/css/dropify.css</header-portlet-css>
+	    <header-portlet-css>/css/bootstrap-multiselect.css</header-portlet-css>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<header-portlet-css>/css/bootstrap-datepicker.css</header-portlet-css>
+        <footer-portlet-javascript>/js/jquery3.1.1.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/dropify.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.2.3.2.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
+	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>
+		<css-class-wrapper>
+			writer_review_report-portlet
+		</css-class-wrapper>
 	</portlet>
 	<role-mapper> 
 		<role-name>administrator</role-name>

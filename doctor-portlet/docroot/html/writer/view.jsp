@@ -482,7 +482,7 @@
 						<div class="form-group span3">
 							<label class="label-control" for="">จากวันที่</label>
 							<input data-toggle="tooltip" title="จากวันที่"
-								data-placement="top" class="span12 m-b-n ui-autocomplete-input"
+								data-placement="top" class="span12 m-b-n ui-autocomplete-input datepicker"
 								placeholder="จากวันที่" id="search_start_date" name="search_start_date"
 								type="text">
 						</div>
@@ -492,7 +492,7 @@
 						<div class="form-group span3">
 							<label class="label-control" for="">ถึงวันที่</label>
 							<input data-toggle="tooltip" title="ถึงวันที่"
-								data-placement="top" class="span12 m-b-n ui-autocomplete-input"
+								data-placement="top" class="span12 m-b-n ui-autocomplete-input datepicker"
 								placeholder="ถึงวันที่" id="search_end_date" name="search_end_date"
 								type="text">
 						</div>
@@ -623,6 +623,9 @@
 				</table>
 			</div>
 			<!-- end table -->
+			<div id="pager" class="pagination">
+				<ul id="pg"></ul>
+			</div>
 			
 <!-- 				pagination start -->
 <!-- 				<div class="row-fluid"> -->
@@ -667,7 +670,7 @@
 				<div class="row-fluid">
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
-							<label class="control-label">ชื่อบทความ :</label>
+							<label class="control-label">ชื่อบทความ<span style="color:red;">*</span>:</label>
 							<div class="controls">
 								<input type="text" class="form-control input-sm span12"
 									name="article_name" id="article">
@@ -676,7 +679,7 @@
 					</div>
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
-							<label class="control-label">ประเภทบทความ :</label>
+							<label class="control-label">ประเภทบทความ<span style="color:red;">*</span>:</label>
 							<div class="controls">
 								<select class="form-control input-sm span12" id="article_type" name="article_type">
 								</select>
@@ -687,7 +690,7 @@
 				<div class="row-fluid">
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
-							<label class="control-label">หัตถการ :</label>
+							<label class="control-label">หัตถการ<span style="color:red;">*</span>:</label>
 							<div class="controls">
 								<select class="form-control input-sm span12" id="procedure_name" name="procedure_name">
 								</select>
@@ -696,7 +699,7 @@
 					</div>
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
-							<label class="control-label">แพทย์ :</label>
+							<label class="control-label">แพทย์<span style="color:red;">*</span>:</label>
 							<div class="controls">
 								<input type="text" class="form-control input-sm span12"
 									placeholder="" name="form_doctor" id="form_doctor">
@@ -707,7 +710,7 @@
 				<div class="row-fluid">
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
-							<label class="control-label">ผู้เขียน :</label>
+							<label class="control-label">ผู้เขียน<span style="color:red;">*</span>:</label>
 							<div class="controls">
 								<input type="text" class="form-control input-sm span12"
 									placeholder="" name="author" id="author">
@@ -716,9 +719,9 @@
 					</div>
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
-							<label class="control-label">วันที่เริ่มเขียน : </label>
+							<label class="control-label">วันที่เริ่มเขียน<span style="color:red;">*</span>: </label>
 							<div class="controls">
-								<input type="text" class="form-control input-sm span12"
+								<input type="text" class="form-control input-sm span12 datepicker"
 									placeholder="" name="start_date" id="start_date">
 							</div>
 						</div>
@@ -727,9 +730,9 @@
 				<div class="row-fluid">
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
-							<label class="control-label">กำหนดส่ง : </label>
+							<label class="control-label">กำหนดส่ง<span style="color:red;">*</span>: </label>
 							<div class="controls">
-								<input type="text" class="form-control input-sm span12"
+								<input type="text" class="form-control input-sm span12 datepicker"
 									placeholder="" name="plan_date" id="plan_date">
 							</div>
 						</div>
@@ -760,7 +763,7 @@
 						</div>
 						<div class="span5 form-horizontal p-t-xxs">
 							<div class="form-group p-xxs">
-								<label class="control-label">ไปขั้นตอน :</label>
+								<label class="control-label">ไปขั้นตอน<span style="color:red;">*</span>:</label>
 								<div class="controls">
 									<select class="form-control input-sm span12" id="to_step" name="to_step">
 									<input type="hidden" id="to_step_status" name="to_step_status">
@@ -781,9 +784,9 @@
 						</div>
 						<div class="span5 form-horizontal p-t-xxs">
 							<div class="form-group p-xxs">
-								<label class="control-label">วันที่เสร็จ :</label>
+								<label class="control-label">วันที่เสร็จ<span style="color:red;">*</span>:</label>
 								<div class="controls">
-									<input type="text" class="form-control input-sm span12"
+									<input type="text" class="form-control input-sm span12 datepicker"
 										placeholder="" name="complete_date" id="complete_date">
 								</div>
 							</div>
@@ -794,7 +797,7 @@
 							<div class="form-group p-xxs">
 								<label class="control-label">วันครบกำหนด :</label>
 								<div class="controls">
-									<input type="text" class="form-control input-sm span12"
+									<input type="text" class="form-control input-sm span12 datepicker"
 										placeholder="" name="deadline_date" id="deadline_date">
 								</div>
 							</div>
@@ -1059,7 +1062,9 @@
 <input type="hidden" name="id" id="id" value="">
 <input type="hidden" name="action" id="action" value="add">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.1/jquery.twbsPagination.js"></script> -->
+<!-- <script src="js/jquery.twbsPagination.js"></script> -->
 
 <script>
 // var restfulURL="";
@@ -1068,13 +1073,10 @@
 // /*#######Office#######*/
 
 // /*#######Localhost#######*/
+// //restfulURL="http://192.168.1.45";
 // restfulURL="http://localhost";
 // serviceName="master_piece/public";
 </script>
-
-
-
-
 
 <script>
 /* for portlet*/
@@ -1106,12 +1108,13 @@
 // 		headers:{Authorization:"Bearer "+tokenID.token},
 // 		async:false,
 // 		success:function(data){
-// 			//console.log(data)
+// 			console.log(data)
 // 			if(data.status == "200"){
 // 				$chk = true;
 // 				userId = data.userID;
 // 				screenName = data.screenName;
 // 				roles = data.roles;
+				
 // 			}else{
 // 				callFlashSlide("login failed."); 
 // 				sessionStorage.clear();
@@ -1280,7 +1283,7 @@
 
 // /*get pagenation*/
 // function getPagenation(target,data){
-// 	$prev_dis = data.prev_page_url?'':'disabled' ;
+// 	$prev_dis = data.prev_page_url?'':'disabled';
 // 	$next_dis = data.next_page_url?'':'disabled';
 // 	$next = data.current_page+1 <= data.last_page?data.current_page+1:'';
 // 	$html = '<li data-lp="1" class="first '+$prev_dis+'">'
@@ -1296,88 +1299,88 @@
 // }
 
 // function formatDateYMD(input) {
-// 	if(input == "") {
+// 	if(input == "" || input == undefined || input == null) {
 // 		return null;
 // 	} else {
 // 	    var datePart = input.match(/\d+/g);
 // 	    var day = datePart[0];
 // 	    var month = datePart[1];
 // 	    var year = datePart[2];
+// 	    year -= 543;
 // 	    return year + '-' + month + '-' + day;
 // 	}
 // }
 
 // function formatDateDMY(input) {
-//     var datePart = input.split("-");
-//     var day = datePart[2];
-//     var month = datePart[1];
-//     var year = datePart[0];
-//     return day + '-' + month + '-' + year;
+// 	if(input == "" || input == undefined || input == null) {
+// 		return null;
+// 	} else {
+// 	    var datePart = input.split("-");
+// 	    var day = datePart[2];
+// 	    var month = datePart[1];
+// 	    var year = datePart[0];
+// 	    year += 543;
+// 	    return day + '-' + month + '-' + year;
+// 	}
 // }
 
 // var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
-	
-// 	if(pageTotal==0){
-// 		pageTotal=1
+	 
+// 	 if(pageTotal==0){
+// 	  pageTotal=1
+// 	 }
+// 	 $('.pagination_top,.pagination_bottom').off("page");
+// 	 $('.pagination_top,.pagination_bottom').bootpag({
+// 	     total: pageTotal,//page Total
+// 	     page: pageIndex,//page index
+// 	     maxVisible: 5,//จำนวนปุ่ม
+// 	     leaps: true,
+// 	     firstLastUse: true,
+// 	     first: '←',
+// 	     last: '→',
+// 	     wrapClass: 'pagination',
+// 	     activeClass: 'active',
+// 	     disabledClass: 'disabled',
+// 	     nextClass: 'next',
+// 	     prevClass: 'prev',
+// 	     next: 'next',
+// 	     prev: 'prev',
+// 	     lastClass: 'last',
+// 	     firstClass: 'first'
+// 	 }).on("page", function(event, num){
+// 	  var rpp=10;
+// 	  if($("#rpp").val()==undefined){
+// 	   rpp=10;
+// 	  }else{
+// 	   rpp=$("#rpp").val();
+// 	  }
+	  
+// 	  getData(num,rpp);
+	  
+// 	     $(".pagingNumber").remove();
+// 	     var htmlPageNumber= "<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='"+num+"'>";
+// 	     $("body").append(htmlPageNumber);
+	    
+// 	 }); 
+
+// 	 $(".countPagination").off("change");
+// 	 $(".countPagination").on("change",function(){
+
+// 	  $("#countPaginationTop").val($(this).val());
+// 	  $("#countPaginationBottom").val($(this).val());
+	  
+// 	  getData(1,$(this).val());
+	  
+// 	  $(".rpp").remove();
+// 	  $(".pagingNumber").remove();
+// 	  var htmlRrp="";
+// 	   htmlRrp+= "<input type='hidden' id='rpp' name='rpp' class='rpp' value='"+$(this).val()+"'>";
+// 	         htmlRrp+="<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='1'>";
+// 	     $("body").append(htmlRrp);
+// 	 });
 // 	}
-// 	$('.pagination_top,.pagination_bottom').off("page");
-// 	$('.pagination_top,.pagination_bottom').bootpag({
-// 	    total: pageTotal,//page Total
-// 	    page: pageIndex,//page index
-// 	    maxVisible: 5,//จำนวนปุ่ม
-// 	    leaps: true,
-// 	    firstLastUse: true,
-// 	    first: '←',
-// 	    last: '→',
-// 	    wrapClass: 'pagination',
-// 	    activeClass: 'active',
-// 	    disabledClass: 'disabled',
-// 	    nextClass: 'next',
-// 	    prevClass: 'prev',
-// 	    next: 'next',
-// 	    prev: 'prev',
-// 	    lastClass: 'last',
-// 	    firstClass: 'first'
-// 	}).on("page", function(event, num){
-// 		var rpp=10;
-// 		if($("#rpp").val()==undefined){
-// 			rpp=10;
-// 		}else{
-// 			rpp=$("#rpp").val();
-// 		}
-		
-// 		getData(num,rpp);
-		
-// 	    $(".pagingNumber").remove();
-// 	    var htmlPageNumber= "<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='"+num+"'>";
-// 	    $("body").append(htmlPageNumber);
-	   
-// 	}); 
-
-// 	$(".countPagination").off("change");
-// 	$(".countPagination").on("change",function(){
-
-// 		$("#countPaginationTop").val($(this).val());
-// 		$("#countPaginationBottom").val($(this).val());
-		
-// 		getData(1,$(this).val());
-		
-// 		$(".rpp").remove();
-// 		$(".pagingNumber").remove();
-// 		var htmlRrp="";
-// 			htmlRrp+= "<input type='hidden' id='rpp' name='rpp' class='rpp' value='"+$(this).val()+"'>";
-// 	        htmlRrp+="<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='1'>";
-// 	    $("body").append(htmlRrp);
-// 	});
-// }
-//set paginate end 
-
+// 	//set paginate end
 </script>
-
-
-
-
-
 
 <script>
 // $(document).ready(function(){
@@ -1393,6 +1396,30 @@
 // 			var InsertUpdateForCheck = "";
 // 			$('.dropify').dropify();
 			
+// 			//pagination
+// 			var $pagination = $('#pg'),
+// 		      totalRecords = 0,
+// 		      records = [],
+// 		      displayRecords = [],
+// 		      recPerPage = 10,
+// 		      page = 1,
+// 		      totalPages = 0;
+			
+// 			function apply_pagination(data) {
+// 			      $pagination.twbsPagination({
+// 			        totalPages: totalPages,
+// 			        visiblePages: 6,
+// 			        onPageClick: function (event, page) {
+// 			          displayRecordsIndex = Math.max(page - 1, 0) * recPerPage;
+// 			          endRec = (displayRecordsIndex) + recPerPage;
+
+// 			          displayRecords = records.slice(displayRecordsIndex, endRec);
+// 			          //generate_table();
+// 			          list_data_template(data);
+// 			        }
+// 			      });
+// 			}
+
 // 			function validatetorWriter(data) {
 // 				var errorData="";
 // 				$.each(data, function(key, value) {
@@ -1495,10 +1522,17 @@
 // 					},
 // 					success:function(data) {
 // 						console.log(data);
-// 						list_data_template(data);
-						
 // 						GlobalDataWriter=data;
-// 						paginationSetUpFn(GlobalDataWriter['current_page'],GlobalDataWriter['last_page'],GlobalDataWriter['last_page']);
+						
+// 						//set pagination
+// 						if(data.length > 0) {
+// 							records = data;
+// 						    totalRecords = records.length;
+// 						    totalPages = Math.ceil(totalRecords / recPerPage);
+// 						    apply_pagination(data);
+// 						} else {
+// 							callFlashSlide('ไม่พบข้อมูลการค้นหา!','warning')
+// 						}
 // 					}
 // 				});
 // 			};
@@ -1682,7 +1716,7 @@
 // 					success:function(data){
 // 						if(data.status==200) {
 // 							callFlashSlide('Update Success!','success')
-//  							$("#ModalWriter").modal('hide');
+// 							$("#ModalWriter").modal('hide');
 // 						} else if (data.status==400) {
 // 							console.log(data)
 // 							validatetorInformation(validatetorWriter(data['errors'][0]));
@@ -1779,23 +1813,26 @@
 // 			function list_data_template(data) {
 // 				var TRTDHTML = "";
 // 				var TRTDClass = "style=\"vertical-align: middle;\"";
-// 				$.each(data, function (key,value) {
-// 						TRTDHTML += 
+				
+// 				for (var i = 0; i < displayRecords.length; i++) {
+// 				//$.each(data, function (key,value) {
+// 						TRTDHTML +=
 // 			                '<tr>'+
-// 			                '<td "'+TRTDClass+'">' + value.article_name +'</td>'+
-// 			                '<td "'+TRTDClass+'">' + value.writer +'</td>'+
-// 			                '<td "'+TRTDClass+'">' + value.procedure_name +'</td>'+
-// 			                '<td "'+TRTDClass+'">' + value.doctor_name +'</td>'+
-// 			                '<td "'+TRTDClass+'">' + formatDateDMY(value.writing_start_date) +'</td>'+
-// 			                '<td "'+TRTDClass+'">' + formatDateDMY(value.writing_end_date) +'</td>'+
-// 			                '<td "'+TRTDClass+'">' + formatDateDMY(value.plan_date) +'</td>'+
-// 			                '<td "'+TRTDClass+'">' + value.article_type_name +'</td>'+
-// 			                '<td "'+TRTDClass+'">' + value.status +'</td>'+
-// 			                '<td "'+TRTDClass+'"><button type="button" id="downloadfile-' + value.article_ID +'" class="btn btn-primary input-sm getfile" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
-// 			                '&nbsp;<button type="button" id="uploadfile-' + value.article_ID +'" class="btn btn-success input-sm getfile" data-target="#ModalImport" data-toggle="modal" title="อัพโหลด" data-placement="top"><i class="fa fa-upload"></i></button>'+
-// 			                '&nbsp;<button type="button" id="edit-' + value.article_ID +'" class="btn btn-warning input-sm getfile" data-target="#ModalWriter" data-toggle="modal" title="แก้ไข" data-placement="top">แก้ไข</button></td>'+
+// 			                '<td "'+TRTDClass+'">' + displayRecords[i].article_name +'</td>'+
+// 			                '<td "'+TRTDClass+'">' + displayRecords[i].writer +'</td>'+
+// 			                '<td "'+TRTDClass+'">' + displayRecords[i].procedure_name +'</td>'+
+// 			                '<td "'+TRTDClass+'">' + displayRecords[i].doctor_name +'</td>'+
+// 			                '<td "'+TRTDClass+'">' + formatDateDMY(displayRecords[i].writing_start_date) +'</td>'+
+// 			                '<td "'+TRTDClass+'">' + formatDateDMY(displayRecords[i].writing_end_date) +'</td>'+
+// 			                '<td "'+TRTDClass+'">' + formatDateDMY(displayRecords[i].plan_date) +'</td>'+
+// 			                '<td "'+TRTDClass+'">' + displayRecords[i].article_type_name +'</td>'+
+// 			                '<td "'+TRTDClass+'">' + displayRecords[i].status +'</td>'+
+// 			                '<td "'+TRTDClass+'"><button type="button" id="downloadfile-' + displayRecords[i].article_ID +'" class="btn btn-primary input-sm getfile" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
+// 			                '&nbsp;<button type="button" id="uploadfile-' + displayRecords[i].article_ID +'" class="btn btn-success input-sm getfile" data-target="#ModalImport" data-toggle="modal" title="อัพโหลด" data-placement="top"><i class="fa fa-upload"></i></button>'+
+// 			                '&nbsp;<button type="button" id="edit-' + displayRecords[i].article_ID +'" class="btn btn-warning input-sm getfile" data-target="#ModalWriter" data-toggle="modal" title="แก้ไข" data-placement="top">แก้ไข</button></td>'+
 // 			                '</tr>';
-// 			    });
+// 			    //});
+// 				}
 // 				$('#result_search_writer').html(TRTDHTML);
 // 			}
 				
@@ -1915,9 +1952,16 @@
 // 			  }
 // 			});
 				
-// 			$("#search_start_date,#search_end_date,#start_date,#plan_date,#complete_date,#deadline_date").datepicker({
-// 				dateFormat: 'dd/mm/yy'
-// 			});
+// //			$("#search_start_date,#search_end_date,#start_date,#plan_date,#complete_date,#deadline_date").datepicker({
+// //				dateFormat: 'dd/mm/yy'
+// //			});
+			
+// 			$('.datepicker').datepicker({
+// 				format: 'dd/mm/yyyy',
+// 				todayBtn: true,
+// 	            language: 'th',            
+// 	            thaiyear: true              
+// 	        }).datepicker("setDate", "0").keydown(function(e){e.preventDefault();});
 				
 // 			$("#btn_search").click(function(){
 // 				if($("#search_start_date").val()=='') {

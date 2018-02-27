@@ -11,6 +11,30 @@ $(document).ready(function(){
 			var InsertUpdateForCheck = "";
 			$('.dropify').dropify();
 			
+			//pagination
+			var $pagination = $('#pg'),
+		      totalRecords = 0,
+		      records = [],
+		      displayRecords = [],
+		      recPerPage = 10,
+		      page = 1,
+		      totalPages = 0;
+			
+			function apply_pagination(data) {
+			      $pagination.twbsPagination({
+			        totalPages: totalPages,
+			        visiblePages: 6,
+			        onPageClick: function (event, page) {
+			          displayRecordsIndex = Math.max(page - 1, 0) * recPerPage;
+			          endRec = (displayRecordsIndex) + recPerPage;
+
+			          displayRecords = records.slice(displayRecordsIndex, endRec);
+			          //generate_table();
+			          list_data_template(data);
+			        }
+			      });
+			}
+
 			function validatetorWriter(data) {
 				var errorData="";
 				$.each(data, function(key, value) {
@@ -113,10 +137,17 @@ $(document).ready(function(){
 					},
 					success:function(data) {
 						console.log(data);
-						list_data_template(data);
-						
 						GlobalDataWriter=data;
-						paginationSetUpFn(GlobalDataWriter['current_page'],GlobalDataWriter['last_page'],GlobalDataWriter['last_page']);
+						
+						//set pagination
+						if(data.length > 0) {
+							records = data;
+						    totalRecords = records.length;
+						    totalPages = Math.ceil(totalRecords / recPerPage);
+						    apply_pagination(data);
+						} else {
+							callFlashSlide('ไม่พบข้อมูลการค้นหา!','warning')
+						}
 					}
 				});
 			};
@@ -300,7 +331,7 @@ $(document).ready(function(){
 					success:function(data){
 						if(data.status==200) {
 							callFlashSlide('Update Success!','success')
- 							$("#ModalWriter").modal('hide');
+							$("#ModalWriter").modal('hide');
 						} else if (data.status==400) {
 							console.log(data)
 							validatetorInformation(validatetorWriter(data['errors'][0]));
@@ -397,23 +428,26 @@ $(document).ready(function(){
 			function list_data_template(data) {
 				var TRTDHTML = "";
 				var TRTDClass = "style=\"vertical-align: middle;\"";
-				$.each(data, function (key,value) {
-						TRTDHTML += 
+				
+				for (var i = 0; i < displayRecords.length; i++) {
+				//$.each(data, function (key,value) {
+						TRTDHTML +=
 			                '<tr>'+
-			                '<td "'+TRTDClass+'">' + value.article_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.writer +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.procedure_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.doctor_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + formatDateDMY(value.writing_start_date) +'</td>'+
-			                '<td "'+TRTDClass+'">' + formatDateDMY(value.writing_end_date) +'</td>'+
-			                '<td "'+TRTDClass+'">' + formatDateDMY(value.plan_date) +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.article_type_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.status +'</td>'+
-			                '<td "'+TRTDClass+'"><button type="button" id="downloadfile-' + value.article_ID +'" class="btn btn-primary input-sm getfile" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
-			                '&nbsp;<button type="button" id="uploadfile-' + value.article_ID +'" class="btn btn-success input-sm getfile" data-target="#ModalImport" data-toggle="modal" title="อัพโหลด" data-placement="top"><i class="fa fa-upload"></i></button>'+
-			                '&nbsp;<button type="button" id="edit-' + value.article_ID +'" class="btn btn-warning input-sm getfile" data-target="#ModalWriter" data-toggle="modal" title="แก้ไข" data-placement="top">แก้ไข</button></td>'+
+			                '<td "'+TRTDClass+'">' + displayRecords[i].article_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + displayRecords[i].writer +'</td>'+
+			                '<td "'+TRTDClass+'">' + displayRecords[i].procedure_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + displayRecords[i].doctor_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + formatDateDMY(displayRecords[i].writing_start_date) +'</td>'+
+			                '<td "'+TRTDClass+'">' + formatDateDMY(displayRecords[i].writing_end_date) +'</td>'+
+			                '<td "'+TRTDClass+'">' + formatDateDMY(displayRecords[i].plan_date) +'</td>'+
+			                '<td "'+TRTDClass+'">' + displayRecords[i].article_type_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + displayRecords[i].status +'</td>'+
+			                '<td "'+TRTDClass+'"><button type="button" id="downloadfile-' + displayRecords[i].article_ID +'" class="btn btn-primary input-sm getfile" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
+			                '&nbsp;<button type="button" id="uploadfile-' + displayRecords[i].article_ID +'" class="btn btn-success input-sm getfile" data-target="#ModalImport" data-toggle="modal" title="อัพโหลด" data-placement="top"><i class="fa fa-upload"></i></button>'+
+			                '&nbsp;<button type="button" id="edit-' + displayRecords[i].article_ID +'" class="btn btn-warning input-sm getfile" data-target="#ModalWriter" data-toggle="modal" title="แก้ไข" data-placement="top">แก้ไข</button></td>'+
 			                '</tr>';
-			    });
+			    //});
+				}
 				$('#result_search_writer').html(TRTDHTML);
 			}
 				
@@ -533,9 +567,16 @@ $(document).ready(function(){
 			  }
 			});
 				
-			$("#search_start_date,#search_end_date,#start_date,#plan_date,#complete_date,#deadline_date").datepicker({
-				dateFormat: 'dd/mm/yy'
-			});
+//			$("#search_start_date,#search_end_date,#start_date,#plan_date,#complete_date,#deadline_date").datepicker({
+//				dateFormat: 'dd/mm/yy'
+//			});
+			
+			$('.datepicker').datepicker({
+				format: 'dd/mm/yyyy',
+				todayBtn: true,
+	            language: 'th',            
+	            thaiyear: true              
+	        }).datepicker("setDate", "0").keydown(function(e){e.preventDefault();});
 				
 			$("#btn_search").click(function(){
 				if($("#search_start_date").val()=='') {

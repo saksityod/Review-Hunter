@@ -71,6 +71,7 @@ $(document).ready(function() {
 		$("#btn_add").click(function(){
 			$("#from_year").html(getyear($current_year,$current_year+20));
 			$("#from_doctor_name").prop("disabled",false);
+			$("#information_errors").hide();
 		});
 		
 		var target_id_confirm = null;

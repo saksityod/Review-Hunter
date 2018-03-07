@@ -104,8 +104,21 @@ $(document).ready(function() {
 // 				}
 				
 // 			} else {
-				this.closest('tr').remove();
+// 				if($(this).closest('tr').find('.edu-is-use').length==1) {
+				
+// 				} else {
+// 					this.closest('tr').remove();
+// 				}
 //			}
+
+			if($(this).closest('tr').find('.edu-is-use').length==1) {
+				if($(this).closest('tr').find('.edu-is-use').prop('checked')==false) {
+ 					this.closest('tr').remove();
+ 				}
+				
+			} else {
+				this.closest('tr').remove();
+			}
 			
 		});
 		
@@ -131,6 +144,7 @@ $(document).ready(function() {
 				 					$("table."+$method+"-table tr[data-id='"+v+"']").remove();
 				 				});
 				 				callFlashSlide("ลบข้อมูลสำเร็จ",'success');
+				 				validateCheckedIsUse();
 							} else {
 								callFlashSlide("ไม่สามารถลบข้อมูลได้",'error');
 							}
@@ -168,7 +182,24 @@ $(document).ready(function() {
 	 				$('#confrimModal').modal('hide');
 				});
 			});
-		    
+		});
+		
+		function validateCheckedIsUse() {
+			var eChecked = false;
+			$('body .edu-is-use').each(function(i,v){
+				if($(this).prop('checked')==true) {
+					eChecked = true;
+					return false;
+				}
+			});
+
+			if(eChecked==false) {
+				$('body .edu-is-use').last().prop('checked',true);
+			}
+		}
+		
+		$('body').on('click','.btn-add-edu', function() {
+			validateCheckedIsUse();
 		});
 		
 		/* edit doctor data in table list */

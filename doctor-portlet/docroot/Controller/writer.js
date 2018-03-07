@@ -24,7 +24,7 @@ $(document).ready(function(){
 		      totalPages = 0;
 			
 			function apply_pagination(data) {
-				console.log('apply_pagination');
+				//console.log('apply_pagination');
 			      $pagination.twbsPagination({
 			        totalPages: totalPages,
 			        visiblePages: 6,
@@ -70,7 +70,7 @@ $(document).ready(function(){
 				 		headers:{Authorization:"Bearer "+tokenID.token},
 				 		async:false,
 				 		success:function(data){
-				 			console.log(data)
+				 			//console.log(data)
 				 			try {
 				 			    if(Object.keys(data[0])[0] != undefined && Object.keys(data[0])[0] == "item_id"){
 				 			    	galbalDataTemp["item_id"] = [];
@@ -100,7 +100,7 @@ $(document).ready(function(){
 						data:{"stage_id":GlobalCurrentStageID},
 						headers:{Authorization:"Bearer "+tokenID.token},
 						success:function(data){
-							console.log(data,'DropDownCurrentStep');
+							//console.log(data,'DropDownCurrentStep');
 							var htmlOption="";
 							var checkrolesIDbtn = null;
 							$.each(data,function(index,indexEntry) {
@@ -125,7 +125,7 @@ $(document).ready(function(){
 					data:{"stage_id":current_stage_id},
 					headers:{Authorization:"Bearer "+tokenID.token},
 					success:function(data){
-						console.log(data,'action_to')
+						//console.log(data,'action_to')
 						var htmlOption="";
 						var htmlOption2="";
 						//var htmlOption3="";
@@ -153,7 +153,7 @@ $(document).ready(function(){
 					headers:{Authorization:"Bearer "+tokenID.token},
 					success:function(data){
 						
-						console.log(data,'DropDownSendToStage');
+						//console.log(data,'DropDownSendToStage');
 						var htmlOption="";
 						
 						$.each(data,function(index,indexEntry) {
@@ -211,7 +211,7 @@ $(document).ready(function(){
 						GlobalDataWriter=data;
 						
 						//set pagination
-						console.log(data.length)
+						//console.log(data.length)
 						if(data.length > 0) {
 							if(data.length <= 10) {
 								list_data_template(data);
@@ -241,20 +241,29 @@ $(document).ready(function(){
 					var writing_end_date = formatDateYMD($("#writing_end_date").val());
 					var actual_date = formatDateYMD($("#actual_date").val());
 					
-					console.log(actual_date,'actual_date');
+					//console.log(actual_date,'actual_date');
 					
 					var user_id = {
 							"user_id":$("#alert_multi").val()
 					}
 					
-					var send_to = $("#send_to").val().split("-");
-					send_to = (send_to == '') ? '' : send_to[0];
-					
-					var send_to_email = $("#send_to").val().split("-");
-					send_to_email = (send_to_email == '') ? '' : send_to_email[1];
-					
-					var send_to_name = $("#send_to").val().split("-");
-					send_to_name = (send_to_name == '') ? '' : send_to_name[2];
+					if($("#send_to").val()==null) {
+
+						var send_to = 0;
+						var send_to_email = "";
+						var send_to_name = "";
+						
+					} else {
+						
+						var send_to = $("#send_to").val().split("-");
+						send_to = (send_to == '') ? '' : send_to[0];
+						
+						var send_to_email = $("#send_to").val().split("-");
+						send_to_email = (send_to_email == '') ? '' : send_to_email[1];
+						
+						var send_to_name = $("#send_to").val().split("-");
+						send_to_name = (send_to_name == '') ? '' : send_to_name[2];
+					}
 					
 					var data_value = {
 							"article_name":$("#article").val(),
@@ -284,7 +293,7 @@ $(document).ready(function(){
 					var datafile = new FormData();
 					if(filesForm!=undefined) {
 						$.each(filesForm, function(key, value) {
-							console.log(value,'filesform');
+							//console.log(value,'filesform');
 							datafile.append('article_doc-'+key, value);
 						});
 					}
@@ -292,7 +301,7 @@ $(document).ready(function(){
 					//var datafileWorkflow = new FormData();
 					if(filesFormWorkflow!=undefined) {
 						$.each(filesFormWorkflow, function(key, value) {
-							console.log(value,'fileformworkflow');
+							//console.log(value,'fileformworkflow');
 							datafile.append('article_stage_doc-'+key, value);
 						});
 					}
@@ -309,13 +318,15 @@ $(document).ready(function(){
 						headers:{Authorization:"Bearer "+tokenID.token},
 						data:datafile,
 						success:function(data){
-							console.log(data)
+							//console.log(data)
 							if(data.status==200) {
+								$("#btn_modal_submit").attr('disabled',false);
 								callFlashSlide('Insert Success!','success')
 	 							$("#ModalWriter").modal('hide');
 								//searchFN();
 							} else if (data.status==400) {
-								console.log(data)
+								//console.log(data)
+								$("#btn_modal_submit").attr('disabled',false);
 								validatetorInformation(validatetor(data['errors'][0]));
 							}
 						}
@@ -323,7 +334,7 @@ $(document).ready(function(){
 			};
 			
 			function UpdateWriter() {
-				console.log(GlobalWriterID,'GlobalWriterID');
+				//console.log(GlobalWriterID,'GlobalWriterID');
 				var article_id = GlobalWriterID;
 				var article_name = $("#article").val().split("-");
 				article_name = (article_name == '') ? '' : article_name[0];
@@ -343,14 +354,23 @@ $(document).ready(function(){
 						"user_id":$("#alert_multi").val()
 				}
 				
-				var send_to = $("#send_to").val().split("-");
-				send_to = (send_to == '') ? '' : send_to[0];
-				
-				var send_to_email = $("#send_to").val().split("-");
-				send_to_email = (send_to_email == '') ? '' : send_to_email[1];
-				
-				var send_to_name = $("#send_to").val().split("-");
-				send_to_name = (send_to_name == '') ? '' : send_to_name[2];
+				if($("#send_to").val()==null) {
+
+					var send_to = 0;
+					var send_to_email = "";
+					var send_to_name = "";
+					
+				} else {
+					
+					var send_to = $("#send_to").val().split("-");
+					send_to = (send_to == '') ? '' : send_to[0];
+					
+					var send_to_email = $("#send_to").val().split("-");
+					send_to_email = (send_to_email == '') ? '' : send_to_email[1];
+					
+					var send_to_name = $("#send_to").val().split("-");
+					send_to_name = (send_to_name == '') ? '' : send_to_name[2];
+				}
 				
 				var data_value = {
 						"article_id":article_id,
@@ -381,7 +401,7 @@ $(document).ready(function(){
 				var datafile = new FormData();
 				if(filesForm!=undefined) {
 					$.each(filesForm, function(key, value) {
-						console.log(value,'filesform');
+						//console.log(value,'filesform');
 						datafile.append('article_doc-'+key, value);
 					});
 				}
@@ -389,7 +409,7 @@ $(document).ready(function(){
 				//var datafileWorkflow = new FormData();
 				if(filesFormWorkflow!=undefined) {
 					$.each(filesFormWorkflow, function(key, value) {
-						console.log(value,'fileformworkflow');
+						//console.log(value,'fileformworkflow');
 						datafile.append('article_stage_doc-'+key, value);
 					});
 				}
@@ -406,13 +426,15 @@ $(document).ready(function(){
 					headers:{Authorization:"Bearer "+tokenID.token},
 					data:datafile,
 					success:function(data){
-						console.log(data)
+						//console.log(data)
 						if(data.status==200) {
+							$("#btn_modal_submit").attr('disabled',false);
 							callFlashSlide('Update Success!','success')
 							$("#ModalWriter").modal('hide');
 							//searchFN();
 						} else if (data.status==400) {
-							console.log(data)
+							//console.log(data)
+							$("#btn_modal_submit").attr('disabled',false);
 							validatetorInformation(validatetor(data['errors'][0]));
 						}
 					}
@@ -429,7 +451,7 @@ $(document).ready(function(){
 						data:{"article_id":article_id},
 						success:function(data){
 							
-							console.log(data['article'][0]['workflow_actual_date'],'datetestww');
+							//console.log(data['article'][0]['workflow_actual_date'],'datetestww');
 							
 							$("#article").val(data['article'][0]['article_name']);
  							$("#article_type").val(data['article'][0]['article_type_id']);
@@ -461,7 +483,7 @@ $(document).ready(function(){
 					var TRTDHTML = "";
 					$.each(data, function (key,value) {
 							var date_split = value.created_dttm.split(" ");
-							console.log(date_split);
+							//console.log(date_split);
 							
 							TRTDHTML += 
 				                '<tr>'+
@@ -502,7 +524,7 @@ $(document).ready(function(){
 						headers:{Authorization:"Bearer "+tokenID.token},
 						success: function(data, textStatus, jqXHR)
 						{
-							console.log(data);
+							//console.log(data);
 							if(data['status']==200){
 								callFlashSlide("Upload Success!");
 								//getDataFn();
@@ -570,7 +592,7 @@ $(document).ready(function(){
 			}
 			
 			function list_data_template_pagination(data) {
-				console.log('list_data_template_pagination');
+				//console.log('list_data_template_pagination');
 				var TRTDHTML = "";
 				var TRTDClass = "style=\"vertical-align: middle;\"";
 				
@@ -641,7 +663,7 @@ $(document).ready(function(){
 				  //allSelectedText: 'No option left ...',
 				  maxHeight: 200,
 				  onChange: function() {
-					  console.log($('#alert_multi').val());
+					  //console.log($('#alert_multi').val());
 				  }
 				});
 				
@@ -668,40 +690,22 @@ $(document).ready(function(){
 				
 			}
 			
-			function BTNcheckSubmitForm(role) {
-				console.log(roles,'roles');
-				
-				console.log(role,'role');
-				$.each(roles, function (key,value) {
-					if(value.roleId==role) {
-						$("#btn_modal_submit").attr('disabled',false);
-						$("#btn_modal_submit").click(function() {
-							if(InsertUpdateForCheck=="insert") {
-								InsertWriter();
-							} else {
-								console.log("1111")
-								UpdateWriter();
-							}
-						});
-						return false;
-					} else {
-						$("#btn_modal_submit").attr('disabled',true);
+			function BTNcheckSubmitForm(checkrolesIDbtn) {
+				$.ajax({
+					url:restfulURL+"/"+serviceName+"/writer/check_disabled",
+					type:"get",
+					dataType:"json",
+					async:false,
+					data:{"role_id":checkrolesIDbtn},
+					headers:{Authorization:"Bearer "+tokenID.token},
+					success:function(data){
+						if(data.status==200) {
+							$("#btn_modal_submit").attr('disabled',false);
+						} else {
+							$("#btn_modal_submit").attr('disabled',true);
+						}
 					}
-		    	});
-				
-// 				if(userId==userid) {
-// 					$("#btn_modal_submit").attr('disabled',false);
-// 					$("#btn_modal_submit").click(function() {
-// 						if(InsertUpdateForCheck=="insert") {
-// 							InsertWriter();
-// 						} else {
-// 							console.log("1111")
-// 							UpdateWriter();
-// 						}
-// 					});
-// 				} else {
-// 					$("#btn_modal_submit").attr('disabled',true);
-// 				}
+				});
 			}
 				
 			//Autocomeplete
@@ -792,35 +796,6 @@ $(document).ready(function(){
 			        }
 			});
 			
-// 			$("#send_to").autocomplete({
-// 				source: function (request, response) {
-// 		        	$.ajax({
-// 						 url:restfulURL+"/"+serviceName+"/writer/send_to",
-// 						 type:"get",
-// 						 dataType:"json",
-// 						 headers:{Authorization:"Bearer "+tokenID.token},
-// 						 //data:{"emp_name":request.term},
-// 						 data:{"screenName":request.term},
-// 						 //async:false,
-// 		                 error: function (xhr, textStatus, errorThrown) {
-// 		                        console.log('Error: ' + xhr.responseText);
-// 		                    },
-// 						 success:function(data){
-// 								response($.map(data, function (item) {
-// 		                            return {
-// 		                                label: item.userId+"-"+item.screenName,
-// 		                                value: item.userId+"-"+item.screenName,
-// 		                            };
-// 		                        }));
-// 						},
-// 						beforeSend:function(){
-// 							$("body").mLoading('hide');	
-// 						}
-						
-// 					});
-// 		        }
-// 			});
-			
 			$("#search_procedure").html(generateDropDownList(
 					restfulURL+"/"+serviceName+"/writer/list_medical_procedure",
 					"GET"
@@ -856,6 +831,15 @@ $(document).ready(function(){
 				InsertUpdateForCheck = "insert";
 				
 				setDataAddAndEdit();
+			});
+			
+			$("#btn_modal_submit").click(function() {
+				$("#btn_modal_submit").attr('disabled',true);
+				if(InsertUpdateForCheck=="insert") {
+					InsertWriter();
+				} else {
+					UpdateWriter();
+				}
 			});
 				
 			$("#result_search_writer").on("click",'.getfile',function() {
@@ -906,7 +890,7 @@ $(document).ready(function(){
 				filesForm = event.target.files;
 				if(event.target.files.length!=undefined){
 					filesLength = event.target.files.length;
-					console.log(filesForm)
+					//console.log(filesForm)
 				}
 			};
 			
@@ -917,7 +901,7 @@ $(document).ready(function(){
 				filesFormWorkflow = event.target.files;
 				if(event.target.files.length!=undefined){
 					filesLengthWorkflow = event.target.files.length;
-					console.log(filesForm)
+					//console.log(filesForm)
 				}
 			};
 				

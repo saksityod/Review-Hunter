@@ -168,12 +168,12 @@ $(document).ready(function(){
 			
 			$("#medical_procedure").html(generateDropDownList(
 				restfulURL+"/"+serviceName+"/todo/procedure_list",
-				"GET"
+				"GET",{},'All'
 			));
 			
 			$("#job_status").html(generateDropDownList(
 				restfulURL+"/"+serviceName+"/todo/status_list",
-				"GET"
+				"GET",{},'All'
 			));
 			
 			$("#case_name").autocomplete({

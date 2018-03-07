@@ -356,6 +356,3 @@ plid = layout.getPlid();
 	</div>
 </div>
 <!-- Modal Confirm End -->
-
-<input type="hidden" name="id" id="id" value="">
-<input type="hidden" name="action" id="action" value="add">

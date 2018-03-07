@@ -195,5 +195,3 @@ plid = layout.getPlid();
 			<!-- content end -->
 		</div>
 	</div>
-
-</div>

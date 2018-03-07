@@ -19,6 +19,13 @@ $(document).ready(function() {
 		$('body').fadeIn('slow');
 		getList($perpage,1);
 		
+		//clear modal
+		$("#btn_add").click(function(){
+			clearModal();
+			$("#from_is_active").prop('checked',true);
+			$("#information_errors").hide();
+		});
+		
 		/* click pagination */
 		$("#"+$appName+"_pagination").on('click','li:not(.disabled,.active) a',function(){
 			getList($perpage,$(this).parent().attr("data-lp"));
@@ -36,13 +43,14 @@ $(document).ready(function() {
 						  	is_active	 	: $('#from_is_active').prop('checked')?1:0						  
 						}
 			console.log(data);
-			getAjax($plRoute+"/cu",'post',data,function(rs){
-				if(rs.status == 200){
-					$('#modalAdd').modal('hide');
+			getAjax($plRoute+"/cu",'post',data,function(data){
+				if(data.status == 200){
+					$("#modalAdd").modal('hide');
 					getList($perpage,1);
-	 				callFlashSlide("สร้างข้อมูลสำเร็จ.",'success');
+					callFlashSlide('insert Success!','success');
+					clearModal();
 				}else{
-	 				callFlashSlide("ไม่สามารถเพิ่มข้อมูลได้.",'error');
+					validatetorInformation(validatetor(data['errors'][0]));
 				}
 			});
 		});
@@ -55,16 +63,19 @@ $(document).ready(function() {
 					if(rs.status == 200){
 		 				getList($perpage,1);
 		 				callFlashSlide("ลบข้อมูล สำเร็จ.",'success');
-					}else{
+					} else if(rs.status == 400) {
+						callFlashSlide(rs.data,'error');
+					} else {
 						callFlashSlide("ไม่สามารถลบข้อมูลได้",'error');
 					}
 	 				$('#confrimModal').modal('hide');
 				});
 			});
 		})
-		 
 		
 		$('body').on('click','.edit',function(){
+			$("#information_errors").hide();
+			
 			var id = $(this).data('id');
 			getAjax($plRoute+"/getOne",'get',{id : id},function(rs){
 				if(rs.status == 200){
@@ -103,8 +114,8 @@ $(document).ready(function() {
 									+'data-trigger="focus" tabindex="0" data-html="true"'
 									+'data-toggle="popover" data-placement="top"'
 									+'data-content="'
-										+'<button class=\'btn btn-warning btn-xs btn-gear edit\' data-target=#modalAdd data-toggle=\'modal\' data-id=\''+this.case_group_id+'\'>Edit</button>'
-										+'<button class=\'btn btn-danger btn-xs btn-gear del\' data-target=#confrimModal data-toggle=\'modal\' data-id=\''+this.case_group_id+'\' style=\'margin-left: 15px\'>Delete</button>">'
+										+'<button class=\'btn btn-warning btn-xs btn-gear edit\' data-target=#modalAdd data-toggle=\'modal\' data-id=\''+this.case_group_id+'\'>แก้ไข</button>'
+										+'<button class=\'btn btn-danger btn-xs btn-gear del\' data-target=#confrimModal data-toggle=\'modal\' data-id=\''+this.case_group_id+'\' style=\'margin-left: 15px\'>ลบ</button>">'
 								+'</i></td>'
 							+'</tr>';
 					$html+= $temp;

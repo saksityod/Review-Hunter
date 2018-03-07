@@ -40,17 +40,28 @@ $(document).ready(function() {
 		});
 		
 		
-		$('#btn_add').click(function(){ $('.btn-edit,.btn-del,.btn-cancel').hide();$('.btn-add').show();});
-		$('.btn-add').click(function(){ 
+		$('#btn_add').click(function() {
+			$('.btn-edit,.btn-del,.btn-cancel').hide();
+			$('.btn-add').show();
+			$("#from_active").prop("checked",true);
+			$('.clickSelector').hide();
+			//addcheckboxDefault('btn_add');
+		});
+		
+		$('.btn-add').click(function(){
 			$('.'+$(this).data('method')+'-table tbody').append($(this).data('elm')); 
 			if($(this).data('method')=="work"){
 				$(".edit-exp").last().find('.build-work-datepicker').html($html_year);
+			} else {
+				//addcheckboxDefault('add');
 			}
+			
 		});
 		$('.btn-edit').click(function(){ 
 			$(this).hide();
 			$(this).closest('.wrap').find('.input,.btn-cancel').show(); 
 			$(this).closest('.wrap').find('.display').hide();
+			
 		});
 		$('.btn-cancel').click(function(){ 
 			$(this).hide();
@@ -60,7 +71,43 @@ $(document).ready(function() {
 			$(this).closest('.wrap').find('.input').hide(); 
 			$(this).closest('.wrap').find('.display,.btn-edit').show();
 		});
-		$('body').on("click", ".del_tr", function(){ this.closest('tr').remove(); });
+		
+// 		var edu_n = 0;
+// 		var addcheckboxDefault = function(n) {
+// 			if(n=='add') { edu_n ++; }
+// 			else if(n=='del') { edu_n --; }
+// 			else if(n=='del_last') { edu_n = 0; }
+// 			else if(n=='btn_add') { edu_n = 0; }
+// 			else if(n=='btn_edit') {
+// 				edu_n = 1;
+// 			}
+			
+// 			console.log($(".edit-edu tr-dump"));
+			
+// 			console.log(edu_n)
+// 			if(edu_n==1) {
+// 				$(".edu-is-use").prop("checked",true);
+// 			}
+			
+// 		}
+		
+		$('body').on("click", ".del_tr", function() {
+// 			if($(this).closest('tr').find('.edu-is-use').length==1) {
+// 				if($(this).closest('tr').find('.edu-is-use').prop('checked')==false) {
+// 					this.closest('tr').remove();
+// 					addcheckboxDefault('del');
+// 				}
+				
+// 				if($('.edu-is-use').length==1) {
+// 					this.closest('tr').remove();
+// 					addcheckboxDefault('del_last');
+// 				}
+				
+// 			} else {
+				this.closest('tr').remove();
+//			}
+			
+		});
 		
 		/* del-edu,work */
 		$('.btn-del').click(function(){
@@ -84,7 +131,7 @@ $(document).ready(function() {
 				 					$("table."+$method+"-table tr[data-id='"+v+"']").remove();
 				 				});
 				 				callFlashSlide("ลบข้อมูลสำเร็จ",'success');
-							}else{
+							} else {
 								callFlashSlide("ไม่สามารถลบข้อมูลได้",'error');
 							}
 			 				$('#confrimModal').modal('hide');
@@ -98,7 +145,8 @@ $(document).ready(function() {
 		$('#ModalEditDetail').on('hidden', function(){ 
 			$('#from_medical_procedure').val('').multiselect("refresh");
 			$(this).data('id','');
-			$('.tr-dump').remove();clearModal(); 
+			$('.tr-dump').remove();
+			clearModal();
 		});
 		
 		
@@ -112,7 +160,9 @@ $(document).ready(function() {
 					if(rs.status == 200){
 		 				getList($perpage,1,getDataToAjax());
 		 				callFlashSlide("ลบข้อมูล  Doctor สำเร็จ.",'success');
-					}else{
+					} else if(rs.status == 400) {
+						callFlashSlide(rs.data,'error');
+					} else {
 						callFlashSlide("ไม่สามารถลบข้อมูลได้",'error');
 					}
 	 				$('#confrimModal').modal('hide');
@@ -122,7 +172,10 @@ $(document).ready(function() {
 		});
 		
 		/* edit doctor data in table list */
-		$('body').on("click", ".edit", function(){ 
+		$('body').on("click", ".edit", function(){
+			console.log('edit doctor data in table list');
+			$('.clickSelector').show();
+			//addcheckboxDefault('btn_edit');
 			$('.btn-cancel').hide(); 
 			$('.btn-edit,.btn-del,.btn-add').show(); 
 			$id = $(this).closest('tr').data('id');
@@ -141,7 +194,7 @@ $(document).ready(function() {
 					$('#from_doctor_name').val(rs.data.doctor_name);
 					$('#from_doctor_sex').val(rs.data.gender);
 					$('#from_medical_procedure').val($procedure).multiselect("refresh");
-					$('#from_active').prop('checked', rs.data.is_active == 1?"True":"False");
+					$('#from_active').prop('checked', rs.data.is_active == 1?true:false);
 					$('#from_doctor_exp').val(rs.data.expertise);
 					$html ='';
 					$.each(rs.data.doctor_education,function(k,v){
@@ -280,6 +333,51 @@ $(document).ready(function() {
 			return $data;
 		}
 		
+// 		$('#doctor_name').autocomplete({
+// 			minLength: 3,
+// 			delay: 100,
+// 			source: function (request, response) {
+// 		        getAjax($plRoute+"/list_doctor",'get',{doctor_name:$("#doctor_name").val()},function(rs){
+// 		        	response( $.map( rs, function( item ) {
+// 		                var object = new Object();
+// 		                  object.value = item.doctor_name;
+// 		                  return object 
+// 		              }));
+// 		        });    
+// 		    }
+// 		});
+
+		//Autocomeplete
+			$("#doctor_name").autocomplete({
+					source: function (request, response) {
+			        	$.ajax({
+							 url:restfulURL+"/"+serviceName+"/doctor_profile/list_doctor_name",
+							 type:"get",
+							 dataType:"json",
+							 headers:{Authorization:"Bearer "+tokenID.token},
+							 //data:{"emp_name":request.term},
+							 data:{"doctor_name":request.term},
+							 //async:false,
+			                 error: function (xhr, textStatus, errorThrown) {
+			                        console.log('Error: ' + xhr.responseText);
+			                    },
+							 success:function(data){
+								 //console.log(data);
+									response($.map(data, function (item) {
+			                            return {
+			                                label: item.doctor_name,
+			                                value: item.doctor_name,
+			                            };
+			                        }));
+							},
+							beforeSend:function(){
+								$("body").mLoading('hide');	
+							}
+							
+						});
+			        }
+		});
+		
 		function onload(){
 			$url = $plRoute+"/list_medical_procedure";
 			getAjax($url,'get','',function(rs){
@@ -343,6 +441,4 @@ $(document).ready(function() {
 		}
 	
 	}
-	
-	
 });

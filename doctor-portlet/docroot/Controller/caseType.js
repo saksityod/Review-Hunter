@@ -8,32 +8,39 @@ $(document).ready(function() {
 		$plRoute = restfulURL+"/"+serviceName+'/'+$appName; 
 		getList($perpage,1);
 		
+		//clear modal
+		$("#btn_add").click(function(){
+			clearModal();
+			$("#add_is_active").prop('checked',true);
+			$("#information_errors").hide();
+		});
+
 		/*action add*/
 		$('#btn_submit_add_'+$appName).on('click',function(){
 			$elm = $('#add_'+$appName+'_name');
 			$name = $.trim($elm.val());
 			$is_active = $('#add_is_active').is(":checked") == true?1:0;
-			if($name != ''){
+
 				$url = $plRoute+'/new';
 				$data = {caseTypeName:$name,is_active:$is_active};
 				$callback = function(data,status){
 					if(data.status == 200){
+						//console.log(data);
+						$("#modalAdd").modal('hide');
 						getList($perpage,1);
-						callFlashSlide(data.message,'success');
-					}else{	
-						callFlashSlide(data.message,'error');
+						callFlashSlide('insert Success!','success');
+						clearModal();
+					}else{
+						validatetorInformation(validatetor(data['errors'][0]));
 					}
-					$("#modalAdd").modal('hide');
-					clearModal();
 				}
 				getAjax($url,"post",$data,$callback);
-			}else{
-				callFlashSlide(data.message,'error');
-			}
 		});
 		
 		/*	get data to modal for edit*/
 		$('#table_'+$appName).on('click','.edit', function(e){
+			$("#information_errors_update").hide();
+			
 			$id = $(this).attr('data-id');
 			$url =$plRoute+"/getOne/"+$id;
 			$callback = function(data){
@@ -53,25 +60,23 @@ $(document).ready(function() {
 		$("#btn_submit_edit_"+$appName).on('click',function(){
 			$name = $.trim($('#edit_'+$appName+'_name').val());
 			$is_active = $('#edit_is_active').is(":checked") == true?1:0;
-			if($name != ''){
+
 				$id = $('#edit_'+$appName+'_name').attr('data-id');
-				$data = {case_type:$name,is_active:$is_active};
+				$data = {caseTypeName:$name,is_active:$is_active};
 				$url = $plRoute+"/update/"+$id;
 				$callback = function(data){
 					if(data.status==200){
 						getList($perpage,1);
-						callFlashSlide(data.message,'success');
+						callFlashSlide('Update Success!','success');
+						$("#modalEdit").modal('hide');
+						clearModal();
+						$('#edit_'+$appName+'_name').removeAttr('data-id');
 					}else{
-						callFlashSlide(data.message,'error');
+						//console.log(data);
+						validatetorInformationUpdate(validatetor(data['errors'][0]));
 					}
 				};
 				getAjax($url,'post',$data,$callback);
-				$("#modalEdit").modal('hide');
-				clearModal();
-				$('#edit_'+$appName+'_name').removeAttr('data-id');
-			}else{
-				callFlashSlide("กรึณากรอกข้อมูลให้ครบถ้วน",'error');
-			}
 		});
 		
 		/*	get data to modal for delete*/
@@ -87,8 +92,10 @@ $(document).ready(function() {
 				if(data.status==200){
 					getList($perpage,1);
 					callFlashSlide(data.message,'success');
-				}else{
-					callFlashSlide(data.message,'error');
+				} else if(data.status == 400) {
+					callFlashSlide(data.data,'error');
+				} else {
+					callFlashSlide("ไม่สามารถลบข้อมูลได้",'error');
 				}
 			};
 			getAjax($url,'post','',$callback);
@@ -129,8 +136,8 @@ function getList($perpage,$page){
 							+'data-trigger="focus" tabindex="0" data-html="true"'
 							+'data-toggle="popover" data-placement="top"'
 							+'data-content="'
-								+'<button class=\'btn btn-warning btn-xs btn-gear edit\' data-target=#modalEdit data-toggle=\'modal\' data-id=\''+this.case_type_id+'\'>Edit</button>'
-								+'<button class=\'btn btn-danger btn-xs btn-gear del\' data-target=#confrimModal data-toggle=\'modal\' data-id=\''+this.case_type_id+'\' style=\'margin-left: 15px\'>Delete</button>">'
+								+'<button class=\'btn btn-warning btn-xs btn-gear edit\' data-target=#modalEdit data-toggle=\'modal\' data-id=\''+this.case_type_id+'\'>แก้ไข</button>'
+								+'<button class=\'btn btn-danger btn-xs btn-gear del\' data-target=#confrimModal data-toggle=\'modal\' data-id=\''+this.case_type_id+'\' style=\'margin-left: 15px\'>ลบ</button>">'
 						+'</i></td>'
 					+'</tr>';
 			$html+= $temp;

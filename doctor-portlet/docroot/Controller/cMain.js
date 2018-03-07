@@ -174,7 +174,7 @@ $("#logOut").click(function(){
  
 /*ajax */
 function getAjax(url,type,data,callback){
-	if(checkSession(JSON.stringify(tokenID))){
+	//if(checkSession(JSON.stringify(tokenID))){
 		$.ajax({
 			url:url,
 			type : type,
@@ -190,7 +190,7 @@ function getAjax(url,type,data,callback){
 				}
 			}
 		});
-	}
+	//}
 }
 
 /*clear field in modal*/
@@ -237,65 +237,32 @@ function formatDateDMY(input) {
 	    var datePart = input.split("-");
 	    var day = datePart[2];
 	    var month = datePart[1];
-	    var year = datePart[0];
-	    year += 543;
-	    return day + '-' + month + '-' + year;
+	    var year = Number(datePart[0]);
+
+		year += 543;
+	    return day + '/' + month + '/' + year;
 	}
 }
 
-var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
-	 
-	 if(pageTotal==0){
-	  pageTotal=1
-	 }
-	 $('.pagination_top,.pagination_bottom').off("page");
-	 $('.pagination_top,.pagination_bottom').bootpag({
-	     total: pageTotal,//page Total
-	     page: pageIndex,//page index
-	     maxVisible: 5,//จำนวนปุ่ม
-	     leaps: true,
-	     firstLastUse: true,
-	     first: '←',
-	     last: '→',
-	     wrapClass: 'pagination',
-	     activeClass: 'active',
-	     disabledClass: 'disabled',
-	     nextClass: 'next',
-	     prevClass: 'prev',
-	     next: 'next',
-	     prev: 'prev',
-	     lastClass: 'last',
-	     firstClass: 'first'
-	 }).on("page", function(event, num){
-	  var rpp=10;
-	  if($("#rpp").val()==undefined){
-	   rpp=10;
-	  }else{
-	   rpp=$("#rpp").val();
-	  }
-	  
-	  getData(num,rpp);
-	  
-	     $(".pagingNumber").remove();
-	     var htmlPageNumber= "<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='"+num+"'>";
-	     $("body").append(htmlPageNumber);
-	    
-	 }); 
-
-	 $(".countPagination").off("change");
-	 $(".countPagination").on("change",function(){
-
-	  $("#countPaginationTop").val($(this).val());
-	  $("#countPaginationBottom").val($(this).val());
-	  
-	  getData(1,$(this).val());
-	  
-	  $(".rpp").remove();
-	  $(".pagingNumber").remove();
-	  var htmlRrp="";
-	   htmlRrp+= "<input type='hidden' id='rpp' name='rpp' class='rpp' value='"+$(this).val()+"'>";
-	         htmlRrp+="<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='1'>";
-	     $("body").append(htmlRrp);
-	 });
+function validatetor(data) {
+	var errorData="";
+	$.each(data, function(key, value) {
+		errorData += stripJsonToString(value);
+	});
+	console.log(errorData);
+	return errorData;
 }
-//set paginate end
+
+var stripJsonToString= function(json){
+    return JSON.stringify(json).replace(',', ', ').replace('[', '').replace(']', '').replace('.', "<br>").replace(/\"/g,'');
+}
+
+function validatetorInformation(data) {
+	$("#information_errors").show();
+	$("#information_errors").html(data);
+}
+
+function validatetorInformationUpdate(data) {
+	$("#information_errors_update").show();
+	$("#information_errors_update").html(data);
+}

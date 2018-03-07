@@ -57,8 +57,8 @@
 			<div class="row-fluid">
 				<div id="width-100-persen" class=" m-b-xs">
 					<br>
-					<button class="btn btn-success" data-target=#modalAdd data-toggle='modal' data-type="add">
-						<i class="fa fa-plus"></i> Add Medical Procedure
+					<button class="btn btn-success" data-target=#modalAdd data-toggle='modal' data-type="add" id="btn_add">
+						<i class="fa fa-plus"></i> เพิ่ม
 					</button>
 					<br><br>
 					<!-- start table -->
@@ -66,9 +66,9 @@
 						<table class="table table-striped" id="table_medical_procedure">
 							<thead>
 								<tr>
-									<th style='width: auto;'><strong>Medical Procedure Name</strong></th>
-									<th style='width: 100px; text-align: center;'><strong>is_active</strong></th>
-									<th style='width: 120px; text-align: center;'><strong>Manage</strong></th>
+									<th style='width: auto;'><strong>ชื่อหัตถการ</strong></th>
+									<th style='width: 100px; text-align: center;'><strong>Active</strong></th>
+									<th style='width: 120px; text-align: center;'><strong>จัดการ</strong></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -128,7 +128,7 @@
 						<span aria-hidden="true"><i class='fa fa-times'></i></span><span
 							class="sr-only"></span>
 					</button>
-					<h4 class="modal-title" id="modalTitleRole">NEW Medical Procedure</h4>
+					<h4 class="modal-title" id="modalTitleRole">หัตถการ</h4>
 				</div>
 				<div class="modal-body">
 					<br />
@@ -139,7 +139,7 @@
 									<div class="form-group span12"
 										style="margin-left: 5px;">
 										<label for="add_medical_procedure_name" class="col-sm-2 control-label">
-											Procedure Name  <span class="red">*</span>
+											ชื่อ  <span class="red">*</span>
 										</label>
 										<div class="span6">
 											<input data-toggle="tooltip" title="Name" data-placement="top"
@@ -149,17 +149,23 @@
 												<!-- <span class="required">asdads</span> -->
 										</div>
 									</div>
-									<div class="form-group" style="margin-left: 5px;">
-										<label for="is_active" class=" control-label">is Active</label>
-										<div class="">
+									<div class="form-group span12"
+										style="margin-left: 5px;">
+										<label for="is_active" class="col-sm-2 control-label">Active</label>
+										<div class="span6">
 											<input data-toggle="tooltip"
 												title="is active" data-placement="top" 
 												id="add_is_active"
 												placeholder="is active"
-												type="checkbox">
+												type="checkbox" checked="checked">
 										</div>
 									</div>
 								</form>
+							</div>
+							
+							<div class="row-fluid">
+								<div class="alert alert-warning information" id="information_errors" style="display: none;height:60px; overflow-y: scroll; position:relative;">
+								</div>
 							</div>
 
 							<div class="modal-footer">
@@ -192,7 +198,7 @@
 						<span aria-hidden="true"><i class='fa fa-times'></i></span><span
 							class="sr-only"></span>
 					</button>
-					<h4 class="modal-title" id="modalTitleRole">Edit Medical Procedure</h4>
+					<h4 class="modal-title" id="modalTitleRole">หัตถการ</h4>
 				</div>
 				<div class="modal-body">
 					<br />
@@ -202,8 +208,8 @@
 								<form class="form-inline">
 									<div class="form-group span12"
 										style="margin-left: 5px;">
-										<label for="edit_medical_procedure_name" class="control-label">
-											Procedure Name  <span class="red">*</span>
+										<label for="edit_medical_procedure_name" class="col-sm-2 control-label">
+											ชื่อ  <span class="red">*</span>
 										</label>
 										<div class="span6">
 											<input data-toggle="tooltip" title="Name" data-placement="top"
@@ -212,9 +218,10 @@
 												type="text">
 										</div>
 									</div>
-									<div class="form-group" style="margin-left: 5px;">
-										<label for="edit_is_active" class="col-sm-2 control-label">is Active</label>
-										<div class="">
+									<div class="form-group span12"
+										style="margin-left: 5px;">
+										<label for="edit_is_active" class="col-sm-2 control-label">Active</label>
+										<div class="span6">
 											<input data-toggle="tooltip"
 												title="is active" data-placement="top" 
 												id="edit_is_active"
@@ -223,6 +230,11 @@
 										</div>
 									</div>
 								</form>
+							</div>
+							
+							<div class="row-fluid">
+								<div class="alert alert-warning information" id="information_errors_update" style="display: none;height:60px; overflow-y: scroll; position:relative;">
+								</div>
 							</div>
 
 							<div class="modal-footer">

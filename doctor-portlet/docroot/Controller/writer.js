@@ -7,20 +7,24 @@ $(document).ready(function(){
 			 
 			var GlobalWriterID;
 			var GlobalStageID;
+			var GlobalCurrentStageID;
 			var GlobalDataWriter;
 			var InsertUpdateForCheck = "";
 			$('.dropify').dropify();
+			
+			var perPagePaganation = 10;
 			
 			//pagination
 			var $pagination = $('#pg'),
 		      totalRecords = 0,
 		      records = [],
 		      displayRecords = [],
-		      recPerPage = 10,
+		      recPerPage = perPagePaganation,
 		      page = 1,
 		      totalPages = 0;
 			
 			function apply_pagination(data) {
+				console.log('apply_pagination');
 			      $pagination.twbsPagination({
 			        totalPages: totalPages,
 			        visiblePages: 6,
@@ -30,28 +34,28 @@ $(document).ready(function(){
 
 			          displayRecords = records.slice(displayRecordsIndex, endRec);
 			          //generate_table();
-			          list_data_template(data);
+			          list_data_template_pagination(data);
 			        }
 			      });
 			}
 
-			function validatetorWriter(data) {
-				var errorData="";
-				$.each(data, function(key, value) {
-					errorData += stripJsonToString(value);
-				});
-				console.log(errorData);
-				return errorData;
-			}
+// 			function validatetor(data) {
+// 				var errorData="";
+// 				$.each(data, function(key, value) {
+// 					errorData += stripJsonToString(value);
+// 				});
+// 				console.log(errorData);
+// 				return errorData;
+// 			}
 			
-			var stripJsonToString= function(json){
-			    return JSON.stringify(json).replace(',', ', ').replace('[', '').replace(']', '').replace('.', "<br>").replace(/\"/g,'');
-			}
+// 			var stripJsonToString= function(json){
+// 			    return JSON.stringify(json).replace(',', ', ').replace('[', '').replace(']', '').replace('.', "<br>").replace(/\"/g,'');
+// 			}
 			
-			function validatetorInformation(data) {
-				$("#information_errors").show();
-				$("#information_errors").html(data);
-			}
+// 			function validatetorInformation(data) {
+// 				$("#information_errors").show();
+// 				$("#information_errors").html(data);
+// 			}
 			 
 			 var generateDropDownList = function(url,type,request,initValue){
 				 	var html="";
@@ -66,6 +70,7 @@ $(document).ready(function(){
 				 		headers:{Authorization:"Bearer "+tokenID.token},
 				 		async:false,
 				 		success:function(data){
+				 			console.log(data)
 				 			try {
 				 			    if(Object.keys(data[0])[0] != undefined && Object.keys(data[0])[0] == "item_id"){
 				 			    	galbalDataTemp["item_id"] = [];
@@ -86,32 +91,99 @@ $(document).ready(function(){
 				 	return html;
 			}
 			 
-			function DropDownToStep() {
+			function DropDownCurrentStep() {
 					$.ajax({
-						url:restfulURL+"/"+serviceName+"/writer/action_to",
+						url:restfulURL+"/"+serviceName+"/writer/current_action",
 						type:"get",
 						dataType:"json",
 						async:false,
-						data:{"stage_id":$("#by_step").val()},
+						data:{"stage_id":GlobalCurrentStageID},
 						headers:{Authorization:"Bearer "+tokenID.token},
 						success:function(data){
+							console.log(data,'DropDownCurrentStep');
 							var htmlOption="";
-							var htmlOption2="";
+							var checkrolesIDbtn = null;
 							$.each(data,function(index,indexEntry) {
 								htmlOption+="<option value="+indexEntry['stage_id']+">"+indexEntry['stage_name']+"</option>";
-								htmlOption2=indexEntry['status'];
+								checkrolesIDbtn = indexEntry['role_id'];
 							});
+							$("#by_step").html(htmlOption);
 							
-							$("#to_step_status").val(htmlOption2);
-							$("#to_step").html(htmlOption);
+							BTNcheckSubmitForm(checkrolesIDbtn);
 						}
 					});
 			}
-			DropDownToStep();
+			
+			function DropDownToStep() {
+				var current_stage_id = (GlobalCurrentStageID == null) ? $("#by_step").val() : GlobalCurrentStageID;
 				
-			function getData(page,rpp) {
-				var article_ID = $("#search_article").val().split("-");
-				article_ID = (article_ID == '') ? '' : article_ID[0];
+				$.ajax({
+					url:restfulURL+"/"+serviceName+"/writer/action_to",
+					type:"get",
+					dataType:"json",
+					async:false,
+					data:{"stage_id":current_stage_id},
+					headers:{Authorization:"Bearer "+tokenID.token},
+					success:function(data){
+						console.log(data,'action_to')
+						var htmlOption="";
+						var htmlOption2="";
+						//var htmlOption3="";
+						
+						$.each(data,function(index,indexEntry) {
+							htmlOption+="<option value="+indexEntry['stage_id']+">"+indexEntry['stage_name']+"</option>";
+							htmlOption2=indexEntry['status'];
+							//htmlOption3=indexEntry['to_user'];
+						});
+						
+						//$("#send_to").val(htmlOption3);
+						$("#to_step_status").val(htmlOption2);
+						$("#to_step").html(htmlOption);
+					}
+				});
+			}
+			
+			function DropDownSendToStage() {
+				$.ajax({
+					url:restfulURL+"/"+serviceName+"/writer/send_to_stage",
+					type:"get",
+					dataType:"json",
+					async:false,
+					data:{"stage_id":$("#to_step").val()},
+					headers:{Authorization:"Bearer "+tokenID.token},
+					success:function(data){
+						
+						console.log(data,'DropDownSendToStage');
+						var htmlOption="";
+						
+						$.each(data,function(index,indexEntry) {
+							htmlOption+="<option value="+indexEntry['userId']+"-"+indexEntry['emailAddress']+"-"+indexEntry['screenName']+">"+indexEntry['screenName']+"</option>";
+						});
+						$("#send_to").html(htmlOption);
+					}
+				});
+			}
+			
+			function DropDownAlertMulti() {
+				$.ajax({
+					url:restfulURL+"/"+serviceName+"/writer/list_user_alert",
+					type:"get",
+					dataType:"json",
+					async:false,
+					headers:{Authorization:"Bearer "+tokenID.token},
+					success:function(data){
+						var htmlOption="";
+						$.each(data,function(index,v) {
+							htmlOption+="<option value="+v.userId+"|"+v.emailAddress+">"+v.screenName+"</option>";
+						});
+						$("#alert_multi").html(htmlOption);
+					}
+				});
+			}
+				
+			function searchFN() {
+				var search_writer = $("#search_writer").val().split("-");
+				search_writer = (search_writer == '') ? '' : search_writer[0];
 					
 				var doctor_id = $("#search_doctor").val().split("-");
 				doctor_id = (doctor_id == '') ? '' : doctor_id[0];
@@ -127,43 +199,62 @@ $(document).ready(function(){
 					async:false,
 					headers:{Authorization:"Bearer "+tokenID.token},
 					data:{
-						"article_id":article_ID,
+						"writer":search_writer,
 						"procedure_id":procedure_id,
 						"doctor_id":doctor_id,
+						
 						"writing_start_date":writing_start_date,
-						"writing_end_date":writing_end_date,
-						"page":page,
-						"rpp":rpp
+						"writing_end_date":writing_end_date
 					},
 					success:function(data) {
-						console.log(data);
+						//console.log(data);
 						GlobalDataWriter=data;
 						
 						//set pagination
+						console.log(data.length)
 						if(data.length > 0) {
-							records = data;
-						    totalRecords = records.length;
-						    totalPages = Math.ceil(totalRecords / recPerPage);
-						    apply_pagination(data);
+							if(data.length <= 10) {
+								list_data_template(data);
+							} else {
+								records = data;
+							    totalRecords = records.length;
+							    totalPages = Math.ceil(totalRecords / recPerPage);
+							    apply_pagination(data);
+							}
 						} else {
 							callFlashSlide('ไม่พบข้อมูลการค้นหา!','warning')
 						}
 					}
 				});
 			};
+			//getData();
 				
 			function InsertWriter() {
 					var doctor_id = $("#form_doctor").val().split("-");
 					doctor_id = (doctor_id == '') ? '' : doctor_id[0];
+					
 					var writer = $("#author").val().split("-");
+					
 					writer = (writer == '') ? null : writer[0];
 					var writer_start_date = formatDateYMD($("#start_date").val());
 					var plan_date = formatDateYMD($("#plan_date").val());
-					var complete_date = formatDateYMD($("#complete_date").val());
-					var actual_date = formatDateYMD($("#deadline_date").val());
+					var writing_end_date = formatDateYMD($("#writing_end_date").val());
+					var actual_date = formatDateYMD($("#actual_date").val());
+					
+					console.log(actual_date,'actual_date');
+					
 					var user_id = {
 							"user_id":$("#alert_multi").val()
 					}
+					
+					var send_to = $("#send_to").val().split("-");
+					send_to = (send_to == '') ? '' : send_to[0];
+					
+					var send_to_email = $("#send_to").val().split("-");
+					send_to_email = (send_to_email == '') ? '' : send_to_email[1];
+					
+					var send_to_name = $("#send_to").val().split("-");
+					send_to_name = (send_to_name == '') ? '' : send_to_name[2];
 					
 					var data_value = {
 							"article_name":$("#article").val(),
@@ -179,8 +270,12 @@ $(document).ready(function(){
 							
 							"from_stage_id":$("#by_step").val(),
 							"to_stage_id":$("#to_step").val(),
-							"to_user_id":$("#send_to").val(),
-							"writing_end_date":complete_date,
+							
+							"to_user_id":send_to,
+							"to_user_email":send_to_email,
+							"to_user_name":send_to_name,
+							
+							"writing_end_date":writing_end_date,
 							"actual_date":actual_date,
 							"status":$("#to_step_status").val(),
 							"remark":$("#remark").val()
@@ -218,77 +313,44 @@ $(document).ready(function(){
 							if(data.status==200) {
 								callFlashSlide('Insert Success!','success')
 	 							$("#ModalWriter").modal('hide');
+								//searchFN();
 							} else if (data.status==400) {
 								console.log(data)
-								validatetorInformation(validatetorWriter(data['errors'][0]));
+								validatetorInformation(validatetor(data['errors'][0]));
 							}
 						}
 					})
 			};
-				
-			function GetDataEdit(article_id) {
-					console.log("GetDataEdit")
-					$.ajax({
-						url:restfulURL+"/"+serviceName+"/writer/show",
-						type:"get",
-						dataType:"json",
-						async:false,
-						headers:{Authorization:"Bearer "+tokenID.token},
-						data:{"article_id":article_id},
-						success:function(data){
-							console.log(data);
-							$("#article").val(data.article.article_name);
-							$("#article_type").val(data.article.article_type_id);
-							//$("#").val(data.article_type_name);
-							$("#procedure_name").val(data.article.procedure_id);
-							//$("#").val(data.procedure_name);
-							$("#form_doctor").val(data.article.doctor_id+'-'+data.article.doctor_name);
-							//$("#").val(data.doctor_name);
-							$("#author").val(writer_id+'-'+data.article.writer_name);
-							$("#start_date").val(formatdateDMY(data.article.writing_start_date));
-							$("#complete_date").val(formatdateDMY(data.article.writing_end_date));
-							$("#plan_date").val(formatdateDMY(data.article.plan_date));
-							$("#to_step_status").val(data.article.status);
-							list_article_history(data.article_hitory);
-							//$("#").val(data.article_path);
-						}
-					})
-			}
 			
-			function list_article_history(data) {
-				var TRTDHTML = "";
-				var TRTDClass = "style=\"vertical-align: middle;\"";
-				$.each(data, function (key,value) {
-						TRTDHTML += 
-			                '<tr>'+
-			                '<td "'+TRTDClass+'">' + value.created_dttm +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.from_stage_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.from_user_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.to_stage_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.to_user_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.remark +'</td>'+
-			                '<td "'+TRTDClass+'">' +  +'</td>'+
-			                '<td "'+TRTDClass+'"><button type="button" id="downloadfileWorkflowHistory-' + value.article_stage_id +'" class="btn btn-primary input-sm getfileWorkflow" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
-			                '</td>'+
-			                '</tr>';
-			    });
-				$('#workflow_history').html(TRTDHTML);
-			} 
-				
 			function UpdateWriter() {
-				var article_id = $("#article").val().split("-");
-				article_id = (article_id == '') ? '' : article_id[0];
+				console.log(GlobalWriterID,'GlobalWriterID');
+				var article_id = GlobalWriterID;
+				var article_name = $("#article").val().split("-");
+				article_name = (article_name == '') ? '' : article_name[0];
+				
 				var doctor_id = $("#form_doctor").val().split("-");
 				doctor_id = (doctor_id == '') ? '' : doctor_id[0];
+				
 				var writer = $("#author").val().split("-");
 				writer = (writer == '') ? null : writer[0];
+				
 				var writer_start_date = formatDateYMD($("#start_date").val());
 				var plan_date = formatDateYMD($("#plan_date").val());
-				var complete_date = formatDateYMD($("#complete_date").val());
-				var actual_date = formatDateYMD($("#deadline_date").val());
+				var writing_end_date = formatDateYMD($("#writing_end_date").val());
+				var actual_date = formatDateYMD($("#actual_date").val());
+				
 				var user_id = {
 						"user_id":$("#alert_multi").val()
 				}
+				
+				var send_to = $("#send_to").val().split("-");
+				send_to = (send_to == '') ? '' : send_to[0];
+				
+				var send_to_email = $("#send_to").val().split("-");
+				send_to_email = (send_to_email == '') ? '' : send_to_email[1];
+				
+				var send_to_name = $("#send_to").val().split("-");
+				send_to_name = (send_to_name == '') ? '' : send_to_name[2];
 				
 				var data_value = {
 						"article_id":article_id,
@@ -305,18 +367,33 @@ $(document).ready(function(){
 						
 						"from_stage_id":$("#by_step").val(),
 						"to_stage_id":$("#to_step").val(),
-						"to_user_id":$("#send_to").val(),
-						"writing_end_date":complete_date,
+						
+						"to_user_id":send_to,
+						"to_user_email":send_to_email,
+						"to_user_name":send_to_name,
+						
+						"writing_end_date":writing_end_date,
 						"actual_date":actual_date,
 						"status":$("#to_step_status").val(),
 						"remark":$("#remark").val()
 				}
 				
 				var datafile = new FormData();
-				$.each(filesForm, function(key, value) {
-					console.log(value);
-					datafile.append(key, value);
-				});
+				if(filesForm!=undefined) {
+					$.each(filesForm, function(key, value) {
+						console.log(value,'filesform');
+						datafile.append('article_doc-'+key, value);
+					});
+				}
+				
+				//var datafileWorkflow = new FormData();
+				if(filesFormWorkflow!=undefined) {
+					$.each(filesFormWorkflow, function(key, value) {
+						console.log(value,'fileformworkflow');
+						datafile.append('article_stage_doc-'+key, value);
+					});
+				}
+				
 				datafile.append('formdata', JSON.stringify(data_value));
 
 				$.ajax({
@@ -329,16 +406,79 @@ $(document).ready(function(){
 					headers:{Authorization:"Bearer "+tokenID.token},
 					data:datafile,
 					success:function(data){
+						console.log(data)
 						if(data.status==200) {
 							callFlashSlide('Update Success!','success')
 							$("#ModalWriter").modal('hide');
+							//searchFN();
 						} else if (data.status==400) {
 							console.log(data)
-							validatetorInformation(validatetorWriter(data['errors'][0]));
+							validatetorInformation(validatetor(data['errors'][0]));
 						}
 					}
 				})
 			};
+				
+			function GetDataEdit(article_id) {
+					$.ajax({
+						url:restfulURL+"/"+serviceName+"/writer/show",
+						type:"get",
+						dataType:"json",
+						async:false,
+						headers:{Authorization:"Bearer "+tokenID.token},
+						data:{"article_id":article_id},
+						success:function(data){
+							
+							console.log(data['article'][0]['workflow_actual_date'],'datetestww');
+							
+							$("#article").val(data['article'][0]['article_name']);
+ 							$("#article_type").val(data['article'][0]['article_type_id']);
+ 							$("#procedure_name").val(data['article'][0]['procedure_id']);
+ 							$("#form_doctor").val(data['article'][0]['doctor_id']+'-'+data['article'][0]['doctor_name']);
+ 							$("#author").val(data['article'][0]['writer_id']+'-'+data['article'][0]['writer_name']);
+ 							$("#start_date").val(formatDateDMY(data['article'][0]['writing_start_date']));
+ 							$("#plan_date").val(formatDateDMY(data['article'][0]['plan_date']));
+ 							
+ 							//get to_stage_id
+ 							GlobalCurrentStageID = data['article'][0]['to_stage_id'];
+
+ 							$("#writing_end_date").val(formatDateDMY(data['article'][0]['writing_end_date']));
+ 							//$("#send_to").val(data['article'][0]['to_user_id']+'-'+data['article'][0]['to_user_name']);
+ 							$("#send_to").val(data['article'][0]['to_user_id']);
+ 							$("#workflow_actual_date").val(formatDateDMY(data['article'][0]['workflow_actual_date']));
+ 							$("#remark").val(data['article'][0]['remark']);
+
+							list_article_history(data['article_history']);
+						}
+					})
+			}
+			
+			function list_article_history(data) {
+				
+				if(data.length==undefined) {
+					return false;
+				} else {
+					var TRTDHTML = "";
+					$.each(data, function (key,value) {
+							var date_split = value.created_dttm.split(" ");
+							console.log(date_split);
+							
+							TRTDHTML += 
+				                '<tr>'+
+				                '<td><center>' + formatDateDMY(date_split[0]) +" "+ date_split[1] +'</center></td>'+
+				                '<td><center>' + value.from_stage_name +'</center></td>'+
+				                '<td><center>' + value.from_user_name +'</center></td>'+
+				                '<td><center>' + value.to_stage_name +'</center></td>'+
+				                '<td><center>' + value.to_user_name +'</center></td>'+
+				                '<td><center>' + value.remark +'</center></td>'+
+				                '<td><center>' + value.remark +'</center></td>'+
+				                '<td><center><button type="button" id="downloadfileWorkflowHistory-' + value.article_stage_id +'" class="btn btn-primary input-sm getfileWorkflow" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
+				                '</center></td>'+
+				                '</tr>';
+				    });
+					$('#workflow_history').html(TRTDHTML);
+				}
+			} 
 			
 			function uploadFiles(event) {
 				
@@ -386,46 +526,51 @@ $(document).ready(function(){
 			};
 			
 			function downloadfileFN(aricleID) {
-				console.log("downloadna")
-				$.ajax({
-					url:restfulURL+"/"+serviceName+"/writer/download/"+aricleID,
+/*  				console.log(aricleID,'downloadfileFN')
+ 				window.open(restfulURL+"/"+serviceName+"/writer/download_article_doc/"+aricleID,"_self");
+ 				return false; */
+ 				
+ 				$.ajax({
+					url:restfulURL+"/"+serviceName+"/writer/download_article_doc/"+aricleID,
 					type:'get',
 					cache: false,
 					dataType: 'json',
 					headers:{Authorization:"Bearer "+tokenID.token},
-					success: function(data, textStatus, jqXHR)
-					{
-						console.log(data);
+					success: function(data){
+						if(data['status']==400){
+							callFlashSlide("No file Data!",'errors');
+						}
 					},
 					error: function(jqXHR, textStatus, errorThrown)
 					{
-						callFlashSlide('Format Error : ' + textStatus);
+						window.open(restfulURL+"/"+serviceName+"/writer/download_article_doc/"+aricleID,"_self");
+		 				return false;
 					}
 				});
-				return false;
 			}
 			
 			function downloadfileWorkflowFN(stageid) {
-				console.log("downloadnaworkflow")
-				$.ajax({
+ 				$.ajax({
 					url:restfulURL+"/"+serviceName+"/writer/download_article_stage_doc/"+stageid,
 					type:'get',
 					cache: false,
 					dataType: 'json',
 					headers:{Authorization:"Bearer "+tokenID.token},
-					success: function(data, textStatus, jqXHR)
-					{
-						console.log(data);
+					success: function(data){
+						if(data['status']==400){
+							callFlashSlide("No file Data!",'errors');
+						}
 					},
 					error: function(jqXHR, textStatus, errorThrown)
 					{
-						callFlashSlide('Format Error : ' + textStatus);
+						window.open(restfulURL+"/"+serviceName+"/writer/download_article_stage_doc/"+stageid,"_self");
+		 				return false;
 					}
 				});
-				return false;
 			}
 			
-			function list_data_template(data) {
+			function list_data_template_pagination(data) {
+				console.log('list_data_template_pagination');
 				var TRTDHTML = "";
 				var TRTDClass = "style=\"vertical-align: middle;\"";
 				
@@ -442,25 +587,133 @@ $(document).ready(function(){
 			                '<td "'+TRTDClass+'">' + formatDateDMY(displayRecords[i].plan_date) +'</td>'+
 			                '<td "'+TRTDClass+'">' + displayRecords[i].article_type_name +'</td>'+
 			                '<td "'+TRTDClass+'">' + displayRecords[i].status +'</td>'+
-			                '<td "'+TRTDClass+'"><button type="button" id="downloadfile-' + displayRecords[i].article_ID +'" class="btn btn-primary input-sm getfile" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
-			                '&nbsp;<button type="button" id="uploadfile-' + displayRecords[i].article_ID +'" class="btn btn-success input-sm getfile" data-target="#ModalImport" data-toggle="modal" title="อัพโหลด" data-placement="top"><i class="fa fa-upload"></i></button>'+
-			                '&nbsp;<button type="button" id="edit-' + displayRecords[i].article_ID +'" class="btn btn-warning input-sm getfile" data-target="#ModalWriter" data-toggle="modal" title="แก้ไข" data-placement="top">แก้ไข</button></td>'+
+			                '<td "'+TRTDClass+'"><button type="button" id="downloadfile-' + displayRecords[i].article_id +'" class="btn btn-primary input-sm getfile" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
+			                '&nbsp;<button type="button" id="uploadfile-' + displayRecords[i].article_id +'" class="btn btn-success input-sm getfile" data-target="#ModalImport" data-toggle="modal" title="อัพโหลด" data-placement="top"><i class="fa fa-upload"></i></button>'+
+			                '&nbsp;<button type="button" id="edit-' + displayRecords[i].article_id +'" class="btn btn-warning input-sm getfile" data-target="#ModalWriter" data-toggle="modal" title="แก้ไข" data-placement="top">แก้ไข</button></td>'+
 			                '</tr>';
 			    //});
 				}
 				$('#result_search_writer').html(TRTDHTML);
 			}
+			
+			function list_data_template(data) {
+				//console.log(data);
+				var TRTDHTML = "";
+				var TRTDClass = "style=\"vertical-align: middle;\"";
+
+				$.each(data, function (key,value) {
+						TRTDHTML +=
+			                '<tr>'+
+			                '<td "'+TRTDClass+'">' + value.article_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.writer +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.procedure_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.doctor_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + formatDateDMY(value.writing_start_date) +'</td>'+
+			                '<td "'+TRTDClass+'">' + formatDateDMY(value.writing_end_date) +'</td>'+
+			                '<td "'+TRTDClass+'">' + formatDateDMY(value.plan_date) +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.article_type_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.status +'</td>'+
+			                '<td "'+TRTDClass+'"><button type="button" id="downloadfile-' + value.article_id +'" class="btn btn-primary input-sm getfile" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
+			                '&nbsp;<button type="button" id="uploadfile-' + value.article_id +'" class="btn btn-success input-sm getfile" data-target="#ModalImport" data-toggle="modal" title="อัพโหลด" data-placement="top"><i class="fa fa-upload"></i></button>'+
+			                '&nbsp;<button type="button" id="edit-' + value.article_id +'" class="btn btn-warning input-sm getfile" data-target="#ModalWriter" data-toggle="modal" title="แก้ไข" data-placement="top">แก้ไข</button></td>'+
+			                '</tr>';
+			    });
+
+				$('#result_search_writer').html(TRTDHTML);
+			}
+			
+			function setDataAddAndEdit() {
+				$("#information_errors").hide();
+				
+				$("#article_type").html(generateDropDownList(
+						restfulURL+"/"+serviceName+"/writer/list_article_type",
+						"GET"
+				));
+				
+				$("#procedure_name").html(generateDropDownList(
+						restfulURL+"/"+serviceName+"/doctor_profile/list_medical_procedure",
+						"GET"
+				));
+				
+				DropDownAlertMulti();
+				
+				$('#alert_multi').multiselect({
+				  //allSelectedText: 'No option left ...',
+				  maxHeight: 200,
+				  onChange: function() {
+					  console.log($('#alert_multi').val());
+				  }
+				});
+				
+				$('#alert_multi').multiselect('refresh');
+				
+				DropDownCurrentStep();
+				DropDownToStep();
+				DropDownSendToStage();
+			}
+			
+			function clearDataIsEmpty() {
+				GlobalCurrentStageID = null;
+				$('#file').val("");
+				$(".btnModalClose").click();
+				$(".dropify-clear").click();
+				
+				$(".modal input[type='text'],.modal textarea").val('');
+				$(".modal input[type='radio'],.modal input[type='checkbox']").prop('checked', false);
+				
+				$(".countFileTargetForm").empty();
+				$(".countFileTargetFormWorkflow").empty();
+				
+				$("#workflow_history").empty();
+				
+			}
+			
+			function BTNcheckSubmitForm(role) {
+				console.log(roles,'roles');
+				
+				console.log(role,'role');
+				$.each(roles, function (key,value) {
+					if(value.roleId==role) {
+						$("#btn_modal_submit").attr('disabled',false);
+						$("#btn_modal_submit").click(function() {
+							if(InsertUpdateForCheck=="insert") {
+								InsertWriter();
+							} else {
+								console.log("1111")
+								UpdateWriter();
+							}
+						});
+						return false;
+					} else {
+						$("#btn_modal_submit").attr('disabled',true);
+					}
+		    	});
+				
+// 				if(userId==userid) {
+// 					$("#btn_modal_submit").attr('disabled',false);
+// 					$("#btn_modal_submit").click(function() {
+// 						if(InsertUpdateForCheck=="insert") {
+// 							InsertWriter();
+// 						} else {
+// 							console.log("1111")
+// 							UpdateWriter();
+// 						}
+// 					});
+// 				} else {
+// 					$("#btn_modal_submit").attr('disabled',true);
+// 				}
+			}
 				
 			//Autocomeplete
-			$("#search_article").autocomplete({
+			$("#search_writer").autocomplete({
 					source: function (request, response) {
 			        	$.ajax({
-							 url:restfulURL+"/"+serviceName+"/writer/list_article",
+							 url:restfulURL+"/"+serviceName+"/writer/list_writer",
 							 type:"get",
 							 dataType:"json",
 							 headers:{Authorization:"Bearer "+tokenID.token},
 							 //data:{"emp_name":request.term},
-							 data:{"article_name":request.term},
+							 data:{"writer":request.term},
 							 //async:false,
 			                 error: function (xhr, textStatus, errorThrown) {
 			                        console.log('Error: ' + xhr.responseText);
@@ -468,8 +721,8 @@ $(document).ready(function(){
 							 success:function(data){
 									response($.map(data, function (item) {
 			                            return {
-			                                label: item.article_ID+"-"+item.article_name,
-			                                value: item.article_ID+"-"+item.article_name,
+			                                label: item.writer+"-"+item.screenName,
+			                                value: item.writer+"-"+item.screenName,
 			                            };
 			                        }));
 							},
@@ -484,7 +737,7 @@ $(document).ready(function(){
 			$("#search_doctor").autocomplete({
 					source: function (request, response) {
 			        	$.ajax({
-							 url:restfulURL+"/"+serviceName+"/writer/list_doctor",
+							 url:restfulURL+"/"+serviceName+"/writer/list_doctor_article",
 							 type:"get",
 							 dataType:"json",
 							 headers:{Authorization:"Bearer "+tokenID.token},
@@ -539,37 +792,43 @@ $(document).ready(function(){
 			        }
 			});
 			
+// 			$("#send_to").autocomplete({
+// 				source: function (request, response) {
+// 		        	$.ajax({
+// 						 url:restfulURL+"/"+serviceName+"/writer/send_to",
+// 						 type:"get",
+// 						 dataType:"json",
+// 						 headers:{Authorization:"Bearer "+tokenID.token},
+// 						 //data:{"emp_name":request.term},
+// 						 data:{"screenName":request.term},
+// 						 //async:false,
+// 		                 error: function (xhr, textStatus, errorThrown) {
+// 		                        console.log('Error: ' + xhr.responseText);
+// 		                    },
+// 						 success:function(data){
+// 								response($.map(data, function (item) {
+// 		                            return {
+// 		                                label: item.userId+"-"+item.screenName,
+// 		                                value: item.userId+"-"+item.screenName,
+// 		                            };
+// 		                        }));
+// 						},
+// 						beforeSend:function(){
+// 							$("body").mLoading('hide');	
+// 						}
+						
+// 					});
+// 		        }
+// 			});
+			
 			$("#search_procedure").html(generateDropDownList(
 					restfulURL+"/"+serviceName+"/writer/list_medical_procedure",
 					"GET"
 			));
 			
-			$("#procedure_name").html(generateDropDownList(
-					restfulURL+"/"+serviceName+"/doctor_profile/list_medical_procedure",
-					"GET"
-			));
-			
-			$("#article_type").html(generateDropDownList(
-					restfulURL+"/"+serviceName+"/writer/list_article_type",
-					"GET"
-			));
-			
-			$("#alert_multi").html(generateDropDownList(
-					restfulURL+"/"+serviceName+"/writer/list_article_type",
-					"GET"
-			));
-				
-			$('#alert_multi').multiselect({
-			  allSelectedText: 'No option left ...',
-			  maxHeight: 200,
-			  onChange: function() {
-				  console.log($('#alert_multi').val());
-			  }
+			$("#to_step").change(function(){
+				DropDownSendToStage();
 			});
-				
-//			$("#search_start_date,#search_end_date,#start_date,#plan_date,#complete_date,#deadline_date").datepicker({
-//				dateFormat: 'dd/mm/yy'
-//			});
 			
 			$('.datepicker').datepicker({
 				format: 'dd/mm/yyyy',
@@ -586,32 +845,22 @@ $(document).ready(function(){
 					$("#search_end_date").focus();
 					callFlashSlide('โปรดระบุถึงวันที่!','warning')
 				} else {
-					getData();
+					searchFN();
 				}
 			});
 				
 			$("#btn_add").click(function(){
+				clearDataIsEmpty();
+				
 				$("#author").val(userId+'-'+screenName);
-				$("#information_errors").hide();
 				InsertUpdateForCheck = "insert";
-			});
 				
-			$("#btn_result_edit").click(function () {
-				$("#information_errors").hide();
-				InsertUpdateForCheck = "update";
-				GetDataEdit();
-			});
-				
-			$("#btn_modal_submit").click(function() {
-				if(InsertUpdateForCheck=="insert") {
-					InsertWriter();
-				} else {
-					UpdateWriter();
-				}
+				setDataAddAndEdit();
 			});
 				
 			$("#result_search_writer").on("click",'.getfile',function() {
 				var ufile = $(this).attr('id').split("-");
+				//console.log(ufile);
 				//var ufile = $(this).attr('id');
 				GlobalWriterID = null;
 				GlobalStageID = null;
@@ -622,12 +871,17 @@ $(document).ready(function(){
 				if(ufile[0]=='downloadfile') {
 					downloadfileFN(GlobalWriterID);
 				} else if(ufile[0]=='edit') {
+					clearDataIsEmpty();
+					
+					InsertUpdateForCheck = "update";
 					GetDataEdit(GlobalWriterID);
+					setDataAddAndEdit();
 				}
-				
-				if(ufile[0]=='downloadfileWorkflowHistory') {
-					GlobalStageID
-				}
+			});
+			
+			$("#countPaginationBottom").change(function() {
+				perPagePaganation = $(this).val();
+				searchFN();
 			});
 			
 			$("#workflow_history").on("click",'.getfileWorkflow',function() {

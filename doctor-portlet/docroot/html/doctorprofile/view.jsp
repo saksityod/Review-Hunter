@@ -214,7 +214,7 @@ plid = layout.getPlid();
 							<div class="controls">
 								<select class="validation" id="from_medical_procedure" name="from_medical_procedure " multiple="multiple"></select> 
 								<span style="margin-left:20px">
-									<input type="checkbox" id="from_active" name="from_active" />
+									<input type="checkbox" id="from_active" name="from_active"/>
 									Active
 								</span>
 							</div>
@@ -237,7 +237,7 @@ plid = layout.getPlid();
 													<td><input type="text" class=" edu-inst validation"  /></td>
 													<td><input type="text" class=" edu-level validation"  /></td>
 													<td><input type="text" class=" edu-degree validation" /></td>
-													<td><input type="checkbox" class="edu-is-use"  /></td>
+													<td><input type="checkbox" class="edu-is-use" /></td>
 													<td><a class="btn btn-danger del_tr" ><i class="fa fa-times-circle"></i></a></td>
 												</tr>' 
 										>เพิ่ม</button>
@@ -249,7 +249,7 @@ plid = layout.getPlid();
 							<table class="table table-striped edu-table">
 								<thead>
 									<tr>
-										<th style='width: 20px; text-align:center;'></th>
+										<th style='width: 20px; text-align:center;'><strong><span class="clickSelector">เลือก</span></strong></th>
 										<th style='width: auto;'><strong>สถาบันการศึกษา</strong></th>
 										<th style='width: auto'><strong>ระดับการศึกษา</strong></th>
 										<th style='width: auto'><strong>วุฒิการศึกษา</strong></th>
@@ -283,7 +283,7 @@ plid = layout.getPlid();
 							<table class="table table-striped work-table">
 							<thead>
 								<tr>
-									<th style='width: 20px; text-align:center;'></th>
+									<th style='width: 20px; text-align:center;'><strong><span class="clickSelector">เลือก</span></strong></th>
 									<th style='max-width: 60px; text-align:center;'><strong>เริ่มปี</strong></th>
 									<th style='max-width: 60px; text-align:center;'><strong>ถึงปี</strong></th>
 									<th style='width: auto'><strong>คลินิก/บริษัท</strong></th>
@@ -359,6 +359,3 @@ plid = layout.getPlid();
 
 <input type="hidden" name="id" id="id" value="">
 <input type="hidden" name="action" id="action" value="add">
-
-<!-- Mainly scripts -->
-<!-- <script type="text/javascript">var jQuery_1_1_3 = $.noConflict(true);</script> -->

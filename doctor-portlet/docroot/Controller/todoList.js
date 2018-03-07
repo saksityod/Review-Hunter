@@ -78,19 +78,77 @@ $(document).ready(function(){
 				});
 			}
 			
+			var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
+				 
+				 if(pageTotal==0){
+				  pageTotal=1
+				 }
+				 $('.pagination_bottom').off("page");
+				 $('.pagination_bottom').bootpag({
+				     total: pageTotal,//page Total
+				     page: pageIndex,//page index
+				     maxVisible: 5,//จำนวนปุ่ม
+				     leaps: true,
+				     firstLastUse: true,
+				     first: '←',
+				     last: '→',
+				     wrapClass: 'pagination',
+				     activeClass: 'active',
+				     disabledClass: 'disabled',
+				     nextClass: 'next',
+				     prevClass: 'prev',
+				     next: 'next',
+				     prev: 'prev',
+				     lastClass: 'last',
+				     firstClass: 'first'
+				 }).on("page", function(event, num){
+				  var rpp=10;
+				  if($("#rpp").val()==undefined){
+				   rpp=10;
+				  }else{
+				   rpp=$("#rpp").val();
+				  }
+				  
+				  getData(num,rpp);
+				  
+				     $(".pagingNumber").remove();
+				     var htmlPageNumber= "<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='"+num+"'>";
+				     $("body").append(htmlPageNumber);
+				    
+				 }); 
+
+				 $(".countPagination").off("change");
+				 $(".countPagination").on("change",function(){
+
+				  //$("#countPaginationTop").val($(this).val());
+				  $("#countPaginationBottom").val($(this).val());
+				  
+				  getData(1,$(this).val());
+				  
+				  $(".rpp").remove();
+				  $(".pagingNumber").remove();
+				  var htmlRrp="";
+				   htmlRrp+= "<input type='hidden' id='rpp' name='rpp' class='rpp' value='"+$(this).val()+"'>";
+				         htmlRrp+="<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='1'>";
+				     $("body").append(htmlRrp);
+				 });
+			}
+			
 			var list_data_template = function(data) {
+				//console.log(data);
+				
 				var TRTDHTML = "";
 				var TRTDClass = "style=\"vertical-align: middle;\"";
-				$.each(data, function (key,value) {
+				$.each(data.data, function (key,value) {
 						TRTDHTML += 
 			                '<tr>'+
-			                '<td "'+TRTDClass+'">' + value.article_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.writer +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.patient_name +'</td>'+
 			                '<td "'+TRTDClass+'">' + value.procedure_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.status +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.pic_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + formatDateDMY(value.as_actual_date) +'</td>'+
+			                '<td "'+TRTDClass+'">' + formatDateDMY(value.plan_date) +'</td>'+
 			                '<td "'+TRTDClass+'">' + value.doctor_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + formatDateDMY(value.writing_start_date) +'</td>'+
-			                '<td "'+TRTDClass+'">' + formatDateDMY(value.writing_end_date) +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.article_type_name +'</td>'+
 			                '</tr>';
 			    });
 				$('#list_job_status').html(TRTDHTML);
@@ -104,9 +162,9 @@ $(document).ready(function(){
 				getData();
 			});
 			
-			$("#countPaginationBottom").change(function() {
-				getData();
-			});
+// 			$("#countPaginationBottom").change(function() {
+// 				getData();
+// 			});
 			
 			$("#medical_procedure").html(generateDropDownList(
 				restfulURL+"/"+serviceName+"/todo/procedure_list",

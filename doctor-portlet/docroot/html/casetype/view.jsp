@@ -57,8 +57,8 @@
 			<div class="row-fluid">
 				<div id="width-100-persen" class=" m-b-xs">
 					<br>
-					<button class="btn btn-success" data-target=#modalAdd data-toggle='modal' data-type="add">
-						<i class="fa fa-plus"></i> Add Case Type
+					<button class="btn btn-success" data-target=#modalAdd data-toggle='modal' data-type="add" id="btn_add">
+						<i class="fa fa-plus"></i> เพิ่ม
 					</button>
 					<br><br>
 					<!-- start table -->
@@ -66,10 +66,9 @@
 						<table class="table table-striped" id="table_case_type">
 							<thead>
 								<tr>
-									<th style='width: auto;'><strong>Case
-											Type Name</strong></th>
-									<th style='width: 100px; text-align: center;'><strong>is_active</strong></th>
-									<th style='width: 120px; text-align: center;'><strong>Manage</strong></th>
+									<th style='width: auto;'><strong>ชื่อประเภท Case</strong></th>
+									<th style='width: 100px; text-align: center;'><strong>Active</strong></th>
+									<th style='width: 120px; text-align: center;'><strong>จัดการ</strong></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -129,7 +128,7 @@
 						<span aria-hidden="true"><i class='fa fa-times'></i></span><span
 							class="sr-only"></span>
 					</button>
-					<h4 class="modal-title" id="modalTitleRole">New Case Type</h4>
+					<h4 class="modal-title" id="modalTitleRole">ประเภท Case</h4>
 				</div>
 				<div class="modal-body">
 					<br />
@@ -140,7 +139,7 @@
 									<div class="form-group span12"
 										style="margin-left: 5px;">
 										<label for="case_type_name" class="control-label">
-											Name <span class="red">*</span>
+											ชื่อ  <span class="red">*</span>
 										</label>
 										<div class="span6">
 											<input data-toggle="tooltip" title="Name" data-placement="top"
@@ -151,16 +150,21 @@
 										</div>
 									</div>
 									<div class="form-group" style="margin-left: 5px;">
-										<label for="is_active" class="control-label">is Active</label>
+										<label for="is_active" class="control-label">Active</label>
 										<div class="span3">
 											<input data-toggle="tooltip"
 												title="is active" data-placement="top" 
 												id="add_is_active"
 												placeholder="is active"
-												type="checkbox">
+												type="checkbox" checked="checked">
 										</div>
 									</div>
 								</form>
+							</div>
+							
+							<div class="row-fluid">
+								<div class="alert alert-warning information" id="information_errors" style="display: none;height:60px; overflow-y: scroll; position:relative;">
+								</div>
 							</div>
 
 							<div class="modal-footer">
@@ -193,7 +197,7 @@
 						<span aria-hidden="true"><i class='fa fa-times'></i></span><span
 							class="sr-only"></span>
 					</button>
-					<h4 class="modal-title" id="modalTitleRole">Edit Case Type</h4>
+					<h4 class="modal-title" id="modalTitleRole">ประเภท Case</h4>
 				</div>
 				<div class="modal-body">
 					<br />
@@ -204,7 +208,7 @@
 									<div class="form-group span12"
 										style="margin-left: 5px;">
 										<label for="case_type_name" class=" control-label">
-											Name <span class="red">*</span>
+											ชื่อ <span class="red">*</span>
 										</label>
 										<div class="span6">
 											<input data-toggle="tooltip" title="Name" data-placement="top"
@@ -214,7 +218,7 @@
 										</div>
 									</div>
 									<div class="form-group" style="margin-left: 5px;">
-										<label for="is_active" class=" control-label">is Active</label>
+										<label for="is_active" class=" control-label">Active</label>
 										<div class="span6">
 											<input data-toggle="tooltip"
 												title="is active" data-placement="top" 
@@ -224,6 +228,11 @@
 										</div>
 									</div>
 								</form>
+							</div>
+							
+							<div class="row-fluid">
+								<div class="alert alert-warning information" id="information_errors_update" style="display: none;height:60px; overflow-y: scroll; position:relative;">
+								</div>
 							</div>
 
 							<div class="modal-footer">

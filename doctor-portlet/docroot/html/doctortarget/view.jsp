@@ -188,6 +188,140 @@
 
 </div>
 
+<!-- Modal Start View -->
+<div aria-hidden="true" role="dialog" class="modal inmodal  large" tabindex="-1" id="ModalView" class="modal inmodal"
+	style="display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content bounceInRight">
+			<div class="modal-header"
+				style="background-color: rgb(0, 206, 215); border-color: rgb(0, 206, 215);">
+				<button data-dismiss="modal" class="close" type="button"
+					style="padding-top: 5px">
+					<span aria-hidden="true"><i class='fa fa-times'></i></span><span
+						class="sr-only">Close</span>
+				</button>
+				<!-- <i class="fa fa-laptop modal-icon"></i> -->
+				<h4 class="modal-title" id="modalTitleRole">เป้าหมายของแพทย์</h4>
+				<!-- 
+                <small class="font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                 -->
+			</div>
+			<div class="modal-body">
+				<div class="row-fluid">
+					<div class="span12 form-horizontal p-t-xxs">
+						<div class="row-fluid p-t-xxs">
+
+
+							<div class="form-group pull-left span3" style="margin-left: 5px;">
+								<label class="">ชื่อแพทย์ (Auto complate):</label>
+								<input class=" m-b-n ui-autocomplete-input view-disabled" placeholder="ชื่อแพทย์" id="from_doctor_namee"
+									name="from_doctor_namee" type="text"
+									data-doctor_id="" data-doctor_name="">
+							</div>
+							<div id="drop_down_organization" class="form-group pull-left span2" style="margin-left: 5px;">
+								<label class="">ประเภท Case:</label>
+								<input class=" m-b-n ui-autocomplete-input view-disabled" id="case_categoryy"
+									name="case_categoryy" type="text"
+									data-doctor_id="" data-doctor_name="">
+
+							</div>
+							<div id="drop_down_organization" class="form-group pull-left span2" style="margin-left: 5px;">
+								<label class="">หัตถการ:</label>
+								<input class=" m-b-n ui-autocomplete-input view-disabled" id="from_medical_proceduree"
+									name="from_medical_proceduree" type="text"
+									data-doctor_id="" data-doctor_name="">
+
+							</div>
+							<div id="drop_down_organization" class="form-group pull-left span2" style="margin-left: 5px;">
+								<label class="">ปี</label>
+								<select class="input span12 m-b-n view-disabled" id="from_yearr" name="from_yearr">
+								</select>
+							</div>
+
+
+							<!-- <div class="form-group pull-right m-b-none ">
+								<button type="button" name="from_btn_search"
+									id="from_btn_search" class="btn btn-info input-sm "
+									style="margin-left: 5px;">
+									<i class="fa fa-search"></i>&nbsp;ค้นหา
+								</button>
+							</div> -->
+
+						</div>
+						<br /> <strong style="font-size: 15px;">เป้าจำนวน Case</strong>
+						<table class="table table-bordered" style="margin-top: 15px;">
+							<thead>
+								<tr>
+									<th style='width: auto; text-align: center;'><strong>ม.ค.</strong></th>
+									<th style='width: auto; text-align: center;'><strong>ก.พ.</strong></th>
+									<th style='width: auto; text-align: center;'><strong>มี.ค.</strong></th>
+									<th style='width: auto; text-align: center;'><strong>เม.ย.</strong></th>
+									<th style='width: auto; text-align: center;'><strong>พ.ค.</strong></th>
+									<th style='width: auto; text-align: center;'><strong>มิ.ย.</strong></th>
+									<th style='width: auto; text-align: center;'><strong>ก.ค.</strong></th>
+									<th style='width: auto; text-align: center;'><strong>ส.ค.</strong></th>
+									<th style='width: auto; text-align: center;'><strong>ก.ย.</strong></th>
+									<th style='width: auto; text-align: center;'><strong>ต.ค</strong></th>
+									<th style='width: auto; text-align: center;'><strong>พ.ย.</strong></th>
+									<th style='width: auto; text-align: center;'><strong>ธ.ค.</strong></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="tr-table-case">
+
+									<td style="vertical-align: middle;">
+										<input type="number" value="0" class="view-disabled" id="form-case-month11" style="width: 85%;" min="0"/>
+									</td>
+									<td style="vertical-align: middle;">
+										<input type="number" value="0" class="view-disabled" id="form-case-month22" style="width: 85%;" min="0"/>
+									</td>
+									<td style="vertical-align: middle;">
+										<input type="number" value="0" class="view-disabled" id="form-case-month33" style="width: 85%;" min="0"/>
+									</td>
+									<td style="vertical-align: middle;">
+										<input type="number" value="0" class="view-disabled" id="form-case-month44" style="width: 85%;" min="0"/>
+									</td>
+									<td style="vertical-align: middle;">
+										<input type="number" value="0" class="view-disabled" id="form-case-month55" style="width: 85%;" min="0"/>
+									</td>
+									<td style="vertical-align: middle;">
+										<input type="number" value="0" class="view-disabled" id="form-case-month66" style="width: 85%;" min="0"/>
+									</td>
+									<td style="vertical-align: middle;">
+										<input type="number" value="0" class="view-disabled" id="form-case-month77" style="width: 85%;" min="0"/>
+									</td>
+									<td style="vertical-align: middle;">
+										<input type="number" value="0" class="view-disabled" id="form-case-month88" style="width: 85%;" min="0"/>
+									</td>
+									<td style="vertical-align: middle;">
+										<input type="number" value="0" class="view-disabled" id="form-case-month99" style="width: 85%;" min="0"/>
+									</td>
+									<td style="vertical-align: middle;">
+										<input type="number" value="0" class="view-disabled" id="form-case-month100" style="width: 85%;" min="0"/>
+									</td>
+									<td style="vertical-align: middle;">
+										<input type="number" value="0" class="view-disabled" id="form-case-month111" style="width: 85%;" min="0"/>
+									</td>
+									<td style="vertical-align: middle;">
+										<input type="number" value="0" class="view-disabled" id="form-case-month122" style="width: 85%;" min="0"/>
+									</td>
+
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!-- form End -->
+				<!-- content end -->
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- Modal End View -->
+
 
 <!-- Modal Start Edit -->
 <div aria-hidden="true" role="dialog" class="modal inmodal  large" tabindex="-1" id="ModalEdit" class="modal inmodal"
@@ -275,40 +409,40 @@
 								<tr class="tr-table-case">
 
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="validate" id="form-case-month1" style="width: 85%;" />
+										<input type="number" value="0" class="validate" id="form-case-month1" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="validate" id="form-case-month2" style="width: 85%;" />
+										<input type="number" value="0" class="validate" id="form-case-month2" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="validate" id="form-case-month3" style="width: 85%;" />
+										<input type="number" value="0" class="validate" id="form-case-month3" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="validate" id="form-case-month4" style="width: 85%;" />
+										<input type="number" value="0" class="validate" id="form-case-month4" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="validate" id="form-case-month5" style="width: 85%;" />
+										<input type="number" value="0" class="validate" id="form-case-month5" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="validate" id="form-case-month6" style="width: 85%;" />
+										<input type="number" value="0" class="validate" id="form-case-month6" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="validate" id="form-case-month7" style="width: 85%;" />
+										<input type="number" value="0" class="validate" id="form-case-month7" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="validate" id="form-case-month8" style="width: 85%;" />
+										<input type="number" value="0" class="validate" id="form-case-month8" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="validate" id="form-case-month9" style="width: 85%;" />
+										<input type="number" value="0" class="validate" id="form-case-month9" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="validate" id="form-case-month10" style="width: 85%;" />
+										<input type="number" value="0" class="validate" id="form-case-month10" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="validate" id="form-case-month11" style="width: 85%;" />
+										<input type="number" value="0" class="validate" id="form-case-month11" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="validate" id="form-case-month12" style="width: 85%;" />
+										<input type="number" value="0" class="validate" id="form-case-month12" style="width: 85%;" min="0"/>
 									</td>
 
 								</tr>
@@ -324,6 +458,11 @@
 								type="button">ยกเลิก</button>
 
 						</div>
+					</div>
+				</div>
+				
+				<div class="row-fluid">
+					<div class="alert alert-warning information" id="information_errors" style="display: none;height:60px; overflow-y: scroll; position:relative;">
 					</div>
 				</div>
 
@@ -351,6 +490,57 @@
 					<span aria-hidden="true"><i class='fa fa-times'></i></span><span
 						class="sr-only">Close</span>
 				</button>
+				<h5 class="modal-title">ยืนยันการลบข้อมูล</h5>
+			</div>
+			<div class="modal-body">
+				<!-- content start -->
+				<!-- <h2><i class="fa fa fa-pencil-square-o icon-title"></i> ADD NEW GRADE</h2>
+                <hr>
+                 -->
+				<!-- form start -->
+				<div class="form-kpi-mangement">
+					<div class="form-kpi-label" align="center">
+
+						<label>ยืนยันจะลบข้อมูลนี้หรือไม่?</label>
+						<div id="inform_on_confirm" class='information'></div>
+					</div>
+				</div>
+
+				<!-- form start -->
+				<!-- content end -->
+			</div>
+			<div class="modal-footer">
+				<div align="center">
+					<button class="btn btn-success" id="btnConfirmOK" type="button">
+						&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;ตกลง&nbsp;&nbsp;
+					</button>
+					&nbsp;&nbsp;
+					<button data-dismiss="modal" class="btn btn-danger" type="button">
+						<i class="fa fa-times-circle"></i>&nbsp;ยกเลิก
+					</button>
+				</div>
+				<div class="alert alert-warning information" id="information"
+					style="display: none;"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal Confirm End -->
+
+
+<!-- Modal Confirm Start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModalSaveTarget"
+	class="modal inmodal in"
+	style="width: 400px; left: calc; display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content  bounceInRight">
+			<div class="modal-header"
+				style="background-color: rgb(0, 206, 215); border-color: rgb(0, 206, 215);">
+				<button data-dismiss="modal" class="close" type="button"
+					style="padding-top: 3px">
+					<span aria-hidden="true"><i class='fa fa-times'></i></span><span
+						class="sr-only">Close</span>
+				</button>
 				<h5 class="modal-title">Confirm Dialog</h5>
 			</div>
 			<div class="modal-body">
@@ -362,8 +552,8 @@
 				<div class="form-kpi-mangement">
 					<div class="form-kpi-label" align="center">
 
-						<label>Confirm to Delete Data?</label>
-						<div id="inform_on_confirm" class='information'></div>
+						<label>มีเป้าหมายของแพทย์ท่านนี้อยู่แล้ว ต้องการที่จะอัพเดทหรือไม่?</label>
+						<div id="" class='information'></div>
 					</div>
 				</div>
 
@@ -372,7 +562,7 @@
 			</div>
 			<div class="modal-footer">
 				<div align="center">
-					<button class="btn btn-success" id="btnConfirmOK" type="button">
+					<button class="btn btn-success" id="btn_confirm_update" type="button">
 						&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
 					</button>
 					&nbsp;&nbsp;
@@ -380,8 +570,6 @@
 						<i class="fa fa-times-circle"></i>&nbsp;Cancel
 					</button>
 				</div>
-				<div class="alert alert-warning information" id="information"
-					style="display: none;"></div>
 			</div>
 		</div>
 	</div>
@@ -390,7 +578,3 @@
 
 <input type="hidden" name="id" id="id" value="">
 <input type="hidden" name="action" id="action" value="add">
-
-<!-- Mainly scripts -->
-<!-- <script type="text/javascript">var jQuery_1_1_3 = $.noConflict(true);</script> -->
-

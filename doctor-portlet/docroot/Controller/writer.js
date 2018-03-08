@@ -38,24 +38,41 @@ $(document).ready(function(){
 			        }
 			      });
 			}
+			
+			function getDateNow() {
+				var today = new Date();
+				var dd = today.getDate();
+				var mm = today.getMonth()+1; //January is 0!
 
-// 			function validatetor(data) {
-// 				var errorData="";
-// 				$.each(data, function(key, value) {
-// 					errorData += stripJsonToString(value);
-// 				});
-// 				console.log(errorData);
-// 				return errorData;
-// 			}
+				var yyyy = today.getFullYear();
+				yyyy += 543;
+				if(dd<10){
+				    dd='0'+dd;
+				} 
+				if(mm<10){
+				    mm='0'+mm;
+				} 
+				var today = dd+'/'+mm+'/'+yyyy;
+				return today;
+			}
+
+//			function validatetor(data) {
+//				var errorData="";
+//				$.each(data, function(key, value) {
+//					errorData += stripJsonToString(value);
+//				});
+//				console.log(errorData);
+//				return errorData;
+//			}
 			
-// 			var stripJsonToString= function(json){
-// 			    return JSON.stringify(json).replace(',', ', ').replace('[', '').replace(']', '').replace('.', "<br>").replace(/\"/g,'');
-// 			}
+//			var stripJsonToString= function(json){
+//			    return JSON.stringify(json).replace(',', ', ').replace('[', '').replace(']', '').replace('.', "<br>").replace(/\"/g,'');
+//			}
 			
-// 			function validatetorInformation(data) {
-// 				$("#information_errors").show();
-// 				$("#information_errors").html(data);
-// 			}
+//			function validatetorInformation(data) {
+//				$("#information_errors").show();
+//				$("#information_errors").html(data);
+//			}
 			 
 			 var generateDropDownList = function(url,type,request,initValue){
 				 	var html="";
@@ -125,35 +142,36 @@ $(document).ready(function(){
 					data:{"stage_id":current_stage_id},
 					headers:{Authorization:"Bearer "+tokenID.token},
 					success:function(data){
-						//console.log(data,'action_to')
+						console.log(data,'action_to')
 						var htmlOption="";
-						var htmlOption2="";
 						//var htmlOption3="";
 						
 						$.each(data,function(index,indexEntry) {
-							htmlOption+="<option value="+indexEntry['stage_id']+">"+indexEntry['stage_name']+"</option>";
-							htmlOption2=indexEntry['status'];
+							htmlOption+="<option value="+indexEntry['stage_id']+"-"+indexEntry['status']+">"+indexEntry['stage_name']+"</option>";
 							//htmlOption3=indexEntry['to_user'];
 						});
 						
 						//$("#send_to").val(htmlOption3);
-						$("#to_step_status").val(htmlOption2);
 						$("#to_step").html(htmlOption);
 					}
 				});
 			}
 			
 			function DropDownSendToStage() {
+				
+				var stage_id = $("#to_step").val().split("-");
+				stage_id = (stage_id == '') ? '' : stage_id[0];
+				
 				$.ajax({
 					url:restfulURL+"/"+serviceName+"/writer/send_to_stage",
 					type:"get",
 					dataType:"json",
 					async:false,
-					data:{"stage_id":$("#to_step").val()},
+					data:{"stage_id":stage_id},
 					headers:{Authorization:"Bearer "+tokenID.token},
 					success:function(data){
 						
-						//console.log(data,'DropDownSendToStage');
+						console.log(data,'DropDownSendToStage');
 						var htmlOption="";
 						
 						$.each(data,function(index,indexEntry) {
@@ -265,8 +283,14 @@ $(document).ready(function(){
 						send_to_name = (send_to_name == '') ? '' : send_to_name[2];
 					}
 					
+					var to_stage_id = $("#to_step").val().split("-");
+					to_stage_id = (to_stage_id == '') ? '' : to_stage_id[0];
+					
+					var to_stage_status = $("#to_step").val().split("-");
+					to_stage_status = (to_stage_status == '') ? '' : to_stage_status[1];
+					
 					var data_value = {
-							"article_name":$("#article").val(),
+							"article_name":$("#article_name").val(),
 							"article_type_id":$("#article_type").val(),
 							"procedure_id":$("#procedure_name").val(),
 							"doctor_id":doctor_id,
@@ -278,7 +302,7 @@ $(document).ready(function(){
 							"alert":user_id,
 							
 							"from_stage_id":$("#by_step").val(),
-							"to_stage_id":$("#to_step").val(),
+							"to_stage_id":to_stage_id,
 							
 							"to_user_id":send_to,
 							"to_user_email":send_to_email,
@@ -286,7 +310,7 @@ $(document).ready(function(){
 							
 							"writing_end_date":writing_end_date,
 							"actual_date":actual_date,
-							"status":$("#to_step_status").val(),
+							"status":to_stage_status,
 							"remark":$("#remark").val()
 					}
 					
@@ -336,7 +360,7 @@ $(document).ready(function(){
 			function UpdateWriter() {
 				//console.log(GlobalWriterID,'GlobalWriterID');
 				var article_id = GlobalWriterID;
-				var article_name = $("#article").val().split("-");
+				var article_name = $("#article_name").val().split("-");
 				article_name = (article_name == '') ? '' : article_name[0];
 				
 				var doctor_id = $("#form_doctor").val().split("-");
@@ -372,9 +396,15 @@ $(document).ready(function(){
 					send_to_name = (send_to_name == '') ? '' : send_to_name[2];
 				}
 				
+				var to_stage_id = $("#to_step").val().split("-");
+				to_stage_id = (to_stage_id == '') ? '' : to_stage_id[0];
+
+				var to_stage_status = $("#to_step").val().split("-");
+				to_stage_status = (to_stage_status == '') ? '' : to_stage_status[1];
+				
 				var data_value = {
 						"article_id":article_id,
-						"article_name":$("#article").val(),
+						"article_name":$("#article_name").val(),
 						"article_type_id":$("#article_type").val(),
 						"procedure_id":$("#procedure_name").val(),
 						"doctor_id":doctor_id,
@@ -386,7 +416,7 @@ $(document).ready(function(){
 						"alert":user_id,
 						
 						"from_stage_id":$("#by_step").val(),
-						"to_stage_id":$("#to_step").val(),
+						"to_stage_id":to_stage_id,
 						
 						"to_user_id":send_to,
 						"to_user_email":send_to_email,
@@ -394,7 +424,7 @@ $(document).ready(function(){
 						
 						"writing_end_date":writing_end_date,
 						"actual_date":actual_date,
-						"status":$("#to_step_status").val(),
+						"status":to_stage_status,
 						"remark":$("#remark").val()
 				}
 				
@@ -453,22 +483,22 @@ $(document).ready(function(){
 							
 							//console.log(data['article'][0]['workflow_actual_date'],'datetestww');
 							
-							$("#article").val(data['article'][0]['article_name']);
- 							$("#article_type").val(data['article'][0]['article_type_id']);
- 							$("#procedure_name").val(data['article'][0]['procedure_id']);
- 							$("#form_doctor").val(data['article'][0]['doctor_id']+'-'+data['article'][0]['doctor_name']);
- 							$("#author").val(data['article'][0]['writer_id']+'-'+data['article'][0]['writer_name']);
- 							$("#start_date").val(formatDateDMY(data['article'][0]['writing_start_date']));
- 							$("#plan_date").val(formatDateDMY(data['article'][0]['plan_date']));
- 							
- 							//get to_stage_id
- 							GlobalCurrentStageID = data['article'][0]['to_stage_id'];
+							$("#article_name").val(data['article'][0]['article_name']);
+							$("#article_type").val(data['article'][0]['article_type_id']);
+							$("#procedure_name").val(data['article'][0]['procedure_id']);
+							$("#form_doctor").val(data['article'][0]['doctor_id']+'-'+data['article'][0]['doctor_name']);
+							$("#author").val(data['article'][0]['writer_id']+'-'+data['article'][0]['writer_name']);
+							$("#start_date").val(formatDateDMY(data['article'][0]['writing_start_date']));
+							$("#plan_date").val(formatDateDMY(data['article'][0]['plan_date']));
+							
+							//get to_stage_id
+							GlobalCurrentStageID = data['article'][0]['to_stage_id'];
 
- 							$("#writing_end_date").val(formatDateDMY(data['article'][0]['writing_end_date']));
- 							//$("#send_to").val(data['article'][0]['to_user_id']+'-'+data['article'][0]['to_user_name']);
- 							$("#send_to").val(data['article'][0]['to_user_id']);
- 							$("#workflow_actual_date").val(formatDateDMY(data['article'][0]['workflow_actual_date']));
- 							$("#remark").val(data['article'][0]['remark']);
+							$("#writing_end_date").val(formatDateDMY(data['article'][0]['writing_end_date']));
+							//$("#send_to").val(data['article'][0]['to_user_id']+'-'+data['article'][0]['to_user_name']);
+							$("#send_to").val(data['article'][0]['to_user_id']);
+							$("#workflow_actual_date").val(formatDateDMY(data['article'][0]['workflow_actual_date']));
+							$("#remark").val(data['article'][0]['remark']);
 
 							list_article_history(data['article_history']);
 						}
@@ -549,10 +579,10 @@ $(document).ready(function(){
 			
 			function downloadfileFN(aricleID) {
 /*  				console.log(aricleID,'downloadfileFN')
- 				window.open(restfulURL+"/"+serviceName+"/writer/download_article_doc/"+aricleID,"_self");
- 				return false; */
- 				
- 				$.ajax({
+				window.open(restfulURL+"/"+serviceName+"/writer/download_article_doc/"+aricleID,"_self");
+				return false; */
+				
+				$.ajax({
 					url:restfulURL+"/"+serviceName+"/writer/download_article_doc/"+aricleID,
 					type:'get',
 					cache: false,
@@ -572,7 +602,7 @@ $(document).ready(function(){
 			}
 			
 			function downloadfileWorkflowFN(stageid) {
- 				$.ajax({
+				$.ajax({
 					url:restfulURL+"/"+serviceName+"/writer/download_article_stage_doc/"+stageid,
 					type:'get',
 					cache: false,
@@ -672,6 +702,13 @@ $(document).ready(function(){
 				DropDownCurrentStep();
 				DropDownToStep();
 				DropDownSendToStage();
+				
+				var val_by_step = $("#by_step").val();
+				if(val_by_step>203) {
+					$("#article_name,#article_type,#procedure_name,#form_doctor,#author,#start_date,#plan_date").attr("disabled",true);
+				} else {
+					$("#article_name,#article_type,#procedure_name,#form_doctor,#author,#start_date,#plan_date").attr("disabled",false);
+				}
 			}
 			
 			function clearDataIsEmpty() {
@@ -741,7 +778,7 @@ $(document).ready(function(){
 			$("#search_doctor").autocomplete({
 					source: function (request, response) {
 			        	$.ajax({
-							 url:restfulURL+"/"+serviceName+"/writer/list_doctor_article",
+							 url:restfulURL+"/"+serviceName+"/writer/list_doctor",
 							 type:"get",
 							 dataType:"json",
 							 headers:{Authorization:"Bearer "+tokenID.token},
@@ -797,8 +834,8 @@ $(document).ready(function(){
 			});
 			
 			$("#search_procedure").html(generateDropDownList(
-					restfulURL+"/"+serviceName+"/writer/list_medical_procedure",
-					"GET"
+					restfulURL+"/"+serviceName+"/doctor_profile/list_medical_procedure",
+					"GET",{},'All'
 			));
 			
 			$("#to_step").change(function(){
@@ -831,6 +868,8 @@ $(document).ready(function(){
 				InsertUpdateForCheck = "insert";
 				
 				setDataAddAndEdit();
+
+				$("#writing_end_date").val(getDateNow());	
 			});
 			
 			$("#btn_modal_submit").click(function() {
@@ -840,6 +879,10 @@ $(document).ready(function(){
 				} else {
 					UpdateWriter();
 				}
+			});
+			
+			$("#plan_date").change(function() {
+				$("#actual_date").val($(this).val());
 			});
 				
 			$("#result_search_writer").on("click",'.getfile',function() {

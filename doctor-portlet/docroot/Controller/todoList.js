@@ -154,6 +154,24 @@ $(document).ready(function(){
 				$('#list_job_status').html(TRTDHTML);
 			}
 			
+			var check_user = function() {
+				$.ajax({
+					url:restfulURL+"/"+serviceName+"/todo/check_user",
+					type:"get",
+					dataType:"json",
+					async:false,
+					headers:{Authorization:"Bearer "+tokenID.token},
+					success:function(data) {
+						console.log(data)
+						if(data.status==400) {
+							$("#responsible").val(data.data[0]['userId']+"-"+data.data[0]['pic_name']);
+							$("#responsible").attr("disabled",true);
+						}
+					}
+				});
+			}
+			check_user();
+			
 			$("#result_search_writer").on("click",'.getfile',function() {
 				var ufile = $(this).attr('id').split("-");
 			});

@@ -16,9 +16,6 @@ $(document).ready(function() {
     }).datepicker("setDate", "0");  
 	
 	$('.dropify').dropify();
-	$('#case_stage_notification').multiselect({
-        includeSelectAllOption: false,
-        maxHeight: 200
-    });
+	
 
 });

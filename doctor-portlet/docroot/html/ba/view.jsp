@@ -25,6 +25,7 @@
 %>
 
 <style>
+	select{ width: 96% !important;}
 	.case_list{     border: 1px solid darkgray; }
 	.edit-list{ margin:10px}
 	.row-fluid {	margin-button: 10px;	}
@@ -140,6 +141,8 @@ padding-top: 5px;
 	margin-bottom: 40px;
 }
 
+.stage_upload_img{	 }
+.stage_upload_img.active{filter:opacity(30%);border : 5px solid blue!important}
 </style>
 
 <input type="hidden" id="user_portlet" name="user_portlet"
@@ -203,6 +206,10 @@ padding-top: 5px;
 						<input type="text"  id="search_hn" />
 					</div>
 					<div class="form-group span3">
+						<label for="" class="control-label">VN</label> 
+						<input type="text" id="search_vn" />
+					</div>
+					<div class="form-group span3">
 						<label for="">Case ติดดาว</label> 
 							<select class="form-control" id="search_review" >
 								<option value='0'>ทั้งหมด</option>
@@ -214,16 +221,34 @@ padding-top: 5px;
 					</div>
 					<div class="form-group span3">
 						<label for="">วันหมดสัญญา</label> 
-						<input type="text" class="form-control datepicker">
-						<input type="text" class=" datepicker_ad" id="search_expireDate">
+						<select id="search_expireDate">
+							<option value="">ไม่ระบุ</option>
+							<option value="0">หมดสัญญาแล้ว</option>
+							<option value="1">ยังไม่หมดสัญญา</option>
+						</select>
 					</div>
-						<label for="">&nbsp;</label> 
+				</div>
+				<div class="row-fluid " id="">
+					<div class="form-group span3">
+						<label for="" class="control-label">หัตถการที่ควรทำต่อ</label> 
+						<select id="search_followup" class="procedure ">
+							<option value=""> ---- เลือกหัตถการที่ควรทำต่อ ---- </option>	
+						</select>
+					</div>
+					<div class="form-group span3">
+						<label for="" class="control-label">กลุ่มของ  Case</label> 
+						<select id="search_case_group" class="caseGroup">
+							<option value=""> ---- เลือกกลุ่มCase ---- </option>	
+						</select>
+					</div>
+					<label for="">&nbsp;</label> 
 					<button type="button" class="btn btn-info span3" id="btn_search" style="width: auto;">
 						<i class="fa fa-search"></i> ค้นหา
 					</button>
 				</div>
-				<br />
+				
 			</div>
+				<br />
 		</div>
 		<!-- content end -->
 	</div>
@@ -312,7 +337,7 @@ padding-top: 5px;
 							<div class="span3">
 								<label class=" ">วันเดือนปีเกิด : </label>
 								<input type="text" id="mask_patient_birthDate"  class="datepicker input_control" class=" input_control">
-								<input type="text" id="patient_birthDate" class="datepicker_ad input_control">
+								<input type="hidden" id="patient_birthDate" class="datepicker_ad input_control">
 							</div>
 							<div class="span1">
 								<label class="">อายุ : </label><div class='yearOld'></div>
@@ -640,7 +665,7 @@ padding-top: 5px;
 									<td><select class="case_appointment_type appointment">
 										<option value=""> ---- เลือก ---- </option></select></td>
 									<td><input class="datepicker" type="text">
-										<input class="case_appointment_date datepicker_ad" type="text"></td>
+										<input class="case_appointment_date datepicker_ad" type="hidden"></td>
 									<td><select class="case_appointment_doctor doctor">
 										<option value=""> ---- เลือกหมอ ---- </option></select></td>
 									<td><input class="case_appointment_supervised user" type="text"></td>
@@ -690,9 +715,9 @@ padding-top: 5px;
 								<td><select class="case_contract_procedure procedure">
 									<option value=""> ---- เลือกหัตถการ ---- </option></select></td>
 								<td><input class="datepicker" 	type="text">
-									<input class="case_contract_startDate datepicker_ad" 	type="text"></td>
+									<input class="case_contract_startDate datepicker_ad" 	type="hidden"></td>
 								<td><input class="datepicker" 	type="text">
-									<input class="case_contract_endDate datepicker_ad" type="text"></td>
+									<input class="case_contract_endDate datepicker_ad" type="hidden"></td>
 								<td><input class="case_contract_isPost" type="checkbox"></td>
 								<td><input class="case_contract_isUsage"	type="checkbox"></td>
 								<td><input class="case_contract_isPicture_vdo" type="checkbox"></td>
@@ -751,7 +776,7 @@ padding-top: 5px;
 									<td><select class="case_pr_pr pr">
 										<option value=""> ---- เลือกรายการประชาสัมพันธ์ ---- </option></select></td>
 									<td><input class=" datepicker" type="text">
-										<input class="case_pr_planDate datepicker_ad" type="text"></td>
+										<input class="case_pr_planDate datepicker_ad" type="hidden"></td>
 									<td width="150px">
 										 <label><input class="case_pr_isPicture" type="checkbox"> รูปภาพ</label>
 										 <label><input class="case_pr_isVdo" type="checkbox"> วีดีโอ(selfie)</label>
@@ -759,7 +784,7 @@ padding-top: 5px;
 										 <label><input class="case_pr_isFacebook" type="checkbox"> live Facebook</label>
 									</td>
 									<td><input class=" datepicker" type="text">
-										<input class="case_pr_actualDate datepicker_ad" type="text"></td>
+										<input class="case_pr_actualDate datepicker_ad" type="hidden"></td>
 									<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
 								</tr>'>เพิ่ม</button>
 							<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
@@ -811,11 +836,11 @@ padding-top: 5px;
 										<option value=""> ---- เลือกบทความ ---- </option></select></td>
 									<td><input class="case_article_writer user" type="text"></td>
 									<td><input class=" datepicker" type="text">
-										<input class="case_article_writingStartDate datepicker_ad" type="text"></td>
+										<input class="case_article_writingStartDate datepicker_ad" type="hidden"></td>
 									<td><input class=" datepicker" type="text">
-										<input class="case_article_writingEndDate datepicker_ad" type="text"></td>
+										<input class="case_article_writingEndDate datepicker_ad" type="hidden"></td>
 									<td><input class=" datepicker" type="text">
-										<input class="case_article_planDate datepicker_ad" type="text"></td>
+										<input class="case_article_planDate datepicker_ad" type="hidden"></td>
 									<td><input class="case_article_upload storeFile" multiple type="file"></td>
 									<td width="150px">
 										<button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button>
@@ -861,7 +886,7 @@ padding-top: 5px;
 							</div>
 							<div class="span4">
 								<label class=" ">ส่งถึง: (Auto complete)</label>
-								<input type="text" id="case_stage_toUser" class="user input_control">
+								<select id="case_stage_toUser" class=" input_control"></select>
 							</div>	
 						</div>
 						<div class="row-fluid">
@@ -871,14 +896,13 @@ padding-top: 5px;
 								<div id="case_stage_actualDate" class=""></div>
 							</div>
 							<div class="span4">
-								<label class=" ">อัพโหลดไฟล์:</label>
 								<button class="btn btn-primary" id="btn_case_stage_upload" data-target="#addImage" data-toggle="modal">เลือกรูปภาพ</button>
-								<input id="case_stage_upload storeFile "  class="input_control">
+								<div id="case_stage_upload"></div>
 							</div>
 							<div class="span4">
 								<label class=" ">วันครบกำหนด: </label>
 								<input id="" class="datepicker input_control" type="text">
-								<input id="case_stage_planDate" class="datepicker_ad input_control" type="text">
+								<input id="case_stage_planDate" class="datepicker_ad input_control" type="hidden">
 							</div>	
 						</div>
 						<div class="row-fluid ">
@@ -888,9 +912,7 @@ padding-top: 5px;
 							</div>
 							<div class="span4">
 								<label class=" ">แจ้งเตือน: </label>
-								<select id="case_stage_notification" class="" multiple>
-									<option value='21803'>Administrator</option>
-									<option value='20536'>Test ORD 1</option>
+								<select id="case_stage_notification" class="input_control" multiple>
 								</select>
 							</div>	
 						</div>
@@ -1188,6 +1210,11 @@ $(document).ready(function() {
 				$html_articleType +='<option value="'+this.article_type_id+'">'+this.article_type_name+'</option>';
 			}); $('.article').append( $html_articleType );
 			
+			$html_temp = '';
+			$.each(rs.getUserAlert,function(){
+				$html_temp +='<option data-email="'+this.emailAddress+'" value="'+this.userId+'">'+this.screenName+'</option>';
+			});	$('#case_stage_notification').append( $html_temp );
+			
 			html_temp = '';
 			$.each(rs.usageType,function(k,v){
 				html_temp += "<div class='span5 coordinate_group dump-multiselect'><label>"+v.usage_type_name+"</label><select data-usageType_id='"+v.usage_type_id+"' class='multiple case_coordinate' multiple='multiple'>";
@@ -1199,6 +1226,10 @@ $(document).ready(function() {
 			$('.multiple').multiSelect();
 			//$('.folder_toggle').click(function(){	$(this).parent('li').find('ul').toggle();	});
 			$('.datepicker').keydown(function(e){e.preventDefault();});
+			$('#case_stage_notification').multiselect({
+		        includeSelectAllOption: false,
+		        maxHeight: 200
+		    });
 			getList();
 		});
 		
@@ -1234,75 +1265,51 @@ $(document).ready(function() {
 					$('.input_control').attr('disabled','disabled');
 
 					getStage(rs.stage.stage_id);
-					getAjax($plRoute+'/sectionRole','get','',function(role){
-						console.log(role);
-						$.each(role,function(){
-							
-							if(this.section_id == 'patient' || this.section_id == 'patient_case'){
-								if(this.add_flag == 1 && this.edit_flag == 1) $('#'+this.section_id).find('.input_control').removeAttr('disabled');
-							}else{
-								if(this.add_flag == 1)		$('#'+this.section_id).find('.modal-add,.btn-other').show();
-								if(this.edit_flag == 1)		$('#'+this.section_id).find('.modal-edit').show();
-								if(this.delete_flag == 1)	$('#'+this.section_id).find('.btn-delete').show();
-								if(this.upload_flag == 1)	$('#'+this.section_id).find('.btn-Upload').show();
-								if(this.download_flag == 1)	$('#'+this.section_id).find('.btn-Download').show();
-							}
-						});
-					});
-					
-					/* if(rs.stage_id==1){ 
-						$('#patient,#patient_social_media,#surgery_history,#patient_case,#case_followup,#case_price,#case_social_media').find('.input_control').removeAttr('disabled');
-						$('#patient_social_media,#surgery_history,#case_followup,#case_price,#case_social_media').find('.modal-add,.del-tr').show();
-						$('.remove_bubble').addClass('remove_supervisedBy');
-					}else if(rs.case_stage_id==2 || rs.case_stage_id==4){ 
-					}else if(rs.case_stage_id==5){	
-						$('.case_coordinate').removeAttr('disabled').multiselect("refresh");
-					}else if(rs.case_stage_id==6){
-						$('.remove_bubble').removeClass('remove_supervisedBy');
-					}else if(rs.case_stage_id==7 || rs.case_stage_id==9){
-						$('.remove_bubble').removeClass('remove_supervisedBy');
-						$('#case_appointment').find('.modal-add,.del-tr').show();
-						$('#case_appointment').find('.input_control').removeAttr('disabled');
-					}else if(rs.case_stage_id==8 || rs.case_stage_id==10){
-						$('.remove_bubble').removeClass('remove_supervisedBy');
-					}else if(rs.case_stage_id==11){
-						$('#case_contract,#case_pr').find('.modal-add,.del-tr').show()
-						$('#case_contract,#case_pr').find('.input_control').removeAttr('disabled');
-					}else if(rs.case_stage_id==15){
-						$('#case_article').find('.modal-add,.del-tr').show()
-						$('#case_article').find('.input_control').removeAttr('disabled');
-					}else if(rs.case_stage_id==17){
-						$('#case_social_media').find('.modal-add,.del-tr').show()
-						$('#case_social_media').find('.input_control').removeAttr('disabled');
-					} */
+					checkRoleAuthurize(rs.stage.stage_id);
 				}
 			});
 		});
+		
+		function checkRoleAuthurize(stage_id){
+			getAjax($plRoute+'/sectionRole','get',{stage_id:stage_id},function(rs){
+				console.log(rs);
+				$.each(rs.section,function(){
+					if(this.section_id == 'patient' || this.section_id == 'patient_case'){
+						if(this.add_flag == 1 && this.edit_flag == 1) $('#'+this.section_id).find('.input_control').removeAttr('disabled');
+					}else{
+						if(this.add_flag == 1)		$('#'+this.section_id).find('.modal-add,.btn-other').show();
+						if(this.edit_flag == 1)		$('#'+this.section_id).find('.modal-edit').show();
+						if(this.delete_flag == 1)	$('#'+this.section_id).find('.btn-delete').show();
+						if(this.upload_flag == 1)	$('#'+this.section_id).find('.btn-Upload').show();
+						if(this.download_flag == 1)	$('#'+this.section_id).find('.btn-Download').show();
+					}
+				});
+				if($.inArray(rs.stageRole.role_id, rs.userRole)!= -1){
+					$('#case_stage').find('.input_control').removeAttr('disabled');
+				}else{
+					$('#case_stage').find('.input_control').attr('disabled',true);
+				}
+				$('#case_stage_notification').multiselect("refresh");
+			});
+			
+		}
 		
 		$('#btnModalSubmit').click(function(){
 			var FormAllData = new FormData();
 			$case_id = $('#case_stage').data('id');
 			getData_patient();
 			getData_patientCase();
+			getData_patientSocial();
+			getData_patientSurgery();
+			getData_caseFollowup();
+			getData_casePrice();
+			getData_caseSocial();
+			getData_caseCoordinate();
+			getData_caseAppointment();
+			getData_caseContact();
+			getData_casePr();
+			getData_caseArticle();
 			getData_caseStage(); 
-			if($case_id == 1){
-				getData_patientSocial();
-				getData_patientSurgery();
-				getData_caseFollowup();
-				getData_casePrice();
-				getData_caseSocial();
-			}else if($case_id == 5){
-				getData_caseCoordinate();
-			}else if($case_id == 7 || $case_id == 9){
-				getData_caseAppointment();
-			}else if($case_id == 11){
-				getData_caseContact();
-				getData_casePr();
-			}else if($case_id == 15){
-				getData_caseArticle();
-			}else if($case_id == 17){
-				getData_caseSocial();
-			}
 
 			console.log($data);
 			$('.storeFile').each(function() {
@@ -1341,6 +1348,54 @@ $(document).ready(function() {
 			    }
 			}); 
 		});
+		
+		$('#case_stage_toStage').change(function(){
+			var html_send_to = '';
+			if($(this).val()!=''){
+				getAjax($plRoute+'/sendTo','get',{stage_id:$(this).val()},function(rs){
+					console.log(rs,'action #case_stage_toStage');
+					if(rs.length > 0){
+						$.each(rs,function(){
+							html_send_to +='<option data-email="'+this.emailAddress+'" value="'+this.userId+'">'+this.screenName+'</option>';
+						}); 
+					}
+				})
+			}
+			$('#case_stage_toUser').html(html_send_to);
+		});
+		
+		$('body').on('click','.stage_upload_img',function(){
+			if($(this).hasClass('active')){
+				$(this).removeClass('active');
+			}else{
+				$(this).addClass('active');
+			}
+		});
+		$('#btn_case_stage_upload').click(function(){
+			$('#addImage .wrap,#case_stage_upload').html('');
+			getAjax($plRoute+'/getCaseFile','get',{case_id:$('#patient_case').data('id')},function(rs){
+				console.log(rs);
+				var html = '<ul class="thumbnails">';
+				if(rs){
+					$.each(rs,function(){
+						var fileType = this.file_name.split('.')[this.file_name.split('.').length-1];
+						if(fileType == 'png' || fileType == 'jpg' || fileType == 'jpeg'){
+			  				html +='<li class="span6">'
+							    +'<a href="javascript:void(0);" data-imagepath="'+this.image_path+'" data-name="'+this.file_name+'" class="stage_upload_img thumbnail">'
+							      +'<img src="'+$host+this.image_path+'" alt=""></a></li>';
+						}
+					});
+				}	$('#addImage .wrap').html(html+'</ul>');
+			});
+		});
+		$('#btnSubmitAddImage').on('click',function(){
+			$('#addImage .stage_upload_img.active').each(function(i,v){
+				//console.log(this.data('imagePath'));
+				$('#case_stage_upload').append('<div class="case_stage_upload_img" data-imagepath ="'+$(this).data('imagepath')+'">'+$(this).data('name')+'</div>');
+			})
+			$('#addImage .wrap').html('');
+			$('#addImage').modal('hide');
+		});
 
 		$('body').on('click','.type-png,.type-jpg,.type-jpeg',function(){
 			$('#review_image img').attr('src',$host+$(this).data('path'));
@@ -1366,13 +1421,14 @@ $(document).ready(function() {
 		
 		function getCurrentStage(stage_id,target){
 			getAjax($plRoute+'/getStage','get',{stage_id:stage_id},function(rs){
+				console.log(rs,'current Stage');
 				$(target).html('<option selected data-status="'+rs.status+'" value="'+rs.from_stage_id+'">'+rs.status+'</option>');
 			});
 		}
 		
 		function getStage(current_stage){
 			getAjax($plRoute+'/action_to','get',{stage_id:current_stage},function(rs){
-				console.log(rs);
+				console.log(rs,'getStage');
 				var html_stage_to = '<option data-status="" value="">บันทึกฉบับร่าง</option>';
 				if(rs.length > 0){
 					$.each(rs,function(){
@@ -1522,7 +1578,7 @@ $(document).ready(function() {
 					+'<td><select class="case_appointment_type appointment input_control">'
 						+'<option value=""> ---- เลือกสื่อ ---- </option>'+$html_appointment+'</select></td> '
 					+'<td><input class="datepicker input_control" type="text" value="'+paresDateToDate(this.appointment_date)+'">'
-						+'<input class="case_appointment_date datepicker_ad input_control" type="text"></td>'
+						+'<input class="case_appointment_date datepicker_ad input_control" type="hidden"></td>'
 					+'<td><select class="case_appointment_doctor doctor input_control">'
 						+'<option value=""> ---- เลือกหมอ ---- </option>'+$html_doctor+'</select></td>'
 					+'<td><input class="case_appointment_supervised user input_control" data-user="'+this.supervised_by.userId+'" type="text" value="'+this.supervised_by.firstName+'  '+this.supervised_by.lastName+'"></td>'
@@ -1553,9 +1609,9 @@ $(document).ready(function() {
 					+'<td><select class="case_contract_procedure procedure input_control">'
 						+'<option value=""> ---- เลือกหัตถการ ---- </option>'+$html_procedure+'</select></td>'
 					+'<td><input class="datepicker input_control" type="text" value="'+paresDateToDate(this.contract_start_date)+'">'
-						+'<input class="case_contract_startDate datepicker_ad input_control" 	type="text"></td>'
+						+'<input class="case_contract_startDate datepicker_ad input_control" 	type="hidden"></td>'
 					+'<td><input class="datepicker input_control" type="text" value="'+paresDateToDate(this.contract_end_date)+'">'
-						+'<input class="case_contract_endDate datepicker_ad input_control" type="text"></td>'
+						+'<input class="case_contract_endDate datepicker_ad input_control" type="hidden"></td>'
 					+'<td><input class="case_contract_isPost input_control" 		type="checkbox"></td>'
 					+'<td><input class="case_contract_isUsage input_control"		type="checkbox"></td>'
 					+'<td><input class="case_contract_isPicture_vdo input_control" 	type="checkbox"></td>'
@@ -1598,13 +1654,13 @@ $(document).ready(function() {
 							+'<td><select class="case_pr_pr pr input_control">'
 								+'<option value=""> ---- เลือกรายการประชาสัมพันธ์ ---- </option>'+$html_pr+'</select></td>'
 							+'<td><input class="datepicker input_control" type="text" value="'+paresDateToDate(this.pr_plan_date)+'">'
-								+'<input class="case_pr_planDate datepicker_ad input_control" type="text"></td>'
+								+'<input class="case_pr_planDate datepicker_ad input_control" type="hidden"></td>'
 							+'<td width="150px"><label><input type="checkbox" class="case_pr_isPicture input_control"> รูปภาพ</label> 		  ' 
 								+'<label><input type="checkbox" class="case_pr_isVdo input_control"> วีดีโอ(selfie)</label>'
 								+'<label><input type="checkbox" class="case_pr_isInstragram input_control"> live Instragram</label> '   
 								+'<label><input type="checkbox" class="case_pr_isFacebook input_control"> live Facebook</label></td>'
 							+'<td><input class="datepicker input_control" type="text" value="'+paresDateToDate(this.pr_actual_date)+'">'
-								+'<input class="case_pr_actualDate datepicker_ad input_control" type="text"></td>'
+								+'<input class="case_pr_actualDate datepicker_ad input_control" type="hidden"></td>'
 							+'<td><button class="btn btn-danger del_rec btn-delete btn-action" ><i class="fa fa-trash"></i></button></td></tr>';
 				$('#case_pr tbody').append($html);
 				getBasicData($('#case_pr tbody'));
@@ -1625,11 +1681,11 @@ $(document).ready(function() {
 								+'<option value=""> ---- เลือกบทความ ---- </option>'+$html_articleType+'</select></td>'
 							+'<td><input class="case_article_writer user input_control" type="text" data-user="'+this.writer.userId+'" value="'+this.writer.firstName+' '+this.writer.lastName+'"></td>'
 							+'<td><input class=" datepicker input_control" type="text " value="'+paresDateToDate(this.writing_start_date)+'">'
-								+'<input class="case_article_writingStartDate datepicker_ad input_control" type="text"></td>'
+								+'<input class="case_article_writingStartDate datepicker_ad input_control" type="hidden"></td>'
 							+'<td><input class=" datepicker input_control" type="text" value="'+paresDateToDate(this.writing_end_date)+'">'
-								+'<input class="case_article_writingEndDate datepicker_ad input_control" type="text"></td>'
+								+'<input class="case_article_writingEndDate datepicker_ad input_control" type="hidden"></td>'
 							+'<td><input class=" datepicker input_control" type="text" value="'+paresDateToDate(this.plan_date)+'">'
-								+'<input class="case_article_planDate datepicker_ad input_control" type="text"></td>'
+								+'<input class="case_article_planDate datepicker_ad input_control" type="hidden"></td>'
 							+'<td><input class="case_article_upload storeFile input_control" multiple type="file"></td>'
 							+'<td width="150px">'
 								+'<button class="btn btn-danger del_rec btn-delete btn-action" ><i class="fa fa-trash"></i></button>'
@@ -1678,13 +1734,13 @@ $(document).ready(function() {
 		
 		function clearAll(){
 			clearModal();
-			$('#list >li > ul').html('');
+			$('#list >li > ul,#case_stage_toUser,#case_stage_upload').html('');
 			$('.bubble').remove();
 			$('.wrap').removeData('id').find('tbody').html('');
 			$('.btn-action,#information_errors').hide();
 			$('.input_control').attr('disabled','disabled');
 			$('#profileImage,#review_image img').attr('src','');
-			$('#case_stage_notification').multiselect("refresh");
+			$('#case_stage_notification').val('').multiselect("refresh");
 			$('.storeFile').val('');
 		}
 		
@@ -1908,16 +1964,20 @@ $(document).ready(function() {
 				case_id			:$("#patient_case").data("id")?$("#patient_case").data("id"):'',
 				from_stage_id	:$('#case_stage_fromStage').val(),
 				from_user_id	:userId,
-				to_user_id		:$('#case_stage_toUser').data('user'),
+				to_user_id		:$('#case_stage_toUser').val(),
 				to_stage_id		:$('#case_stage_toStage').val()==''?$('#case_stage_fromStage').val():$('#case_stage_toStage').val(),
 				plan_date		:$('#case_stage_actualDate').text(),
 				actual_date		:$('#case_stage_planDate').val(),
 				status			:$('#case_stage_toStage').val()==''?$('#case_stage_fromStage option:selected').text():$("#case_stage_toStage option:selected").data('status'),
 				remark			:$.trim($('#case_stage_remark').val())
 			}
-			$data['case_stage']['alerts'] = {
-					user_id :$('#case_stage_toUser').data('user')
-			}
+			
+			var attach_img = [];
+			$('body .case_stage_upload_img').each(function(){
+				attach_img.push({image_path:$(this).data('imagepath')});
+			});
+			$data['case_stage']['attach_img'] = attach_img;
+			$data['case_stage']['alerts'] = $('#case_stage_notification').val();
 		}	
 		
 		$('body').on('click','.del_rec',function(){
@@ -2013,14 +2073,17 @@ $(document).ready(function() {
 				headers:{Authorization:"Bearer "+tokenID.token},
 				success: function(rs){
 					console.log(rs);
+					if(rs['status']==200){
+						window.open($host+rs.file_path,"_self");
+					}
 					if(rs['status']==400){
 						callFlashSlide("No file Data!",'errors');
 					}
 				},
 				error: function(jqXHR, textStatus, errorThrown)
 				{
-					window.open($plRoute+'/downloadCaseStageDoc/'+case_stage_id,"_self");
-	 				return false;
+					console.log(textStatus);
+					callFlashSlide("No file Data!",'errors');
 				}
 			});
 		});
@@ -2337,7 +2400,11 @@ $(document).ready(function() {
 						social		:$('#search_social').val(),
 						hn			:$.trim($('#search_hn').val()),
 						review		:$('#search_review').val(),
-						expDate		:$('#search_expireDate').val()
+						expDate		:$('#search_expireDate').val(),
+						followup	:$('#search_followup').val(),
+						case_group	:$('#search_case_group').val(),
+						vn			:$('#search_vn').val(),
+						
 					}
 			getAjax($plRoute+"/getCaseList",'get',$data,function(rs){
 				console.log(rs);

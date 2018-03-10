@@ -410,6 +410,23 @@ var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
 	    $("body").append(htmlRrp);
 	});
 }
+
+function getDateNow() {
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+
+	var yyyy = today.getFullYear();
+	yyyy += 543;
+	if(dd<10){
+	    dd='0'+dd;
+	} 
+	if(mm<10){
+	    mm='0'+mm;
+	} 
+	var today = dd+'/'+mm+'/'+yyyy;
+	return today;
+}
 </script>
 
 <script>
@@ -464,6 +481,23 @@ $(document).ready(function() {
 					$("#time").attr('readonly',true);
 				}
 			}
+			
+			var generateStartEndDate = function(time) {
+				$.ajax ({
+					url:restfulURL+"/"+serviceName+"/report/list_selector_time",
+					type:"get",
+					dataType:"json",
+			 		data:{"time":time},
+			 		headers:{Authorization:"Bearer "+tokenID.token},
+			 		async:false,
+			 		success:function(data){
+			 			if(data.status==200) {
+			 				$("#start_date").val(formatDateDMY(data.data));
+			 				$("#end_date").val(getDateNow());
+			 			}
+			 		}
+			 	});
+			}
 			 
 			$('.datepicker').datepicker({
 				format: 'dd/mm/yyyy',
@@ -479,19 +513,21 @@ $(document).ready(function() {
 	 		
 	 		$("#btn_search").click(function() {
 	 			var parameter = {
-	 				time: $("#time").val(),
-	 				case_type: $("#case_type").val(),
-	 				start_date: $("#start_date").val(),
-	 				end_date: $("#end_date").val()
-	 			}
+		 				param_case_type: $("#case_type").val(),
+		 				param_start_date: formatDateYMD($("#start_date").val()),
+		 				param_end_date: formatDateYMD($("#end_date").val())
+		 		}
 	 			
-	 			var data = JSON.stringify(parameter);
-	 			var url_report_jasper = "www.google.com";
+	 			var url_report_jasper = restfulURL+"/"+serviceName+"/report/api_report?template_name=report-5&template_format=pdf&used_connection=1&inline=1&data="+JSON.stringify(parameter);
 	 			
 	 			$('#iFrame_report').attr('src',url_report_jasper);
 	 		});
 	 		
-	 		$("#time").click(function(){swapFN(this.id)});
+	 		$("#time").click(function() {
+	 			swapFN(this.id);
+	 			generateStartEndDate($(this).val());
+	 		});
+	 		
 	 		$("#start_date").click(function(){swapFN(this.id)});
 	 		$("#end_date").click(function(){swapFN(this.id)});
 	 		

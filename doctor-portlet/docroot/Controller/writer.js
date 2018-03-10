@@ -39,22 +39,22 @@ $(document).ready(function(){
 			      });
 			}
 			
-			function getDateNow() {
-				var today = new Date();
-				var dd = today.getDate();
-				var mm = today.getMonth()+1; //January is 0!
-
-				var yyyy = today.getFullYear();
-				yyyy += 543;
-				if(dd<10){
-				    dd='0'+dd;
-				} 
-				if(mm<10){
-				    mm='0'+mm;
-				} 
-				var today = dd+'/'+mm+'/'+yyyy;
-				return today;
-			}
+//			function getDateNow() {
+//				var today = new Date();
+//				var dd = today.getDate();
+//				var mm = today.getMonth()+1; //January is 0!
+//
+//				var yyyy = today.getFullYear();
+//				yyyy += 543;
+//				if(dd<10){
+//				    dd='0'+dd;
+//				} 
+//				if(mm<10){
+//				    mm='0'+mm;
+//				} 
+//				var today = dd+'/'+mm+'/'+yyyy;
+//				return today;
+//			}
 
 //			function validatetor(data) {
 //				var errorData="";
@@ -832,6 +832,35 @@ $(document).ready(function(){
 						});
 			        }
 			});
+			
+			$("#author").autocomplete({
+				source: function (request, response) {
+		        	$.ajax({
+						 url:restfulURL+"/"+serviceName+"/writer/list_to_user",
+						 type:"get",
+						 dataType:"json",
+						 headers:{Authorization:"Bearer "+tokenID.token},
+						 //data:{"emp_name":request.term},
+						 data:{"screenName":request.term},
+						 //async:false,
+		                 error: function (xhr, textStatus, errorThrown) {
+		                        console.log('Error: ' + xhr.responseText);
+		                    },
+						 success:function(data){
+								response($.map(data, function (item) {
+		                            return {
+		                                label: item.userId+"-"+item.screenName,
+		                                value: item.userId+"-"+item.screenName,
+		                            };
+		                        }));
+						},
+						beforeSend:function(){
+							$("body").mLoading('hide');	
+						}
+						
+					});
+		        }
+		});
 			
 			$("#search_procedure").html(generateDropDownList(
 					restfulURL+"/"+serviceName+"/doctor_profile/list_medical_procedure",

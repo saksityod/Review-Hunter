@@ -115,8 +115,8 @@ var serviceName="";
 /*#######Localhost#######*/
 restfulURL="http://localhost";
 serviceName="master_piece/public";
-</script>
 
+</script>
 <script>
 /* for portlet*/
 var tokenID= [];
@@ -147,12 +147,13 @@ function checkSession(paramTokenID){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
-			//console.log(data)
+			console.log(data)
 			if(data.status == "200"){
 				$chk = true;
 				userId = data.userID;
 				screenName = data.screenName;
 				roles = data.roles;
+				
 			}else{
 				callFlashSlide("login failed."); 
 				sessionStorage.clear();
@@ -293,7 +294,7 @@ $("#logOut").click(function(){
  
 /*ajax */
 function getAjax(url,type,data,callback){
-	if(checkSession(JSON.stringify(tokenID))){
+	//if(checkSession(JSON.stringify(tokenID))){
 		$.ajax({
 			url:url,
 			type : type,
@@ -309,7 +310,7 @@ function getAjax(url,type,data,callback){
 				}
 			}
 		});
-	}
+	//}
 }
 
 /*clear field in modal*/
@@ -321,7 +322,7 @@ function clearModal(){
 
 /*get pagenation*/
 function getPagenation(target,data){
-	$prev_dis = data.prev_page_url?'':'disabled' ;
+	$prev_dis = data.prev_page_url?'':'disabled';
 	$next_dis = data.next_page_url?'':'disabled';
 	$next = data.current_page+1 <= data.last_page?data.current_page+1:'';
 	$html = '<li data-lp="1" class="first '+$prev_dis+'">'
@@ -337,82 +338,72 @@ function getPagenation(target,data){
 }
 
 function formatDateYMD(input) {
-	if(input == "") {
+	if(input == "" || input == undefined || input == null) {
 		return null;
 	} else {
 	    var datePart = input.match(/\d+/g);
 	    var day = datePart[0];
 	    var month = datePart[1];
 	    var year = datePart[2];
+	    year -= 543;
 	    return year + '-' + month + '-' + day;
 	}
 }
 
 function formatDateDMY(input) {
-    var datePart = input.split("-");
-    var day = datePart[2];
-    var month = datePart[1];
-    var year = datePart[0];
-    return day + '-' + month + '-' + year;
+	if(input == "" || input == undefined || input == null) {
+		return null;
+	} else {
+	    var datePart = input.split("-");
+	    var day = datePart[2];
+	    var month = datePart[1];
+	    var year = Number(datePart[0]);
+
+		year += 543;
+	    return day + '/' + month + '/' + year;
+	}
 }
 
-var paginationSetUpFn = function(pageIndex,pageButton,pageTotal){
-	
-	if(pageTotal==0){
-		pageTotal=1
-	}
-	$('.pagination_top,.pagination_bottom').off("page");
-	$('.pagination_top,.pagination_bottom').bootpag({
-	    total: pageTotal,//page Total
-	    page: pageIndex,//page index
-	    maxVisible: 5,//จำนวนปุ่ม
-	    leaps: true,
-	    firstLastUse: true,
-	    first: '←',
-	    last: '→',
-	    wrapClass: 'pagination',
-	    activeClass: 'active',
-	    disabledClass: 'disabled',
-	    nextClass: 'next',
-	    prevClass: 'prev',
-	    next: 'next',
-	    prev: 'prev',
-	    lastClass: 'last',
-	    firstClass: 'first'
-	}).on("page", function(event, num){
-		var rpp=10;
-		if($("#rpp").val()==undefined){
-			rpp=10;
-		}else{
-			rpp=$("#rpp").val();
-		}
-		
-		getData(num,rpp);
-		
-	    $(".pagingNumber").remove();
-	    var htmlPageNumber= "<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='"+num+"'>";
-	    $("body").append(htmlPageNumber);
-	   
-	}); 
-
-	$(".countPagination").off("change");
-	$(".countPagination").on("change",function(){
-
-		$("#countPaginationTop").val($(this).val());
-		$("#countPaginationBottom").val($(this).val());
-		
-		getData(1,$(this).val());
-		
-		$(".rpp").remove();
-		$(".pagingNumber").remove();
-		var htmlRrp="";
-			htmlRrp+= "<input type='hidden' id='rpp' name='rpp' class='rpp' value='"+$(this).val()+"'>";
-	        htmlRrp+="<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='1'>";
-	    $("body").append(htmlRrp);
+function validatetor(data) {
+	var errorData="";
+	$.each(data, function(key, value) {
+		errorData += stripJsonToString(value);
 	});
+	console.log(errorData);
+	return errorData;
+}
+
+var stripJsonToString= function(json){
+    return JSON.stringify(json).replace(',', ', ').replace('[', '').replace(']', '').replace('.', "<br>").replace(/\"/g,'');
+}
+
+function validatetorInformation(data) {
+	$("#information_errors").show();
+	$("#information_errors").html(data);
+}
+
+function validatetorInformationUpdate(data) {
+	$("#information_errors_update").show();
+	$("#information_errors_update").html(data);
+}
+
+function getDateNow() {
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+
+	var yyyy = today.getFullYear();
+	yyyy += 543;
+	if(dd<10){
+	    dd='0'+dd;
+	} 
+	if(mm<10){
+	    mm='0'+mm;
+	} 
+	var today = dd+'/'+mm+'/'+yyyy;
+	return today;
 }
 </script>
-
 <script>
 $(document).ready(function() {
 	 var username = $('#user_portlet').val();
@@ -465,6 +456,23 @@ $(document).ready(function() {
 					$("#time").attr('readonly',true);
 				}
 			}
+			
+			var generateStartEndDate = function(time) {
+				$.ajax ({
+					url:restfulURL+"/"+serviceName+"/report/list_selector_time",
+					type:"get",
+					dataType:"json",
+			 		data:{"time":time},
+			 		headers:{Authorization:"Bearer "+tokenID.token},
+			 		async:false,
+			 		success:function(data){
+			 			if(data.status==200) {
+			 				$("#start_date").val(formatDateDMY(data.data));
+			 				$("#end_date").val(getDateNow());
+			 			}
+			 		}
+			 	});
+			}
 			 
 			$('.datepicker').datepicker({
 				format: 'dd/mm/yyyy',
@@ -480,19 +488,23 @@ $(document).ready(function() {
 	 		
 	 		$("#btn_search").click(function() {
 	 			var parameter = {
-	 				time: $("#time").val(),
-	 				writer: $("#writer").val(),
-	 				start_date: $("#start_date").val(),
-	 				end_date: $("#end_date").val()
+	 				param_writer_code: $("#writer").val(),
+	 				param_start_date: formatDateYMD($("#start_date").val()),
+	 				param_end_date: formatDateYMD($("#end_date").val())
 	 			}
 	 			
-	 			var data = JSON.stringify(parameter);
-	 			var url_report_jasper = "www.google.com";
+	 			//var data = JSON.stringify(parameter);
+	 			var url_report_jasper = restfulURL+"/"+serviceName+"/report/api_report?template_name=report-2&template_format=pdf&used_connection=1&inline=1&data="+JSON.stringify(parameter);
+	 			//console.log(url_report_jasper);
+	 			//var url_report_jasper = "www.google.com";
 	 			
 	 			$('#iFrame_report').attr('src',url_report_jasper);
 	 		});
 	 		
-	 		$("#time").click(function(){swapFN(this.id)});
+	 		$("#time").click(function() {
+	 			swapFN(this.id);
+	 			generateStartEndDate($(this).val());
+	 		});
 	 		$("#start_date").click(function(){swapFN(this.id)});
 	 		$("#end_date").click(function(){swapFN(this.id)});
 	 		

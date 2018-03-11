@@ -641,7 +641,7 @@ $(document).ready(function(){
 			                '<td "'+TRTDClass+'">' + displayRecords[i].status +'</td>'+
 			                '<td "'+TRTDClass+'"><button type="button" id="downloadfile-' + displayRecords[i].article_id +'" class="btn btn-primary input-sm getfile" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
 			                '&nbsp;<button type="button" id="uploadfile-' + displayRecords[i].article_id +'" class="btn btn-success input-sm getfile" data-target="#ModalImport" data-toggle="modal" title="อัพโหลด" data-placement="top"><i class="fa fa-upload"></i></button>'+
-			                '&nbsp;<button type="button" id="edit-' + displayRecords[i].article_id +'" class="btn btn-warning input-sm getfile" data-target="#ModalWriter" data-toggle="modal" title="แก้ไข" data-placement="top">แก้ไข</button></td>'+
+			                '&nbsp;<button type="button" id="edit-' + displayRecords[i].article_id +'" class="btn btn-warning input-sm getfile" data-target="#ModalWriter" data-toggle="modal" data-backdrop="static" data-keyboard="false" title="แก้ไข" data-placement="top">แก้ไข</button></td>'+
 			                '</tr>';
 			    //});
 				}
@@ -667,7 +667,7 @@ $(document).ready(function(){
 			                '<td "'+TRTDClass+'">' + value.status +'</td>'+
 			                '<td "'+TRTDClass+'"><button type="button" id="downloadfile-' + value.article_id +'" class="btn btn-primary input-sm getfile" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
 			                '&nbsp;<button type="button" id="uploadfile-' + value.article_id +'" class="btn btn-success input-sm getfile" data-target="#ModalImport" data-toggle="modal" title="อัพโหลด" data-placement="top"><i class="fa fa-upload"></i></button>'+
-			                '&nbsp;<button type="button" id="edit-' + value.article_id +'" class="btn btn-warning input-sm getfile" data-target="#ModalWriter" data-toggle="modal" title="แก้ไข" data-placement="top">แก้ไข</button></td>'+
+			                '&nbsp;<button type="button" id="edit-' + value.article_id +'" class="btn btn-warning input-sm getfile" data-target="#ModalWriter" data-toggle="modal" data-backdrop="static" data-keyboard="false" title="แก้ไข" data-placement="top">แก้ไข</button></td>'+
 			                '</tr>';
 			    });
 

@@ -514,7 +514,7 @@
 		<div class="ibox-title"
 			style="background-color: rgb(0, 206, 215); border-color: rgb(0, 206, 215);">
 			<h5>สถานะของ content
-			 	<button type="button" name="btn_add" id="btn_add" class="btn btn-success input-sm" data-target=#ModalWriter data-toggle='modal' style="margin-left: 5px;">
+			 	<button type="button" name="btn_add" id="btn_add" class="btn btn-success input-sm" data-target=#ModalWriter data-toggle='modal' data-backdrop="static" data-keyboard="false" style="margin-left: 5px;">
 			 	<i class="fa fa-plus"></i>&nbsp;เพิ่ม
 				</button>
 			</h5>

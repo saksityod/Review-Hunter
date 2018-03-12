@@ -58,7 +58,7 @@
 				<div id="width-100-persen" class=" m-b-xs">
 					<br>
 					<button class="btn btn-success" data-target=#modalAdd data-toggle='modal' data-type="add" id="btn_add">
-						<i class="fa fa-plus"></i>  เพิ่มช่องทางลงสื่อ
+						<i class="fa fa-plus"></i>  เพิ่ม
 					</button>
 					<br><br>
 					<!-- start table -->
@@ -67,8 +67,8 @@
 							<thead>
 								<tr>
 									<th style='width: auto;'><strong>ชื่อช่องทางลงสื่อ</strong></th>
-									<th style='width: 100px; text-align: center;'><strong>ใช้งาน</strong></th>
-									<th style='width: 120px; text-align: center;'><strong>จัดการข้อมูล</strong></th>
+									<th style='width: 100px; text-align: center;'><strong>Active</strong></th>
+									<th style='width: 120px; text-align: center;'><strong>จัดการ</strong></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -128,7 +128,7 @@
 						<span aria-hidden="true"><i class='fa fa-times'></i></span><span
 							class="sr-only"></span>
 					</button>
-					<h4 class="modal-title" id="modalTitleRole">เพิ่มช่องทางลงสื่อ</h4>
+					<h4 class="modal-title" id="modalTitleRole">ช่องทางลงสื่อ</h4>
 				</div>
 				<div class="modal-body">
 					<br />
@@ -150,7 +150,7 @@
 										</div>
 									</div>
 									<div class="form-group" style="margin-left: 5px;">
-										<label for="is_active" class="control-label">ใช้งาน</label>
+										<label for="is_active" class="control-label">Active</label>
 										<div class="span3">
 											<input data-toggle="tooltip"
 												title="is active" data-placement="top" 
@@ -197,7 +197,7 @@
 						<span aria-hidden="true"><i class='fa fa-times'></i></span><span
 							class="sr-only"></span>
 					</button>
-					<h4 class="modal-title" id="modalTitleRole">แก้ไขช่องทางลงสื่อ</h4>
+					<h4 class="modal-title" id="modalTitleRole">ช่องทางลงสื่อ</h4>
 				</div>
 				<div class="modal-body">
 					<br />
@@ -218,7 +218,7 @@
 										</div>
 									</div>
 									<div class="form-group" style="margin-left: 5px;">
-										<label for="is_active" class=" control-label">ใช้งาน</label>
+										<label for="is_active" class=" control-label">Active</label>
 										<div class="span3">
 											<input data-toggle="tooltip"
 												title="is active" data-placement="top" 

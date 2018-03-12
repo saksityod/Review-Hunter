@@ -72,45 +72,7 @@ $(document).ready(function() {
 			$(this).closest('.wrap').find('.display,.btn-edit').show();
 		});
 		
-// 		var edu_n = 0;
-// 		var addcheckboxDefault = function(n) {
-// 			if(n=='add') { edu_n ++; }
-// 			else if(n=='del') { edu_n --; }
-// 			else if(n=='del_last') { edu_n = 0; }
-// 			else if(n=='btn_add') { edu_n = 0; }
-// 			else if(n=='btn_edit') {
-// 				edu_n = 1;
-// 			}
-			
-// 			console.log($(".edit-edu tr-dump"));
-			
-// 			console.log(edu_n)
-// 			if(edu_n==1) {
-// 				$(".edu-is-use").prop("checked",true);
-// 			}
-			
-// 		}
-		
 		$('body').on("click", ".del_tr", function() {
-// 			if($(this).closest('tr').find('.edu-is-use').length==1) {
-// 				if($(this).closest('tr').find('.edu-is-use').prop('checked')==false) {
-// 					this.closest('tr').remove();
-// 					addcheckboxDefault('del');
-// 				}
-				
-// 				if($('.edu-is-use').length==1) {
-// 					this.closest('tr').remove();
-// 					addcheckboxDefault('del_last');
-// 				}
-				
-// 			} else {
-// 				if($(this).closest('tr').find('.edu-is-use').length==1) {
-				
-// 				} else {
-// 					this.closest('tr').remove();
-// 				}
-//			}
-
 			if($(this).closest('tr').find('.edu-is-use').length==1) {
 				if($(this).closest('tr').find('.edu-is-use').prop('checked')==false) {
  					this.closest('tr').remove();
@@ -198,8 +160,24 @@ $(document).ready(function() {
 			}
 		}
 		
+		function getyear(min,max) {
+			var maxx = parseInt(max) + 20;
+			var year_min = parseInt(min) + 543;
+			var year_max = parseInt(maxx) + 543;
+			var html_year ='';
+			for($i = year_min; $i < year_max;$i++ ) {
+				html_year +="<option value="+($i-543)+">"+$i+"</option>";
+			}
+			return html_year;
+		}
+		
 		$('body').on('click','.btn-add-edu', function() {
 			validateCheckedIsUse();
+		});
+		
+		$('body').on('change','.exp-start', function() {
+			console.log($(this).val());
+			$(this).closest('tr').find('.exp-end').html(getyear($(this).val(),$(this).val()));
 		});
 		
 		/* edit doctor data in table list */

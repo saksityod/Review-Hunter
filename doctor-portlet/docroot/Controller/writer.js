@@ -142,7 +142,7 @@ $(document).ready(function(){
 					data:{"stage_id":current_stage_id},
 					headers:{Authorization:"Bearer "+tokenID.token},
 					success:function(data){
-						console.log(data,'action_to')
+						//console.log(data,'action_to')
 						var htmlOption="";
 						//var htmlOption3="";
 						
@@ -171,7 +171,7 @@ $(document).ready(function(){
 					headers:{Authorization:"Bearer "+tokenID.token},
 					success:function(data){
 						
-						console.log(data,'DropDownSendToStage');
+						//console.log(data,'DropDownSendToStage');
 						var htmlOption="";
 						
 						$.each(data,function(index,indexEntry) {

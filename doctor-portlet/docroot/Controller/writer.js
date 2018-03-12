@@ -10,7 +10,13 @@ $(document).ready(function(){
 			var GlobalCurrentStageID;
 			var GlobalDataWriter;
 			var InsertUpdateForCheck = "";
-			$('.dropify').dropify();
+			
+			function onload() {
+				$('.dropify').dropify();
+				$("#author").val(userId+'-'+screenName);
+				$("#writing_end_date").val(getDateNow());
+			}
+			onload();
 			
 			var perPagePaganation = 10;
 			
@@ -198,6 +204,7 @@ $(document).ready(function(){
 					}
 				});
 			}
+			DropDownAlertMulti();
 				
 			function searchFN() {
 				var search_writer = $("#search_writer").val().split("-");
@@ -687,16 +694,24 @@ $(document).ready(function(){
 						"GET"
 				));
 				
-				DropDownAlertMulti();
+//				DropDownAlertMulti();
+//				
+//				$('#alert_multi').multiselect({
+//				  //allSelectedText: 'No option left ...',
+//				  maxHeight: 200,
+//				  onChange: function() {
+//					  //console.log($('#alert_multi').val());
+//				  }
+//				});
+//				
+//				$('#alert_multi').multiselect('refresh');
 				
 				$('#alert_multi').multiselect({
-				  //allSelectedText: 'No option left ...',
-				  maxHeight: 200,
-				  onChange: function() {
-					  //console.log($('#alert_multi').val());
-				  }
+					  maxHeight: 200,
+					  onChange: function() {
+					  }
 				});
-				
+					
 				$('#alert_multi').multiselect('refresh');
 				
 				DropDownCurrentStep();
@@ -888,16 +903,16 @@ $(document).ready(function(){
 					searchFN();
 				}
 			});
-				
+			
 			$("#btn_add").click(function(){
 				clearDataIsEmpty();
 				
-				$("#author").val(userId+'-'+screenName);
+				//$("#author").val(userId+'-'+screenName);
 				InsertUpdateForCheck = "insert";
 				
 				setDataAddAndEdit();
 
-				$("#writing_end_date").val(getDateNow());	
+				//$("#writing_end_date").val(getDateNow());	
 			});
 			
 			$("#btn_modal_submit").click(function() {

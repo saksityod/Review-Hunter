@@ -44,7 +44,7 @@ $(document).ready(function() {
 	 		$("#btn_search").click(function() {
 	 			
 	 			var parameter = {
-		 				param_status: $("#writer").val(),
+		 				param_status: $("[name='status']:checked").val(),
 		 				param_start_date: formatDateYMD($("#start_date").val()),
 		 				param_end_date: formatDateYMD($("#end_date").val())
 		 		}

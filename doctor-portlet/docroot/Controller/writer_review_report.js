@@ -76,7 +76,7 @@ $(document).ready(function() {
 
 	 		$("#writer").html(generateDropDownList(
 				restfulURL+"/"+serviceName+"/report/writer_list_writer",
-				"GET",'','ทั้งหมด'
+				"GET"
 			));
 	 		
 	 		$("#btn_search").click(function() {

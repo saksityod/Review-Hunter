@@ -55,7 +55,7 @@ $(document).ready(function() {
 	 			}
 	 			
 	 			var data = JSON.stringify(parameter);
-	 			var url_report_jasper = "www.google.com";
+	 			var url_report_jasper = "http://www.google.com";
 	 			
 	 			$('#iFrame_report').attr('src',url_report_jasper);
 	 		});

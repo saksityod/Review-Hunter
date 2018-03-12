@@ -76,7 +76,7 @@ $(document).ready(function() {
 
 	 		$("#case_type").html(generateDropDownList(
 				restfulURL+"/"+serviceName+"/report/case_list_case_type",
-				"GET",'','ทั้งหมด'
+				"GET"
 			));
 	 		
 	 		$("#btn_search").click(function() {

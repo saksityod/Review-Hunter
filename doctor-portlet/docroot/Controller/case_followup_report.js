@@ -64,7 +64,7 @@ $(document).ready(function() {
 			
 			$("#case_type").html(generateDropDownList(
 					restfulURL+"/"+serviceName+"/report/case_followup_case_type",
-					"GET",'','ทั้งหมด'
+					"GET"
 			));
 			
 			$("#case_group").html(generateDropDownList(
@@ -81,7 +81,7 @@ $(document).ready(function() {
 	 			}
 	 			
 	 			var data = JSON.stringify(parameter);
-	 			var url_report_jasper = "www.google.com";
+	 			var url_report_jasper = "http://www.google.com";
 	 			
 	 			$('#iFrame_report').attr('src',url_report_jasper);
 	 		});

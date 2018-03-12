@@ -59,7 +59,7 @@ $(document).ready(function() {
 
 	 		$("#doctor").html(generateDropDownList(
 				restfulURL+"/"+serviceName+"/report/case_list_doctor",
-				"GET",'','ทั้งหมด'
+				"GET"
 			));
 	 		
 	 		$("#btn_search").click(function() {
@@ -71,7 +71,7 @@ $(document).ready(function() {
 	 			}
 	 			
 	 			var data = JSON.stringify(parameter);
-	 			var url_report_jasper = "www.google.com";
+	 			var url_report_jasper = "http://www.google.com";
 	 			
 	 			$('#iFrame_report').attr('src',url_report_jasper);
 	 		});

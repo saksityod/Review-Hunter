@@ -799,7 +799,6 @@ $(document).ready(function(){
 							beforeSend:function(){
 								$("body").mLoading('hide');	
 							}
-							
 						});
 			        }
 			});

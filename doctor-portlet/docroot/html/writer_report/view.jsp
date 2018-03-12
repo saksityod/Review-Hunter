@@ -74,11 +74,11 @@ plid = layout.getPlid();
 							  เสร็จ
 							</label>
 							<label class="radio inline">
-							  <input type="radio" name="status" id="status" value="1">
+							  <input type="radio" name="status" id="status" value="2">
 							  ไม่เสร็จ
 							</label>
 							<label class="radio inline">
-							  <input type="radio" name="status" id="status" value="1">
+							  <input type="radio" name="status" id="status" value="3">
 							  ทั้งหมด
 							</label>
 						</div>
@@ -103,7 +103,7 @@ plid = layout.getPlid();
 			</div>
 			<div class="ibox-content">
 				<div class="row-fluid">
-					<iframe id="iFrame_report" frameborder="0" style="width :100%;height: 1200px;">
+					<iframe id="iFrame_report" frameborder="0" style="width :100%;height: 900px;">
 			  			<p>Your browser does not support iframes.</p>
 					</iframe>
 				</div>

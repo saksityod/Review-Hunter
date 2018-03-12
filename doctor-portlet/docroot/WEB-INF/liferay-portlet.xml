@@ -336,6 +336,9 @@
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	      
+	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/case_confirm_report.js</footer-portlet-javascript>
 		<css-class-wrapper>
 			case_confirm_report-portlet
 		</css-class-wrapper>
@@ -365,6 +368,9 @@
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	      
+	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/case_followup_report.js</footer-portlet-javascript>
 		<css-class-wrapper>
 			case_followup_report-portlet
 		</css-class-wrapper>
@@ -394,6 +400,9 @@
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	      
+	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/case_image_report.js</footer-portlet-javascript>
 		<css-class-wrapper>case_image_report-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -421,6 +430,9 @@
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	      
+	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/case_report.js</footer-portlet-javascript>
 		<css-class-wrapper>case_report-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -448,6 +460,9 @@
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	      
+	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/case_send_image_report.js</footer-portlet-javascript>
 		<css-class-wrapper>
 			case_send_image_report-portlet
 		</css-class-wrapper>
@@ -477,6 +492,9 @@
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	      
+	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/status_review_report.js</footer-portlet-javascript>
 		<css-class-wrapper>
 			status_review_report-portlet
 		</css-class-wrapper>
@@ -506,6 +524,9 @@
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	      
+	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/writer_report.js</footer-portlet-javascript>
 		<css-class-wrapper>writer_report-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -533,6 +554,9 @@
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	 
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	      
+	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>
+	    <footer-portlet-javascript>/Controller/writer_review_report.js</footer-portlet-javascript>
 		<css-class-wrapper>
 			writer_review_report-portlet
 		</css-class-wrapper>

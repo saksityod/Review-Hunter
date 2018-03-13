@@ -38,9 +38,7 @@ function checkSession(paramTokenID){
 				callFlashSlide("login failed."); 
 				sessionStorage.clear();
 				$chk = false;
-		    	setTimeout(function(){
-		    		window.location.href = "../login.html"; 
-				},500);
+				$("#content").html("");
 			}
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
@@ -48,9 +46,7 @@ function checkSession(paramTokenID){
 		    	callFlashSlide("login failed."); 
 		    	console.log("Error is "+textStatus);
 		    	$chk = false;
-		    	setTimeout(function(){
-		    		window.location.href = "../login.html"; 
-				},500);
+		    	$("#content").html("");
 		    }
 		}
 		
@@ -69,9 +65,7 @@ function checkSession(paramTokenID){
 		error: function(jqXHR, textStatus, errorThrown) {
 			 sessionStorage.clear();
 			 $chk = false;
-		    	setTimeout(function(){
-		    		window.location.href = "../login.html"; 
-				},500);
+			 $("#content").html("");
 		},
 		success:function(data){
 			sessionStorage.setItem("tokenID",data);

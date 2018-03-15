@@ -50,13 +50,11 @@ $(document).ready(function() {
 	 		
 	 		$("#btn_search").click(function() {
 	 			var parameter = {
-	 				year: $("#year").val(),
-	 				month: $("#month").val()
+	 				param_year: $("#year").val(),
+	 				param_month: $("#month").val()
 	 			}
 	 			
-	 			var data = JSON.stringify(parameter);
-	 			var url_report_jasper = "http://www.google.com";
-	 			
+	 			var url_report_jasper = restfulURL+"/"+serviceName+"/report/api_report?template_name=report-1&template_format=pdf&used_connection=1&inline=1&data="+JSON.stringify(parameter);
 	 			$('#iFrame_report').attr('src',url_report_jasper);
 	 		});
 		}

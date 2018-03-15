@@ -36,7 +36,25 @@ $(document).ready(function() {
 				 		}
 				 	});	
 				 	return html;
-				}
+			}
+			 
+			function DropDownCaseType() {
+					$.ajax({
+						url:restfulURL+"/"+serviceName+"/report/case_followup_case_type",
+						type:"get",
+						dataType:"json",
+						async:false,
+						headers:{Authorization:"Bearer "+tokenID.token},
+						success:function(data) {
+							var htmlOption="";
+							$.each(data,function(index,indexEntry) {
+								htmlOption+="<option value="+indexEntry['case_type_id']+"-"+indexEntry['case_type']+">"+indexEntry['case_type']+"</option>";
+							});
+							$("#case_type").html(htmlOption);
+						}
+					});
+			}
+			DropDownCaseType();
 			 
 			var swapFN = function(input) {
 				if(input==$("#time").attr('id')) {
@@ -62,35 +80,31 @@ $(document).ready(function() {
 					"GET"
 			));
 			
-			$("#case_type").html(generateDropDownList(
-					restfulURL+"/"+serviceName+"/report/case_followup_case_type",
-					"GET"
-			));
-			
 			$("#case_group").html(generateDropDownList(
 					restfulURL+"/"+serviceName+"/report/case_followup_case_group",
 					"GET"
 			));
 	 		
 	 		$("#btn_search").click(function() {
+	 				
+	 			var case_type_id = $("#case_type").val().split("-");
+	 			case_type_id = (case_type_id == '') ? '' : case_type_id[0];
+	 			
+	 			var case_type_name = $("#case_type").val().split("-");
+	 			case_type_name = (case_type_name == '') ? '' : case_type_name[1];
+	 			
 	 			var parameter = {
-	 				time: $("#time").val(),
-	 				writer: $("#writer").val(),
-	 				start_date: $("#start_date").val(),
-	 				end_date: $("#end_date").val()
+	 				param_year: $("#year").val(),
+	 				param_case_type: case_type_id,
+	 				param_case_group: $("#case_group").val(),
+	 				param_case_name: case_type_name
 	 			}
 	 			
-	 			var data = JSON.stringify(parameter);
-	 			var url_report_jasper = "http://www.google.com";
+	 			console.log(parameter,'parameter')
 	 			
+	 			var url_report_jasper = restfulURL+"/"+serviceName+"/report/api_report?template_name=report-8&template_format=pdf&used_connection=1&inline=1&data="+JSON.stringify(parameter);
 	 			$('#iFrame_report').attr('src',url_report_jasper);
 	 		});
-	 		
-	 		$("#time").click(function(){swapFN(this.id)});
-	 		$("#start_date").click(function(){swapFN(this.id)});
-	 		$("#end_date").click(function(){swapFN(this.id)});
-	 		
-	 		$("#time").click();
 		}
 	}
 });

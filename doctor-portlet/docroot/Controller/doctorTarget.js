@@ -19,6 +19,15 @@ $(document).ready(function() {
 		$plRoute = restfulURL+"/"+serviceName+'/'+$appName; 
 		onload();
 		
+		/* check disabled */
+		$("#btn_add").attr("disabled",true);
+		$.each(roles,function(k,v) {
+			if(v.roleId==22302 || v.roleId==22309) {
+				$("#btn_add").attr("disabled",false);
+				return false;
+			}
+		});
+		
 		/* click pagination */
 		$("#"+$appName+"_pagination").on('click','li:not(.disabled,.active) a',function(){
 			getList($perpage,$(this).parent().attr("data-lp"),getDataToAjax());
@@ -47,7 +56,7 @@ $(document).ready(function() {
 			minLength: 3,
 			delay: 100,
 			source: function (request, response) {
-				console.log($("#from_doctor_name").val());
+				//console.log($("#from_doctor_name").val());
 		        getAjax($plRoute+"/list_doctor_all",'get',{doctor_name:$("#from_doctor_name").val()},function(rs){
 		        	response( $.map( rs, function( item ) {
 		                var object = new Object();
@@ -149,10 +158,10 @@ $(document).ready(function() {
 		
 		$('#table_doctor_target').on("click", ".del", function(){ 
 			$id = $(this).data('target_id');
-			console.log($id);
+			//console.log($id);
 			$('#confrimModal').one('click', '#btnConfirmOK', function(e) {
 				getAjax($plRoute+"/destroy_one",'post',{id : $id },function(rs){
-					console.log(rs);
+					//console.log(rs);
 					if(rs.status == 200){
 		 				getList($perpage,1,getDataToAjax());
 		 				callFlashSlide("ลบข้อมูล สำเร็จ.",'success');
@@ -266,7 +275,7 @@ $(document).ready(function() {
 			});
 			
 			getAjax($plRoute+"/get_user",'get','',function(rs){
-				console.log(rs);
+				//console.log(rs);
 				$html = '';
 				$.each(rs,function(k,v) {
 					$html += "<option value= "+v.userId+"|"+v.emailAddress+">"+v.screenName+"</option>";
@@ -276,7 +285,7 @@ $(document).ready(function() {
 					includeSelectAllOption: true,
 			        maxHeight: 200,
 			        onChange: function() {
-			            console.log($('#alert_multi').val());
+			            //console.log($('#alert_multi').val());
 			        }
 			    });
 				
@@ -345,7 +354,7 @@ $(document).ready(function() {
 						year 		:$('#year').val(),
 						month		:$('#month').val()
 					};
-			console.log(data);
+			//console.log(data);
 			return data;
 		}
 		
@@ -360,9 +369,18 @@ $(document).ready(function() {
 			$url = $plRoute+"/search_target?page="+$page;
 			$data = data!=''?$.extend({perpage:$perpage},data):{perpage:$perpage};
 			getAjax($url,'get',$data,function(rs){
-				console.log(rs);
-				$html=''; 
-				if(rs.data.length > 0){
+				//console.log(rs);
+				$html='';
+				$is_disabled="disabled";
+				if(rs.data.length > 0) {
+					//console.log(roles,'roles');
+					$.each(roles,function(k,v) {
+						if(v.roleId==22302 || v.roleId==22309) {
+							$is_disabled="";
+							return false;
+						}
+					});
+					
 					$.each(rs.data,function(i,v){
 						$temp_arr =[0,v.target_month1,v.target_month2,v.target_month3,v.target_month4,
 									v.target_month5,v.target_month6,v.target_month7,v.target_month8,
@@ -380,8 +398,8 @@ $(document).ready(function() {
 									+'data-toggle="popover" data-placement="top"'
 									+'data-content=" '
 										+'<button class=\'btn btn-primary btn-xs btn-gear view\'data-target_id=\''+v.doctor_target_id+'\' data-target=#ModalView data-toggle=\'modal\' style=\'z-index:9999 \'>ดู</button> '
-										+'<button class=\'btn btn-warning btn-xs btn-gear edit\'data-target_id=\''+v.doctor_target_id+'\' data-target=#ModalEdit data-toggle=\'modal\' style=\'z-index:9999;margin-left: 15px\'>แก้ไข</button> '
-										+'<button class=\'btn btn-danger btn-xs btn-gear del\'data-target_id=\''+v.doctor_target_id+'\' data-target=#confrimModal data-toggle=\'modal\' style=\'z-index:9999;margin-left: 15px\'>ลบ</button>""'
+										+'<button class=\'btn btn-warning btn-xs btn-gear edit\'data-target_id=\''+v.doctor_target_id+'\' data-target=#ModalEdit data-toggle=\'modal\' style=\'z-index:9999;margin-left: 15px\' '+$is_disabled+'>แก้ไข</button> '
+										+'<button class=\'btn btn-danger btn-xs btn-gear del\'data-target_id=\''+v.doctor_target_id+'\' data-target=#confrimModal data-toggle=\'modal\' style=\'z-index:9999;margin-left: 15px\' '+$is_disabled+'>ลบ</button>""'
 								+'</i></td></tr>';
 						$html+= $temp;
 					});

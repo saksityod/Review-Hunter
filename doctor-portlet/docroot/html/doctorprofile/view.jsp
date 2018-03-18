@@ -104,7 +104,7 @@ plid = layout.getPlid();
 			style="background-color: rgb(0, 206, 215); border-color: rgb(0, 206, 215);">
 			<h5>รายชื่อแพทย์  
 				<span type="button" name="btn_add" id="btn_add" class="btn btn-success input-sm "
-					style="margin-left: 5px;" data-target=#ModalEditDetail data-toggle='modal'>
+					style="margin-left: 5px;" data-target=#ModalEditDetail data-toggle='modal' data-backdrop="static" data-keyboard="false">
 					<i class="fa fa-plus"></i>&nbsp;เพิ่ม
 				</span>
 			</h5>

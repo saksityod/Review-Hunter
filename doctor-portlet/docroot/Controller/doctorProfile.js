@@ -435,7 +435,7 @@ $(document).ready(function() {
 									+'data-trigger="focus" tabindex="0" data-html="true"'
 									+'data-toggle="popover" data-placement="top"'
 									+'data-content=" '
-									+'<button class=\'btn btn-warning btn-xs btn-gear edit\' data-target=#ModalEditDetail data-toggle=\'modal\' style=\'z-index:9999 \'>แก้ไข</button> '
+									+'<button class=\'btn btn-warning btn-xs btn-gear edit\' data-target=#ModalEditDetail data-toggle=\'modal\' style=\'z-index:9999 \' data-backdrop=\'static\' data-keyboard=\'false\'>แก้ไข</button> '
 									+'<button class=\'btn btn-danger btn-xs btn-gear del\' data-target=#confrimModal data-toggle=\'modal\' style=\'margin-left: 15px;z-index:9999 \'>ลบ</button>">'
 									+'</i></td></tr>';
 						$html+= $temp;

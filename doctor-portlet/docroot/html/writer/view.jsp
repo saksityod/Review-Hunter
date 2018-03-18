@@ -566,22 +566,22 @@
 				<ul id="pg"></ul>
 			</div>
 			
-			<div class="row-fluid">
-				<div id="width-100-persen" class="span9 m-b-xs ">
-					<span class="pagination_bottom m-b-none pagination"></span>
-				</div>
-				<div class="span3 object-right ResultsPerPageBottom">
-		            <div class='pagingDropdown'>
-		                <select id='countPaginationBottom'  class="form-control input-sm countPagination">
-					       <option>10</option>
-					       <option>20</option>
-					       <option>50</option>
-					       <option>100</option>
-					    </select> 
-			        </div>
-					<div class='pagingText'>Results per page</div>
-		        </div>
-			</div>
+<!-- 			<div class="row-fluid"> -->
+<!-- 				<div id="width-100-persen" class="span9 m-b-xs "> -->
+<!-- 					<span class="pagination_bottom m-b-none pagination"></span> -->
+<!-- 				</div> -->
+<!-- 				<div class="span3 object-right ResultsPerPageBottom"> -->
+<!-- 		            <div class='pagingDropdown'> -->
+<!-- 		                <select id='countPaginationBottom'  class="form-control input-sm countPagination"> -->
+<!-- 					       <option value="10">10</option> -->
+<!-- 					       <option value="20">20</option> -->
+<!-- 					       <option value="50">50</option> -->
+<!-- 					       <option value="100">100</option> -->
+<!-- 					    </select>  -->
+<!-- 			        </div> -->
+<!-- 					<div class='pagingText'>Results per page</div> -->
+<!-- 		        </div> -->
+<!-- 			</div> -->
 			<!-- pagination end  -->
 			
 		</div>

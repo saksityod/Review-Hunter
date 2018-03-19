@@ -44,86 +44,16 @@ $(document).ready(function(){
 			        }
 			      });
 			}
-			
-//			function getDateNow() {
-//				var today = new Date();
-//				var dd = today.getDate();
-//				var mm = today.getMonth()+1; //January is 0!
-//
-//				var yyyy = today.getFullYear();
-//				yyyy += 543;
-//				if(dd<10){
-//				    dd='0'+dd;
-//				} 
-//				if(mm<10){
-//				    mm='0'+mm;
-//				} 
-//				var today = dd+'/'+mm+'/'+yyyy;
-//				return today;
-//			}
-
-//			function validatetor(data) {
-//				var errorData="";
-//				$.each(data, function(key, value) {
-//					errorData += stripJsonToString(value);
-//				});
-//				console.log(errorData);
-//				return errorData;
-//			}
-			
-//			var stripJsonToString= function(json){
-//			    return JSON.stringify(json).replace(',', ', ').replace('[', '').replace(']', '').replace('.', "<br>").replace(/\"/g,'');
-//			}
-			
-//			function validatetorInformation(data) {
-//				$("#information_errors").show();
-//				$("#information_errors").html(data);
-//			}
-			 
-			 var generateDropDownList = function(url,type,request,initValue){
-				 	var html="";
-				 	if(initValue!=undefined){
-				 		html+="<option value=''>"+initValue+"</option>";
-					}
-				 	$.ajax ({
-				 		url:url,
-				 		type:type ,
-				 		dataType:"json" ,
-				 		data:request,
-				 		headers:{Authorization:"Bearer "+tokenID.token},
-				 		async:false,
-				 		success:function(data){
-				 			//console.log(data)
-				 			try {
-				 			    if(Object.keys(data[0])[0] != undefined && Object.keys(data[0])[0] == "item_id"){
-				 			    	galbalDataTemp["item_id"] = [];
-				 			    	$.each(data,function(index,indexEntry){
-				 			    		galbalDataTemp["item_id"].push(indexEntry[Object.keys(indexEntry)[0]]);
-				 		 			});	
-				 			    }
-				 			}
-				 			catch(err) {
-				 			    console.log(err.message);
-				 			}
-
-				 			$.each(data,function(index,indexEntry){
-				 				html+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1] == undefined  ?  Object.keys(indexEntry)[0]:Object.keys(indexEntry)[1]]+"</option>";	
-				 			});
-				 		}
-				 	});	
-				 	return html;
-			}
 			 
 			function DropDownCurrentStep() {
 					$.ajax({
 						url:restfulURL+"/"+serviceName+"/writer/current_action",
 						type:"get",
 						dataType:"json",
-						async:false,
+						async:true,
 						data:{"stage_id":GlobalCurrentStageID},
 						headers:{Authorization:"Bearer "+tokenID.token},
 						success:function(data){
-							//console.log(data,'DropDownCurrentStep');
 							var htmlOption="";
 							var checkrolesIDbtn = null;
 							$.each(data,function(index,indexEntry) {
@@ -193,7 +123,7 @@ $(document).ready(function(){
 					url:restfulURL+"/"+serviceName+"/writer/list_user_alert",
 					type:"get",
 					dataType:"json",
-					async:false,
+					async:true,
 					headers:{Authorization:"Bearer "+tokenID.token},
 					success:function(data){
 						var htmlOption="";
@@ -204,7 +134,40 @@ $(document).ready(function(){
 					}
 				});
 			}
-			DropDownAlertMulti();
+			
+			function DropDownArticleType() {
+				$.ajax({
+					url:restfulURL+"/"+serviceName+"/writer/list_article_type",
+					type:"get",
+					dataType:"json",
+					async:true,
+					headers:{Authorization:"Bearer "+tokenID.token},
+					success:function(data){
+						var htmlOption="";
+						$.each(data,function(index,v) {
+							htmlOption+="<option value="+v.article_type_id+">"+v.article_type_name+"</option>";
+						});
+						$("#article_type").html(htmlOption);
+					}
+				});
+			}
+			
+			function DropDownProcedureName() {
+				$.ajax({
+					url:restfulURL+"/"+serviceName+"/doctor_profile/list_medical_procedure",
+					type:"get",
+					dataType:"json",
+					async:true,
+					headers:{Authorization:"Bearer "+tokenID.token},
+					success:function(data){
+						var htmlOption="";
+						$.each(data,function(index,v) {
+							htmlOption+="<option value="+v.procedure_id+">"+v.procedure_name+"</option>";
+						});
+						$("#search_procedure,#procedure_name").append(htmlOption);
+					}
+				});
+			}
 				
 			function searchFN() {
 				var search_writer = $("#search_writer").val().split("-");
@@ -252,15 +215,14 @@ $(document).ready(function(){
 					}
 				});
 			};
-			//getData();
 				
 			function InsertWriter() {
 					var doctor_id = $("#form_doctor").val().split("-");
 					doctor_id = (doctor_id == '') ? '' : doctor_id[0];
 					
 					var writer = $("#author").val().split("-");
-					
 					writer = (writer == '') ? null : writer[0];
+					
 					var writer_start_date = formatDateYMD($("#start_date").val());
 					var plan_date = formatDateYMD($("#plan_date").val());
 					var writing_end_date = formatDateYMD($("#writing_end_date").val());
@@ -585,10 +547,6 @@ $(document).ready(function(){
 			};
 			
 			function downloadfileFN(aricleID) {
-/*  				console.log(aricleID,'downloadfileFN')
-				window.open(restfulURL+"/"+serviceName+"/writer/download_article_doc/"+aricleID,"_self");
-				return false; */
-				
 				$.ajax({
 					url:restfulURL+"/"+serviceName+"/writer/download_article_doc/"+aricleID,
 					type:'get',
@@ -629,7 +587,6 @@ $(document).ready(function(){
 			}
 			
 			function list_data_template_pagination(data) {
-				//console.log('list_data_template_pagination');
 				var TRTDHTML = "";
 				var TRTDClass = "style=\"vertical-align: middle;\"";
 				
@@ -656,7 +613,6 @@ $(document).ready(function(){
 			}
 			
 			function list_data_template(data) {
-				//console.log(data);
 				var TRTDHTML = "";
 				var TRTDClass = "style=\"vertical-align: middle;\"";
 
@@ -684,35 +640,13 @@ $(document).ready(function(){
 			function setDataAddAndEdit() {
 				$("#information_errors").hide();
 				
-				$("#article_type").html(generateDropDownList(
-						restfulURL+"/"+serviceName+"/writer/list_article_type",
-						"GET"
-				));
-				
-				$("#procedure_name").html(generateDropDownList(
-						restfulURL+"/"+serviceName+"/doctor_profile/list_medical_procedure",
-						"GET"
-				));
-				
-//				DropDownAlertMulti();
-//				
-//				$('#alert_multi').multiselect({
-//				  //allSelectedText: 'No option left ...',
-//				  maxHeight: 200,
-//				  onChange: function() {
-//					  //console.log($('#alert_multi').val());
-//				  }
-//				});
-//				
-//				$('#alert_multi').multiselect('refresh');
-				
 				$('#alert_multi').multiselect({
 					  maxHeight: 200,
 					  onChange: function() {
 					  }
 				});
-					
-				$('#alert_multi').multiselect('refresh');
+				
+				$('#alert_multi').val("").multiselect('refresh');
 				
 				DropDownCurrentStep();
 				DropDownToStep();
@@ -747,7 +681,7 @@ $(document).ready(function(){
 					url:restfulURL+"/"+serviceName+"/writer/check_disabled",
 					type:"get",
 					dataType:"json",
-					async:false,
+					async:true,
 					data:{"role_id":checkrolesIDbtn},
 					headers:{Authorization:"Bearer "+tokenID.token},
 					success:function(data){
@@ -876,12 +810,11 @@ $(document).ready(function(){
 		        }
 		});
 			
-			$("#search_procedure").html(generateDropDownList(
-					restfulURL+"/"+serviceName+"/doctor_profile/list_medical_procedure",
-					"GET",{},'All'
-			));
+			DropDownAlertMulti();
+			DropDownArticleType();
+			DropDownProcedureName();
 			
-			$("#to_step").change(function(){
+			$("#to_step").change(function() {
 				DropDownSendToStage();
 			});
 			
@@ -906,13 +839,8 @@ $(document).ready(function(){
 			
 			$("#btn_add").click(function(){
 				clearDataIsEmpty();
-				
-				//$("#author").val(userId+'-'+screenName);
 				InsertUpdateForCheck = "insert";
-				
 				setDataAddAndEdit();
-
-				//$("#writing_end_date").val(getDateNow());	
 			});
 			
 			$("#btn_modal_submit").click(function() {
@@ -942,17 +870,21 @@ $(document).ready(function(){
 					downloadfileFN(GlobalWriterID);
 				} else if(ufile[0]=='edit') {
 					clearDataIsEmpty();
-					
 					InsertUpdateForCheck = "update";
 					GetDataEdit(GlobalWriterID);
 					setDataAddAndEdit();
 				}
 			});
 			
-//			$("#countPaginationBottom").change(function() {
-//				perPagePaganation = $(this).val();
-//				searchFN();
-//			});
+			$('#close_form,#btn_cancel_form').click(function() {
+				$('#confrimModalCancel').modal({
+			    	backdrop: 'static',
+			      	keyboard: false
+			    }).one('click', '#btnConfirmOK2', function(e) {
+			    	$('#confrimModalCancel').modal('hide');
+			    	$('#ModalWriter').modal('hide');
+			    });
+			});
 			
 			$("#workflow_history").on("click",'.getfileWorkflow',function() {
 				var ufile = $(this).attr('id').split("-");

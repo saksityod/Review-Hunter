@@ -260,7 +260,7 @@ padding-top: 5px;
 	<div class="col-lg-12">
 		<div class="ibox-title">
 			<h5>B&A Library 
-				<button class="btn btn-success" id='addCase' data-target=#modalAdd data-toggle='modal' data-type="add" data-backdrop="static" data-keyboard="false">
+				<button class="btn btn-success" id='addCase'  data-type="add"  data-keyboard="false">
 					<i class="fa fa-plus"></i> เพิ่ม
 				</button>
 			</h5>
@@ -279,7 +279,7 @@ padding-top: 5px;
 						<div id="width-100-persen" class="span9 m-b-xs">
 							<span class="pagination_top m-b-none pagination"
 								id="yui_patched_v3_11_0_1_1514185894268_841">
-								<ul class="pagination bootpag" id=""></ul>
+								<ul class="pagination bootpag" id="ba_pagination"></ul>
 							</span>
 						</div>
 						<div class="span3 object-right ResultsPerPageBottom">
@@ -987,7 +987,7 @@ padding-top: 5px;
 			</div>
 		</div>
 	</div>
-<!-- Modal End  -->
+	<!-- Modal End  -->
 		
 	<!-- Modal Confirm Start -->
 	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal"
@@ -1029,7 +1029,7 @@ padding-top: 5px;
 			</div>
 		</div>
 		
-		<!-- Modal Confirm Start -->
+		<!-- Modal create folder Start -->
 		<div aria-hidden="true" role="dialog" tabindex="-1" id="addFolder"
 			class="modal inmodal in"
 			style="width: 400px; left: calc; display: none;">
@@ -1068,37 +1068,72 @@ padding-top: 5px;
 		</div>
 		
 		<!-- Modal Image Start -->
-	<div aria-hidden="true" role="dialog" tabindex="-1" id="addImage"
-		class="modal inmodal in"
-		style="width: 400px; left: calc; display: none;">
-		<div class="modal-dialog">
-			<div class="modal-content  bounceInRight">
-				<div class="modal-header">
-					<button data-dismiss="modal" class="close" type="button"
-						style="padding-top: 3px">
-						<span aria-hidden="true"><i class='fa fa-times'></i></span><span
-							class="sr-only">Close</span>
-					</button>
-					<h5 class="modal-title">เลือกรูป</h5>
-				</div>
-				<div class="modal-body">
-					<div class="row-fluid wrap"> 
-						
-					</div>
-				</div>
-				<div class="modal-footer">
-					<div align="center">
-						<button class="btn btn-success" id="btnSubmitAddImage" type="button">
-							&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;เลือก&nbsp;&nbsp;
-						</button>&nbsp;&nbsp;
-						<button data-dismiss="modal" class="btn btn-danger" type="button">
-							<i class="fa fa-times-circle"></i>&nbsp;ยกเลิก
+		<div aria-hidden="true" role="dialog" tabindex="-1" id="addImage"
+			class="modal inmodal in"
+			style="width: 400px; left: calc; display: none;">
+			<div class="modal-dialog">
+				<div class="modal-content  bounceInRight">
+					<div class="modal-header">
+						<button data-dismiss="modal" class="close" type="button"
+							style="padding-top: 3px">
+							<span aria-hidden="true"><i class='fa fa-times'></i></span><span
+								class="sr-only">Close</span>
 						</button>
+						<h5 class="modal-title">เลือกรูป</h5>
+					</div>
+					<div class="modal-body">
+						<div class="row-fluid wrap"> 
+							
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div align="center">
+							<button class="btn btn-success" id="btnSubmitAddImage" type="button">
+								&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;เลือก&nbsp;&nbsp;
+							</button>&nbsp;&nbsp;
+							<button data-dismiss="modal" class="btn btn-danger" type="button">
+								<i class="fa fa-times-circle"></i>&nbsp;ยกเลิก
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+		
+		<!-- Modal edit folder Start -->
+		<div aria-hidden="true" role="dialog" tabindex="-1" id="editFolder"
+			class="modal inmodal in"
+			style="width: 400px; left: calc; display: none;">
+			<div class="modal-dialog">
+				<div class="modal-content  bounceInRight">
+					<div class="modal-header">
+						<button data-dismiss="modal" class="close" type="button"
+							style="padding-top: 3px">
+							<span aria-hidden="true"><i class='fa fa-times'></i></span><span
+								class="sr-only">Close</span>
+						</button>
+						<h5 class="modal-title">แก้ไขแฟ้มรูป</h5>
+					</div>
+					<div class="modal-body">
+						<div class="row-fluid">
+							<div class=""> <label class=" ">ชื่อแฟ้ม: </label> 
+								<input type="text" id="edit_folderName" class="">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div align="center">
+							<button class="btn btn-success" id="btnSubmitEditFolder" type="button">
+								&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;ตกลง&nbsp;&nbsp;
+							</button>&nbsp;&nbsp;
+							<button data-dismiss="modal" class="btn btn-danger" type="button">
+								<i class="fa fa-times-circle"></i>&nbsp;ยกเลิก
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		
 	</div>
 </div>
@@ -1204,21 +1239,34 @@ $(document).ready(function() {
 		        includeSelectAllOption: false,
 		        maxHeight: 200
 		    });
-			getList();
 		});
 		
-		$('#btn_search').click(function(){	getList();  });
+		$('#btn_search').click(function(){	getList(1);  });
+		$('#countPaginationBottom').change(function(){	getList(1);  });
 		$('body').on('click','.add_procedure', function () {
 			clearAll();
-			getAjax($plRoute+'/getOnePatient','get',{patient_id:$(this).data('patient_id')},function(rs){
+			$('#modalAdd').modal({
+				backdrop: 'static',
+			    keyboard: false});
+			$.ajax({
+				url:$plRoute+'/getOnePatient',
+				type : 'GET',
+				dataType : "json",
+				data : {patient_id:$(this).data('patient_id')},
+				async:true,
+				headers:{Authorization:"Bearer "+tokenID.token},
+				success : function(rs) {
 				console.log(rs);
 				if(rs){
 					pushData_patient(rs);
 					if(rs.social) pushData_socialMedia(rs.social);
 					if(rs.surgery) pushData_sugery(rs.surgery);
 					$('#case_stage').data('id',1);
+					getCurrentStage($('#case_stage').data('id'),'#case_stage_fromStage');
+					getCurrentStage($('#case_stage').data('id'),'#case_stage_toStage');
 					$('.btn-action').hide();
 					checkRoleAuthurize($('#case_stage').data('id'));
+				}
 				}
 			});
 
@@ -1227,78 +1275,98 @@ $(document).ready(function() {
 		
 		/* edit case */
 		$('body').on('click','.edit-list,#addCase',function(){		
-			getAjax($plRoute+'/getOneCase','get',{case_id:$(this).closest('.case_list').data('id')},function(rs){
-				console.log(rs);
-				clearAll();
-				if(rs){
-					if(rs.patient){
-						pushData_patient(rs.patient);
-						pushData_patientCase(rs);
-						$('#review_image img').attr('src',$host+rs.patient.image_path);
-						if(rs.patient.social) 	pushData_socialMedia(rs.patient.social);
-						if(rs.patient_surgery) 	pushData_sugery(rs.patient_surgery);
-						
-						if(rs.case_social_media)pushData_caseSocialMedia(rs.case_social_media);
-						if(rs.case_follow_up) 	pushData_caseFollowup(rs.case_follow_up);
-						if(rs.case_price)		pushData_casePrice(rs.case_price);
-						if(rs.case_coordinate)	pushData_caseCoordinate(rs.case_coordinate);
-						if(rs.case_appointment)	pushData_caseAppointment(rs.case_appointment);
-						if(rs.case_contract)	pushData_caseContact(rs.case_contract);
-						if(rs.case_pr)			pushData_casePr(rs.case_pr);
-						if(rs.folder)			getFolder(rs.folder);
-						if(rs.case_article)		pushData_caseArticle(rs.case_article);
-						if(rs.caseStageHistory)	pushData_workFlow(rs.caseStageHistory);
-						if(rs.stage) {
-							$('#case_stage').data('id',rs.stage.stage_id);
-							getCurrentStage(rs.stage.stage_id,'#case_stage_fromStage');
-							getStage(rs.stage.stage_id);
+			clearAll();
+			$('#modalAdd').modal({
+				backdrop: 'static',
+			    keyboard: false});
+			$.ajax({
+				url:$plRoute+'/getOneCase',
+				type:"GET",
+				dataType:"json",
+				data:{case_id:$(this).closest('.case_list').data('id')},
+				headers:{Authorization:"Bearer "+tokenID.token},
+				async:true,
+				success:function(rs){
+					console.log(rs);
+					if(rs){
+						if(rs.patient){
+							pushData_patient(rs.patient);
+							pushData_patientCase(rs);
+							$('#review_image img').attr('src',$host+rs.patient.image_path);
+							if(rs.patient.social) 	pushData_socialMedia(rs.patient.social);
+							if(rs.patient_surgery) 	pushData_sugery(rs.patient_surgery);
+							
+							if(rs.case_social_media)pushData_caseSocialMedia(rs.case_social_media);
+							if(rs.case_follow_up) 	pushData_caseFollowup(rs.case_follow_up);
+							if(rs.case_price)		pushData_casePrice(rs.case_price);
+							if(rs.case_coordinate)	pushData_caseCoordinate(rs.case_coordinate);
+							if(rs.case_appointment)	pushData_caseAppointment(rs.case_appointment);
+							if(rs.case_contract)	pushData_caseContact(rs.case_contract);
+							if(rs.case_pr)			pushData_casePr(rs.case_pr);
+							if(rs.folder)			getFolder(rs.folder);
+							if(rs.case_article)		pushData_caseArticle(rs.case_article);
+							if(rs.caseStageHistory)	pushData_workFlow(rs.caseStageHistory);
+							if(rs.stage) {
+								$('#case_stage').data('id',rs.stage.stage_id);
+								getCurrentStage(rs.stage.stage_id,'#case_stage_fromStage');
+								getStage(rs.stage.stage_id);
+							}
+							
+						}else{
+							$('#case_stage').data('id',1);
+							console.log($('#case_stage').data('id'),'case stage id');
+							getCurrentStage($('#case_stage').data('id'),'#case_stage_fromStage');
+							getCurrentStage($('#case_stage').data('id'),'#case_stage_toStage');
+							$('#case_stage').find('.input_control').removeAttr('disabled');
 						}
-						
-					}else{
-						$('#case_stage').data('id',1);
-						console.log($('#case_stage').data('id'),'case stage id');
-						getCurrentStage($('#case_stage').data('id'),'#case_stage_fromStage');
-						getCurrentStage($('#case_stage').data('id'),'#case_stage_toStage');
-						$('#case_stage').find('.input_control').removeAttr('disabled');
 					}
-				}
-
-				$('.case_coordinate').attr('disabled','disabled').multiselect("refresh");
-				$('.input_control').attr('disabled','disabled');
-				$('.btn-action').hide();
-				checkRoleAuthurize($('#case_stage').data('id'));
 				
+
+					$('.case_coordinate').attr('disabled','disabled').multiselect("refresh");
+					$('.input_control').attr('disabled','disabled');
+					$('.btn-action').hide();
+					checkRoleAuthurize($('#case_stage').data('id'));
+				}
 			});
 		});
 		
 		function checkRoleAuthurize(stage_id){
 			console.log(stage_id,'-- stage_id')
-			getAjax($plRoute+'/sectionRole','get',{stage_id:stage_id},function(rs){
-				console.log(rs);
-				
-				$.each(rs.section,function(){
-					if(stage_id < 6){
-						if(this.section_id == 'patient' || this.section_id == 'patient_case' || this.section_id == 'case_coordinate'){
-							if(this.add_flag == 1 && this.edit_flag == 1){
-								$('#'+this.section_id).find('.input_control').removeAttr('disabled');
-								$('#'+this.section_id).find('.case_coordinate').removeAttr('disabled').multiselect("refresh");
+			$.ajax({
+				url: $plRoute+'/sectionRole',
+				type : 'GET',
+				dataType : "json",
+				data : {stage_id:stage_id},
+				async:true,
+				headers:{Authorization:"Bearer "+tokenID.token},
+				success : function(rs) {
+			//getAjax($plRoute+'/sectionRole','get',{stage_id:stage_id},function(rs){
+					console.log(rs);
+					
+					$.each(rs.section,function(){
+						//if(stage_id < 6){
+							if(this.section_id == 'patient' || this.section_id == 'patient_case' || this.section_id == 'case_coordinate'){
+								if(this.add_flag == 1 && this.edit_flag == 1){
+									$('#'+this.section_id).find('.input_control').removeAttr('disabled');
+									$('#'+this.section_id).find('.case_coordinate').removeAttr('disabled').multiselect("refresh");
+								}
 							}
-						}
-						if(this.add_flag == 1)		$('#'+this.section_id).find('.modal-add,.btn-other').show();
-						if(this.edit_flag == 1)		$('#'+this.section_id).find('.modal-edit').show();
-						if(this.delete_flag == 1)	$('#'+this.section_id).find('.btn-delete').show();
+							if(this.add_flag == 1)		$('#'+this.section_id).find('.modal-add,.btn-other').show();
+							if(this.edit_flag == 1)		$('#'+this.section_id).find('.modal-edit,.btn-edit').show();
+							if(this.delete_flag == 1)	$('#'+this.section_id).find('.btn-delete').show();
+						//}
+						if(this.upload_flag == 1)	$('#'+this.section_id).find('.btn-upload').show();
+						if(this.download_flag == 1)	$('#'+this.section_id).find('.btn-download').show();
+					});
+					$('body .notHide').show();
+					
+					if($.inArray(rs.stageRole.role_id, rs.userRole)!= -1){
+						$('#case_stage').find('.input_control').removeAttr('disabled');
+					}else{
+						$('#case_stage').find('.input_control').attr('disabled',true);
 					}
-					if(this.upload_flag == 1)	$('#'+this.section_id).find('.btn-upload').show();
-					if(this.download_flag == 1)	$('#'+this.section_id).find('.btn-download').show();
-				});
-				$('body .notHide').show();
-				
-				if($.inArray(rs.stageRole.role_id, rs.userRole)!= -1){
-					$('#case_stage').find('.input_control').removeAttr('disabled');
-				}else{
-					$('#case_stage').find('.input_control').attr('disabled',true);
+					$('#case_stage_notification').multiselect("refresh");
 				}
-				$('#case_stage_notification').multiselect("refresh");
 			});
 			
 		}
@@ -1347,7 +1415,7 @@ $(document).ready(function() {
 			    	console.log(rs,'rs cu');
 			    	if(rs.status==200){
 			    		callFlashSlide('บันทึกข้อมูลสำเร็จ','success');
-			    		getList();
+			    		getList(1);
 			    		$('#modalAdd').modal('hide');
 			    	}else if(rs.status==400){
 			    		callFlashSlide('ไม่สามารถบันทึกข้อมูลได้!!  กรุณาตรวจกรอกข้อมูล','error');
@@ -1396,7 +1464,7 @@ $(document).ready(function() {
 						var fileType = this.file_name.split('.')[this.file_name.split('.').length-1];
 						if(fileType == 'png' || fileType == 'jpg' || fileType == 'jpeg'){
 			  				html +='<li class="span6">'
-							    +'<a href="javascript:void(0);" data-imagepath="'+this.image_path+'" data-name="'+this.file_name+'" class="stage_upload_img thumbnail">'
+							    +'<a onclick="return false;" data-imagepath="'+this.image_path+'" data-name="'+this.file_name+'" class="stage_upload_img thumbnail">'
 							      +'<img src="'+$host+this.image_path+'" alt=""></a></li>';
 						}
 					});
@@ -1417,22 +1485,40 @@ $(document).ready(function() {
 		});
 		
 		function getCurrentStage(stage_id,target){
-			getAjax($plRoute+'/getStage','get',{stage_id:stage_id},function(rs){
-				console.log(rs,'current Stage');
-				$(target).html('<option selected data-status="'+rs.from_stage.stage_name+'" value="'+rs.from_stage_id+'">'+rs.from_stage.stage_name+'</option>');
+			$.ajax({
+				url: $plRoute+'/getStage',
+				type : 'GET',
+				dataType : "json",
+				data : {stage_id:stage_id},
+				async:true,
+				headers:{Authorization:"Bearer "+tokenID.token},
+				success : function(rs) {
+				//getAjax($plRoute+'/getStage','get',{stage_id:stage_id},function(rs){
+					console.log(rs,'current Stage');
+					$(target).html('<option selected data-status="'+rs.from_stage.stage_name+'" value="'+rs.from_stage_id+'">'+rs.from_stage.stage_name+'</option>');
+				}			
 			});
 		}
 		
 		function getStage(current_stage){
-			getAjax($plRoute+'/action_to','get',{stage_id:current_stage},function(rs){
-				console.log(rs,'getStage');
-				var html_stage_to = '<option data-status="" value="">บันทึกฉบับร่าง</option>';
-				if(rs.length > 0){
-					$.each(rs,function(){
-						html_stage_to +='<option data-status="'+this.status+'" value="'+this.stage_id+'">'+this.stage_name+'</option>';
-					}); 
-					$('#case_stage').find('.input_control').removeAttr('disabled');
-					$('#case_stage_toStage').html(html_stage_to);
+			$.ajax({
+				url: $plRoute+'/action_to',
+				type : 'GET',
+				dataType : "json",
+				data : {stage_id:current_stage},
+				async:true,
+				headers:{Authorization:"Bearer "+tokenID.token},
+				success : function(rs) {
+			//getAjax($plRoute+'/action_to','get',{stage_id:current_stage},function(rs){
+					console.log(rs,'getStage');
+					var html_stage_to = '<option data-status="" value="">บันทึกฉบับร่าง</option>';
+					if(rs.length > 0){
+						$.each(rs,function(){
+							html_stage_to +='<option data-status="'+this.status+'" value="'+this.stage_id+'">'+this.stage_name+'</option>';
+						}); 
+						$('#case_stage').find('.input_control').removeAttr('disabled');
+						$('#case_stage_toStage').html(html_stage_to);
+					}
 				}
 			})
 		}
@@ -1505,7 +1591,7 @@ $(document).ready(function() {
 			$.each(data.case_supervised,function(){
 				$html  += '<div data-user="'+this.supervised_id+'" class="bubble patient_case_supervisedBy alert-info">'
 							+this.user.firstName+'  '+this.user.lastName
-							+'<a href="javascript:void(0)" class="fa fa-times-circle remove_bubble btn-delete btn-action  remove_supervisedBy"></a>'
+							+'<a onclick="return false;" class="fa fa-times-circle remove_bubble btn-delete btn-action  remove_supervisedBy"></a>'
 							+'</div>';
 			});
 			$('.view_supervisedBy').append($html);
@@ -1672,8 +1758,8 @@ $(document).ready(function() {
 						var fileName = '';
 						if(this.contract_path)  fileName = this.contract_path.split("/").slice(-1)[0];
 						$html = '<div data-id="'+this.case_contract_doc_id+'" style="width:max-content;padding:3px;margin-top:10px" class="bg-info file_download">'
-							+'<a href="'+$host+this.contract_path+'" class="fa fa-file ">  '+fileName+'</a> '
-							+'<a href="javascript:void(0)" class="fa fa-times-circle remove_file btn-action btn-delete"></a></div>';
+							+'<a href="'+$host+this.contract_path+'" target="_blank" class="fa fa-file ">  '+fileName+'</a> '
+							+'<a href="#" onclick="return false;" class="fa fa-times-circle remove_file btn-action btn-delete"></a></div>';
 						$('#case_contract tbody tr:last-child').find('.case_contract_upload').parent().append($html);
 					});
 				}
@@ -1729,8 +1815,8 @@ $(document).ready(function() {
 						var fileName = '';
 						if(this.article_path) fileName = this.article_path.split("/").slice(-1)[0];
 						$html = '<div data-id="'+this.case_article_doc_id+'" style="width:max-content;padding:3px;margin-top:10px" class="bg-info file_download">'
-							+'<a href="'+$host+this.article_path+'" class="fa fa-file ">  '+fileName+'</a> '
-							+'<a href="javascript:void(0)" class="fa fa-times-circle remove_file"></a></div>';
+							+'<a href="'+$host+this.article_path+'" target="_blank" class="fa fa-file ">  '+fileName+'</a> '
+							+'<a href="#" onclick="return false;" class="fa fa-times-circle remove_file"></a></div>';
 						$('#case_article tbody tr:last-child').find('.case_article_upload').parent().append($html);
 					});
 				} 
@@ -2034,7 +2120,6 @@ $(document).ready(function() {
 			var elm_file = $(this).parent();
 			$('#confrimModal').modal('show');
 			$('#btnConfirmOK').one('click',function(){
-				console.log({method:elm_file.closest('.wrap').attr('id'),file_id:elm_file.data('id')});
 				getAjax($plRoute+'/deleteFile','post',{method:elm_file.closest('.wrap').attr('id'),file_id:elm_file.data('id')},function(rs){
 					console.log(rs);
 					$('#confrimModal').modal('hide');
@@ -2216,13 +2301,14 @@ $(document).ready(function() {
 		        });    
 		    },
 		    select: function (event, ui) {
-		    	$('.view_supervisedBy').append('<div data-user="'+ui.item.id+'" class="bubble patient_case_supervisedBy alert-info">'+ui.item.value+'<a href="javascript:void(0)" class="fa fa-times-circle remove_supervisedBy"></a></div>');
+		    	$('.view_supervisedBy').append('<div data-user="'+ui.item.id+'" class="bubble patient_case_supervisedBy alert-info">'+ui.item.value+'<a href="#" onclick="return false;" class="fa fa-times-circle remove_supervisedBy"></a></div>');
 		    	$(this).val(''); return false;
 		    }
 		});
 		$('body').on('click','.remove_supervisedBy',function(){$(this).parent().remove();});
 		
 		$('#btnAddFolder').click(function(){
+			$('#folderName').val('')
 			getAjax($plRoute+"/getFolder/"+$('#patient_case').data('id'),'get','',function(rs){
 		        var html_temp ='<option value="" >แฟ้มหลัก</option>';
 		        $.each(rs,function(){
@@ -2231,7 +2317,7 @@ $(document).ready(function() {
 				$('#addFolder .main_folder').html( html_temp );
 			}); 
 		});
-		$('#btnSubmitAddFolder').one("click", function( e ) {
+		$('#btnSubmitAddFolder').on("click", function( e ) {
 			var folder ={
 					folder_screen_name	:	$.trim($('#folderName').val()),
 					folder_parent_id	:	$('#addFolder .main_folder').val(),
@@ -2268,8 +2354,7 @@ $(document).ready(function() {
 
 		$("body").on('click','.btnIsOpen:not(.active)',function(e){
 			var thiss = $(this);
-			console.log($('#patient_case').data('id'));
-			getAjax($plRoute+"/updateFolder",'post',{case_id:$('#patient_case').data('id'),folder_id:$(this).closest('li').data('folder_id'),is_open:$(this).data('value')},function(rs){
+			getAjax($plRoute+"/updateFolder",'post',{case_id:$('#patient_case').data('id'),folder_id:$(this).closest('li.folder').data('folder_id'),is_open:$(this).data('value')},function(rs){
 				console.log(rs);
 				if(rs.status == 200){
 					thiss.closest('li').find('.wrap_volume').toggle();
@@ -2277,13 +2362,60 @@ $(document).ready(function() {
 					e.preventDefault();
 				}
 			});
-			//$(this).closest('li').find('ul').toggle();
 		});
 		
+		$("body").on('click','.btn_editFolder',function(e){
+			var thiss = $(this);
+			$('#edit_folderName').val('');
+			$('#btnSubmitEditFolder').one('click',function(){
+				var folder_name =  $.trim($('#edit_folderName').val());
+				console.log($.trim($('#edit_folderName').val()));
+				if(folder_name != ''){
+					var folder_id =  thiss.closest('li.folder').data('folder_id');
+					var case_id =  $('#patient_case').data('id');
+					getAjax($plRoute+"/updateFolder",'post',{case_id:case_id,folder_id:folder_id,folder_name:folder_name},function(rs){
+						console.log(rs,'updateFolder');
+						if(rs.status == 200){
+							callFlashSlide('แก้ไขแฟ้มข้อมูลสำเร็จ' ,'success');
+							thiss.closest('li.folder').find('.folder_name').text(rs.data);
+						}else	callFlashSlide(rs.error ,'error');
+					});
+				}else{
+					callFlashSlide('ไม่สามารถแก้ไขแฟ้มข้อมูลได้ !! กรุณากรอก ชื่อแฟ้มข้อมูล ' ,'error');
+				}
+				$('#editFolder').modal('hide');
+			});
+		});
+		
+		function getFolderSummary(folder_id,thiss){
+			var total = 0;
+			$.ajax({
+				url:$plRoute+"/getFolderSummary",
+				type:"GET",
+				dataType:"json",
+				data:{folder_id:folder_id},
+				async:true,
+				headers:{Authorization:"Bearer "+tokenID.token},
+				success: function(rs) {
+					console.log(rs,'getFolderSummary');
+					if(rs.status == 200){
+						var f_pass = rs.data[0].f_pass!==null?rs.data[0].f_pass:0;
+						var f_all = rs.data[0].f_all!==null?parseInt(rs.data[0].f_all):0;
+						if(f_pass == 0 && f_all == 0) total = 0;
+						else total = ((f_pass*100)/f_all).toFixed(2);
+					}
+					thiss.closest('li.parent').find('.volume').text(total);
+				}
+			});
+		}
+		
 		$("body").on('click','.isPass',function(e){
-			getAjax($plRoute+"/updateFolder",'post',{case_id:$('#patient_case').data('id'),folder_id:$(this).closest('li').data('folder_id'),is_pass:$(this).prop('checked')?1:0},function(rs){
+			var thiss = $(this);
+			var folder_id = $(this).closest('li').data('folder_id');
+			getAjax($plRoute+"/updateFolder",'post',{case_id:$('#patient_case').data('id'),folder_id:folder_id,is_pass:$(this).prop('checked')?1:0},function(rs){
+				console.log(rs,'updateFolder');
 				if(rs.status == 200){
-					
+					getFolderSummary(folder_id,thiss);
 				}else{
 					e.preventDefault();
 				}
@@ -2380,58 +2512,66 @@ $(document).ready(function() {
 			console.log(data,'getFolder');
 			var html_temp = '';
 			$.each(data,function(){
-				var isOpen = this.case_folder.is_open==1?'active':'';
-				var isClose = this.case_folder.is_open==0?'active':'';
-				var volume_tik = this.case_folder.is_open==1?'block':'none';
-				var isNotHide = this.user_id == userId?'notHide':'';
-				html_temp +='<ul><li class="folder" data-folder_id="'+this.folder_id+'">'
-				+'<a href="javascript:void(0)" class="folder_toggle">'+this.folder_screen_name+'</a>'
-				+'<div style="float:right;"class="span6">'
-					+'<div class="wrap_volume span5" style="display:'+volume_tik+'">ปริมาณรูป&nbsp;&nbsp;<span class="volume">0</span>&nbsp;%</div>'
-					+'<div class="btn-group span5" data-toggle="buttons-radio">'
-						+'<button type="button" data-value="1" class="btnIsOpen btn btn-other btn-action '+isOpen+' ">เปิด</button>'
-						+'<button type="button" data-value="0" class="btnIsOpen btn btn-other btn-action '+isClose+' ">ปิด</button>'
-					+'</div><button class=" btn btn-danger del-folder btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div>';
-				if(this.case_file!=null){
-					html_temp +='<ul>';
-					$.each(this.case_file,function(){
-						var fileType = '';
-						isNotHide = this.user_id == userId?'notHide':'';
-						if(this.file_name)	fileType = this.file_name.split('.')[this.file_name.split('.').length-1];
-						html_temp 	+='<li class="file type-'+fileType+'" data-file_id="'+this.file_id+'" data-path="'+this.image_path+'" >'
-						+'<a href="javascript:void(0)" >'+this.file_name+'</a>'
-						+'<a target="_blank" href="'+$host+this.image_path+'" download class="fa fa-download btn-download btn-action" download style="position: relative;left: 40px;"></a>'
-						+'<div style="float:right;"class="span2"><button class=" btn btn-danger del-file btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div></li>';		
-					});	html_temp +='</ul>';
-				}
-				if(this.sub_folder!=null){
-					html_temp +='<ul>';
-					$.each(this.sub_folder,function(){
-						if(this.case_folder){
+				if(this.case_folder!=null){
+					var isOpen = this.case_folder.is_open==1?'active':'';
+					var isClose = this.case_folder.is_open==0?'active':'';
+					var volume_tik = this.case_folder.is_open==1?'block':'none';
+					var isNotHide = this.user_id == userId?'notHide':'';
+					html_temp +='<ul><li class="folder parent" data-folder_id="'+this.folder_id+'">'
+					+'<a href="#" onclick="return false;" class="folder_toggle folder_name">'+this.folder_screen_name+'</a>'
+					+'<a href="#" onclick="return false;" class="fa fa-edit btn-edit btn-action btn_editFolder" data-target="#editFolder" data-toggle="modal" style="position: relative; left: 40px; display: inline-block;"></a>'
+					+'<div style="float:right;"class="span6">'
+						+'<div class="wrap_volume span5" style="display:'+volume_tik+'">ปริมาณรูป&nbsp;&nbsp;<span class="volume"></span>&nbsp;%</div>'
+						+'<div class="btn-group span5" data-toggle="buttons-radio">'
+							+'<button type="button" data-value="1" class="btnIsOpen btn btn-other btn-action '+isOpen+' ">เปิด</button>'
+							+'<button type="button" data-value="0" class="btnIsOpen btn btn-other btn-action '+isClose+' ">ปิด</button>'
+						+'</div><button class=" btn btn-danger del-folder btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div>';
+					if(this.case_file!=null){
+						html_temp +='<ul>';
+						$.each(this.case_file,function(){
+							var fileType = '';
 							isNotHide = this.user_id == userId?'notHide':'';
-							var isPass = this.case_folder.is_pass==1?'checked':'';
-							html_temp 	+='<li class="folder" data-folder_id="'+this.folder_id+'" ><a href="javascript:void(0)" >'+this.folder_screen_name+'</a>'
-							+'<div style="float:right;"class="span6">'
-							+'<label class="span10"><input type="checkbox" '+isPass+' class="isPass btn-action btn-other">&nbsp;&nbsp;ผ่าน</label>'
-							+'<button class=" btn btn-danger del-folder btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div></li>';		
-							
-							if(this.case_file!=null){
-								html_temp +='<ul>';
-								$.each(this.case_file,function(){
-									var fileType = '';
-									isNotHide = this.user_id == userId?'notHide':'';
-									if(this.file_name)	fileType = this.file_name.split('.')[this.file_name.split('.').length-1];
-									html_temp 	+='<li class="file  type-'+fileType+'" data-file_id="'+this.file_id+'" data-path="'+this.image_path+'" >'
-									+'<a href="javascript:void(0)" >'+this.file_name+'</a>'
-									+'<a target="_blank" href="'+$host+this.image_path+'" class="fa fa-download btn-download btn-action" download style="position: relative;left: 40px;"></a>'
-									+'<div style="float:right;"class="span2"><button class=" btn btn-danger del-file btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div></li>';		
-								});	html_temp +='</ul>';
+							if(this.file_name)	fileType = this.file_name.split('.')[this.file_name.split('.').length-1];
+							html_temp 	+='<li class="file type-'+fileType+'" data-file_id="'+this.file_id+'" data-path="'+this.image_path+'" >'
+							+'<a href="#" onclick="return false;" >'+this.file_name+'</a>'
+							+'<a target="_blank" href="'+$host+this.image_path+'" download class="fa fa-download btn-download btn-action" download style="position: relative;left: 40px;"></a>'
+							+'<div style="float:right;"class="span2"><button class=" btn btn-danger del-file btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div></li>';		
+						});	html_temp +='</ul>';
+					}
+					if(this.sub_folder!=null){
+						html_temp +='<ul>';
+						$.each(this.sub_folder,function(){
+							if(this.case_folder){
+								isNotHide = this.user_id == userId?'notHide':'';
+								var isPass = this.case_folder.is_pass==1?'checked':'';
+								html_temp 	+='<li class="folder" data-folder_id="'+this.folder_id+'" >'
+								+'<a href="#" onclick="return false;" class="folder_name" >'+this.folder_screen_name+'</a>'
+								+'<a href="#" onclick="return false;" class="fa fa-edit btn-edit btn-action btn_editFolder" data-target="#editFolder" data-toggle="modal" style="position: relative; left: 40px; display: inline-block;"></a>'
+								+'<div style="float:right;"class="span6">'
+								+'<label class="span10"><input type="checkbox" '+isPass+' class="isPass btn-action btn-other">&nbsp;&nbsp;ผ่าน</label>'
+								+'<button class=" btn btn-danger del-folder btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div></li>';		
+								
+								if(this.case_file!=null){
+									html_temp +='<ul>';
+									$.each(this.case_file,function(){
+										var fileType = '';
+										isNotHide = this.user_id == userId?'notHide':'';
+										if(this.file_name)	fileType = this.file_name.split('.')[this.file_name.split('.').length-1];
+										html_temp 	+='<li class="file  type-'+fileType+'" data-file_id="'+this.file_id+'" data-path="'+this.image_path+'" >'
+										+'<a href="#" onclick="return false;" >'+this.file_name+'</a>'
+										+'<a target="_blank" href="'+$host+this.image_path+'" class="fa fa-download btn-download btn-action" download style="position: relative;left: 40px;"></a>'
+										+'<div style="float:right;"class="span2"><button class=" btn btn-danger del-file btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div></li>';		
+									});	html_temp +='</ul>';
+								}
 							}
-						}
-					});	html_temp +='</ul>';
-				}	html_temp +='</li></ul>';
+						});	html_temp +='</ul>';
+					}	html_temp +='</li></ul>';
+				}
 			}); 
 			$('#list >li > ul').html(html_temp);
+			$('.volume').each(function(){
+				getFolderSummary($(this).closest('li.parent').data('folder_id'),$(this));
+			});
 		}
 		
 		function validatetor(data) {
@@ -2475,8 +2615,11 @@ $(document).ready(function() {
 		}
 
 		$("#btnUpload_profileImage").change(function() {	readURL(this);	});
-		
-		function getList(){
+		/* click pagination */
+		$("#"+$appName+"_pagination").on('click','li:not(.disabled,.active) a',function(){
+			getList($(this).parent().attr("data-lp"));
+		});
+		function getList(page){
 			$data = { 	search		:$.trim($('#search_caseName').val()),
 						caseType	:$('#search_caseType').val(),
 						procedure	:$('#search_procedure').val(),
@@ -2487,9 +2630,10 @@ $(document).ready(function() {
 						followup	:$('#search_followup').val(),
 						case_group	:$('#search_case_group').val(),
 						vn			:$('#search_vn').val(),
+						perpage    	:$('#countPaginationBottom').val(),
 						
 					}
-			getAjax($plRoute+"/getCaseList",'get',$data,function(rs){
+			getAjax($plRoute+"/getCaseList?page="+page,'get',$data,function(rs){
 				console.log(rs);
 				 var html_temp = '';
 				 if(rs.data.length >0){
@@ -2513,14 +2657,15 @@ $(document).ready(function() {
 							+'<div > <input type="checkbox" '+is_good_case+' disabled=""> <span>Case ติดดาว</span> </div> '
 							+'<div > <input type="checkbox" '+is_good_review+' disabled=""> <span>Review ติดดาว</span> </div> '
 							+'<div> <span>สถานะงาน:</span><span>'+v.status+'</span> </div> '
-							+'<div> <button data-patient_id="'+v.patient.patient_id+'" class="btn btn-success add_procedure" data-target="#modalAdd" data-toggle="modal" data-backdrop="static" data-keyboard="false">เพิ่มหัตถการ</button> '
-								+'<button class="btn btn-warning edit-list"data-target="#modalAdd" data-toggle="modal" data-type="edit" data-backdrop="static" data-keyboard="false">แก้ไข</button> </div> </div> </div>';
+							+'<div> <button data-patient_id="'+v.patient.patient_id+'" class="btn btn-success add_procedure" data-keyboard="false">เพิ่มหัตถการ</button> '
+								+'<button class="btn btn-warning edit-list" data-type="edit" data-backdrop="static" data-keyboard="false">แก้ไข</button> </div> </div> </div>';
 						if(i%2==1) html_temp += '</div>';
 					}); 
-				 }
+
 					$('#show_list').html(html_temp);
+					getPagenation('#ba_pagination',rs);
+				 }
 			});
-			
 		}
 	}
 });

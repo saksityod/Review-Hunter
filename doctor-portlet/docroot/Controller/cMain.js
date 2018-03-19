@@ -12,6 +12,13 @@ $(document).ready(function() {
 });
 
 
+$( document ).ajaxStart(function() {
+	$("body").mLoading();
+});
+$( document ).ajaxStop(function() {
+	$("body").mLoading('hide');
+});
+
 function checkSession(paramTokenID){
 	$chk = true;
 	tokenID = paramTokenID == undefined || paramTokenID == ""  ? tokenID : paramTokenID ;

@@ -2325,6 +2325,7 @@ $(document).ready(function() {
 			}
 			console.log(folder);
 			getAjax($plRoute+"/makeDirectory",'post',folder,function(rs){
+				console.log(rs);
 				if(rs.status == 200){
 					callFlashSlide('สร้างแฟ้มข้อมูลสำเร็จ' ,'success');
 					getFolder(rs.data);
@@ -2425,7 +2426,7 @@ $(document).ready(function() {
 		$("body").on('click','.del-folder',function(e){
 			var thiss = $(this);
 			$('#btnConfirmOK').one("click", function( e ) {
-				getAjax($plRoute+"/destoryFolder",'post',{folder_id:thiss.closest('li').data('folder_id')},function(rs){
+				getAjax($plRoute+"/destoryFolder",'post',{folder_id:thiss.closest('li').data('folder_id'),case_id:$('#patient_case').data('id')},function(rs){
 					console.log(rs,'del-folder');
 					if(rs.status==200){ 
 						thiss.closest('ul').remove();
@@ -2442,6 +2443,7 @@ $(document).ready(function() {
 			var thiss = $(this);
 			$('#btnConfirmOK').one("click", function( e ) {
 				getAjax($plRoute+"/deleteFile",'post',{file_id:thiss.closest('li').data('file_id'),method:thiss.closest('.wrap').attr('id')},function(rs){
+					console.log(rs,'deleteFile');
 					if(rs.status==200){ 
 						callFlashSlide('ลบไฟล์สำเร็จ' ,'success');
 						thiss.closest('li').remove();

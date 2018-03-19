@@ -23,7 +23,6 @@ $(document).ready(function() {
 	        maxHeight: 200
 	    });
 		
-		
 		/* click pagination */
 		$("#"+$appName+"_pagination").on('click','li:not(.disabled,.active) a',function(){
 			getList($perpage,$(this).parent().attr("data-lp"),getDataToAjax());
@@ -45,15 +44,12 @@ $(document).ready(function() {
 			$('.btn-add').show();
 			$("#from_active").prop("checked",true);
 			$('.clickSelector').hide();
-			//addcheckboxDefault('btn_add');
 		});
 		
 		$('.btn-add').click(function(){
 			$('.'+$(this).data('method')+'-table tbody').append($(this).data('elm')); 
 			if($(this).data('method')=="work"){
 				$(".edit-exp").last().find('.build-work-datepicker').html($html_year);
-			} else {
-				//addcheckboxDefault('add');
 			}
 			
 		});
@@ -73,15 +69,32 @@ $(document).ready(function() {
 		});
 		
 		$('body').on("click", ".del_tr", function() {
-			if($(this).closest('tr').find('.edu-is-use').length==1) {
-				if($(this).closest('tr').find('.edu-is-use').prop('checked')==false) {
- 					this.closest('tr').remove();
- 				}
-				
-			} else {
-				this.closest('tr').remove();
-			}
-			
+			var thiss = $(this);
+			$('#confrimModal').modal({
+		    	backdrop: 'static',
+		      	keyboard: false
+		    }).one('click', '#btnConfirmOK', function(e) {
+		    	thiss.closest('tr').remove();
+		    	validateCheckedIsUse();
+		    	$('#confrimModal').modal('hide');
+//		    	if(thiss.closest('tr').find('.edu-is-use').length==1) {
+//					if(thiss.closest('tr').find('.edu-is-use').prop('checked')==false) {
+//						thiss.closest('tr').remove();
+//	 				}
+//				} else {
+//					thiss.closest('tr').remove();
+//				}
+		    });
+		});
+		
+		$('#close_form,#btn_cancel_form').click(function() {
+			$('#confrimModalCancel').modal({
+		    	backdrop: 'static',
+		      	keyboard: false
+		    }).one('click', '#btnConfirmOK2', function(e) {
+		    	$('#confrimModalCancel').modal('hide');
+		    	$('#ModalEditDetail').modal('hide');
+		    });
 		});
 		
 		/* del-edu,work */

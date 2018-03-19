@@ -176,10 +176,10 @@ plid = layout.getPlid();
 		<div class="modal-content bounceInRight">
 			<div class="modal-header"
 				style="background-color: rgb(0, 206, 215); border-color: rgb(0, 206, 215);">
-				<button data-dismiss="modal" class="close" type="button"
+				<button class="close" type="button"
 					style="padding-top: 5px">
 					<span aria-hidden="true"><i class='fa fa-times'></i></span><span
-						class="sr-only">Close</span>
+						class="sr-only" id="close_form">Close</span>
 				</button>
 				<!-- <i class="fa fa-laptop modal-icon"></i> -->
 				<h4 class="modal-title" id="modalTitleRole">ข้อมูลแพทย์</h4>
@@ -299,8 +299,8 @@ plid = layout.getPlid();
 							<button class="btn btn-info" type="button" id="btnLvSubmit">บันทึก</button>
 							<!-- <button class="btn btn-info" type="button" id="btnLvSubmit">บันทึก
 								และไปต่อ</button> -->
-							<button data-dismiss="modal" class="btn btn-danger btnCancle"
-								type="button">ยกเลิก</button>
+							<button class="btn btn-danger btnCancle"
+								type="button" id="btn_cancel_form">ยกเลิก</button>
 
 						</div>
 					</div>
@@ -351,6 +351,46 @@ plid = layout.getPlid();
 				</div>
 				<div class="alert alert-warning information" id="information"
 					style="display: none;"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal Confirm End -->
+
+<!-- Modal Confirm Start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModalCancel"
+	class="modal inmodal in"
+	style="width: 400px; left: calc; display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content  bounceInRight">
+			<div class="modal-header"
+				style="background-color: rgb(0, 206, 215); border-color: rgb(0, 206, 215);">
+				<button data-dismiss="modal" class="close" type="button"
+					style="padding-top: 3px">
+					<span aria-hidden="true"><i class='fa fa-times'></i></span><span
+						class="sr-only">Close</span>
+				</button>
+				<h5 class="modal-title">Confirm Dialog</h5>
+			</div>
+			<div class="modal-body">
+				
+				<div class="form-kpi-mangement">
+					<div class="form-kpi-label" align="center">
+						<label>Confirm to Cancel Data?</label>
+					</div>
+				</div>
+
+			</div><!-- modal body -->
+			<div class="modal-footer">
+				<div align="center">
+					<button class="btn btn-success" id="btnConfirmOK2" type="button">
+						&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+					</button>
+					&nbsp;&nbsp;
+					<button data-dismiss="modal" class="btn btn-danger" type="button">
+						<i class="fa fa-times-circle"></i>&nbsp;Cancel
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>

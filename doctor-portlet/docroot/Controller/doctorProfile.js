@@ -44,6 +44,7 @@ $(document).ready(function() {
 			$('.btn-add').show();
 			$("#from_active").prop("checked",true);
 			$('.clickSelector').hide();
+			$("#information_errors").hide();
 		});
 		
 		$('.btn-add').click(function(){
@@ -87,14 +88,23 @@ $(document).ready(function() {
 		    });
 		});
 		
-		$('#close_form,#btn_cancel_form').click(function() {
-			$('#confrimModalCancel').modal({
-		    	backdrop: 'static',
-		      	keyboard: false
-		    }).one('click', '#btnConfirmOK2', function(e) {
-		    	$('#confrimModalCancel').modal('hide');
-		    	$('#ModalEditDetail').modal('hide');
-		    });
+		//$('#close_form,#btn_cancel_form').click(function() {
+		//	$('#confrimModalCancel').modal({
+		//    	backdrop: 'static',
+		//      	keyboard: false
+		//    }).one('click', '#btnConfirmOK2', function(e) {
+		//    	$('#confrimModalCancel').modal('hide');
+		//    	$('#ModalEditDetail').modal('hide');
+		//    });
+		//});
+		
+		$('#btnConfirmOK2').click(function() {
+			$('#confrimModalCancel').modal('hide');
+			$('#ModalEditDetail').modal('hide');
+		});
+			
+		$('#btnCancelOK2').click(function() {
+			$('#confrimModalCancel').modal('hide');
 		});
 		
 		/* del-edu,work */
@@ -197,6 +207,7 @@ $(document).ready(function() {
 		$('body').on("click", ".edit", function(){
 			console.log('edit doctor data in table list');
 			$('.clickSelector').show();
+			$("#information_errors").hide();
 			//addcheckboxDefault('btn_edit');
 			$('.btn-cancel').hide(); 
 			$('.btn-edit,.btn-del,.btn-add').show(); 
@@ -277,7 +288,7 @@ $(document).ready(function() {
 			$(this).prop('checked', true);
 		});
 		$("#btnLvSubmit").on('click',function(){
-			if(validation()){
+			//if(validation()){
 				$id = $('#ModalEditDetail').data('id');
 				$name = $.trim($('#from_doctor_name').val());
 				$gender = $('#from_doctor_sex').val();
@@ -316,26 +327,29 @@ $(document).ready(function() {
 									doctor_name:$name,
 									gender:$gender,
 									expertise:$expertise,
-									is_active:$is_active 
+									is_active:$is_active,
+									doctor_procedure : $arr_proc
 								},
-								doctor_procedure : $arr_proc,
+								//doctor_procedure : $arr_proc,
 								doctor_education : $arr_edu,
 								doctor_work		 : $arr_work
 							}
-						};
+				};
+				//console.log($data,'data');
+				
 				getAjax($plRoute+"/crud",'post',$data,function(rs){
-					console.log(rs);
-					if(rs.status == 200){
+					//console.log(rs,'rs');
+					if(rs.status == 200) {
 						$('#ModalEditDetail').modal('hide');
 						getList($perpage,1,getDataToAjax());
-						callFlashSlide("ทำรายการสำเร็จ",'success');
+						callFlashSlide('บักทึกข้อมูลสำเร็จ!','success');
 					}else{
-						callFlashSlide("เกิดข้อผิดพลาดในการทำรายการ",'error');
+						validatetorInformation(validatetor(rs['errors'][0]));
 					}
 				});
-			}else{
-				callFlashSlide("กรุณากรอกข้อมูลให้ครบถ้วน",'error');
-			}
+// 			}else{
+// 				callFlashSlide("กรุณากรอกข้อมูลให้ครบถ้วน",'error');
+// 			}
 		})
 		
 		function validation(){

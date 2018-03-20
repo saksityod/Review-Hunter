@@ -27,7 +27,7 @@ $(document).ready(function() {
 					if(data.status == 200){
 						$("#modalAdd").modal('hide');
 						getList($perpage,1);
-						callFlashSlide('insert Success!','success');
+						callFlashSlide('บักทึกข้อมูลสำเร็จ!','success');
 						clearModal();
 					}else{	
 						validatetorInformation(validatetor(data['errors'][0]));
@@ -65,7 +65,7 @@ $(document).ready(function() {
 				$callback = function(data){
 					if(data.status==200){
 						getList($perpage,1);
-						callFlashSlide('Update Success!','success');
+						callFlashSlide('บักทึกข้อมูลสำเร็จ!','success');
 						$("#modalEdit").modal('hide');
 						clearModal();
 						$('#edit_'+$appName+'_name').removeAttr('data-id');
@@ -89,7 +89,7 @@ $(document).ready(function() {
 			$callback = function(data){
 				if(data.status==200){
 					getList($perpage,1);
-					callFlashSlide('Delete Success!','success');
+					callFlashSlide('ลบข้อมูลสำเร็จ!','success');
 				} else if (data.status == 400) {
 					callFlashSlide(data.data,'error');
 				} else {

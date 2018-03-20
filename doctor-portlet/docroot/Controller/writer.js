@@ -17,33 +17,6 @@ $(document).ready(function(){
 				$("#writing_end_date").val(getDateNow());
 			}
 			onload();
-			
-			//var perPagePaganation = 10;
-			
-			//pagination
-			var $pagination = $('#pg'),
-		      totalRecords = 0,
-		      records = [],
-		      displayRecords = [],
-		      recPerPage = 10,
-		      page = 1,
-		      totalPages = 0;
-			
-			function apply_pagination(data) {
-				//console.log('apply_pagination');
-			      $pagination.twbsPagination({
-			        totalPages: totalPages,
-			        visiblePages: 6,
-			        onPageClick: function (event, page) {
-			          displayRecordsIndex = Math.max(page - 1, 0) * recPerPage;
-			          endRec = (displayRecordsIndex) + recPerPage;
-
-			          displayRecords = records.slice(displayRecordsIndex, endRec);
-			          //generate_table();
-			          list_data_template_pagination(data);
-			        }
-			      });
-			}
 			 
 			function DropDownCurrentStep() {
 					$.ajax({
@@ -78,16 +51,10 @@ $(document).ready(function(){
 					data:{"stage_id":current_stage_id},
 					headers:{Authorization:"Bearer "+tokenID.token},
 					success:function(data){
-						//console.log(data,'action_to')
 						var htmlOption="";
-						//var htmlOption3="";
-						
 						$.each(data,function(index,indexEntry) {
 							htmlOption+="<option value="+indexEntry['stage_id']+"-"+indexEntry['status']+">"+indexEntry['stage_name']+"</option>";
-							//htmlOption3=indexEntry['to_user'];
 						});
-						
-						//$("#send_to").val(htmlOption3);
 						$("#to_step").html(htmlOption);
 					}
 				});
@@ -106,10 +73,7 @@ $(document).ready(function(){
 					data:{"stage_id":stage_id},
 					headers:{Authorization:"Bearer "+tokenID.token},
 					success:function(data){
-						
-						//console.log(data,'DropDownSendToStage');
 						var htmlOption="";
-						
 						$.each(data,function(index,indexEntry) {
 							htmlOption+="<option value="+indexEntry['userId']+"-"+indexEntry['emailAddress']+"-"+indexEntry['screenName']+">"+indexEntry['screenName']+"</option>";
 						});
@@ -168,8 +132,63 @@ $(document).ready(function(){
 					}
 				});
 			}
-				
-			function searchFN() {
+			
+			var paginationSetUpFn = function(pageIndex,pageButton,pageTotal) {
+				 if(pageTotal==0){
+				  pageTotal=1
+				 }
+				 $('.pagination_bottom').off("page");
+				 $('.pagination_bottom').bootpag({
+				     total: pageTotal,//page Total
+				     page: pageIndex,//page index
+				     maxVisible: 5,//จำนวนปุ่ม
+				     leaps: true,
+				     firstLastUse: true,
+				     first: '←',
+				     last: '→',
+				     wrapClass: 'pagination',
+				     activeClass: 'active',
+				     disabledClass: 'disabled',
+				     nextClass: 'next',
+				     prevClass: 'prev',
+				     next: 'next',
+				     prev: 'prev',
+				     lastClass: 'last',
+				     firstClass: 'first'
+				 }).on("page", function(event, num){
+				  var rpp=10;
+				  if($("#rpp").val()==undefined){
+				   rpp=10;
+				  }else{
+				   rpp=$("#rpp").val();
+				  }
+				  
+				  getData(num,rpp);
+				  
+				     $(".pagingNumber").remove();
+				     var htmlPageNumber= "<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='"+num+"'>";
+				     $("body").append(htmlPageNumber);
+				    
+				 }); 
+
+				 $(".countPagination").off("change");
+				 $(".countPagination").on("change",function(){
+
+				  //$("#countPaginationTop").val($(this).val());
+				  $("#countPaginationBottom").val($(this).val());
+				  
+				  getData(1,$(this).val());
+				  
+				  $(".rpp").remove();
+				  $(".pagingNumber").remove();
+				  var htmlRrp="";
+				   htmlRrp+= "<input type='hidden' id='rpp' name='rpp' class='rpp' value='"+$(this).val()+"'>";
+				         htmlRrp+="<input type='hidden' id='pageNumber' name='pageNumber' class='pagingNumber' value='1'>";
+				     $("body").append(htmlRrp);
+				 });
+			}
+			
+			function getData(page,rpp) {
 				var search_writer = $("#search_writer").val().split("-");
 				search_writer = (search_writer == '') ? '' : search_writer[0];
 					
@@ -192,29 +211,19 @@ $(document).ready(function(){
 						"doctor_id":doctor_id,
 						
 						"writing_start_date":writing_start_date,
-						"writing_end_date":writing_end_date
+						"writing_end_date":writing_end_date,
+						"page":page,
+						"rpp":rpp
 					},
 					success:function(data) {
-						//console.log(data);
 						GlobalDataWriter=data;
-						
-						//set pagination
-						//console.log(data.length)
-						if(data.length > 0) {
-							if(data.length <= 10) {
-								list_data_template(data);
-							} else {
-								records = data;
-							    totalRecords = records.length;
-							    totalPages = Math.ceil(totalRecords / recPerPage);
-							    apply_pagination(data);
-							}
-						} else {
-							callFlashSlide('ไม่พบข้อมูลการค้นหา!','warning')
-						}
+						list_data_template(data.data);
+						paginationSetUpFn(GlobalDataWriter['current_page'],GlobalDataWriter['last_page'],GlobalDataWriter['last_page']);
 					}
 				});
 			};
+				
+
 				
 			function InsertWriter() {
 					var doctor_id = $("#form_doctor").val().split("-");
@@ -223,12 +232,13 @@ $(document).ready(function(){
 					var writer = $("#author").val().split("-");
 					writer = (writer == '') ? null : writer[0];
 					
+					var writer_name = $("#author").val().split("-");
+					writer_name = (writer_name == '') ? null : writer_name[1];
+					
 					var writer_start_date = formatDateYMD($("#start_date").val());
 					var plan_date = formatDateYMD($("#plan_date").val());
 					var writing_end_date = formatDateYMD($("#writing_end_date").val());
 					var actual_date = formatDateYMD($("#actual_date").val());
-					
-					//console.log(actual_date,'actual_date');
 					
 					var user_id = {
 							"user_id":$("#alert_multi").val()
@@ -264,6 +274,7 @@ $(document).ready(function(){
 							"procedure_id":$("#procedure_name").val(),
 							"doctor_id":doctor_id,
 							"from_user_id":writer,
+							"from_user_name":writer_name,
 							"writing_start_date":writer_start_date,
 							"plan_date":plan_date,
 							
@@ -314,7 +325,7 @@ $(document).ready(function(){
 							//console.log(data)
 							if(data.status==200) {
 								$("#btn_modal_submit").attr('disabled',false);
-								callFlashSlide('Insert Success!','success')
+								callFlashSlide('บักทึกข้อมูลสำเร็จ!','success');
 	 							$("#ModalWriter").modal('hide');
 								//searchFN();
 							} else if (data.status==400) {
@@ -337,6 +348,9 @@ $(document).ready(function(){
 				
 				var writer = $("#author").val().split("-");
 				writer = (writer == '') ? null : writer[0];
+				
+				var writer_name = $("#author").val().split("-");
+				writer_name = (writer_name == '') ? null : writer_name[1];
 				
 				var writer_start_date = formatDateYMD($("#start_date").val());
 				var plan_date = formatDateYMD($("#plan_date").val());
@@ -378,6 +392,7 @@ $(document).ready(function(){
 						"procedure_id":$("#procedure_name").val(),
 						"doctor_id":doctor_id,
 						"from_user_id":writer,
+						"from_user_name":writer_name,
 						"writing_start_date":writer_start_date,
 						"plan_date":plan_date,
 						
@@ -428,7 +443,7 @@ $(document).ready(function(){
 						//console.log(data)
 						if(data.status==200) {
 							$("#btn_modal_submit").attr('disabled',false);
-							callFlashSlide('Update Success!','success')
+							callFlashSlide('บักทึกข้อมูลสำเร็จ!','success');
 							$("#ModalWriter").modal('hide');
 							//searchFN();
 						} else if (data.status==400) {
@@ -525,7 +540,7 @@ $(document).ready(function(){
 						{
 							//console.log(data);
 							if(data['status']==200){
-								callFlashSlide("Upload Success!");
+								callFlashSlide("อัพโหลดสำเร็จ!",'success');
 								//getDataFn();
 								$("body").mLoading('hide');
 								$('#file').val("");
@@ -533,7 +548,7 @@ $(document).ready(function(){
 								
 							}else{
 								//listErrorFn(data['errors']);
-								callFlashSlide('errors','No Files Data');
+								callFlashSlide('ไม่มีไฟล์ข้อมูล','error');
 								//getDataFn();
 								$("body").mLoading('hide');
 							}
@@ -555,7 +570,7 @@ $(document).ready(function(){
 					headers:{Authorization:"Bearer "+tokenID.token},
 					success: function(data){
 						if(data['status']==400){
-							callFlashSlide("No file Data!",'errors');
+							callFlashSlide('ไม่มีไฟล์ข้อมูล','error');
 						}
 					},
 					error: function(jqXHR, textStatus, errorThrown)
@@ -575,7 +590,7 @@ $(document).ready(function(){
 					headers:{Authorization:"Bearer "+tokenID.token},
 					success: function(data){
 						if(data['status']==400){
-							callFlashSlide("No file Data!",'errors');
+							callFlashSlide('ไม่มีไฟล์ข้อมูล','error');
 						}
 					},
 					error: function(jqXHR, textStatus, errorThrown)
@@ -584,32 +599,6 @@ $(document).ready(function(){
 		 				return false;
 					}
 				});
-			}
-			
-			function list_data_template_pagination(data) {
-				var TRTDHTML = "";
-				var TRTDClass = "style=\"vertical-align: middle;\"";
-				
-				for (var i = 0; i < displayRecords.length; i++) {
-				//$.each(data, function (key,value) {
-						TRTDHTML +=
-			                '<tr>'+
-			                '<td "'+TRTDClass+'">' + displayRecords[i].article_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + displayRecords[i].writer +'</td>'+
-			                '<td "'+TRTDClass+'">' + displayRecords[i].procedure_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + displayRecords[i].doctor_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + formatDateDMY(displayRecords[i].writing_start_date) +'</td>'+
-			                '<td "'+TRTDClass+'">' + formatDateDMY(displayRecords[i].writing_end_date) +'</td>'+
-			                '<td "'+TRTDClass+'">' + formatDateDMY(displayRecords[i].plan_date) +'</td>'+
-			                '<td "'+TRTDClass+'">' + displayRecords[i].article_type_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + displayRecords[i].status +'</td>'+
-			                '<td "'+TRTDClass+'"><button type="button" id="downloadfile-' + displayRecords[i].article_id +'" class="btn btn-primary input-sm getfile" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
-			                '&nbsp;<button type="button" id="uploadfile-' + displayRecords[i].article_id +'" class="btn btn-success input-sm getfile" data-target="#ModalImport" data-toggle="modal" title="อัพโหลด" data-placement="top"><i class="fa fa-upload"></i></button>'+
-			                '&nbsp;<button type="button" id="edit-' + displayRecords[i].article_id +'" class="btn btn-warning input-sm getfile" data-target="#ModalWriter" data-toggle="modal" data-backdrop="static" data-keyboard="false" title="แก้ไข" data-placement="top"><i class="fa fa-wrench"></i></button></td>'+
-			                '</tr>';
-			    //});
-				}
-				$('#result_search_writer').html(TRTDHTML);
 			}
 			
 			function list_data_template(data) {
@@ -628,9 +617,9 @@ $(document).ready(function(){
 			                '<td "'+TRTDClass+'">' + formatDateDMY(value.plan_date) +'</td>'+
 			                '<td "'+TRTDClass+'">' + value.article_type_name +'</td>'+
 			                '<td "'+TRTDClass+'">' + value.status +'</td>'+
-			                '<td "'+TRTDClass+'"><button type="button" id="downloadfile-' + value.article_id +'" class="btn btn-primary input-sm getfile" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
-			                '&nbsp;<button type="button" id="uploadfile-' + value.article_id +'" class="btn btn-success input-sm getfile" data-target="#ModalImport" data-toggle="modal" title="อัพโหลด" data-placement="top"><i class="fa fa-upload"></i></button>'+
-			                '&nbsp;<button type="button" id="edit-' + value.article_id +'" class="btn btn-warning input-sm getfile" data-target="#ModalWriter" data-toggle="modal" data-backdrop="static" data-keyboard="false" title="แก้ไข" data-placement="top"><i class="fa fa-wrench"></i></button></td>'+
+			                '<td "'+TRTDClass+'"><button style="margin-top:4px;" type="button" id="downloadfile-' + value.article_id +'" class="btn btn-primary input-sm getfile" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
+			                '&nbsp;<button style="margin-top:4px;" type="button" id="uploadfile-' + value.article_id +'" class="btn btn-success input-sm getfile" data-target="#ModalImport" data-toggle="modal" title="อัพโหลด" data-placement="top"><i class="fa fa-upload"></i></button>'+
+			                '&nbsp;<button style="margin-top:4px;" type="button" id="edit-' + value.article_id +'" class="btn btn-warning input-sm getfile" data-target="#ModalWriter" data-toggle="modal" data-backdrop="static" data-keyboard="false" title="แก้ไข" data-placement="top"><i class="fa fa-wrench"></i></button></td>'+
 			                '</tr>';
 			    });
 
@@ -638,8 +627,6 @@ $(document).ready(function(){
 			}
 			
 			function setDataAddAndEdit() {
-				$("#information_errors").hide();
-				
 				$('#alert_multi').multiselect({
 					  maxHeight: 200,
 					  onChange: function() {
@@ -652,8 +639,9 @@ $(document).ready(function(){
 				DropDownToStep();
 				DropDownSendToStage();
 				
-				var val_by_step = $("#by_step").val();
-				if(val_by_step>203) {
+				//console.log(GlobalCurrentStageID,'GlobalCurrentStageID')
+				//var val_by_step = $("#by_step").val();
+				if(GlobalCurrentStageID>203) {
 					$("#article_name,#article_type,#procedure_name,#form_doctor,#author,#start_date,#plan_date").attr("disabled",true);
 				} else {
 					$("#article_name,#article_type,#procedure_name,#form_doctor,#author,#start_date,#plan_date").attr("disabled",false);
@@ -673,6 +661,7 @@ $(document).ready(function(){
 				$(".countFileTargetFormWorkflow").empty();
 				
 				$("#workflow_history").empty();
+				$("#information_errors").hide();
 				
 			}
 			
@@ -808,7 +797,7 @@ $(document).ready(function(){
 						
 					});
 		        }
-		});
+			});
 			
 			DropDownAlertMulti();
 			DropDownArticleType();
@@ -833,12 +822,12 @@ $(document).ready(function(){
 					$("#search_end_date").focus();
 					callFlashSlide('โปรดระบุถึงวันที่!','warning')
 				} else {
-					searchFN();
+					//searchFN();
+					getData();
 				}
 			});
 			
-			$("#btn_add").click(function(){
-				clearDataIsEmpty();
+			$("#btn_add").click(function() {
 				InsertUpdateForCheck = "insert";
 				setDataAddAndEdit();
 			});
@@ -858,8 +847,6 @@ $(document).ready(function(){
 				
 			$("#result_search_writer").on("click",'.getfile',function() {
 				var ufile = $(this).attr('id').split("-");
-				//console.log(ufile);
-				//var ufile = $(this).attr('id');
 				GlobalWriterID = null;
 				GlobalStageID = null;
 				$('#file').val("");
@@ -869,21 +856,20 @@ $(document).ready(function(){
 				if(ufile[0]=='downloadfile') {
 					downloadfileFN(GlobalWriterID);
 				} else if(ufile[0]=='edit') {
-					clearDataIsEmpty();
 					InsertUpdateForCheck = "update";
 					GetDataEdit(GlobalWriterID);
 					setDataAddAndEdit();
 				}
 			});
 			
-			$('#close_form,#btn_cancel_form').click(function() {
-				$('#confrimModalCancel').modal({
-			    	backdrop: 'static',
-			      	keyboard: false
-			    }).one('click', '#btnConfirmOK2', function(e) {
-			    	$('#confrimModalCancel').modal('hide');
-			    	$('#ModalWriter').modal('hide');
-			    });
+			$('#btnConfirmOK2').click(function() {
+				$('#confrimModalCancel').modal('hide');
+			    $('#ModalWriter').modal('hide');
+			    clearDataIsEmpty();
+			});
+			
+			$('#btnCancelOK2').click(function() {
+				$('#confrimModalCancel').modal('hide');
 			});
 			
 			$("#workflow_history").on("click",'.getfileWorkflow',function() {

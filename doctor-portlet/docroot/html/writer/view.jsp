@@ -561,30 +561,25 @@
 				</table>
 			</div>
 			<!-- end table -->
-			
-			<!-- pagination start  -->
-			<div id="pager" class="pagination">
-				<ul id="pg"></ul>
-			</div>
-			
-<!-- 			<div class="row-fluid"> -->
-<!-- 				<div id="width-100-persen" class="span9 m-b-xs "> -->
-<!-- 					<span class="pagination_bottom m-b-none pagination"></span> -->
-<!-- 				</div> -->
-<!-- 				<div class="span3 object-right ResultsPerPageBottom"> -->
-<!-- 		            <div class='pagingDropdown'> -->
-<!-- 		                <select id='countPaginationBottom'  class="form-control input-sm countPagination"> -->
-<!-- 					       <option value="10">10</option> -->
-<!-- 					       <option value="20">20</option> -->
-<!-- 					       <option value="50">50</option> -->
-<!-- 					       <option value="100">100</option> -->
-<!-- 					    </select>  -->
-<!-- 			        </div> -->
-<!-- 					<div class='pagingText'>Results per page</div> -->
-<!-- 		        </div> -->
-<!-- 			</div> -->
-			<!-- pagination end  -->
-			
+			<!-- pagination start -->
+				<div class="row-fluid">
+					<div id="width-100-persen" class="span9 m-b-xs ">
+						<span class="pagination_bottom m-b-none pagination"></span>
+					</div>
+					<div class="span3 object-right ResultsPerPageBottom">
+		            	<div class='pagingDropdown'>
+		                <select  id='countPaginationBottom'  class="form-control input-sm countPagination">
+					       <option>10</option>
+					       <option>20</option>
+					       <option>50</option>
+					       <option>100</option>
+					    </select> 
+			            </div>
+					<div class='pagingText'>Results per page</div>
+		           </div>
+				</div>
+				</div>
+		<!-- pagination end -->
 		</div>
 		<!-- content end -->
 	</div>
@@ -597,7 +592,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content bounceInRight">
 			<div class="modal-header" style="background-color: rgb(0, 206, 215); border-color: rgb(0, 206, 215);">
-				<button class="close" type="button" style="padding-top: 5px" id="close_form">
+				<button class="close" type="button" style="padding-top: 5px" data-target=#confrimModalCancel data-toggle='modal' data-backdrop="static" data-keyboard="false">
 					<span aria-hidden="true"><i class='fa fa-times'></i></span>
 					<span class="sr-only">Close</span>
 				</button>
@@ -723,7 +718,7 @@
 						</div>
 						<div class="span5 form-horizontal p-t-xxs">
 							<div class="form-group p-xxs">
-								<label class="control-label">ส่งถึง :</label>
+								<label class="control-label">ส่งถึง:</label>
 								<div class="controls">
 <!-- 									<input type="text" class="form-control input-sm span12" -->
 <!-- 										placeholder="" name="send_to" id="send_to"> -->
@@ -807,7 +802,7 @@
 				<div class="modal-footer">
 					<button class="btn btn-success" type="submit" id="btn_modal_submit">Submit</button>
 					<button class="btn btn-danger btnCancle"
-						type="button" id="btn_cancel_form">Cancel</button>
+						type="button" id="btn_cancel_form" data-target=#confrimModalCancel data-toggle='modal' data-backdrop="static" data-keyboard="false">Cancel</button>
 						<div class="alert alert-warning information" id="information"
 						style="display: none;height:120px; overflow-y: scroll; position:relative;"></div>
 				</div>
@@ -963,13 +958,13 @@
 					<span aria-hidden="true"><i class='fa fa-times'></i></span><span
 						class="sr-only">Close</span>
 				</button>
-				<h5 class="modal-title">Confirm Dialog</h5>
+				<h5 class="modal-title">ยืนยันการปิดแบบฟอร์ม</h5>
 			</div>
 			<div class="modal-body">
 				
 				<div class="form-kpi-mangement">
 					<div class="form-kpi-label" align="center">
-						<label>Confirm to Cancel Data?</label>
+						<label>คุณต้องการปิดแบบฟอร์มนี้หรือไม่?</label>
 					</div>
 				</div>
 
@@ -980,7 +975,7 @@
 						&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
 					</button>
 					&nbsp;&nbsp;
-					<button data-dismiss="modal" class="btn btn-danger" type="button">
+					<button class="btn btn-danger" type="button" id="btnCancelOK2" >
 						<i class="fa fa-times-circle"></i>&nbsp;Cancel
 					</button>
 				</div>

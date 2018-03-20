@@ -47,7 +47,7 @@ $(document).ready(function() {
 				if(data.status == 200){
 					$("#modalAdd").modal('hide');
 					getList($perpage,1);
-					callFlashSlide('insert Success!','success');
+					callFlashSlide('บักทึกข้อมูลสำเร็จ!','success');
 					clearModal();
 				}else{
 					validatetorInformation(validatetor(data['errors'][0]));

@@ -44,16 +44,19 @@
     color: orange;
     font-size: 25px;
     padding-right: 10px;
+    float: left;
 }
 #list li ul li.folder:before {
 	font-family: FontAwesome;
     content: "\f07b";
+    float: left;
 }
 #list li ul li.file:before {
 	font-family: FontAwesome;
     content: "\f15b";
     color: #0aba1d;
     font-size: 20px;
+    float: left;
 }
 #list li ul li.file.type-jpg:before,
 #list li ul li.file.type-png:before,
@@ -123,9 +126,7 @@ padding-top: 5px;
     float: left;
     padding-right: 10px;
 }	
-.remove_supervisedBy{
-        margin-left: 5px;
-}
+.remove_supervisedBy{	margin-left: 5px;	}
 #fileForm {
  width: 100%;
  height: 100%;
@@ -133,22 +134,83 @@ padding-top: 5px;
 .coordinate_group{ margin-bottom:15px}
 .ui-autocomplete{ z-index:1099 !important}
 .aui li{ margin-top: 5px;}
-
 .aui .btn.active, .aui .btn:active{ background: #0044cc ;color:white}
-.case_list {
-    margin-bottom: 20px;
-}
-.wrap{
-	margin-bottom: 40px;
-}
-
+.case_list {	margin-bottom: 20px;	}
+.wrap{	margin-bottom: 40px;	}
 .stage_upload_img{	 }
 .stage_upload_img.active{filter:opacity(30%);border : 5px solid blue!important}
-
 .redFont{ float:inherit; }
 .hr1{     margin: 5px 0 !important; }
-</style>
+.wrap_option{ display: inline-flex;}
+.btn-group { display: inline-flex; padding-right:20px }
+.wrap_volume { padding-right: 40px; }
+.del-folder,.btn-delete{ padding: 5px !important;}
+	.aui .wrap_isPass{ display: inline-flex;    margin-right: 70px; }
+	.aui .btn-group, .aui .button-holder{ display: inline-flex; }
+.ms-container{ width:auto !important }
+.file_name{	float: left;
+			    max-width: 150px;
+			    white-space: nowrap;
+			    overflow: hidden;
+			    text-overflow: ellipsis; 
+			    padding-left:30px}
+	.folder_name{float: left;
+			    max-width: 80px;
+			    white-space: nowrap;
+			    overflow: hidden;
+			    text-overflow: ellipsis; 
+			    padding-left:30px}
+.wrap_button{    display: inline;}
+.file_name:hover{ cursor:pointer}
+			    
+@media  only screen and (max-width: 979px){
+.file a.file_name,.file a.folder_name{ white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+	.aui body{	padding:0;	}
+	.aui select,.aui .input_control{
+	    max-width: 100% !important;
+	    font-size: 13px !important;
+	}
+	.aui button,.aui .btn{
+	    font-size: 13px !important;
+	    width: auto !important;
+    	padding: 0px 10px !important;
+    	margin-right:5px;
+    	margin-top:0px;
+	}
+	.aui .btnIsOpen{	margin:0px	}
+	.aui input,.aui select{
+	    font-size: 13px !important;
+	    width: auto !important;
+	    display: inline-block !important;
+	}
+	.aui input[type='file']{
+	    font-size: 13px !important;
+	    width: auto !important;
+    	padding: 0 5px !important;
+	    display: inline-block !important;
+	}
+	.aui .case_list{	padding:10px;	}
+	.aui .wrap_button{	display:inline-flex;	}
+	.aui .table-responsive {
+	    width: 100%;
+	    margin-bottom: 15px;
+	    overflow-y: hidden;
+	}
+	.aui .label-control{	width: max-content;	}
+	#list, #list ul{ 
+		padding-left: 10px;
+	    text-indent: 0; 
+	}
+	.volume_title{ display:none}
+	.wrap_volume{ padding-right: 10px; }
+	#list > li:before{     font-size: 25px; }
+	#list li ul li:before{ font-size: 20px; }
+	.btn-group { display: inline-flex; padding-right:10px }
+	.file_name{	padding-left:0px}
+	.folder_name{padding-left:0px}
+}
 
+</style>
 <input type="hidden" id="user_portlet" name="user_portlet"
 	value="<%=username%>">
 <input type="hidden" id="pass_portlet" name="pass_portlet"
@@ -329,31 +391,31 @@ padding-top: 5px;
 							</label>
 						</div>
 						<div class="row-fluid">
-							<div class="span3">
+							<div class="form-group span3">
 								<label>เลข HN: </label><input type="text" id="patient_hnNo"  class=" input_control">
 							</div>
-							<div class="span3">
+							<div class="form-group span3">
 								<label class=" ">ชื่อ : <span class="redFont ">*</span></label><input type="text" id="patient_name" class=" input_control">
 							</div>
-							<div class="span2">
+							<div class="form-group span2">
 								<label class=" ">ชื่อเล่น : </label><input type="text" id="patient_nickName" class=" input_control">
 							</div>
-							<div class="span3">
+							<div class="form-group span3">
 								<label class=" ">วันเดือนปีเกิด : <span class="redFont ">*</span></label>
 								<input type="text" id="patient_birthDate" class="datepicker input_control">
 							</div>
-							<div class="span1">
-								<label class="">อายุ : </label><div class='yearOld'></div>
+							<div class="form-group span1">
+								<label class="">อายุ : <div class='yearOld'></div></label>
 							</div>	
 						</div>
 						<div class="row-fluid">
-							<div class="span3">
+							<div class="form-group span3">
 								<label >สัญชาติ : <span class="redFont ">*</span></label>
 								<select id="patient_nationality" class="nationality input_control">
 									<option value=""> ---- เลือกสัญชาติ ---- </option>
 								</select>
 							</div>
-							<div class="span3">
+							<div class="form-group span3">
 								<label class="">เพศ : <span class="redFont ">*</span></label>
 								<select id="patient_gender" class=" input_control">
 									<option value=""> ---- เลือกเพศ ---- </option>
@@ -361,49 +423,49 @@ padding-top: 5px;
 									<option value="female">หญิง</option>
 								</select>
 							</div>
-							<div class="span6">
+							<div class="form-group span6">
 								<label class="">เลขที่บัตรประจำตัวประชาชน/หนังสือเดินทาง : <span class="redFont ">*</span></label><input type="text" id="patient_idCard" class=" input_control">
 							</div>
 						</div>
 						<div class="row-fluid">
-							<div class="span3">
+							<div class="form-group span3">
 								<label class="">บ้านเลขที่ : <span class="redFont ">*</span></label><input type="text" id="patient_homeNo" class=" input_control">
 							</div>
-							<div class="span3">
+							<div class="form-group span3">
 								<label class="">หมู่ที่ : </label><input type="text" id="patient_moo" class=" input_control">
 							</div>
-							<div class="span6">
+							<div class="form-group span6">
 								<label class="">อาชีพ : </label><input type="text" id="patient_career" class=" input_control">
 							</div>
 						</div>
 						<div class="row-fluid">
-							<div class="span3">
+							<div class="form-group span3">
 								<label class=" ">ซอย : </label><input type="text" id="patient_soi" class=" input_control">
 							</div>
-							<div class="span3">
+							<div class="form-group span3">
 								<label class=" ">ถนน : </label><input type="text" id="patient_road" class=" input_control">
 							</div>
-							<div class="span3">
+							<div class="form-group span3">
 								<label class=" ">โทรศัพท์มือถือ : <span class="redFont ">*</span></label><input type="text" id="patient_mobile" class=" input_control">
 							</div>
-							<div class="span3">
+							<div class="form-group span3">
 								<label class="">โทรศัพท์บ้าน : </label><input type="text" id="patient_telNo" class=" input_control">
 							</div>
 						</div>
 						<div class="row-fluid">
-							<div class="span3">
+							<div class="form-group span3">
 								<label class="">จังหวัด : <span class="redFont ">*</span></label>
 								<select id="patient_province" class=" input_control">
 									<option value=""> ---- เลือกจังหวัด ---- </option>
 								</select>
 							</div>
-							<div class="span3">
+							<div class="form-group span3">
 								<label class="">อำเภอ/เขต : <span class="redFont ">*</span></label><select id="patient_amphur" class=" input_control"></select>
 							</div>
-							<div class="span3">
+							<div class="form-group span3">
 								<label class="">ตำบล/แขวง : <span class="redFont ">*</span></label><select id="patient_district" class=" input_control"></select>
 							</div>
-							<div class="span3">
+							<div class="form-group span3">
 								<label class="">รหัสไปรษณีย์ : </label><div id="patient_zipcode" ></div>
 							</div>
 						</div>
@@ -412,64 +474,73 @@ padding-top: 5px;
 					
 					<!-- patient_social_media -->
 					<div class="row-fluid wrap" id="patient_social_media">
-						<h4>ข้อมูล Social Network &nbsp;&nbsp;&nbsp;&nbsp;
-							<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
-									<td><select class="patient_social_media_type social">
-										<option value=""> ---- เลือกสื่อ ---- </option></select></td>
-									<td><input type="text" class="patient_social_media_link"></td>
-									<td><input type="number" class="patient_social_media_follow"></td>
-									<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
-								</tr>'
-							>เพิ่ม</button>
-							<button class="btn btn-warning modal-edit btn-action">แก้ไข</button>
-							<button class="btn btn-danger modal-cancel pull-right btn-action">ยกเลิก</button> 
+						<h4>ข้อมูล Social Network &nbsp;&nbsp;
+							<div class="wrap_button">
+								<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
+										<td><select class="patient_social_media_type social">
+											<option value=""> ---- เลือกสื่อ ---- </option></select></td>
+										<td><input type="text" class="patient_social_media_link"></td>
+										<td><input type="number" class="patient_social_media_follow"></td>
+										<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
+									</tr>'
+								>เพิ่ม</button>
+								<button class="btn btn-warning modal-edit btn-action">แก้ไข</button>
+								<button class="btn btn-danger modal-cancel pull-right btn-action">ยกเลิก</button> 
+							</div>
 						</h4> 
 						<hr/>
-						<table class="table table-bordered">
-							<thead>
-								<tr>
-									<th>ประเภท <span class="redFont ">*</span></th>
-									<th>บัญชีผู้ใช้งาน/ลิ้งค์ <span class="redFont ">*</span></th>
-									<th>จำนวน Follower <span class="redFont ">*</span></th>
-									<th width="20px"></th>
-								</tr>
-							</thead>
-							<tbody></tbody>
-						</table>
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>ประเภท <span class="redFont ">*</span></th>
+										<th>บัญชีผู้ใช้งาน/ลิ้งค์ <span class="redFont ">*</span></th>
+										<th>จำนวน Follower <span class="redFont ">*</span></th>
+										<th width="20px"></th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
 					</div>
 					
 					
 					<!-- surgery_history -->
 					<div class="row-fluid wrap" id="surgery_history">
-						<h4>ประวัติศัลยกรรม &nbsp;&nbsp;&nbsp;&nbsp;
-							<button class="btn btn-success modal-add  btn-action" data-tr='<tr class="dump_tr">
-									<td><select class="surgery_year reverse_year">
-										<option value=""> ---- เลือกปี ---- </option></select></td>
-									<td><div class="surgery_lengthYear"></div></td>
-									<td><input type="text" class="surgery_clinic"></td>
-									<td><input type="text" class="surgery_doctor"></td>
-									<td><input type="text" class="surgery_procedure"></td>
-									<td><input type="text" class="surgery_remark"></td>
-									<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
-								</tr>'>เพิ่ม</button>
-							<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
-							<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
+						<h4>ประวัติศัลยกรรม &nbsp;&nbsp;
+							<div class="wrap_button">
+								<button class="btn btn-success modal-add  btn-action" data-tr='<tr class="dump_tr">
+										<td><select class="surgery_year reverse_year">
+											<option value=""> ---- เลือกปี ---- </option></select></td>
+										<td><div class="surgery_lengthYear"></div></td>
+										<td><input type="text" class="surgery_clinic"></td>
+										<td><input type="text" class="surgery_doctor"></td>
+										<td><input type="text" class="surgery_procedure"></td>
+										<td><input type="text" class="surgery_remark"></td>
+										<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
+									</tr>'>เพิ่ม</button>
+								<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
+								<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
+							</div>
 						</h4> 
 						<hr/>
-						<table class="table table-bordered">
-							<thead>
-								<tr>
-									<th>ปี <span class="redFont ">*</span></th>
-									<th>ระยะเวลา(ปี)</th>
-									<th>คลินิก/โรงพยาบาล </th>
-									<th>แพทย์</th>
-									<th>หัตถการ  <span class="redFont ">*</span></th>
-									<th>หมายเหตุ</th>
-									<th width="20px"></th>
-								</tr>
-							</thead>
-							<tbody></tbody>
-						</table>
+						
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>ปี <span class="redFont ">*</span></th>
+										<th>ระยะเวลา(ปี)</th>
+										<th>คลินิก/โรงพยาบาล </th>
+										<th>แพทย์</th>
+										<th>หัตถการ  <span class="redFont ">*</span></th>
+										<th>หมายเหตุ</th>
+										<th width="20px"></th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
 					</div>
 					
 					
@@ -507,7 +578,6 @@ padding-top: 5px;
 								<span class="add_supervisedBy"><i class="fa fa-angle-double-right text-success"></i></span> 
 							</div>
 							<div class="span9">
-								<label class=" ">&nbsp; </label>
 								<div class="view_supervisedBy"></div>
 							</div>
 						</div>
@@ -550,16 +620,18 @@ padding-top: 5px;
 					
 					<div class="row-fluid wrap" id="case_followup">
 						<div class="row-fluid">
-							<h4 class="">หัตถการที่ควรทำ &nbsp;&nbsp;&nbsp;&nbsp; 
-								<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
-										<td><select class="case_followup_procedure procedure">
-											<option value=""> ---- เลือกหัตถการ ---- </option></select></td>
-										<td><select class="case_followup_year next_year">
-											<option value=""> ---- เลือกปี ---- </option></select></td>
-										<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
-									</tr>'>เพิ่ม</button>
-								<button class="btn btn-warning modal-edit btn-action " style="display: inline-block;">แก้ไข</button>
-								<button class="btn btn-danger modal-cancel btn-action pull-right" style="display: none;">ยกเลิก</button>
+							<h4 class="">หัตถการที่ควรทำ &nbsp;&nbsp;
+								<div class="wrap_button">
+									<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
+											<td><select class="case_followup_procedure procedure">
+												<option value=""> ---- เลือกหัตถการ ---- </option></select></td>
+											<td><select class="case_followup_year next_year">
+												<option value=""> ---- เลือกปี ---- </option></select></td>
+											<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
+										</tr>'>เพิ่ม</button>
+									<button class="btn btn-warning modal-edit btn-action " style="display: inline-block;">แก้ไข</button>
+									<button class="btn btn-danger modal-cancel btn-action pull-right" style="display: none;">ยกเลิก</button>
+								</div>
 							</h4>
 							
 							<div class="table-responsive">
@@ -582,19 +654,21 @@ padding-top: 5px;
 					
 					<!-- case_price -->
 					<div class="row-fluid wrap" id="case_price">
-						<h4 class=" ">ราคา &nbsp;&nbsp;&nbsp;&nbsp; 
-							<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
-									<td><select class="case_price_type discount">
-										<option value=""> ---- เลือกประเภทส่วนลด ---- </option></select></td>
-									<td><input type="number" class="case_price_offer"></td>
-									<td><input type="number" class="case_price_accept"></td>
-									<td><div class="case_price_percent"></div></td>
-									<td><div class="case_price_value"></div></td>
-									<td><input type="text" class="case_price_remark"></td>
-									<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
-								</tr>'>เพิ่ม</button>
-							<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
-							<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
+						<h4 class=" ">ราคา &nbsp;&nbsp;
+							<div class="wrap_button">
+								<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
+										<td><select class="case_price_type discount">
+											<option value=""> ---- เลือกประเภทส่วนลด ---- </option></select></td>
+										<td><input type="number" class="case_price_offer"></td>
+										<td><input type="number" class="case_price_accept"></td>
+										<td><div class="case_price_percent"></div></td>
+										<td><div class="case_price_value"></div></td>
+										<td><input type="text" class="case_price_remark"></td>
+										<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
+									</tr>'>เพิ่ม</button>
+								<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
+								<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
+							<div class="wrap_button">
 						</h4>
 						<hr/>
 						
@@ -620,18 +694,20 @@ padding-top: 5px;
 					
 					<!-- case_social_media -->
 					<div class="row-fluid wrap" id="case_social_media">
-						<h4 class=" ">ช่องทางลงสื่อ &nbsp;&nbsp;&nbsp;&nbsp; 
-							<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
-									<td><select class="case_social_media_social social">
-										<option value=""> ---- เลือกสื่อ ---- </option></select></td>
-									<td><input type="text" class="case_social_media_link"></td>
-									<td><input type="text" class="case_social_media_username"></td>
-									<td><input type="text" class="case_social_media_password"></td>
-									<td><input type="text" class="case_social_media_remark"></td>
-									<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
-								</tr>'>เพิ่ม</button>
-							<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
-							<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
+						<h4 class=" ">ช่องทางลงสื่อ &nbsp;&nbsp;
+							<div class="wrap_button">
+								<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
+										<td><select class="case_social_media_social social">
+											<option value=""> ---- เลือกสื่อ ---- </option></select></td>
+										<td><input type="text" class="case_social_media_link"></td>
+										<td><input type="text" class="case_social_media_username"></td>
+										<td><input type="text" class="case_social_media_password"></td>
+										<td><input type="text" class="case_social_media_remark"></td>
+										<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
+									</tr>'>เพิ่ม</button>
+								<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
+								<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
+							</div>
 						</h4>
 						<hr/>
 						
@@ -661,24 +737,26 @@ padding-top: 5px;
 					
 					<!-- case_appointment -->
 					<div class="row-fluid wrap" id="case_appointment">
-						<h4 class=" ">นัดหมาย &nbsp;&nbsp;&nbsp;&nbsp; 
-							<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr"></td>
-									<td><select class="case_appointment_type appointment">
-										<option value=""> ---- เลือก ---- </option></select></td>
-									<td><input type="text" class="case_appointment_date datetimepicker"></td>
-									<td><select class="case_appointment_doctor doctor">
-										<option value=""> ---- เลือกหมอ ---- </option></select></td>
-									<td><input class="case_appointment_supervised user" type="text"></td>
-									<td><label><input class="case_appointment_isVdoProduct" type="checkbox"> ถ่าย VDO</label>
-										<label><input class="case_appointment_isVdoRh" type="checkbox"> RH VDO</label>
-										<label><input class="case_appointment_isPictureProduct" type="checkbox"> ถ่ายภาพ</label>
-										<label><input class="case_appointment_isPictureRh" type="checkbox"> RH ถ่ายภาพ</label>
-										<label><input class="case_appointment_isMeetDoctor" type="checkbox"> พบแพทย์</label></td>
-									<td><input class="case_appointment_remark" type="text"></td>
-									<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
-								</tr>'>เพิ่ม</button>
-							<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
-							<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
+						<h4 class=" ">นัดหมาย &nbsp;&nbsp;
+							<div class="wrap_button">
+								<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr"></td>
+										<td><select class="case_appointment_type appointment">
+											<option value=""> ---- เลือก ---- </option></select></td>
+										<td><input type="text" class="case_appointment_date datetimepicker"></td>
+										<td><select class="case_appointment_doctor doctor">
+											<option value=""> ---- เลือกหมอ ---- </option></select></td>
+										<td><input class="case_appointment_supervised user" type="text"></td>
+										<td><label class="label-control"><input class="case_appointment_isVdoProduct" type="checkbox"> ถ่าย VDO</label>
+											<label class="label-control"><input class="case_appointment_isVdoRh" type="checkbox"> RH VDO</label>
+											<label class="label-control"><input class="case_appointment_isPictureProduct" type="checkbox"> ถ่ายภาพ</label>
+											<label class="label-control"><input class="case_appointment_isPictureRh" type="checkbox"> RH ถ่ายภาพ</label>
+											<label class="label-control"><input class="case_appointment_isMeetDoctor" type="checkbox"> พบแพทย์</label></td>
+										<td><input class="case_appointment_remark" type="text"></td>
+										<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
+									</tr>'>เพิ่ม</button>
+								<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
+								<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
+							</div>
 						</h4>
 						<hr/>
 						
@@ -704,32 +782,34 @@ padding-top: 5px;
 					
 					<!-- case_contract -->
 					<div class="row-fluid wrap" id="case_contract">
-						<h4 class=" ">รายละเอียดสัญญา &nbsp;&nbsp;&nbsp;&nbsp; 
-							<button type="button" class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
-								<td><div class="case_contract_no no"></div></td>
-								<td><select class="case_contract_procedure procedure">
-									<option value=""> ---- เลือกหัตถการ ---- </option></select></td>
-								<td><input type="text" class="case_contract_startDate datepicker"></td>
-								<td><input type="text" class="case_contract_endDate datepicker"><hr class="hr1">
-    								<div class="text-center">เหลือเวลา <span class="remaining_days"></span> วัน</div></td>
-								<td><label><input class="case_contract_isPost" type="checkbox"> โพสรีวิว</label>
-									<label><input class="case_contract_isUsage"	type="checkbox"> อนุญาตให่้่ใช้รูปภาพและVDO</label>
-									<label><input class="case_contract_isPicture_vdo" type="checkbox"> ถ่ายภาพและVDO</label>
-									<label><input class="case_contract_isReview" type="checkbox"> เขียนReview</label>
-									<label><input class="case_contract_isPr" type="checkbox"> ช่วยประชาสัมพันธ์ข่าว</label>
-									<label><input class="case_contract_isGroupPost" type="checkbox"> โพสรีวิวในกลุ่มศัลยกรรม</label>
-									<label><input class="case_contract_isSendPicture" type="checkbox"> ส่งรูปภาพ</label>
-									<label><input class="case_contract_isOther" 	type="checkbox"> อื่นๆ</label></td>
-								<td><input class="case_contract_upload storeFile" multiple type="file" ></td>
-								<td>
-									<button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button>
-								</td>
-								<input class="case_contract_file_name_check" type="hidden">
-								
-								
-							</tr>'>เพิ่ม</button>
-							<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
-							<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
+						<h4 class=" ">รายละเอียดสัญญา &nbsp;&nbsp;
+							<div class="wrap_button">
+								<button type="button" class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
+									<td><div class="case_contract_no no"></div></td>
+									<td><select class="case_contract_procedure procedure">
+										<option value=""> ---- เลือกหัตถการ ---- </option></select></td>
+									<td><input type="text" class="case_contract_startDate datepicker"></td>
+									<td><input type="text" class="case_contract_endDate datepicker"><hr class="hr1">
+	    								<div class="text-center">เหลือเวลา <span class="remaining_days"></span> วัน</div></td>
+									<td><label class="label-control"><input class="case_contract_isPost" type="checkbox"> โพสรีวิว</label>
+										<label class="label-control"><input class="case_contract_isUsage"	type="checkbox"> อนุญาตให่้่ใช้รูปภาพและVDO</label>
+										<label class="label-control"><input class="case_contract_isPicture_vdo" type="checkbox"> ถ่ายภาพและVDO</label>
+										<label class="label-control"><input class="case_contract_isReview" type="checkbox"> เขียนReview</label>
+										<label class="label-control"><input class="case_contract_isPr" type="checkbox"> ช่วยประชาสัมพันธ์ข่าว</label>
+										<label class="label-control"><input class="case_contract_isGroupPost" type="checkbox"> โพสรีวิวในกลุ่มศัลยกรรม</label>
+										<label class="label-control"><input class="case_contract_isSendPicture" type="checkbox"> ส่งรูปภาพ</label>
+										<label class="label-control"><input class="case_contract_isOther" 	type="checkbox"> อื่นๆ</label></td>
+									<td><input class="case_contract_upload storeFile" multiple type="file" ></td>
+									<td>
+										<button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button>
+									</td>
+									<input class="case_contract_file_name_check" type="hidden">
+									
+									
+								</tr>'>เพิ่ม</button>
+								<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
+								<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
+							</div>
 						</h4>
 						<hr/>
 						<div class="table-responsive">
@@ -753,44 +833,50 @@ padding-top: 5px;
 					
 					<!-- case_pr -->
 					<div class="row-fluid wrap" id="case_pr">
-						<h4 class=" ">รายละเอียดการประชาสัมพันธ์ &nbsp;&nbsp;&nbsp;&nbsp; 
-							<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
-									<td><select class="case_pr_pr pr">
-										<option value=""> ---- เลือกรายการประชาสัมพันธ์ ---- </option></select></td>
-									<td><input type="text" class="case_pr_planDate datepicker"></td>
-									<td width="150px">
-										 <label><input class="case_pr_isPicture" type="checkbox"> รูปภาพ</label>
-										 <label><input class="case_pr_isVdo" type="checkbox"> วีดีโอ(selfie)</label>
-										 <label><input class="case_pr_isInstragram" type="checkbox"> live Instragram</label>
-										 <label><input class="case_pr_isFacebook" type="checkbox"> live Facebook</label>
-									</td>
-									<td><input type="text" class="case_pr_actualDate datepicker"></td>
-									<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
-								</tr>'>เพิ่ม</button>
-							<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
-							<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
+						<h4 class=" ">รายละเอียดการประชาสัมพันธ์ &nbsp;&nbsp;
+							<div class="wrap_button">
+								<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
+										<td><select class="case_pr_pr pr">
+											<option value=""> ---- เลือกรายการประชาสัมพันธ์ ---- </option></select></td>
+										<td><input type="text" class="case_pr_planDate datepicker"></td>
+										<td width="150px">
+											 <label class="label-control"><input class="case_pr_isPicture" type="checkbox"> รูปภาพ</label>
+											 <label class="label-control"><input class="case_pr_isVdo" type="checkbox"> วีดีโอ(selfie)</label>
+											 <label class="label-control"><input class="case_pr_isInstragram" type="checkbox"> live Instragram</label>
+											 <label class="label-control"><input class="case_pr_isFacebook" type="checkbox"> live Facebook</label>
+										</td>
+										<td><input type="text" class="case_pr_actualDate datepicker"></td>
+										<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
+									</tr>'>เพิ่ม</button>
+								<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
+								<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
+							</div>
 						</h4>
 						<hr/>
-						<table class="table table-bordered">
-							<thead>
-								<tr>
-									<th>รายการ <span class="redFont ">*</span></th>
-									<th>ณ วันที่ <span class="redFont ">*</span></th>
-									<th>โดยจะลงเป็น</th>
-									<th>ในวันที่ <span class="redFont ">*</span></th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>รายการ <span class="redFont ">*</span></th>
+										<th>ณ วันที่ <span class="redFont ">*</span></th>
+										<th>โดยจะลงเป็น</th>
+										<th>ในวันที่ <span class="redFont ">*</span></th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
 					</div>
 					
 					<!-- case_file -->
 					<div class="row-fluid wrap" id="case_file">
-						<h4 class=" ">แฟ้ม  &nbsp;&nbsp;&nbsp;&nbsp;  
-							<button class="btn btn-info btn-action btn-upload modal-add" id="btnAddFolder"  data-target="#addFolder" data-toggle="modal">สร้างแฟ้มรูป</button> 
-							<button class="btn btn-success btn-action btn-upload modal-add" id="btnUploadFile" data-target="#ModalImportForm" data-toggle="modal" form="fileUploadWriterForm">อัพโหลด</button>
+						<h4 class=" ">แฟ้ม  &nbsp;&nbsp;
+							<div class="wrap_button">
+								<button class="btn btn-info btn-action btn-upload modal-add" id="btnAddFolder"  data-target="#addFolder" data-toggle="modal">สร้างแฟ้มรูป</button> 
+								<button class="btn btn-success btn-action btn-upload modal-add" id="btnUploadFile" data-target="#ModalImportForm" data-toggle="modal" form="fileUploadWriterForm">อัพโหลด</button>
+							</div>
 						</h4>
 						<hr/>
 						<div class="row-fluid">
@@ -809,23 +895,25 @@ padding-top: 5px;
 					
 					<!-- Article -->
 					<div class="row-fluid wrap" id="case_article">
-						<h4 class=" ">บทความ &nbsp;&nbsp;&nbsp;&nbsp; 
-							<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
-									<td><input class="case_article_name" type="text"></td>
-									<td><select class="case_article_type_id article">
-										<option value=""> ---- เลือกบทความ ---- </option></select></td>
-									<td><input class="case_article_writer user" type="text"></td>
-									<td><input type="text" class="case_article_writingStartDate datepicker"></td>
-									<td><input type="text" class="case_article_writingEndDate datepicker"></td>
-									<td><input type="text" class="case_article_planDate datepicker" ></td>
-									<td><input class="case_article_upload storeFile" multiple type="file"></td>
-									<td width="150px">
-										<button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button>
-									<input class="case_contract_file_name_check" type="hidden">
-									</td>
-								</tr>'>เพิ่ม</button>
-							<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
-							<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
+						<h4 class=" ">บทความ &nbsp;&nbsp;
+							<div class="wrap_button">
+								<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
+										<td><input class="case_article_name" type="text"></td>
+										<td><select class="case_article_type_id article">
+											<option value=""> ---- เลือกบทความ ---- </option></select></td>
+										<td><input class="case_article_writer user" type="text"></td>
+										<td><input type="text" class="case_article_writingStartDate datepicker"></td>
+										<td><input type="text" class="case_article_writingEndDate datepicker"></td>
+										<td><input type="text" class="case_article_planDate datepicker" ></td>
+										<td><input class="case_article_upload storeFile" multiple type="file"></td>
+										<td width="150px">
+											<button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button>
+										<input class="case_contract_file_name_check" type="hidden">
+										</td>
+									</tr>'>เพิ่ม</button>
+								<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
+								<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
+							</div>
 						</h4>
 						<hr/>
 						<div class="table-responsive">
@@ -897,10 +985,10 @@ padding-top: 5px;
 								<input type="file" id="case_stage_upfile" class="storeFile input_control" multiple>
 							</div>
 						</div>
-						<div align="center">
+						<div align="center" class="wrap_button">
 							<button class="btn btn-success input_control" id="btnModalSubmit" type="button">
 								Submit
-							</button>&nbsp;&nbsp;
+							</button>
 							<button data-dismiss="modal" class="btn btn-danger" type="button">
 								Cancel
 							</button>
@@ -1344,17 +1432,16 @@ $(document).ready(function() {
 					console.log(rs);
 					
 					$.each(rs.section,function(){
-						//if(stage_id < 6){
-							if(this.section_id == 'patient' || this.section_id == 'patient_case' || this.section_id == 'case_coordinate'){
-								if(this.add_flag == 1 && this.edit_flag == 1){
-									$('#'+this.section_id).find('.input_control').removeAttr('disabled');
-									$('#'+this.section_id).find('.case_coordinate').removeAttr('disabled').multiselect("refresh");
-								}
+						if(this.section_id == 'patient' || this.section_id == 'patient_case' || this.section_id == 'case_coordinate'){
+							if(this.add_flag == 1 && this.edit_flag == 1){
+								$('#'+this.section_id).find('.input_control').removeAttr('disabled');
+								$('#'+this.section_id).find('.case_coordinate').removeAttr('disabled').multiselect("refresh");
 							}
-							if(this.add_flag == 1)		$('#'+this.section_id).find('.modal-add,.btn-other').show();
-							if(this.edit_flag == 1)		$('#'+this.section_id).find('.modal-edit,.btn-edit').show();
-							if(this.delete_flag == 1)	$('#'+this.section_id).find('.btn-delete').show();
-						//}
+						}
+						if(this.add_flag == 1)		$('#'+this.section_id).find('.modal-add,.btn-other').show();
+						if(this.edit_flag == 1)		$('#'+this.section_id).find('.modal-edit,.btn-edit').show();
+						if(this.delete_flag == 1)	$('#'+this.section_id).find('.btn-delete').show();
+						
 						if(this.upload_flag == 1)	$('#'+this.section_id).find('.btn-upload').show();
 						if(this.download_flag == 1)	$('#'+this.section_id).find('.btn-download').show();
 					});
@@ -1364,6 +1451,10 @@ $(document).ready(function() {
 						$('#case_stage').find('.input_control').removeAttr('disabled');
 					}else{
 						$('#case_stage').find('.input_control').attr('disabled',true);
+					}
+					if($.inArray(22312, rs.userRole)== -1){
+						$('#case_social_media').find('.case_social_media_username,.case_social_media_password').hide();
+						$('#case_social_media').find('.modal-add,.modal-edit,.btn-edit').hide();
 					}
 					$('#case_stage_notification').multiselect("refresh");
 				}
@@ -1662,11 +1753,11 @@ $(document).ready(function() {
 					+'<td><select class="case_appointment_doctor doctor input_control">'
 						+'<option value=""> ---- เลือกหมอ ---- </option>'+$html_doctor+'</select></td>'
 					+'<td><input class="case_appointment_supervised user input_control" type="text" ></td>'
-					+'<td><label><input class="case_appointment_isVdoProduct" type="checkbox"> ถ่าย VDO</label>'
-						+'<label><input class="case_appointment_isVdoRh" type="checkbox"> RH VDO</label>'
-						+'<label><input class="case_appointment_isPictureProduct" type="checkbox"> ถ่ายภาพ</label>'
-						+'<label><input class="case_appointment_isPictureRh" type="checkbox"> RH ถ่ายภาพ</label>'
-						+'<label><input class="case_appointment_isMeetDoctor" type="checkbox"> พบแพทย์</label></td>'
+					+'<td><label class="label-control"><input class="case_appointment_isVdoProduct" type="checkbox"> ถ่าย VDO</label>'
+						+'<label class="label-control"><input class="case_appointment_isVdoRh" type="checkbox"> RH VDO</label>'
+						+'<label class="label-control"><input class="case_appointment_isPictureProduct" type="checkbox"> ถ่ายภาพ</label>'
+						+'<label class="label-control"><input class="case_appointment_isPictureRh" type="checkbox"> RH ถ่ายภาพ</label>'
+						+'<label class="label-control"><input class="case_appointment_isMeetDoctor" type="checkbox"> พบแพทย์</label></td>'
 					+'<td><input class="case_appointment_remark input_control" type="text" value="'+this.remark+'"></td>'
 					+'<td><button class="btn btn-danger del_rec btn-delete btn-action" style="display:none" ><i class="fa fa-trash"></i></button></td></tr>';
 				$('#case_appointment tbody').append($html);
@@ -1728,15 +1819,15 @@ $(document).ready(function() {
 						+'<option value=""> ---- เลือกหัตถการ ---- </option>'+$html_procedure+'</select></td>'
 					+'<td><input type="text" class="case_contract_startDate datepicker input_control"  value="'+paresDateToDate(this.contract_start_date)+'"></td>'
 					+'<td><input type="text" class="case_contract_endDate datepicker input_control" value="'+paresDateToDate(this.contract_end_date)+'">'
-						+'<hr class="hr1"><div class="text-center">เหลือเวลา <span class="remaining_days"></span> วัน</div></td>'
-					+'<td><label><input class="case_contract_isPost" type="checkbox"> 		โพสรีวิว				</label>'
-					+'<label><input class="case_contract_isUsage"	type="checkbox"> 		อนุญาตให่้่ใช้รูปภาพและVDO	</label>'
-					+'<label><input class="case_contract_isPicture_vdo" type="checkbox"> 	ถ่ายภาพและVDO		</label>'
-					+'<label><input class="case_contract_isReview" type="checkbox"> 		เขียนReview		</label>'
-					+'<label><input class="case_contract_isPr" type="checkbox">				 ช่วยประชาสัมพันธ์ข่าว		</label>'
-					+'<label><input class="case_contract_isGroupPost" type="checkbox"> 		โพสรีวิวในกลุ่มศัลยกรรม		</label>'
-					+'<label><input class="case_contract_isSendPicture" type="checkbox"> 	ส่งรูปภาพ			</label>'
-					+'<label><input class="case_contract_isOther" 	type="checkbox"> 		อื่นๆ				</label></td>'
+						+'<hr class="hr1"><div class="text-center">เหลือเวลา <span class="remaining_days">0</span> วัน</div></td>'
+					+'<td><label class="label-control"><input class="case_contract_isPost" type="checkbox"> 		โพสรีวิว				</label>'
+						+'<label class="label-control"><input class="case_contract_isUsage"	type="checkbox"> 		อนุญาตให่้่ใช้รูปภาพและVDO	</label>'
+						+'<label class="label-control"><input class="case_contract_isPicture_vdo" type="checkbox"> 	ถ่ายภาพและVDO		</label>'
+						+'<label class="label-control"><input class="case_contract_isReview" type="checkbox"> 		เขียนReview		</label>'
+						+'<label class="label-control"><input class="case_contract_isPr" type="checkbox">				 ช่วยประชาสัมพันธ์ข่าว		</label>'
+						+'<label class="label-control"><input class="case_contract_isGroupPost" type="checkbox"> 		โพสรีวิวในกลุ่มศัลยกรรม		</label>'
+						+'<label class="label-control"><input class="case_contract_isSendPicture" type="checkbox"> 	ส่งรูปภาพ			</label>'
+						+'<label class="label-control"><input class="case_contract_isOther" 	type="checkbox"> 		อื่นๆ				</label></td>'
 					+'<td><input class="case_contract_upload storeFile input_control" multiple type="file" ></td>'
 					+'<td><button class="btn btn-danger del_rec btn-delete btn-action" style="display:none"><i class="fa fa-trash"></i></button></td>'
 					+'<input class="case_contract_file_name_check" type="hidden"></tr>';
@@ -1773,9 +1864,9 @@ $(document).ready(function() {
 								+'<option value=""> ---- เลือกรายการประชาสัมพันธ์ ---- </option>'+$html_pr+'</select></td>'
 							+'<td><input type="text" class="case_pr_planDate datepicker input_control" value="'+paresDateToDate(this.pr_plan_date)+'"></td>'
 							+'<td width="150px"><label><input type="checkbox" class="case_pr_isPicture input_control"> รูปภาพ</label> 		  ' 
-								+'<label><input type="checkbox" class="case_pr_isVdo input_control"> วีดีโอ(selfie)</label>'
-								+'<label><input type="checkbox" class="case_pr_isInstragram input_control"> live Instragram</label> '   
-								+'<label><input type="checkbox" class="case_pr_isFacebook input_control"> live Facebook</label></td>'
+								+'<label class="label-control"><input type="checkbox" class="case_pr_isVdo input_control"> วีดีโอ(selfie)</label>'
+								+'<label class="label-control"><input type="checkbox" class="case_pr_isInstragram input_control"> live Instragram</label> '   
+								+'<label class="label-control"><input type="checkbox" class="case_pr_isFacebook input_control"> live Facebook</label></td>'
 							+'<td><input type="text" class="case_pr_actualDate datepicker input_control" value="'+paresDateToDate(this.pr_actual_date)+'"></td>'
 							+'<td><button class="btn btn-danger del_rec btn-delete btn-action"  style="display:none"><i class="fa fa-trash"></i></button></td></tr>';
 				$('#case_pr tbody').append($html);
@@ -1833,13 +1924,13 @@ $(document).ready(function() {
 				}
 				var to_user_name = this.to_user_name?this.to_user_name:'';
 				$html = '<tr data-id="'+this.case_stage_id+'">'
-							+'<td>'+this.created_dttm+'</td>'
-							+'<td>'+this.from_stage_name+'</td>'
-							+'<td>'+this.from_user_name+'</td>'
-							+'<td>'+this.to_stage_name+'</td>'
-							+'<td>'+to_user_name+'</td>'
-							+'<td>'+this.remark+'</td>'
-							+'<td>'+html_alert+'</td>'
+							+'<td><label class="label-control">'+formatDateDMY(this.created_dttm.split(' ')[0])+' '+this.created_dttm.split(' ')[1]+'</label></td>'
+							+'<td><label class="label-control">'+this.from_stage_name	+'</label></td>'
+							+'<td><label class="label-control">'+this.from_user_name	+'</label></td>'
+							+'<td><label class="label-control">'+this.to_stage_name		+'</label></td>'
+							+'<td><label class="label-control">'+to_user_name			+'</label></td>'
+							+'<td><label class="label-control">'+this.remark			+'</label></td>'
+							+'<td><label class="label-control">'+html_alert				+'</label></td>'
 							+'<td>';
 				if(this.docs.length > 0){
 					$html += '<center><button type="button" class="btn btn-primary input-sm downloadfileCaseHistory" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
@@ -2216,12 +2307,18 @@ $(document).ready(function() {
 		})
 	    
 		$('body').on('change','.case_contract_endDate,.case_contract_startDate',function(){	
-			var today 		= new Date(($current_date.split('/')[2]),$current_date.split('/')[1],$current_date.split('/')[0]);
+			var arr_today 		= $current_date.split('/');
 			var arr_startDate= $(this).closest('tr').find('.case_contract_startDate').val().split('/');
 			var arr_endDate	= $(this).closest('tr').find('.case_contract_endDate').val().split('/');
+			var todayDate 	= new Date(arr_today[2],arr_today[1],arr_today[0]);
 			var startDate 	= new Date(arr_startDate[2],arr_startDate[1],arr_startDate[0]);
 			var endDate 	= new Date(arr_endDate[2],arr_endDate[1],arr_endDate[0]);
-			var remaining_days = Math.floor((endDate-startDate) / (24 * 60 * 60 * 1000));
+			var remaining_days = 0;
+			if(todayDate > startDate){
+				remaining_days = Math.floor((endDate-todayDate) / (24 * 60 * 60 * 1000));
+			}else{
+				remaining_days = Math.floor((endDate-startDate) / (24 * 60 * 60 * 1000));
+			}
 			remaining_days = remaining_days >= 0 ?remaining_days:0;
 			var label = (remaining_days == 0)?' label label-important' :(remaining_days < 4 ?' label label-warning':'');
 			$(this).closest('tr').find('.remaining_days').text(remaining_days).closest('div').removeClass('label-important label-warning').addClass(label);	
@@ -2429,7 +2526,7 @@ $(document).ready(function() {
 				getAjax($plRoute+"/destoryFolder",'post',{folder_id:thiss.closest('li').data('folder_id'),case_id:$('#patient_case').data('id')},function(rs){
 					console.log(rs,'del-folder');
 					if(rs.status==200){ 
-						thiss.closest('ul').remove();
+						thiss.closest('ul.wrap_folder').remove();
 						callFlashSlide('ลบไฟล์สำเร็จ' ,'success');
 					}else if(rs.status==400){
 						callFlashSlide(rs.message ,'error');
@@ -2519,12 +2616,12 @@ $(document).ready(function() {
 					var isClose = this.case_folder.is_open==0?'active':'';
 					var volume_tik = this.case_folder.is_open==1?'block':'none';
 					var isNotHide = this.user_id == userId?'notHide':'';
-					html_temp +='<ul><li class="folder parent" data-folder_id="'+this.folder_id+'">'
-					+'<a href="#" onclick="return false;" class="folder_toggle folder_name">'+this.folder_screen_name+'</a>'
-					+'<a href="#" onclick="return false;" class="fa fa-edit btn-edit btn-action btn_editFolder" data-target="#editFolder" data-toggle="modal" style="position: relative; left: 40px; display: inline-block;"></a>'
-					+'<div style="float:right;"class="span6">'
-						+'<div class="wrap_volume span5" style="display:'+volume_tik+'">ปริมาณรูป&nbsp;&nbsp;<span class="volume"></span>&nbsp;%</div>'
-						+'<div class="btn-group span5" data-toggle="buttons-radio">'
+					html_temp +='<ul class="wrap_folder"><li class="folder parent" data-folder_id="'+this.folder_id+'">'
+					+'<div href="#" onclick="return false;" class="folder_toggle folder_name" title="'+this.folder_screen_name+'">'+this.folder_screen_name+'</div>'
+					+'<a href="#" onclick="return false;" class="fa fa-edit btn-edit btn-action btn_editFolder" data-target="#editFolder" data-toggle="modal" style="display: unset; padding-left: 6%;"></a>'
+					+'<div style="float:right;"class="wrap_option">'
+						+'<div class="wrap_volume " style="display:'+volume_tik+'"><span class="volume_title">ปริมาณรูป&nbsp;&nbsp;</span><span class="volume"></span>&nbsp;%</div>'
+						+'<div class="btn-group " data-toggle="buttons-radio">'
 							+'<button type="button" data-value="1" class="btnIsOpen btn btn-other btn-action '+isOpen+' ">เปิด</button>'
 							+'<button type="button" data-value="0" class="btnIsOpen btn btn-other btn-action '+isClose+' ">ปิด</button>'
 						+'</div><button class=" btn btn-danger del-folder btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div>';
@@ -2535,22 +2632,22 @@ $(document).ready(function() {
 							isNotHide = this.user_id == userId?'notHide':'';
 							if(this.file_name)	fileType = this.file_name.split('.')[this.file_name.split('.').length-1];
 							html_temp 	+='<li class="file type-'+fileType+'" data-file_id="'+this.file_id+'" data-path="'+this.image_path+'" >'
-							+'<a href="#" onclick="return false;" >'+this.file_name+'</a>'
-							+'<a target="_blank" href="'+$host+this.image_path+'" download class="fa fa-download btn-download btn-action" download style="position: relative;left: 40px;"></a>'
-							+'<div style="float:right;"class="span2"><button class=" btn btn-danger del-file btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div></li>';		
+							+'<div href="#" class="file_name" onclick="return false;" title="'+this.file_name+'">'+this.file_name+'</div>'
+							+'<a target="_blank" href="'+$host+this.image_path+'" download class="fa fa-download btn-download btn-action" download style="display: unset; padding-left: 6%;"></a>'
+							+'<div style="float:right;"class=""><button class=" btn btn-danger del-file btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div></li>';		
 						});	html_temp +='</ul>';
 					}
 					if(this.sub_folder!=null){
-						html_temp +='<ul>';
+						html_temp +='<ul class="wrap_folder">';
 						$.each(this.sub_folder,function(){
 							if(this.case_folder){
 								isNotHide = this.user_id == userId?'notHide':'';
 								var isPass = this.case_folder.is_pass==1?'checked':'';
 								html_temp 	+='<li class="folder" data-folder_id="'+this.folder_id+'" >'
-								+'<a href="#" onclick="return false;" class="folder_name" >'+this.folder_screen_name+'</a>'
-								+'<a href="#" onclick="return false;" class="fa fa-edit btn-edit btn-action btn_editFolder" data-target="#editFolder" data-toggle="modal" style="position: relative; left: 40px; display: inline-block;"></a>'
-								+'<div style="float:right;"class="span6">'
-								+'<label class="span10"><input type="checkbox" '+isPass+' class="isPass btn-action btn-other">&nbsp;&nbsp;ผ่าน</label>'
+								+'<div href="#" onclick="return false;" class="folder_name" title="'+this.folder_screen_name+'">'+this.folder_screen_name+'</div>'
+								+'<a href="#" onclick="return false;" class="fa fa-edit btn-edit btn-action btn_editFolder" data-target="#editFolder" data-toggle="modal" style="display: unset; padding-left: 6%;"></a>'
+								+'<div style="float:right;"class="">'
+								+'<label class="control-label wrap_isPass"><input type="checkbox" '+isPass+' class="isPass btn-action btn-other">&nbsp;&nbsp;ผ่าน</label>'
 								+'<button class=" btn btn-danger del-folder btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div></li>';		
 								
 								if(this.case_file!=null){
@@ -2560,9 +2657,9 @@ $(document).ready(function() {
 										isNotHide = this.user_id == userId?'notHide':'';
 										if(this.file_name)	fileType = this.file_name.split('.')[this.file_name.split('.').length-1];
 										html_temp 	+='<li class="file  type-'+fileType+'" data-file_id="'+this.file_id+'" data-path="'+this.image_path+'" >'
-										+'<a href="#" onclick="return false;" >'+this.file_name+'</a>'
-										+'<a target="_blank" href="'+$host+this.image_path+'" class="fa fa-download btn-download btn-action" download style="position: relative;left: 40px;"></a>'
-										+'<div style="float:right;"class="span2"><button class=" btn btn-danger del-file btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div></li>';		
+										+'<div href="#" class="file_name" onclick="return false;"  title="'+this.file_name+'">'+this.file_name+'</div>'
+										+'<a target="_blank" href="'+$host+this.image_path+'" class="fa fa-download btn-download btn-action" download style="display: unset; padding-left: 6%;"></a>'
+										+'<div style="float:right;"class=""><button class=" btn btn-danger del-file btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div></li>';		
 									});	html_temp +='</ul>';
 								}
 							}
@@ -2659,8 +2756,8 @@ $(document).ready(function() {
 							+'<div > <input type="checkbox" '+is_good_case+' disabled=""> <span>Case ติดดาว</span> </div> '
 							+'<div > <input type="checkbox" '+is_good_review+' disabled=""> <span>Review ติดดาว</span> </div> '
 							+'<div> <span>สถานะงาน:</span><span>'+v.status+'</span> </div> '
-							+'<div> <button data-patient_id="'+v.patient.patient_id+'" class="btn btn-success add_procedure" data-keyboard="false">เพิ่มหัตถการ</button> '
-								+'<button class="btn btn-warning edit-list" data-type="edit" data-backdrop="static" data-keyboard="false">แก้ไข</button> </div> </div> </div>';
+							+'<div> <div class="wrap_button"><button data-patient_id="'+v.patient.patient_id+'" class="btn btn-success add_procedure" data-keyboard="false">เพิ่มหัตถการ</button> '
+								+'<button class="btn btn-warning edit-list" data-type="edit" data-backdrop="static" data-keyboard="false">แก้ไข</button> </div> </div> </div> </div>';
 						if(i%2==1) html_temp += '</div>';
 					}); 
 

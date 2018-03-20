@@ -145,12 +145,14 @@ plid = layout.getPlid();
 						<thead>
 							<tr>
 								<th style='width: auto'><strong>ชื่อ Case</strong></th>
+								<th style='width: auto'><strong>ชื่อบทความ</strong></th>
 								<th style='width: auto'><strong>หัตถการ</strong></th>
 								<th style='width: auto'><strong>สถานะงาน</strong></th>
 								<th style='width: auto'><strong>ผู้รับผิดชอบ</strong></th>
 								<th style='width: auto'><strong>วันครบกำหนด</strong></th>
 								<th style='width: auto'><strong>วันที่เสร็จ</strong></th>
 								<th style='width: auto'><strong>แพทย์</strong></th>
+								<th style='width: auto'><strong>VN</strong></th>
 							</tr>
 						</thead>
 						<tbody id="list_job_status">

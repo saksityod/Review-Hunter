@@ -4,44 +4,9 @@ $(document).ready(function(){
 	var plid = $('#plid_portlet').val();
 	if(username!="" && username!=null & username!=[] && username!=undefined ){
 		 if(connectionServiceFn(username,password,plid)==true){
-			 var GlobalDataTodolist;
-			 var generateDropDownList = function(url,type,request,initValue){
-			 	var html="";
-			 	
-			 	if(initValue!=undefined){
-			 		html+="<option value=''>"+initValue+"</option>";
-				}
-
-			 	$.ajax ({
-			 		url:url,
-			 		type:type ,
-			 		dataType:"json" ,
-			 		data:request,
-			 		headers:{Authorization:"Bearer "+tokenID.token},
-			 		async:false,
-			 		success:function(data){
-			 			try {
-			 			    if(Object.keys(data[0])[0] != undefined && Object.keys(data[0])[0] == "item_id"){
-			 			    	galbalDataTemp["item_id"] = [];
-			 			    	$.each(data,function(index,indexEntry){
-			 			    		galbalDataTemp["item_id"].push(indexEntry[Object.keys(indexEntry)[0]]);
-			 		 			});	
-			 			    }
-			 			}
-			 			catch(err) {
-			 			    console.log(err.message);
-			 			}
-
-			 			
-			 			$.each(data,function(index,indexEntry){
-			 				html+="<option value="+indexEntry[Object.keys(indexEntry)[0]]+">"+indexEntry[Object.keys(indexEntry)[1] == undefined  ?  Object.keys(indexEntry)[0]:Object.keys(indexEntry)[1]]+"</option>";	
-			 			});	
-
-			 		}
-			 	});	
-			 	return html;
-			}
 			 
+			var GlobalDataTodolist;
+			
 			var getData = function(page,rpp) {
 				var case_id = $("#case_name").val().split("-");
 				var job_status = $("#job_status").val();
@@ -135,20 +100,20 @@ $(document).ready(function(){
 			}
 			
 			var list_data_template = function(data) {
-				//console.log(data);
-				
 				var TRTDHTML = "";
 				var TRTDClass = "style=\"vertical-align: middle;\"";
 				$.each(data.data, function (key,value) {
 						TRTDHTML += 
 			                '<tr>'+
 			                '<td "'+TRTDClass+'">' + value.patient_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.article_name +'</td>'+
 			                '<td "'+TRTDClass+'">' + value.procedure_name +'</td>'+
 			                '<td "'+TRTDClass+'">' + value.status +'</td>'+
 			                '<td "'+TRTDClass+'">' + value.pic_name +'</td>'+
 			                '<td "'+TRTDClass+'">' + formatDateDMY(value.as_actual_date) +'</td>'+
 			                '<td "'+TRTDClass+'">' + formatDateDMY(value.plan_date) +'</td>'+
 			                '<td "'+TRTDClass+'">' + value.doctor_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.vn_no +'</td>'+
 			                '</tr>';
 			    });
 				$('#list_job_status').html(TRTDHTML);
@@ -159,10 +124,9 @@ $(document).ready(function(){
 					url:restfulURL+"/"+serviceName+"/todo/check_user",
 					type:"get",
 					dataType:"json",
-					async:false,
+					async:true,
 					headers:{Authorization:"Bearer "+tokenID.token},
 					success:function(data) {
-						console.log(data)
 						if(data.status==400) {
 							$("#responsible").val(data.data[0]['userId']+"-"+data.data[0]['pic_name']);
 							$("#responsible").attr("disabled",true);
@@ -170,7 +134,42 @@ $(document).ready(function(){
 					}
 				});
 			}
-			check_user();
+			
+			function DropDownMedicalProcedure() {
+				$.ajax({
+					url:restfulURL+"/"+serviceName+"/todo/procedure_list",
+					type:"get",
+					dataType:"json",
+					async:true,
+					headers:{Authorization:"Bearer "+tokenID.token},
+					success:function(data){
+						var htmlOption="";
+						htmlOption+="<option value=''>All</option>";
+						$.each(data,function(index,indexEntry) {
+							htmlOption+="<option value="+indexEntry['procedure_id']+">"+indexEntry['procedure_name']+"</option>";
+						});
+						$("#medical_procedure").html(htmlOption);
+					}
+				});
+			}
+			
+			function DropDownJobStatus() {
+				$.ajax({
+					url:restfulURL+"/"+serviceName+"/todo/status_list",
+					type:"get",
+					dataType:"json",
+					async:true,
+					headers:{Authorization:"Bearer "+tokenID.token},
+					success:function(data){
+						var htmlOption="";
+						htmlOption+="<option value=''>All</option>";
+						$.each(data,function(index,indexEntry) {
+							htmlOption+="<option value="+indexEntry['status']+">"+indexEntry['status']+"</option>";
+						});
+						$("#job_status").html(htmlOption);
+					}
+				});
+			}
 			
 			$("#result_search_writer").on("click",'.getfile',function() {
 				var ufile = $(this).attr('id').split("-");
@@ -180,19 +179,9 @@ $(document).ready(function(){
 				getData();
 			});
 			
-// 			$("#countPaginationBottom").change(function() {
-// 				getData();
-// 			});
-			
-			$("#medical_procedure").html(generateDropDownList(
-				restfulURL+"/"+serviceName+"/todo/procedure_list",
-				"GET",{},'All'
-			));
-			
-			$("#job_status").html(generateDropDownList(
-				restfulURL+"/"+serviceName+"/todo/status_list",
-				"GET",{},'All'
-			));
+			check_user();
+			DropDownMedicalProcedure();
+			DropDownJobStatus();
 			
 			$("#case_name").autocomplete({
 					source: function (request, response) {

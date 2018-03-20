@@ -348,19 +348,19 @@
 
 
 							<div class="form-group pull-left span3" style="margin-left: 5px;">
-								<label class="">ชื่อแพทย์ (Auto complate):</label>
+								<label class="">ชื่อแพทย์ (Auto complate)<span style="color:red;">*</span></label>
 								<input class=" m-b-n ui-autocomplete-input validate" placeholder="ชื่อแพทย์" id="from_doctor_name"
 									name="from_doctor_name" type="text"
 									data-doctor_id="" data-doctor_name="">
 							</div>
 							<div id="drop_down_organization" class="form-group pull-left span2" style="margin-left: 5px;">
-								<label class="">ประเภท Case:</label>
+								<label class="">ประเภท Case<span style="color:red;">*</span></label>
 								<select class="input span12 m-b-n validate" id="case_category" name="case_category">
 								</select>
 
 							</div>
 							<div id="drop_down_organization" class="form-group pull-left span2" style="margin-left: 5px;">
-								<label class="">หัตถการ:</label>
+								<label class="">หัตถการ<span style="color:red;">*</span></label>
 								<select class="input span12 m-b-n validate" id="from_medical_procedure" name="from_medical_procedure">
 								</select>
 
@@ -371,7 +371,7 @@
 								</select>
 							</div>
 							<div id="drop_down_organization" class="form-group pull-left span2" style="margin-left: 5px;">
-								<label class="">แจ้งเตือน</label>
+								<label class="">แจ้งเตือน<span style="color:red;">*</span></label>
 								<select class="input span12 m-b-n validate" id="alert_multi" name="alert_multi" multiple="multiple">
 									
 								</select>
@@ -541,7 +541,7 @@
 					<span aria-hidden="true"><i class='fa fa-times'></i></span><span
 						class="sr-only">Close</span>
 				</button>
-				<h5 class="modal-title">Confirm Dialog</h5>
+				<h5 class="modal-title">ยืนยันการแก้ไขเป้าหมายของแพทย์</h5>
 			</div>
 			<div class="modal-body">
 				<!-- content start -->

@@ -4,5 +4,5 @@ var serviceName="";
 /*#######Office#######*/
 
 /*#######Localhost#######*/
-restfulURL="http://192.168.1.46";
+restfulURL="http://localhost";
 serviceName="master_piece/public";

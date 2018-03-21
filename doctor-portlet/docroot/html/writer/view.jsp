@@ -553,7 +553,7 @@
 							<th style='width: auto'><strong>กำหนดส่ง</strong></th>
 							<th style='width: auto'><strong>ประเภทบทความ</strong></th>
 							<th style='width: auto'><strong>สถานะงาน</strong></th>
-							<th style='width: auto' colspan='3'></th>
+							<th style='width: 130px;' colspan='3'></th>
 						</tr>
 					</thead>
 					<tbody id="result_search_writer">

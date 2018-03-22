@@ -173,8 +173,8 @@
 	}
 	.folder a{ padding-left:10px}
 	
-	
 @media  only screen and (max-width: 979px){
+
 	.file .file_name,.file .folder_name{ white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 	.aui body{	padding:0;	}
 	.aui select,.aui .input_control{
@@ -234,13 +234,14 @@
 	.aui .portlet-content .form-group[class*="span"], 
 	.aui .portlet-content .form-group.uneditable-input[class*="span"], 
 	.aui .portlet-content .row-fluid .form-group[class*="span"], 
-	.aui .modal .row-fluid .form-group[class*="span"]
-	
-	{
+	.aui .modal .row-fluid .form-group[class*="span"]{
 		float: left !important;
 		width: 50% !important;
 		padding-right: 5%;
 	}
+	
+	
+	
 }
 
 </style>
@@ -545,7 +546,7 @@
 								<button class="btn btn-success modal-add  btn-action" data-tr='<tr class="dump_tr">
 										<td><select class="surgery_year reverse_year">
 											<option value=""> ---- เลือกปี ---- </option></select></td>
-										<td><div class="surgery_lengthYear"></div></td>
+										<td><div class="surgery_lengthYear">0</div></td>
 										<td><input type="text" class="surgery_clinic"></td>
 										<td><input type="text" class="surgery_doctor"></td>
 										<td><input type="text" class="surgery_procedure"></td>
@@ -1282,6 +1283,7 @@ $(document).ready(function() {
 		
 		getAjax($plRoute+'/getOnLoad','get',{userId:$('#userId_portlet').val()},function(rs){
 			console.log(rs);
+			setCssTableRespornsive();
 			$host = rs.host;
 			$current_year = parseInt(rs.currentDate.split("-")[2])+543;
 			$current_date = rs.currentDate.split("-")[0]+'/'+rs.currentDate.split("-")[1]+'/'+$current_year;
@@ -1690,7 +1692,7 @@ $(document).ready(function() {
 				$html = '<tr class="" data-id="'+this.history_id+'">'
 					+'<td><select class="surgery_year reverse_year input_control">'
 						+'<option value=""> ---- เลือกปี ---- </option>'+getyear($current_year-30,$current_year+1)+'</select></td>' 
-					+'<td><div class="surgery_lengthYear"></div></td>' 
+					+'<td><div class="surgery_lengthYear">0</div></td>' 
 					+'<td><input type="text" class="surgery_clinic input_control" value="'+this.clinic_name+'"></td>'
 					+'<td><input class="surgery_doctor input_control"  value="'+this.doctor_name+'"></td>'
 					+'<td><input class="surgery_procedure input_control" value="'+this.history_name+'"></td>'
@@ -2588,6 +2590,22 @@ $(document).ready(function() {
 				});
 			});
 		});
+		
+		function setCssTableRespornsive(){
+			$css = '<style>@media  only screen and (max-width: 979px){'
+				+'table, thead, tbody, th, td, tr { display: block; border-radius: 0 !important;}'
+				+'thead tr { position: absolute;top: -9999px;left: -9999px;}'
+				+'tr { border-bottom: 15px solid white; }'
+				+'td { border-top: 1px solid #eee !important; border: none;border-bottom: 1px solid #eee; position: relative;padding: 5px !important; padding-left: 50% !important; }'
+				+'td:before { position: absolute;top: 6px;left: 6px;width: 45%; padding-right: 10px; white-space: nowrap;}';
+				$('.responsive-table table').each(function(){
+					$(this).find('thead > tr > th').each(function(i,v){
+						$css += 'td:nth-of-type('+i+'):before { content: "'+$(v).text()+'"; }';
+					});
+				});
+				$css +='</style>';
+				$('head').append($css);
+		}
 		
 		function getBasicData(selector){
 			var last_tr = selector.closest('.wrap').find('tr.dump_tr').last();

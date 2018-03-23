@@ -252,7 +252,7 @@ $(document).ready(function() {
 		function get_year_ontarget(){
 			getAjax($plRoute+"/list_year",'get','',function(rs){
 				$html = '';
-				$.each(rs,function(k,v){	$html += "<option value= "+v.year+">"+v.year+"</option>";	});
+				$.each(rs,function(k,v){	$html += "<option value= "+v.year+">"+v.year_format+"</option>";	});
 				$("#year").html($html);
 			});
 		}

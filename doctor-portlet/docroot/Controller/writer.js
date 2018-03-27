@@ -358,7 +358,11 @@ $(document).ready(function(){
 							$("#article_name").val(data['article'][0]['article_name']);
 							$("#article_type").val(data['article'][0]['article_type_id']);
 							$("#procedure_name").val(data['article'][0]['procedure_id']);
-							$("#form_doctor").val(data['article'][0]['doctor_id']+'-'+data['article'][0]['doctor_name']);
+							
+							if(data['article'][0]['doctor_id']!=null) {
+								$("#form_doctor").val(data['article'][0]['doctor_id']+'-'+data['article'][0]['doctor_name']);
+							}
+							
 							$("#author").val(data['article'][0]['writer_id']+'-'+data['article'][0]['writer_name']);
 							$("#start_date").val(formatDateDMY(data['article'][0]['writing_start_date']));
 							$("#plan_date").val(formatDateDMY(data['article'][0]['plan_date']));

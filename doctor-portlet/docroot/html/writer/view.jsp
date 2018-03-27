@@ -634,7 +634,7 @@
 					</div>
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
-							<label class="control-label">แพทย์<span style="color:red;">*</span>:</label>
+							<label class="control-label">แพทย์<!-- <span style="color:red;">*</span> -->:</label>
 							<div class="controls">
 								<input type="text" class="form-control input-sm span12"
 									placeholder="" name="form_doctor" id="form_doctor">

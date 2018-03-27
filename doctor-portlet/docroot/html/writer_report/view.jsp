@@ -50,7 +50,7 @@ plid = layout.getPlid();
 				<div class="ibox-content breadcrumbs2">
 					<div class="row-fluid p-t-xxs">
 						<div class="form-group span3" >
-							<label class="label-control" for="">ระบุช่วงเวลา</label>
+							<label class="label-control" for="">ระบุช่วงเวลา(ย้อนหลัง)</label>
 							<select data-toggle="tooltip" title="ระบุช่วงเวลา"
 								class="input span12 m-b-n" id="time" name="time">
 								<option value="7">7 วัน</option>

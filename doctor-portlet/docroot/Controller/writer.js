@@ -14,6 +14,7 @@ $(document).ready(function(){
 			
 			function onload() {
 				$("#author").val(userId+'-'+screenName);
+				$("#article_code").val("ระบบจะทำการเพิ่มให้อัตโนมัติ");
 				$("#start_date").val(getDateNow());
 				$("#writing_end_date").val("");
 				$("#plan_date").val("");
@@ -215,7 +216,7 @@ $(document).ready(function(){
 						"writer":search_writer,
 						"procedure_id":procedure_id,
 						"doctor_id":doctor_id,
-						
+						"article_code":$("#search_article_code").val(),
 						"writing_start_date":writing_start_date,
 						"writing_end_date":writing_end_date,
 						"page":page,
@@ -353,7 +354,7 @@ $(document).ready(function(){
 						success:function(data){
 							
 							//console.log(data['article'][0]['workflow_actual_date'],'datetestww');
-							
+							$("#article_code").val(data['article'][0]['article_code']);
 							$("#article_name").val(data['article'][0]['article_name']);
 							$("#article_type").val(data['article'][0]['article_type_id']);
 							$("#procedure_name").val(data['article'][0]['procedure_id']);
@@ -500,7 +501,7 @@ $(document).ready(function(){
 				$.each(data, function (key,value) {
 						TRTDHTML +=
 			                '<tr>'+
-			                '<td "'+TRTDClass+'">' + value.article_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.article_code +'</td>'+
 			                '<td "'+TRTDClass+'">' + value.writer +'</td>'+
 			                '<td "'+TRTDClass+'">' + value.procedure_name +'</td>'+
 			                '<td "'+TRTDClass+'">' + value.doctor_name +'</td>'+
@@ -580,7 +581,37 @@ $(document).ready(function(){
 			}
 				
 			//Autocomeplete
+			$("#search_article_code").autocomplete({
+				minLength: 3,
+				source: function (request, response) {
+		        	$.ajax({
+						 url:restfulURL+"/"+serviceName+"/writer/list_article_code",
+						 type:"get",
+						 dataType:"json",
+						 headers:{Authorization:"Bearer "+tokenID.token},
+						 //data:{"emp_name":request.term},
+						 data:{"article_code":request.term},
+						 //async:false,
+		                 error: function (xhr, textStatus, errorThrown) {
+		                        console.log('Error: ' + xhr.responseText);
+		                    },
+						 success:function(data){
+								response($.map(data, function (item) {
+		                            return {
+		                                label: item.article_code,
+		                                value: item.article_code,
+		                            };
+		                        }));
+						},
+						beforeSend:function(){
+							$("body").mLoading('hide');	
+						}
+					});
+		        }
+			});
+			
 			$("#search_writer").autocomplete({
+					minLength: 3,
 					source: function (request, response) {
 			        	$.ajax({
 							 url:restfulURL+"/"+serviceName+"/writer/list_writer",
@@ -610,6 +641,7 @@ $(document).ready(function(){
 			});
 				
 			$("#search_doctor").autocomplete({
+					minLength: 3,
 					source: function (request, response) {
 			        	$.ajax({
 							 url:restfulURL+"/"+serviceName+"/writer/list_doctor",
@@ -638,6 +670,7 @@ $(document).ready(function(){
 			});
 				
 			$("#form_doctor").autocomplete({
+					minLength: 3,
 					source: function (request, response) {
 			        	$.ajax({
 							 url:restfulURL+"/"+serviceName+"/writer/list_doctor",
@@ -667,6 +700,7 @@ $(document).ready(function(){
 			});
 			
 			$("#author").autocomplete({
+				minLength: 3,
 				source: function (request, response) {
 		        	$.ajax({
 						 url:restfulURL+"/"+serviceName+"/writer/list_to_user",

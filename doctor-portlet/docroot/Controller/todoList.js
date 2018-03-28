@@ -106,7 +106,7 @@ $(document).ready(function(){
 						TRTDHTML += 
 			                '<tr>'+
 			                '<td "'+TRTDClass+'">' + value.patient_name +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.article_name +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.article_code +'</td>'+
 			                '<td "'+TRTDClass+'">' + value.procedure_name +'</td>'+
 			                '<td "'+TRTDClass+'">' + value.status +'</td>'+
 			                '<td "'+TRTDClass+'">' + value.pic_name +'</td>'+
@@ -184,6 +184,7 @@ $(document).ready(function(){
 			DropDownJobStatus();
 			
 			$("#case_name").autocomplete({
+					minLength: 3,
 					source: function (request, response) {
 			        	$.ajax({
 							 url:restfulURL+"/"+serviceName+"/todo/auto_patient",
@@ -213,6 +214,7 @@ $(document).ready(function(){
 			});
 			
 			$("#doctor_name").autocomplete({
+				minLength: 3,
 				source: function (request, response) {
 		        	$.ajax({
 						 url:restfulURL+"/"+serviceName+"/todo/auto_doctor",
@@ -242,6 +244,7 @@ $(document).ready(function(){
 			});
 			
 			$("#responsible").autocomplete({
+				minLength: 3,
 				source: function (request, response) {
 		        	$.ajax({
 						 url:restfulURL+"/"+serviceName+"/todo/auto_user",

@@ -457,6 +457,14 @@
 					
 					<div class="row-fluid p-t-xxs">
 						<div class="form-group span3">
+							<label class="label-control" for="">รหัสบทความ</label>
+							<input data-toggle="tooltip" title="รหัสบทความ"
+								data-placement="top" class="span12 m-b-n ui-autocomplete-input"
+								placeholder="รหัสบทความ" id="search_article_code" name="search_article_code"
+								type="text">
+						</div>
+						
+						<div class="form-group span3">
 							<label class="label-control" for="">ชื่อผู้เขียน</label>
 							<input data-toggle="tooltip" title="ชื่อผู้เขียน"
 								data-placement="top" class="span12 m-b-n ui-autocomplete-input"
@@ -480,6 +488,9 @@
 								placeholder="แพทย์" id="search_doctor" name="search_doctor"	type="text">
 						</div>
 						
+					</div>
+						
+					<div class="row-fluid p-t-xxs">
 						<div class="form-group span3">
 							<label class="label-control" for="">จากวันที่</label>
 							<input data-toggle="tooltip" title="จากวันที่"
@@ -487,9 +498,6 @@
 								placeholder="จากวันที่" id="search_start_date" name="search_start_date"
 								type="text">
 						</div>
-					</div>
-					
-					<div class="row-fluid p-t-xxs">
 						<div class="form-group span3">
 							<label class="label-control" for="">ถึงวันที่</label>
 							<input data-toggle="tooltip" title="ถึงวันที่"
@@ -497,7 +505,7 @@
 								placeholder="ถึงวันที่" id="search_end_date" name="search_end_date"
 								type="text">
 						</div>
-						<div class="form-group text-right span9" style=" margin-top: 25px;">
+						<div class="form-group text-right span6" style=" margin-top: 25px;">
 							<button type="button" name="btn_search" id="btn_search"	class="btn btn-info input-sm">
 								<i class="fa fa-search"></i>&nbsp;ค้นหา
 							</button>
@@ -544,7 +552,7 @@
 				<table class="table table-striped" id="">
 					<thead>
 						<tr>
-							<th style='width: auto'><strong>ชื่อบทความ</strong></th>
+							<th style='width: auto'><strong>รหัสบทความ</strong></th>
 							<th style='width: auto'><strong>ผู้เขียน</strong></th>
 							<th style='width: auto'><strong>หัตถการ</strong></th>
 							<th style='width: auto'><strong>แพทย์</strong></th>
@@ -605,6 +613,15 @@
 				<div class="row-fluid">
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
+							<label class="control-label">รหัสบทความ:</label>
+							<div class="controls">
+								<input type="text" class="form-control input-sm span12"
+									name="article_code" id="article_code" disabled="disabled">
+							</div>
+						</div>
+					</div>
+					<div class="span5 form-horizontal p-t-xxs">
+						<div class="form-group p-xxs">
 							<label class="control-label">ชื่อบทความ<span style="color:red;">*</span>:</label>
 							<div class="controls">
 								<input type="text" class="form-control input-sm span12"
@@ -612,6 +629,8 @@
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="row-fluid">
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
 							<label class="control-label">ประเภทบทความ<span style="color:red;">*</span>:</label>
@@ -621,8 +640,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row-fluid">
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
 							<label class="control-label">หัตถการ<span style="color:red;">*</span>:</label>
@@ -632,6 +649,8 @@
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="row-fluid">
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
 							<label class="control-label">แพทย์<!-- <span style="color:red;">*</span> -->:</label>
@@ -641,8 +660,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row-fluid">
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
 							<label class="control-label">ผู้เขียน<span style="color:red;">*</span>:</label>
@@ -652,6 +669,8 @@
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="row-fluid">
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
 							<label class="control-label">วันที่เริ่มเขียน<span style="color:red;">*</span>: </label>
@@ -661,8 +680,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row-fluid">
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
 							<label class="control-label">กำหนดส่ง<span style="color:red;">*</span>: </label>
@@ -672,6 +689,9 @@
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span5 form-horizontal p-t-xxs"></div>
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
 							<label class="control-label">แนบบทความ: </label>

@@ -145,7 +145,7 @@ plid = layout.getPlid();
 						<thead>
 							<tr>
 								<th style='width: auto'><strong>ชื่อ Case</strong></th>
-								<th style='width: auto'><strong>ชื่อบทความ</strong></th>
+								<th style='width: auto'><strong>รหัสบทความ</strong></th>
 								<th style='width: auto'><strong>หัตถการ</strong></th>
 								<th style='width: auto'><strong>สถานะงาน</strong></th>
 								<th style='width: auto'><strong>ผู้รับผิดชอบ</strong></th>

@@ -55,13 +55,12 @@ $(document).ready(function() {
 					url:restfulURL+"/"+serviceName+"/report/list_selector_time",
 					type:"get",
 					dataType:"json",
-			 		data:{"time":time},
+			 		data:{"time_next":time},
 			 		headers:{Authorization:"Bearer "+tokenID.token},
 			 		async:false,
 			 		success:function(data){
 			 			if(data.status==200) {
-			 				$("#start_date").val(formatDateDMY(data.data));
-			 				$("#end_date").val(getDateNow());
+			 				$("#end_date").val(formatDateDMY(data.data));
 			 			}
 			 		}
 			 	});

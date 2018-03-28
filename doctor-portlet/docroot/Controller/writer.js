@@ -334,13 +334,12 @@ $(document).ready(function(){
 							callFlashSlide('บักทึกข้อมูลสำเร็จ!','success');
 							$("#ModalWriter").modal('hide');
 							clearDataIsEmpty();
-							$("#btn_modal_submit").attr('disabled',false);
 						} else if (data.status==400) {
 							validatetorInformation(validatetor(data['errors'][0]));
-							$("#btn_modal_submit").attr('disabled',false);
 						}
 					}
-				})
+				});
+				$("#btn_modal_submit").attr('disabled',false);
 			};
 				
 			function GetDataEdit(article_id) {

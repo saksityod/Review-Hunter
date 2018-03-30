@@ -352,6 +352,7 @@ $(document).ready(function(){
 						headers:{Authorization:"Bearer "+tokenID.token},
 						data:{"article_id":article_id},
 						success:function(data){
+							//console.log(data,'GetDataEdit')
 							
 							//console.log(data['article'][0]['workflow_actual_date'],'datetestww');
 							$("#article_code").val(data['article'][0]['article_code']);
@@ -369,14 +370,15 @@ $(document).ready(function(){
 							
 							//get to_stage_id
 							GlobalCurrentStageID = data['article'][0]['to_stage_id'];
-							console.log(GlobalCurrentStageID,'to_stage_id');
+							//console.log(GlobalCurrentStageID,'to_stage_id');
 
 							$("#writing_end_date").val(formatDateDMY(data['article'][0]['writing_end_date']));
 							//$("#send_to").val(data['article'][0]['to_user_id']+'-'+data['article'][0]['to_user_name']);
 							$("#send_to").val(data['article'][0]['to_user_id']);
 							$("#actual_date").val(formatDateDMY(data['article'][0]['workflow_actual_date']));
 							$("#remark").val(data['article'][0]['remark']);
-
+							
+							list_doc_file(data['article']);
 							list_article_history(data['article_history']);
 						}
 					})
@@ -407,7 +409,20 @@ $(document).ready(function(){
 				    });
 					$('#workflow_history').html(TRTDHTML);
 				}
-			} 
+			}
+			
+			function list_doc_file(data) {
+				$('#span_doc_path').empty();
+					var doc_path_file = "";
+					$.each(data, function (key,value) {
+						if(value['doc_file']!=null) {
+							var doc_file = (value['doc_file'].length>25) ? value['doc_file'].substring(0,25) + "..." : value['doc_file'];
+							//console.log(doc_file,'doc_file')
+							doc_path_file += '<span title="'+value['doc_file']+'">'+doc_file+'</span><span id="'+value['article_doc_id']+'" class="doc_file_del"><a href="#" style="color:red;" title="ลบ">x</a></span><br/>';
+						}
+				    });
+					$('#span_doc_path').html(doc_path_file);
+			}
 			
 			function uploadFiles(event) {
 				
@@ -552,17 +567,16 @@ $(document).ready(function(){
 				$(".countFileTargetFormWorkflow").empty();
 				
 				$("#workflow_history").empty();
+				$('#span_doc_path').empty();
 				$("#information_errors").hide();
 			}
 			
 			function BTNcheckSubmitForm(checkrolesIDbtn) {
-				
 				if(GlobalCurrentStageID==207) {
 					$("#send_to").empty();
 					$("#btn_modal_submit").attr('disabled',true);
 					return false;
 				}
-				
 				$.ajax({
 					url:restfulURL+"/"+serviceName+"/writer/check_disabled",
 					type:"get",
@@ -575,6 +589,23 @@ $(document).ready(function(){
 							$("#btn_modal_submit").attr('disabled',false);
 						} else {
 							$("#btn_modal_submit").attr('disabled',true);
+						}
+					}
+				});
+			}
+			
+			function delDocFile(article_doc_id,article_id) {
+				$.ajax({
+					url:restfulURL+"/"+serviceName+"/writer/del_doc_file",
+					type:"post",
+					dataType:"json",
+					async:true,
+					data:{"article_doc_id":article_doc_id,"article_id":article_id},
+					headers:{Authorization:"Bearer "+tokenID.token},
+					success:function(data){
+						if(data.status==200) {
+							callFlashSlide("ลบข้อมูล สำเร็จ.",'success');
+							list_doc_file(data.article);
 						}
 					}
 				});
@@ -804,6 +835,17 @@ $(document).ready(function(){
 				if(ufile[0]=='downloadfileWorkflowHistory') {
 					downloadfileWorkflowFN(GlobalStageID);
 				}
+			});
+			
+			$("#span_doc_path").on("click",'.doc_file_del',function() {
+				var doc_id = $(this).attr('id');
+				$('#confrimModalDelFile').modal({
+			    	backdrop: 'static',
+			      	keyboard: false
+			    }).one('click', '#btnConfirmDelFile', function(e) {
+			    	delDocFile(doc_id,GlobalWriterID);
+			    	$('#confrimModalDelFile').modal('hide');
+			    });
 			});
 				
 			var files;

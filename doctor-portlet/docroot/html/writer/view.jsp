@@ -691,7 +691,15 @@
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span5 form-horizontal p-t-xxs"></div>
+					<div class="span5 form-horizontal p-t-xxs">
+						<div class="form-group p-xxs">
+							<label class="control-label">บทความที่มีอยู่: </label>
+							<div class="controls">
+								<span id="span_doc_path">sdwdsdw.pdf
+								</span>
+							</div>
+						</div>
+					</div>
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
 							<label class="control-label">แนบบทความ: </label>
@@ -996,6 +1004,46 @@
 					</button>
 					&nbsp;&nbsp;
 					<button class="btn btn-danger" type="button" id="btnCancelOK2" >
+						<i class="fa fa-times-circle"></i>&nbsp;Cancel
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal Confirm End -->
+
+<!-- Modal Confirm Start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModalDelFile"
+	class="modal inmodal in"
+	style="width: 400px; left: calc; display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content  bounceInRight">
+			<div class="modal-header"
+				style="background-color: rgb(0, 206, 215); border-color: rgb(0, 206, 215);">
+				<button data-dismiss="modal" class="close" type="button"
+					style="padding-top: 3px">
+					<span aria-hidden="true"><i class='fa fa-times'></i></span><span
+						class="sr-only">Close</span>
+				</button>
+				<h5 class="modal-title">ยืนยันการลบไฟล์</h5>
+			</div>
+			<div class="modal-body">
+				
+				<div class="form-kpi-mangement">
+					<div class="form-kpi-label" align="center">
+						<label>คุณต้องการลบไฟล์นี้หรือไม่?</label>
+					</div>
+				</div>
+
+			</div><!-- modal body -->
+			<div class="modal-footer">
+				<div align="center">
+					<button class="btn btn-success" id="btnConfirmDelFile" type="button">
+						&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+					</button>
+					&nbsp;&nbsp;
+					<button data-dismiss="modal" class="btn btn-danger" type="button" id="btnCancelDelFile" >
 						<i class="fa fa-times-circle"></i>&nbsp;Cancel
 					</button>
 				</div>

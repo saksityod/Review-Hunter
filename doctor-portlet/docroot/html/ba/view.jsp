@@ -33,47 +33,51 @@
 	.modal-body > div{display:none;} */
 	.aui hr{ margin:10px 0 20px}
 
-#list, #list ul {
+.list_tree{ padding-top:15px !important; }
+.list_tree, .list_tree ul {
   font-family: Verdana, Arial, Helvetica, sans-serif;
   list-style-type: none;
   margin-left:0;
   padding-left:15px;
 }
-#list li ul li:before {
+.list_tree li ul li:before {
     color: orange;
     font-size: 25px;
     padding-right: 10px;
     float: left;
 }
-#list li ul li.folder:before {
+.list_tree li ul li.folder:before {
 	font-family: FontAwesome;
     content: "\f07b";
     float: left;
 }
-#list li ul li.file:before {
+.list_tree li ul li.file:before {
 	font-family: FontAwesome;
     content: "\f15b";
     color: #0aba1d;
     font-size: 20px;
     float: left;
 }
-#list li ul li.file.type-jpg:before,
-#list li ul li.file.type-png:before,
-#list li ul li.file.type-jpeg:before {
+.list_tree li ul li.file.type-jpg:before,
+.list_tree li ul li.file.type-png:before,
+.list_tree li ul li.file.type-jpeg:before {
 	font-family: FontAwesome;
     content: "\f1c5";
 }
-#list > li:before {
+.list_tree > li:before {
     font-family: FontAwesome;
     content: "\f015";
     color:skyblue;
     font-size: 40px;
     padding-right: 10px;
 }
-#list li {
+.list_tree li {
 	font-size: 12px;
+	    margin-top: 10px;
+	    width: 100% !important;
+    display: inline-block;
 }
-#list > li > ul > li > ul > li > ul > li{     display: flex !important;	}
+.list_tree > li > ul > li > ul > li > ul > li{     display: flex !important;	}
 
 /* UL Layer 1 Rules 
 #nestedlist {
@@ -124,6 +128,7 @@
     width: max-content;
     float: left;
     padding-right: 10px;
+    margin-top: 20px;
 }	
 .remove_supervisedBy{	margin-left: 5px;	}
 #fileForm {
@@ -133,27 +138,27 @@
 .coordinate_group{ margin-bottom:15px}
 .ui-autocomplete{ z-index:1099 !important}
 .aui li{ margin-top: 5px;}
-.aui .btn.active, .aui .btn:active{ background: #0044cc ;color:white}
+.aui .btn.active, .aui .btn:active{ background: #0044cc ;color:white  ;}
 .case_list {	margin-bottom: 20px;	}
-.wrap{	margin-bottom: 40px;	}
+.wrap{	margin-bottom: 20px;	}
 .stage_upload_img{	 }
 .stage_upload_img.active{filter:opacity(30%);border : 5px solid blue!important}
 .redFont{ float:inherit; line-height: initial;}
 .hr1{     margin: 5px 0 !important; }
 .wrap_option{ display: inline-flex;}
-.btn-group { display: inline-flex; padding-right:20px }
+.btn-group { display: inline-flex; padding-right:0px }
 .wrap_volume { padding-right: 40px; }
 .del-folder,.btn-delete{ padding: 3px 10px !important;}
-	.aui .wrap_isPass{ display: inline-flex;    margin-right: 60px; }
+	.aui .wrap_isPass{ display: inline-flex;    margin-right: 40px; }
 	.aui .btn-group, .aui .button-holder{ display: inline-flex; }
 .ms-container{ width:auto !important }
 .file_name{	float: left;
-			    max-width: 150px;
+			    max-width: 250px;
 			    white-space: nowrap;
 			    overflow: hidden;
 			    text-overflow: ellipsis; }
-	.folder_name{float: left;
-			    max-width: 80px;
+.folder_name{float: left;
+			    max-width: 250px;
 			    white-space: nowrap;
 			    overflow: hidden;
 			    text-overflow: ellipsis;}
@@ -161,46 +166,57 @@
 .file_name:hover{ cursor:pointer}
 .ui_tpicker_hour,.ui_tpicker_minute{ width :70px}	
 .ui_tpicker_minute_slider,.ui_tpicker_hour_slider{ width :60px}
-.aui input[readonly]{ background:white;}
+.aui input[readonly]{ background:white;cursor:pointer}
 
-	.aui .table-responsive {
-    width: 100%;
-    margin-bottom: 15px;
-    overflow-x: auto !important;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-	}
+.aui .btn{   margin-top: 15px; }
 	.folder a{ padding-left:10px}
-	
+	.case_list .btn {	margin-bottom: 10px;	}
+	.btn-collapse{
+	    padding: 0px 10px;
+	    cursor: pointer;
+    }
+    .btn-collapse.open .icon-chevron-down:before{	content:"\f077";	}
+    .wrap h4{
+        background: aliceblue;
+	    margin: 0px;
+	    padding:15px;
+	    border-left: 5px solid cadetblue;
+	    font-size: 15px;
+    }
+    .aui .table{	border-radius: 0;	margin:0}
+    .content_field{     padding: 0px 10px;
+	    background: rgba(200, 250, 250, 0.1);
+	    box-shadow: rgb(170, 170, 170) 0px 0px 4px -1px inset; }
+	    
+.list_tree li li:hover, .list_tree li ul li:hover {
+    background: aliceblue;
+}
+.responsive-table{ padding-top:15px; padding-bottom:15px; }
 @media  only screen and (max-width: 979px){
-
+	td{ border-top:0px !important; }
 	.file .file_name,.file .folder_name{ white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+	
+	.file_name{	padding-left:0px; max-width: 200px;}
+	.folder_name{padding-left:0px;max-width: 205px;}
 	.aui body{	padding:0;	}
-	.aui select,.aui .input_control{
-	    max-width: 100% !important;
-	    font-size: 13px !important;
-	}
-	.aui .table-responsive {
-    width: 100%;
-    margin-bottom: 15px;
-    overflow-x: auto !important;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-	}
+
 	.aui button,.aui .btn{
-	    font-size: 10px !important;
+	    font-size: 15px !important;
 	    width: auto !important;
-    	padding: 0px 5px !important;
+    	padding: 5px !important;
     	margin-right:5px;
     	margin-top:0px;
+    	display: initial;
 	}
 	.aui .btnIsOpen{	margin:0px	}
-	.aui input,.aui select{
+	/* .aui input,.aui select{
 	    font-size: 13px !important;
 	    width: auto !important;
 	    display: inline-block !important;
+	} */
+	.aui input,.aui select,.aui .input_control{
+	    font-size: 13px !important;
+    	padding: 5px 5px !important;
 	}
 	.aui input[type='file']{
 	    font-size: 13px !important;
@@ -213,24 +229,27 @@
 	.aui .responsive-table {
 	    width: 100%;
 	    margin-bottom: 15px;
-	    overflow-y: hidden;
+	    overflow: hidden;
 	}
+	.aui .table-bordered{	border:0px !important	}
 	.aui .label-control{	width: max-content;	}
-	#list, #list ul{ 
+	.list_tree, .list_tree ul{ 
 		padding-left: 8px;
 	    text-indent: 0; 
 	}
 	.volume_title{ display:none}
 	.wrap_volume{ padding-right: 10px; }
-	#list {	padding-left:0	}
-	#list li {	font-size: 10px;	}
-	#list > li:before{     font-size: 15px; }
-	#list li ul li:before{ font-size: 15px; }
-	#list li ul li.file:before{  font-size: 10px; }
-	.btn-group { display: inline-flex; padding-right:10px }
-	.file_name{	padding-left:0px}
-	.folder_name{padding-left:0px}
-	.aui .wrap_isPass{     margin-right: 10px; }
+	.list_tree {	padding-left:0	}
+	.list_tree li {	font-size: 12px;	}
+	.list_tree > li:before{     font-size: 15px; }
+	.list_tree li ul li:before{ font-size: 15px; }
+	.list_tree li ul li.file:before{  font-size: 10px; }
+	.btn-group { display: inline-flex; padding-right:5px }
+	.aui .wrap_isPass{     margin-right: 20px; }
+	.patient_case_supervisedBy{	 margin-top: 0px;	}		
+}
+@media  only screen and (max-width: 767px){
+
 	.aui .portlet-content .form-group[class*="span"], 
 	.aui .portlet-content .form-group.uneditable-input[class*="span"], 
 	.aui .portlet-content .row-fluid .form-group[class*="span"], 
@@ -239,9 +258,6 @@
 		width: 50% !important;
 		padding-right: 5%;
 	}
-	
-	
-	
 }
 
 </style>
@@ -278,7 +294,7 @@
 				<div class="row-fluid " id="">
 					<div class="form-group span3">
 						<label for="" class="control-label">ชื่อ Case</label> 
-						<input type="text" id="search_caseName" />
+						<input type="text" id="search_caseName" placeholder="กรอกชื่อ Case" />
 					</div>
 					<div class="form-group span3">
 						<label for="" class="control-label ">ประเภท Case</label> 
@@ -303,26 +319,26 @@
 				<div class="row-fluid " id="">
 					<div class="form-group span3">
 						<label for="">HN</label> 
-						<input type="text"  id="search_hn" />
+						<input type="text"  id="search_hn" placeholder="กรอกเลข  HN" class="num" />
 					</div>
 					<div class="form-group span3">
 						<label for="" class="control-label">VN</label> 
-						<input type="text" id="search_vn" />
+						<input type="text" id="search_vn" placeholder="กรอกเลข VN"  class="num" />
 					</div>
 					<div class="form-group span3">
 						<label for="">Case ติดดาว</label> 
-							<select class="form-control" id="search_review" >
-								<option value='0'>ทั้งหมด</option>
-								<option value='1'>Case ยอดแย่</option>
-								<option value='2'>Review ติดดาว</option>
-								<option value='3'>Case ติดดาว</option>
-								<option value='4'>ไม่ติดดาว</option>
-							</select>
+						<select class="form-control" id="search_review" >
+							<option value='0'>-- ทั้งหมด --</option>
+							<option value='1'>Case ยอดแย่</option>
+							<option value='2'>Review ติดดาว</option>
+							<option value='3'>Case ติดดาว</option>
+							<option value='4'>ไม่ติดดาว</option>
+						</select>
 					</div>
 					<div class="form-group span3">
 						<label for="">วันหมดสัญญา</label> 
 						<select id="search_expireDate">
-							<option value="">ไม่ระบุ</option>
+							<option value="">-- ไม่ระบุ --</option>
 							<option value="0">หมดสัญญาแล้ว</option>
 							<option value="1">ยังไม่หมดสัญญา</option>
 						</select>
@@ -332,17 +348,17 @@
 					<div class="form-group span3">
 						<label for="" class="control-label">หัตถการที่ควรทำต่อ</label> 
 						<select id="search_followup" class="procedure ">
-							<option value=""> ---- เลือกหัตถการที่ควรทำต่อ ---- </option>	
+							<option value=""> -- เลือกหัตถการที่ควรทำต่อ -- </option>	
 						</select>
 					</div>
 					<div class="form-group span3">
 						<label for="" class="control-label">กลุ่มของ  Case</label> 
 						<select id="search_case_group" class="caseGroup">
-							<option value=""> ---- เลือกกลุ่มCase ---- </option>	
+							<option value=""> -- เลือกกลุ่ม Case -- </option>	
 						</select>
 					</div>
 					<label for="">&nbsp;</label> 
-					<button type="button" class="btn btn-info span3" id="btn_search" style="width: auto;">
+					<button type="button" class="btn btn-info span3 pull-right" id="btn_search" style="width: auto;">
 						<i class="fa fa-search"></i> ค้นหา
 					</button>
 				</div>
@@ -420,23 +436,26 @@
 						<br><br>
 							 อัพโหลดรูปโปรไฟล์
 							<div class="display_profileImage"><img style="width: 20%;" id="profileImage" src="#" alt=""  /></div>
-							<label>
+							<p>
 								<input type="file" id="btnUpload_profileImage" class="btn btn-info storeFile" accept="image/x-png,image/gif,image/jpeg" >
-							</label>
+							</p>
 						</div>
 						<div class="row-fluid">
 							<div class="form-group span3">
-								<label>เลข HN: </label><input type="text" id="patient_hnNo"  class=" input_control">
+								<label>เลข HN: </label>
+								<input type="text" id="patient_hnNo"  class=" input_control num" placeholder="ตัวเลขเท่านั้น" >
 							</div>
 							<div class="form-group span3">
-								<label class=" ">ชื่อ : <span class="redFont ">*</span></label><input type="text" id="patient_name" class=" input_control">
+								<label class=" ">ชื่อ : <span class="redFont ">*</span></label>
+								<input type="text" id="patient_name" class=" input_control" placeholder="ชื่อ - นามสกุล">
 							</div>
 							<div class="form-group span2">
-								<label class=" ">ชื่อเล่น : </label><input type="text" id="patient_nickName" class=" input_control">
+								<label class=" ">ชื่อเล่น : </label>
+								<input type="text" id="patient_nickName" class=" input_control" placeholder="ชื่อเล่น">
 							</div>
 							<div class="form-group span3">
 								<label class=" ">วันเดือนปีเกิด : <span class="redFont ">*</span></label>
-								<input type="text" id="patient_birthDate" class="datepicker input_control" readonly>
+								<input type="text" id="patient_birthDate" class="datepicker input_control" readonly  placeholder="วว/ดด/ปปปป">
 							</div>
 							<div class="form-group span1">
 								<label class="">อายุ : <div class='yearOld'></div></label>
@@ -458,32 +477,39 @@
 								</select>
 							</div>
 							<div class="form-group span6">
-								<label class="">เลขที่บัตรประจำตัวประชาชน/หนังสือเดินทาง : <span class="redFont ">*</span></label><input type="text" id="patient_idCard" class=" input_control">
+								<label class="">เลขที่บัตรประจำตัวประชาชน/หนังสือเดินทาง : <span class="redFont ">*</span></label><input type="text" id="patient_idCard" class=" input_control" placeholder="xxxxxxxxxxxxx">
 							</div>
 						</div>
 						<div class="row-fluid">
 							<div class="form-group span3">
-								<label class="">บ้านเลขที่ : <span class="redFont ">*</span></label><input type="text" id="patient_homeNo" class=" input_control">
+								<label class="">บ้านเลขที่ : <span class="redFont ">*</span></label>
+								<input type="text" id="patient_homeNo" class=" input_control" placeholder="บ้านเลขที่">
 							</div>
 							<div class="form-group span3">
-								<label class="">หมู่ที่ : </label><input type="text" id="patient_moo" class=" input_control">
+								<label class="">หมู่ที่ : </label>
+								<input type="text" id="patient_moo" class=" input_control"  placeholder="หมู่ที่">
 							</div>
 							<div class="form-group span6">
-								<label class="">อาชีพ : </label><input type="text" id="patient_career" class=" input_control">
+								<label class="">อาชีพ : </label>
+								<input type="text" id="patient_career" class=" input_control" placeholder="อาชีพ">
 							</div>
 						</div>
 						<div class="row-fluid">
 							<div class="form-group span3">
-								<label class=" ">ซอย : </label><input type="text" id="patient_soi" class=" input_control">
+								<label class=" ">ซอย : </label>
+								<input type="text" id="patient_soi" class=" input_control" placeholder="ซอย">
 							</div>
 							<div class="form-group span3">
-								<label class=" ">ถนน : </label><input type="text" id="patient_road" class=" input_control">
+								<label class=" ">ถนน : </label>
+								<input type="text" id="patient_road" class=" input_control" placeholder="ซอย">
 							</div>
 							<div class="form-group span3">
-								<label class=" ">โทรศัพท์มือถือ : <span class="redFont ">*</span></label><input type="text" id="patient_mobile" class=" input_control">
+								<label class=" ">โทรศัพท์มือถือ : <span class="redFont ">*</span></label>
+								<input type="text" id="patient_mobile" class=" input_control" placeholder="โทรศัพท์มือถือ">
 							</div>
 							<div class="form-group span3">
-								<label class="">โทรศัพท์บ้าน : </label><input type="text" id="patient_telNo" class=" input_control">
+								<label class="">โทรศัพท์บ้าน : </label>
+								<input type="text" id="patient_telNo" class=" input_control" placeholder="โทรศัพท์บ้าน">
 							</div>
 						</div>
 						<div class="row-fluid">
@@ -509,32 +535,34 @@
 					<!-- patient_social_media -->
 					<div class="row-fluid wrap" id="patient_social_media">
 						<h4>ข้อมูล Social Network &nbsp;&nbsp;
+							<div class="btn-collapse pull-right" ><i class="fa icon-chevron-down"></i></div>
+						</h4> 
+						<div class="content_field collapse" id='collapse_patient_social_media'>
 							<div class="wrap_button">
 								<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
 										<td><select class="patient_social_media_type social">
 											<option value=""> ---- เลือกสื่อ ---- </option></select></td>
-										<td><input type="text" class="patient_social_media_link"></td>
-										<td><input type="number" class="patient_social_media_follow"></td>
+										<td><input type="text" class="patient_social_media_link" placeholder="บัญชีผู้ใช้งาน/ลิ้งค์"></td>
+										<td><input type="number" class="patient_social_media_follow" placeholder="จำนวน Follower"></td>
 										<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
 									</tr>'
 								>เพิ่ม</button>
 								<button class="btn btn-warning modal-edit btn-action">แก้ไข</button>
 								<button class="btn btn-danger modal-cancel pull-right btn-action">ยกเลิก</button> 
 							</div>
-						</h4> 
-						<hr/>
-						<div class="responsive-table">
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th>ประเภท <span class="redFont ">*</span></th>
-										<th>บัญชีผู้ใช้งาน/ลิ้งค์ <span class="redFont ">*</span></th>
-										<th>จำนวน Follower <span class="redFont ">*</span></th>
-										<th width="20px"></th>
-									</tr>
-								</thead>
-								<tbody></tbody>
-							</table>
+							<div class="responsive-table">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>ประเภท <span class="redFont ">*</span></th>
+											<th>บัญชีผู้ใช้งาน/ลิ้งค์ <span class="redFont ">*</span></th>
+											<th>จำนวน Follower <span class="redFont ">*</span></th>
+											<th width="20px"></th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 					
@@ -542,119 +570,138 @@
 					<!-- surgery_history -->
 					<div class="row-fluid wrap" id="surgery_history">
 						<h4>ประวัติศัลยกรรม &nbsp;&nbsp;
+							<div class="btn-collapse pull-right" ><i class="fa icon-chevron-down"></i></div>
+						</h4> 
+						<div class="content_field collapse" id="collapse_surgery_history">
 							<div class="wrap_button">
 								<button class="btn btn-success modal-add  btn-action" data-tr='<tr class="dump_tr">
 										<td><select class="surgery_year reverse_year">
 											<option value=""> ---- เลือกปี ---- </option></select></td>
 										<td><div class="surgery_lengthYear">0</div></td>
-										<td><input type="text" class="surgery_clinic"></td>
-										<td><input type="text" class="surgery_doctor"></td>
-										<td><input type="text" class="surgery_procedure"></td>
-										<td><input type="text" class="surgery_remark"></td>
+										<td><input type="text" class="surgery_clinic" placeholder="ระยะเวลา(ปี)"></td>
+										<td><input type="text" class="surgery_doctor" placeholder="แพทย์"></td>
+										<td><input type="text" class="surgery_procedure" placeholder="หัตถการ"></td>
+										<td><input type="text" class="surgery_remark" placeholder="หมายเหตุ"></td>
 										<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
 									</tr>'>เพิ่ม</button>
 								<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
 								<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
 							</div>
-						</h4> 
-						<hr/>
-						
-						<div class="responsive-table">
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th>ปี <span class="redFont ">*</span></th>
-										<th>ระยะเวลา(ปี)</th>
-										<th>คลินิก/โรงพยาบาล </th>
-										<th>แพทย์</th>
-										<th>หัตถการ  <span class="redFont ">*</span></th>
-										<th>หมายเหตุ</th>
-										<th width="20px"></th>
-									</tr>
-								</thead>
-								<tbody></tbody>
-							</table>
+							<div class="responsive-table">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>ปี <span class="redFont ">*</span></th>
+											<th>ระยะเวลา(ปี)</th>
+											<th>คลินิก/โรงพยาบาล </th>
+											<th>แพทย์</th>
+											<th>หัตถการ  <span class="redFont ">*</span></th>
+											<th>หมายเหตุ</th>
+											<th width="20px"></th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 					
 					
 					<!-- patient_case -->
 					<div class="row-fluid wrap" id="patient_case">
-						<h4>ข้อมูลการทำหัตถการ (Case) &nbsp;&nbsp;&nbsp;&nbsp;</h4> 
-						<hr/>
-						<div class="row-fluid">
-							<div class="form-group span3">
-								<label class=" ">กลุ่มที่แนะนำ: </label>
-								<input type="text" id="patient_case_suggesGroup" class="input_control">
+						<h4>ข้อมูลการทำหัตถการ (Case) &nbsp;&nbsp;&nbsp;&nbsp;
+							<div class="btn-collapse pull-right" ><i class="fa icon-chevron-down"></i></div>
+						</h4> 
+						<div class="content_field collapse" id="collapse_patient_case">
+							<br/>	
+							<div class="row-fluid">
+								<!-- <div class="form-group span3">
+									<label class=" ">กลุ่มที่แนะนำ: </label>
+									<input type="text" id="patient_case_suggesGroup" class="input_control" placeholder="กลุ่มแนะนำ">
+								</div> -->
+								<div class="form-group span3">
+									<label class=" ">แนะนำโดย: </label>
+									<input type="text" id="patient_case_suggestedBy" class="input_control" placeholder="แนะนำโดย">
+								</div>
+								<div class="form-group span3">
+									<label >ประเภท Case : <span class="redFont ">*</span></label>
+									<select id="patient_case_caseType" class="casetype input_control">
+										<option value=""> ---- เลือกประเภท Case ---- </option>
+									</select>
+								</div>
+								<div class="form-group span3">
+									<label >กลุ่มของ Case :  <span class="redFont ">*</span></label>
+									<select id="patient_case_caseGroup" class="caseGroup input_control">
+										<option value=""> ---- เลือกกลุ่มCase ---- </option>	
+									</select>
+								</div>	
 							</div>
-							<div class="form-group span3">
-								<label class=" ">แนะนำโดย: </label>
-								<input type="text" id="patient_case_suggestedBy" class="input_control">
+							
+							<div class="row-fluid">
+								<div class="span3">
+									<label >ผู้ดูแล : (Auto complete) <span class="redFont ">*</span></label>
+									<input type="text" id="patient_case_supervisedBy" class=" input_control" placeholder="ค้นหาผู้ดูแลอัตโนมัติ">
+									<span class="add_supervisedBy"><i class="fa fa-angle-double-right text-success"></i></span> 
+								</div>
+								<div class="span9">
+									<div class="view_supervisedBy"></div>
+								</div>
 							</div>
-							<div class="form-group span3">
-								<label >ประเภท Case : <span class="redFont ">*</span></label>
-								<select id="patient_case_caseType" class="casetype input_control">
-									<option value=""> ---- เลือกประเภท Case ---- </option>
-								</select>
+							<div class="row-fluid">
+								<div class="form-group span3">
+									<label class=" ">กลุ่มที่เลข VN : </label>
+									<input type="text" id="patient_case_vn" class=" input_control num" placeholder="ตัวเลขเท่านั้น">
+								</div>
+								<div class="form-group span3">
+									<label class=" ">หัตถการ : <span class="redFont ">*</span></label>
+									<select id="patient_case_procedure" class="procedure input_control">
+										<option value=""> ---- เลือกหัตถการ ---- </option>
+									</select>
+								</div>
+								<div class="form-group span3">
+									<label class=" ">แพทย์ :  <span class="redFont ">*</span></label>
+									<select id="patient_case_doctor" class="doctor input_control">
+										<option value=""> ---- เลือกหมอ ---- </option>
+									</select>
+								</div>
 							</div>
-							<div class="form-group span3">
-								<label >กลุ่มของ Case :  <span class="redFont ">*</span></label>
-								<select id="patient_case_caseGroup" class="caseGroup input_control">
-									<option value=""> ---- เลือกกลุ่มCase ---- </option>	
-								</select>
-							</div>	
-						</div>
-						
-						<div class="row-fluid">
-							<div class="span3">
-								<label >ผู้ดูแล : (Auto complete) <span class="redFont ">*</span></label>
-								<input type="text" id="patient_case_supervisedBy" class=" input_control">
-								<span class="add_supervisedBy"><i class="fa fa-angle-double-right text-success"></i></span> 
+							<div class="row-fluid">
+								<div class="form-group span3">
+									<input id="patient_case_isGood" type="checkbox" class=" input_control"><span> Case ติดดาว</span>
+								</div>
+								<div class="form-group span3">
+									<input id="patient_case_isBad" type="checkbox" class=" input_control"><span> Case ยอดแย่</span>
+								</div>
+								<div class="form-group span3">
+									<input id="patient_case_isGoodReview" type="checkbox" class=" input_control"><span> Review ติดดาว</span>
+								</div>
 							</div>
-							<div class="span9">
-								<div class="view_supervisedBy"></div>
+							<div class="row-fluid">
+								<div class="span12">
+									<label class=" ">เหตุผล :  </label>
+									<input type="text" id="patient_case_remark" class=" input_control span12" placeholder="หมายเหตุ">
+								</div>
 							</div>
-						</div>
-						<div class="row-fluid">
-							<div class="form-group span3">
-								<label class=" ">กลุ่มที่เลข VN : </label>
-								<input type="text" id="patient_case_vn" class=" input_control">
+							<div class="row-fluid text-center patientSubmit hide">
+								<div class="wrap_button">
+									<button class="btn btn-success input_control btnModalSubmit"  type="button">
+										Submit
+									</button>
+									<button data-dismiss="modal" class="btn btn-danger" type="button">
+										Cancel
+									</button>
+								</div>
 							</div>
-							<div class="form-group span3">
-								<label class=" ">หัตถการ : <span class="redFont ">*</span></label>
-								<select id="patient_case_procedure" class="procedure input_control">
-									<option value=""> ---- เลือกหัตถการ ---- </option>
-								</select>
-							</div>
-							<div class="form-group span6">
-								<label class=" ">แพทย์ :  <span class="redFont ">*</span></label>
-								<select id="patient_case_doctor" class="doctor input_control">
-									<option value=""> ---- เลือกหมอ ---- </option>
-								</select>
-							</div>
-						</div>
-						<div class="row-fluid">
-							<div class="form-group span3">
-								<input id="patient_case_isGood" type="checkbox" class=" input_control"><span> Case ติดดาว</span>
-							</div>
-							<div class="form-group span3">
-								<input id="patient_case_isBad" type="checkbox" class=" input_control"><span> Case ยอดแย่</span>
-							</div>
-							<div class="form-group span3">
-								<input id="patient_case_isGoodReview" type="checkbox" class=" input_control"><span> Review ติดดาว</span>
-							</div>
-						</div>
-						<div class="row-fluid">
-							<div class="span12">
-								<label class=" ">เหตุผล :  </label>
-								<input type="text" id="patient_case_remark" class=" input_control span12">
-							</div>
+							<br/>
 						</div>
 					</div>
 					
 					<div class="row-fluid wrap" id="case_followup">
 						<div class="row-fluid">
 							<h4 class="">หัตถการที่ควรทำ &nbsp;&nbsp;
+								<div class="btn-collapse pull-right" ><i class="fa icon-chevron-down"></i></div>
+							</h4>
+							<div class="content_field collapse" id="collapse_case_followup">
 								<div class="wrap_button">
 									<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
 											<td><select class="case_followup_procedure procedure">
@@ -666,15 +713,59 @@
 									<button class="btn btn-warning modal-edit btn-action " style="display: inline-block;">แก้ไข</button>
 									<button class="btn btn-danger modal-cancel btn-action pull-right" style="display: none;">ยกเลิก</button>
 								</div>
-							</h4>
-							
+								<div class="responsive-table">
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th>ชื่อหัตถการ <span class="redFont ">*</span></th>
+												<th>ปีที่ควรทำ <span class="redFont ">*</span></th>
+												<th width="20px"></th>
+											</tr>
+										</thead>
+										<tbody>
+											
+										</tbody>
+									</table>
+									<div class="row-fluid">
+										<button class="btn btn-primary modal-add btn-action pull-right" id="followupSubmit">บันทึก</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					<!-- case_price -->
+					<div class="row-fluid wrap" id="case_price">
+						<h4 class=" ">ราคา &nbsp;&nbsp;
+							<div class="btn-collapse pull-right" ><i class="fa icon-chevron-down"></i></div>
+						</h4>
+						<div class="content_field collapse" id="collapse_case_price">
+							<div class="wrap_button">
+								<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
+										<td><select class="case_price_type discount">
+											<option value=""> ---- เลือกประเภทส่วนลด ---- </option></select></td>
+										<td><input type="number" class="case_price_offer"  placeholder="ราคาที่เสนอ"></td>
+										<td><input type="number" class="case_price_accept" placeholder="ราคาที่ยอมจ่าย"></td>
+										<td><div class="case_price_percent">0</div></td>
+										<td><div class="case_price_value">0</div></td>
+										<td><input type="text" class="case_price_remark" placeholder="หมายเหตุ"></td>
+										<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
+									</tr>'>เพิ่ม</button>
+								<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
+								<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
+							</div>
 							<div class="responsive-table">
-								<table class="table">
+								<table class="table table-bordered">
 									<thead>
 										<tr>
-											<th>ชื่อหัตถการ <span class="redFont ">*</span></th>
-											<th>ปีที่ควรทำ <span class="redFont ">*</span></th>
-											<th width="20px"></th>
+											<th>ประเภทส่วนลด <span class="redFont ">*</span></th>
+											<th>ราคาที่เสนอ <span class="redFont ">*</span></th>
+											<th>ราคาที่ยอมจ่าย <span class="redFont ">*</span></th>
+											<th>%ส่วนลด</th>
+											<th>มูลค่าส่วนลด</th>
+											<th>หมายเหตุ</th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -685,131 +776,97 @@
 						</div>
 					</div>
 					
-					
-					<!-- case_price -->
-					<div class="row-fluid wrap" id="case_price">
-						<h4 class=" ">ราคา &nbsp;&nbsp;
-							<div class="wrap_button">
-								<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
-										<td><select class="case_price_type discount">
-											<option value=""> ---- เลือกประเภทส่วนลด ---- </option></select></td>
-										<td><input type="number" class="case_price_offer"></td>
-										<td><input type="number" class="case_price_accept"></td>
-										<td><div class="case_price_percent"></div></td>
-										<td><div class="case_price_value"></div></td>
-										<td><input type="text" class="case_price_remark"></td>
-										<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
-									</tr>'>เพิ่ม</button>
-								<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
-								<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
-							<div class="wrap_button">
-						</h4>
-						<hr/>
-						
-						<div class="responsive-table">
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th>ประเภทส่วนลด <span class="redFont ">*</span></th>
-										<th>ราคาที่เสนอ <span class="redFont ">*</span></th>
-										<th>ราคาที่ยอมจ่าย <span class="redFont ">*</span></th>
-										<th>%ส่วนลด</th>
-										<th>มูลค่าส่วนลด</th>
-										<th>หมายเหตุ</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									
-								</tbody>
-							</table>
-						</div>
-					</div>
-					
 					<!-- case_social_media -->
 					<div class="row-fluid wrap" id="case_social_media">
 						<h4 class=" ">ช่องทางลงสื่อ &nbsp;&nbsp;
+							<div class="btn-collapse pull-right" ><i class="fa icon-chevron-down"></i></div>
+						</h4>
+						<div class="content_field collapse" id="collapse_case_social_media">
 							<div class="wrap_button">
 								<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
 										<td><select class="case_social_media_social social">
 											<option value=""> ---- เลือกสื่อ ---- </option></select></td>
-										<td><input type="text" class="case_social_media_link"></td>
-										<td><input type="text" class="case_social_media_username"></td>
-										<td><input type="text" class="case_social_media_password"></td>
-										<td><input type="text" class="case_social_media_remark"></td>
+										<td><input type="text" class="case_social_media_link" placeholder="ลิงค์"></td>
+										<td><input type="text" class="case_social_media_username" placeholder="Username"></td>
+										<td><input type="text" class="case_social_media_password" placeholder="Password"></td>
+										<td><input type="text" class="case_social_media_remark" placeholder="หมายเหตุ"></td>
 										<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
 									</tr>'>เพิ่ม</button>
 								<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
 								<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
 							</div>
-						</h4>
-						<hr/>
-						
-						<div class="responsive-table">
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th>ประเภท <span class="redFont ">*</span></th>
-										<th>ลิงค์ <span class="redFont ">*</span></th>
-										<th>Username</th>
-										<th>Password</th>
-										<th>หมายเหตุ</th>
-										<th width="20px"></th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
+							<div class="responsive-table">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>ประเภท <span class="redFont ">*</span></th>
+											<th>ลิงค์ <span class="redFont ">*</span></th>
+											<th>Username</th>
+											<th>Password</th>
+											<th>หมายเหตุ</th>
+											<th width="20px"></th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 					
 					<!-- case_coordinate -->
 					<div class="row-fluid wrap" id="case_coordinate">
-						<h4 class=" ">การประสานงานคลินิก &nbsp;&nbsp;&nbsp;&nbsp; </h4>
-						<hr/>
+						<h4 class=" ">การประสานงานคลินิก &nbsp;&nbsp;&nbsp;&nbsp; 
+							<div class="btn-collapse pull-right" ><i class="fa icon-chevron-down"></i></div>
+						</h4>
+						<div class="content_field collapse" id="collapse_case_coordinate" style="display: inline-block;">
+							<br/>
+						</div>
 					</div>
 					
 					<!-- case_appointment -->
 					<div class="row-fluid wrap" id="case_appointment">
 						<h4 class=" ">นัดหมาย &nbsp;&nbsp;
+							<div class="btn-collapse pull-right" ><i class="fa icon-chevron-down"></i></div>
+						</h4>
+						<div class="content_field collapse" id="collapse_case_appointment">
 							<div class="wrap_button">
 								<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr"></td>
 										<td><select class="case_appointment_type appointment">
 											<option value=""> ---- เลือก ---- </option></select></td>
-										<td><input type="text" class="case_appointment_date datetimepicker"></td>
+										<td><input type="text" class="case_appointment_date datetimepicker" readonly  placeholder="หมายเหตุ"></td>
 										<td><select class="case_appointment_doctor doctor">
 											<option value=""> ---- เลือกหมอ ---- </option></select></td>
-										<td><input class="case_appointment_supervised user" type="text"></td>
+										<td><input class="case_appointment_supervised " type="text" placeholder="ผู้ดูแล ค้นหาอัตโนมัติ"></td>
 										<td><label class="label-control"><input class="case_appointment_isVdoProduct" type="checkbox"> ถ่าย VDO</label>
 											<label class="label-control"><input class="case_appointment_isVdoRh" type="checkbox"> RH VDO</label>
 											<label class="label-control"><input class="case_appointment_isPictureProduct" type="checkbox"> ถ่ายภาพ</label>
 											<label class="label-control"><input class="case_appointment_isPictureRh" type="checkbox"> RH ถ่ายภาพ</label>
 											<label class="label-control"><input class="case_appointment_isMeetDoctor" type="checkbox"> พบแพทย์</label></td>
-										<td><input class="case_appointment_remark" type="text"></td>
+										<td><input class="case_appointment_remark" type="text" placeholder="หมายเหตุ"></td>
 										<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
 									</tr>'>เพิ่ม</button>
 								<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
 								<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
 							</div>
-						</h4>
-						<hr/>
-						
-						<div class="responsive-table">
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th>รายการ <span class="redFont ">*</span></th>
-										<th>ณ วันที่ <span class="redFont ">*</span></th>
-										<th>แพทย์ <span class="redFont ">*</span></th>
-										<th>ผู้ดูแล</th>
-										<th>รายการนัดหมาย</th>
-										<th>หมายเหตุ</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
+							<br/>
+							<div class="responsive-table">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>รายการ <span class="redFont ">*</span></th>
+											<th>ณ วันที่ <span class="redFont ">*</span></th>
+											<th>แพทย์ <span class="redFont ">*</span></th>
+											<th>ผู้ดูแล (Auto complete)</th>
+											<th>รายการนัดหมาย</th>
+											<th>หมายเหตุ</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 					
@@ -817,14 +874,17 @@
 					<!-- case_contract -->
 					<div class="row-fluid wrap" id="case_contract">
 						<h4 class=" ">รายละเอียดสัญญา &nbsp;&nbsp;
+							<div class="btn-collapse pull-right" ><i class="fa icon-chevron-down"></i></div>
+						</h4>
+						<div class="content_field collapse" data-target="collapse_case_contract">
 							<div class="wrap_button">
 								<button type="button" class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
 									<td><div class="case_contract_no no"></div></td>
 									<td><select class="case_contract_procedure procedure">
 										<option value=""> ---- เลือกหัตถการ ---- </option></select></td>
-									<td><input type="text" class="case_contract_startDate datepicker" readonly></td>
-									<td><input type="text" class="case_contract_endDate datepicker" readonly><hr class="hr1">
-	    								<div class="text-center">เหลือเวลา <span class="remaining_days"></span> วัน</div></td>
+									<td><input type="text" class="case_contract_startDate datepicker" readonly placeholder="วว/ดด/ปปปป"></td>
+									<td><input type="text" class="case_contract_endDate datepicker" readonly placeholder="วว/ดด/ปปปป"><hr class="hr1">
+	    								<div class="text-center">เหลือเวลา <span class="remaining_days">0</span> วัน</div></td>
 									<td><label class="label-control"><input class="case_contract_isPost" type="checkbox"> โพสรีวิว</label>
 										<label class="label-control"><input class="case_contract_isUsage"	type="checkbox"> อนุญาตให่้่ใช้รูปภาพและVDO</label>
 										<label class="label-control"><input class="case_contract_isPicture_vdo" type="checkbox"> ถ่ายภาพและVDO</label>
@@ -844,84 +904,89 @@
 								<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
 								<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
 							</div>
-						</h4>
-						<hr/>
-						<div class="responsive-table">
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th>ลำดับ</th>
-										<th>หัตถการ <span class="redFont ">*</span></th>
-										<th>วันเริ่มสัญญา <span class="redFont ">*</span></th>
-										<th>วันหมดสัญญา <span class="redFont ">*</span></th>
-										<th>ยินยอม</th>
-										<th colspan='2'>ไฟล์อัพโหลด</th>
-									</tr>
-								</thead>
-								<tbody>
-									
-								</tbody>
-							</table>
+							<div class="responsive-table">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>ลำดับ</th>
+											<th>หัตถการ <span class="redFont ">*</span></th>
+											<th>วันเริ่มสัญญา <span class="redFont ">*</span></th>
+											<th>วันหมดสัญญา <span class="redFont ">*</span></th>
+											<th>ยินยอม</th>
+											<th>ไฟล์อัพโหลด</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 					
 					<!-- case_pr -->
 					<div class="row-fluid wrap" id="case_pr">
 						<h4 class=" ">รายละเอียดการประชาสัมพันธ์ &nbsp;&nbsp;
+							<div class="btn-collapse pull-right"><i class="fa icon-chevron-down"></i></div>
+						</h4>
+						<div class="content_field collapse" id="collapse_case_pr">
 							<div class="wrap_button">
 								<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
 										<td><select class="case_pr_pr pr">
 											<option value=""> ---- เลือกรายการประชาสัมพันธ์ ---- </option></select></td>
-										<td><input type="text" class="case_pr_planDate datepicker" readonly></td>
-										<td width="150px">
+										<td><input type="text" class="case_pr_planDate datepicker" readonly placeholder="วว/ดด/ปปปป"></td>
+										<td >
 											 <label class="label-control"><input class="case_pr_isPicture" type="checkbox"> รูปภาพ</label>
 											 <label class="label-control"><input class="case_pr_isVdo" type="checkbox"> วีดีโอ(selfie)</label>
 											 <label class="label-control"><input class="case_pr_isInstragram" type="checkbox"> live Instragram</label>
 											 <label class="label-control"><input class="case_pr_isFacebook" type="checkbox"> live Facebook</label>
 										</td>
-										<td><input type="text" class="case_pr_actualDate datepicker" readonly></td>
+										<td><input type="text" class="case_pr_actualDate datepicker" readonly placeholder="วว/ดด/ปปปป"></td>
 										<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
 									</tr>'>เพิ่ม</button>
 								<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
 								<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
 							</div>
-						</h4>
-						<hr/>
-						<div class="responsive-table">
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th>รายการ <span class="redFont ">*</span></th>
-										<th>ณ วันที่ <span class="redFont ">*</span></th>
-										<th>โดยจะลงเป็น</th>
-										<th>ในวันที่ <span class="redFont ">*</span></th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
+							<div class="responsive-table">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>รายการ <span class="redFont ">*</span></th>
+											<th>ณ วันที่ <span class="redFont ">*</span></th>
+											<th>โดยจะลงเป็น</th>
+											<th>ในวันที่ <span class="redFont ">*</span></th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 					
 					<!-- case_file -->
 					<div class="row-fluid wrap" id="case_file">
 						<h4 class=" ">แฟ้ม  &nbsp;&nbsp;
+							<div class="btn-collapse pull-right"><i class="fa icon-chevron-down"></i></div>
+						</h4>
+						<div class="content_field collapse"  id="collapse_case_file">
 							<div class="wrap_button">
 								<button class="btn btn-info btn-action btn-upload modal-add" id="btnAddFolder"  data-target="#addFolder" data-toggle="modal">สร้างแฟ้มรูป</button> 
-								<button class="btn btn-success btn-action btn-upload modal-add" id="btnUploadFile" data-target="#ModalImportForm" data-toggle="modal" form="fileUploadWriterForm">อัพโหลด</button>
+								<button class="btn btn-success btn-action btn-upload modal-add" id="btnUploadFile" data-target="#ModalImportForm" data-toggle="modal" >อัพโหลด</button>
+								<button class="btn btn-danger btn-action btn-upload" id="btndeleteFolder" data-target="#deleteFolderForm" data-toggle="modal">ลบแฟ้มข้อมูล</button>
 							</div>
-						</h4>
-						<hr/>
-						<div class="row-fluid">
-							<div class="span8">
-								<ul id="list">
-								    <li><a href="#">Home</a><ul> </ul></li>
-								</ul>
-							</div>
-							<div class="span4">
-								<div id="review_image">
-									<img src=''>
+							<div class="row-fluid">
+								<div class="span8">
+									<ul id="list" class="list_tree">
+									    <li><a href="#">Home</a><ul> </ul></li>
+									</ul>
+								</div>
+								<div class="span4">
+									<div id="review_image">
+										<img src=''>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -929,18 +994,21 @@
 					
 					<!-- Article -->
 					<div class="row-fluid wrap" id="case_article">
-						<h4 class=" ">บทความ &nbsp;&nbsp;
+						<h4 class=" ">รีวิว &nbsp;&nbsp;
+							<div class="btn-collapse pull-right" ><i class="fa icon-chevron-down"></i></div>
+						</h4>
+						<div class="content_field collapse" id="collapse_case_article">
 							<div class="wrap_button">
 								<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
-										<td><input class="case_article_name" type="text"></td>
+										<td><input class="case_article_name" type="text" placeholder="ชื่อรีวิว"></td>
 										<td><select class="case_article_type_id article">
-											<option value=""> ---- เลือกบทความ ---- </option></select></td>
-										<td><input class="case_article_writer user" type="text"></td>
-										<td><input type="text" class="case_article_writingStartDate datepicker" readonly></td>
-										<td><input type="text" class="case_article_writingEndDate datepicker" readonly></td>
-										<td><input type="text" class="case_article_planDate datepicker" readonly></td>
+											<option value=""> ---- เลือกรีวิว ---- </option></select></td>
+										<td><input class="case_article_writer user" type="text" placeholder="ผู้เขียน ค้นหาอัตโนมัติ"></td>
+										<td><input type="text" class="case_article_writingStartDate datepicker" readonly placeholder="วว/ดด/ปปปป"></td>
+										<td><input type="text" class="case_article_writingEndDate datepicker" readonly placeholder="วว/ดด/ปปปป"></td>
+										<td><input type="text" class="case_article_planDate datepicker" readonly placeholder="วว/ดด/ปปปป"></td>
 										<td><input class="case_article_upload storeFile" multiple type="file"></td>
-										<td width="150px">
+										<td >
 											<button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button>
 										<input class="case_contract_file_name_check" type="hidden">
 										</td>
@@ -948,120 +1016,122 @@
 								<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
 								<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
 							</div>
-						</h4>
-						<hr/>
-						<div class="responsive-table">
-							<table class="table table-bordered" width="100%">
-								<thead>
-									<tr>
-										<th>ชื่อบทความ <span class="redFont ">*</span></th>
-										<th>ประเภทบทความ <span class="redFont ">*</span></th>
-										<th>ผู้เขียน <span class="redFont ">*</span></th>
-										<th>วันที่เริ่มเขียน <span class="redFont ">*</span></th>
-										<th>วันที่เขียนเสร็จ</th>
-										<th>กำหนดส่ง <span class="redFont ">*</span></th>
-										<th>ไฟล์อัพโหลด</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
+							<div class="responsive-table">
+								<table class="table table-bordered" width="100%">
+									<thead>
+										<tr>
+											<th>ชื่อรีวิว <span class="redFont ">*</span></th>
+											<th>ประเภทรีวิว <span class="redFont ">*</span></th>
+											<th>ผู้เขียน (Auto Complete) <span class="redFont ">*</span></th>
+											<th>วันที่เริ่มเขียน <span class="redFont ">*</span></th>
+											<th>วันที่เขียนเสร็จ</th>
+											<th>กำหนดส่ง <span class="redFont ">*</span></th>
+											<th>ไฟล์อัพโหลด</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 					
 					<!-- case_stage -->
 					<div class="row-fluid wrap" id="case_stage">
 						<h4 class=" ">Workflow  &nbsp;&nbsp;&nbsp;&nbsp;</h4>
-						<hr/>
-						<div class="row-fluid">
-							<div class="span4">
-								<label class="input_control ">จากขั้นตอน : <span class="redFont ">*</span></label>
-								<select id="case_stage_fromStage"  class="input_control "></select>
+						<div class="content_field">
+							<div class="row-fluid">
+								<div class="form-group span4">
+									<label class="input_control ">จากขั้นตอน : <span class="redFont ">*</span></label>
+									<select id="case_stage_fromStage"  class="input_control "></select>
+								</div>
+								<div class="form-group span4">
+									<label class=" ">ไปขั้นตอน : <span class="redFont ">*</span></label>
+									<select id="case_stage_toStage"  class="input_control "></select>
+								</div>
+								<div class="form-group span4">
+									<label class=" ">ส่งถึง: (Auto complete)</label>
+									<select id="case_stage_toUser" class=" input_control"></select>
+								</div>	
 							</div>
-							<div class="span4">
-								<label class=" ">ไปขั้นตอน : <span class="redFont ">*</span></label>
-								<select id="case_stage_toStage"  class="input_control "></select>
+							<div class="row-fluid">
+								<div class="form-group span4">
+									<label class=" ">วันที่เสร็จ : </label>
+									<div id="case_stage_actualDate" class=""></div>
+								</div>
+								<div class="form-group span4">
+									<button class="btn btn-primary" id="btn_case_stage_upload" data-target="#addImage" data-toggle="modal">เลือกรูปภาพ</button>
+									<div id="case_stage_upload"></div>
+								</div>
+								<div class="form-group span4">
+									<label class=" ">วันครบกำหนด: </label>
+									<input type="text" id="case_stage_planDate" class="datepicker input_control" readonly placeholder="วว/ดด/ปปปป">
+								</div>	
 							</div>
-							<div class="span4">
-								<label class=" ">ส่งถึง: (Auto complete)</label>
-								<select id="case_stage_toUser" class=" input_control"></select>
+							<div class="row-fluid ">
+								<div class="span8">
+									<label >เหตุผล : </label>
+									<textarea id="case_stage_remark" rows="4" class="input_control" placeholder="หมายเหตุ"></textarea>
+								</div>
+								<div class="span4">
+									<label class=" ">แจ้งเตือน: </label>
+									<select id="case_stage_notification" class="input_control" multiple>
+									</select>
+								</div>	
+							</div>
+							<div class="row-fluid">
+								<div class="span8">
+									<label class=" ">แนบเอกสาร : </label>
+									<input type="file" id="case_stage_upfile" class="storeFile input_control" multiple >
+								</div>
+							</div>
+							
+							<div class="row-fluid text-center">
+								<div class="wrap_button">
+									<button class="btn btn-success input_control btnModalSubmit" id="btnModalSubmit" type="button">
+										Submit
+									</button>
+									<button data-dismiss="modal" class="btn btn-danger" type="button">
+										Cancel
+									</button>
+								</div>
+							</div>
+							<div class="row-fluid">
+							<br>
+							   <div class="alert alert-warning information" id="information_errors" style="display: none;height:120px; overflow-y: scroll; position:relative;">
+								<h4>แจ้งเตือน</h4></div>
 							</div>	
 						</div>
-						<div class="row-fluid">
-							<div class="span4">
-								<label class=" ">วันที่เสร็จ : </label>
-								<div id="case_stage_actualDate" class=""></div>
-							</div>
-							<div class="span4">
-								<button class="btn btn-primary" id="btn_case_stage_upload" data-target="#addImage" data-toggle="modal">เลือกรูปภาพ</button>
-								<div id="case_stage_upload"></div>
-							</div>
-							<div class="span4">
-								<label class=" ">วันครบกำหนด: </label>
-								<input type="text" id="case_stage_planDate" class="datepicker input_control" readonly>
-							</div>	
-						</div>
-						<div class="row-fluid ">
-							<div class="span8">
-								<label >เหตุผล : </label>
-								<textarea id="case_stage_remark" rows="4" class="input_control"></textarea>
-							</div>
-							<div class="span4">
-								<label class=" ">แจ้งเตือน: </label>
-								<select id="case_stage_notification" class="input_control" multiple>
-								</select>
-							</div>	
-						</div>
-						<div class="row-fluid">
-							<div class="span8">
-								<label class=" ">แนบเอกสาร : </label>
-								<input type="file" id="case_stage_upfile" class="storeFile input_control" multiple>
-							</div>
-						</div>
-						
-						<div class="row-fluid text-center">
-							<div class="wrap_button">
-								<button class="btn btn-success input_control" id="btnModalSubmit" type="button">
-									Submit
-								</button>
-								<button data-dismiss="modal" class="btn btn-danger" type="button">
-									Cancel
-								</button>
-							</div>
-						</div>
-						<div class="row-fluid">
-						<br>
-						   <div class="alert alert-warning information" id="information_errors" style="display: none;height:120px; overflow-y: scroll; position:relative;">
-							<h4>แจ้งเตือน</h4></div>
-						</div>	
 					</div>
 					
 					<!-- Workflow -->
 					<div class="row-fluid wrap" id="workflow">
-						<h4 class=" ">Workflow History</h4>
-						<hr/>
-						
-						<div class="responsive-table">
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th rowspan=2>วันเวลา</th>
-										<th colspan=2>จาก</th>
-										<th colspan=2>ถึง</th>
-										<th rowspan=2>หมายเหตุ</th>
-										<th rowspan=2>แจ้งเตือน</th>
-										<th rowspan=2>เอกสารแนบ</th>
-									</tr>
-									<tr>
-										<th>งาน</th>
-										<th>ผู้รับผิดชอบ</th>
-										<th>งาน</th>
-										<th>ผู้รับผิดชอบ</th>
-									</tr>
-								</thead>
-								<tbody></tbody>
-							</table>
+						<h4 class=" ">Workflow History
+							<div class="btn-collapse pull-right" ><i class="fa icon-chevron-down"></i></div>
+						</h4>
+						<div class="content_field collapse" id="collapse_workflow">
+							<div class="responsive-table none">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th rowspan=2>วันเวลา</th>
+											<th colspan=2>จาก</th>
+											<th colspan=2>ถึง</th>
+											<th rowspan=2>หมายเหตุ</th>
+											<th rowspan=2>แจ้งเตือน</th>
+											<th rowspan=2>เอกสารแนบ</th>
+										</tr>
+										<tr>
+											<th>งาน</th>
+											<th>ผู้รับผิดชอบ</th>
+											<th>งาน</th>
+											<th>ผู้รับผิดชอบ</th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 						
@@ -1090,7 +1160,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-					<form id="fileUploadWriterForm">
+					<form id="">
 						<div class="row-fluid"> 
 							<div class=""> <label class=" ">แฟ้มหลัก: </label> 
 								<select class="folderList"></select>
@@ -1105,7 +1175,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-success" type="button" id="importsubmitForm" form="fileUploadWriterForm">Upload</button>
+					<button class="btn btn-success" type="button" id="importsubmitForm" >Upload</button>
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
 						type="button">Cancel</button>
 				</div>
@@ -1113,6 +1183,40 @@
 		</div>
 	</div>
 	<!-- Modal End  -->
+	
+	<!-- Modal Delete Folder form -->
+	<div aria-hidden="true" role="dialog" tabindex="-1" id="deleteFolderForm"
+		class="modal inmodal portlet-frame" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header" style="background-color: rgb(0, 206, 215); border-color: rgb(0, 206, 215);">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top:5px">
+						<span aria-hidden="true"><i class='fa fa-times'></i></span><span class="sr-only"></span>
+					</button>
+					<h4 class="modal-title" id="">ลบแฟ้มข้อมูล</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+					<form id="">
+						<div class="row-fluid"> 
+							<div class=""> <label class=" ">แฟ้ม: </label> 
+								<ul class="folderList list_tree">
+								    <li><a href="#">Home</a><ul> </ul></li>
+								</ul>
+							</div>
+						</div>
+					</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button data-dismiss="modal" class="btn btn-danger btnCancle"
+						type="button">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal End  -->
+	
 		
 	<!-- Modal Confirm Start -->
 	<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModal"
@@ -1358,9 +1462,8 @@ $(document).ready(function() {
 				$html_temp +='<option data-email="'+this.emailAddress+'" value="'+this.userId+'">'+this.screenName+'</option>';
 			});	$('#case_stage_notification').append( $html_temp );
 			
-			$('#case_coordinate').append( html_temp );
+			$('#case_coordinate .content_field').append( html_temp );
 			$('.multiple').multiSelect();
-			//$('.folder_toggle').click(function(){	$(this).parent('li').find('ul').toggle();	});
 			$('.datepicker').keydown(function(e){e.preventDefault();});
 			$('#case_stage_notification').multiselect({
 		        includeSelectAllOption: false,
@@ -1370,11 +1473,10 @@ $(document).ready(function() {
 		
 		$('#btn_search').click(function(){	getList(1);  });
 		$('#countPaginationBottom').change(function(){	getList(1);  });
+		
 		$('body').on('click','.add_procedure', function () {
 			clearAll();
-			$('#modalAdd').modal({
-				backdrop: 'static',
-			    keyboard: false});
+			$('#modalAdd').modal({	backdrop: 'static', keyboard: false	});
 			$.ajax({
 				url:$plRoute+'/getOnePatient',
 				type : 'GET',
@@ -1383,29 +1485,41 @@ $(document).ready(function() {
 				async:true,
 				headers:{Authorization:"Bearer "+tokenID.token},
 				success : function(rs) {
-				console.log(rs);
-				if(rs){
-					pushData_patient(rs);
-					if(rs.social) pushData_socialMedia(rs.social);
-					if(rs.surgery) pushData_sugery(rs.surgery);
-					$('#case_stage').data('id',1);
-					getCurrentStage($('#case_stage').data('id'),'#case_stage_fromStage');
-					getCurrentStage($('#case_stage').data('id'),'#case_stage_toStage');
-					$('.btn-action').hide();
-					checkRoleAuthurize($('#case_stage').data('id'));
-				}
+					console.log(rs,'.add_procedure');
+					if(rs){
+						pushData_patient(rs);
+						if(rs.social) pushData_socialMedia(rs.social);
+						if(rs.surgery) pushData_sugery(rs.surgery);
+						$('#case_stage').data('stage_id',1);
+						getNewCaseStage();
+						$('.btn-action').hide();
+						checkRoleAuthurize(1,function(){ 
+							$('#case_file').find('.btn-action').hide(); 
+							$('#patient_case').find('.btn-collapse').not('.open').click();
+							$('.patientSubmit').removeClass('show');
+						});
+					}
 				}
 			});
-
-			
 		}); 
 		
-		/* edit case */
-		$('body').on('click','.edit-list,#addCase',function(){		
+		$('body').on('click','#addCase', function () {
 			clearAll();
-			$('#modalAdd').modal({
-				backdrop: 'static',
-			    keyboard: false});
+			$('#modalAdd').modal({	backdrop: 'static', keyboard: false	});
+			$('#case_stage').data('stage_id',1);
+			getNewCaseStage();
+			$('.btn-action').hide();
+			checkRoleAuthurize(1,function(){ 
+				$('#case_file').find('.btn-action').hide(); 
+				$('#patient_case').find('.btn-collapse').not('.open').click();
+				$('.patientSubmit').addClass('show');
+			});
+		});
+		
+		/* edit case */
+		$('body').on('click','.edit-list',function(){		
+			clearAll();
+			$('#modalAdd').modal({	backdrop: 'static', keyboard: false	});
 			$.ajax({
 				url:$plRoute+'/getOneCase',
 				type:"GET",
@@ -1414,7 +1528,7 @@ $(document).ready(function() {
 				headers:{Authorization:"Bearer "+tokenID.token},
 				async:true,
 				success:function(rs){
-					console.log(rs);
+					console.log(rs,'.edit');
 					if(rs){
 						if(rs.patient){
 							pushData_patient(rs.patient);
@@ -1433,43 +1547,50 @@ $(document).ready(function() {
 							if(rs.folder)			getFolder(rs.folder);
 							if(rs.case_article)		pushData_caseArticle(rs.case_article);
 							if(rs.caseStageHistory)	pushData_workFlow(rs.caseStageHistory);
-							if(rs.stage) {
-								$('#case_stage').data('id',rs.stage.stage_id);
-								getCurrentStage(rs.stage.stage_id,'#case_stage_fromStage');
-								getStage(rs.stage.stage_id);
+							if(rs.case_stage) {
+								console.log(rs.case_stage,'rs.caseStage');
+								$('#case_stage').data('id',rs.case_stage.case_stage_id).data('stage_id',rs.case_stage.to_stage_id);
+								getCurrentStage(rs.case_stage.case_stage_id,'#case_stage_fromStage');
+								getToStage(rs.case_stage.to_stage_id);
 							}
-							
-						}else{
-							$('#case_stage').data('id',1);
-							console.log($('#case_stage').data('id'),'case stage id');
-							getCurrentStage($('#case_stage').data('id'),'#case_stage_fromStage');
-							getCurrentStage($('#case_stage').data('id'),'#case_stage_toStage');
-							$('#case_stage').find('.input_control').removeAttr('disabled');
 						}
 					}
-				
-
 					$('.case_coordinate').attr('disabled','disabled').multiselect("refresh");
 					$('.input_control').attr('disabled','disabled');
 					$('.btn-action').hide();
-					checkRoleAuthurize($('#case_stage').data('id'));
+					checkRoleAuthurize(rs.case_stage.to_stage_id);
+				},error : function(rs){
+					console.log(rs,'edit error');	
 				}
 			});
 		});
+
 		
-		function checkRoleAuthurize(stage_id){
-			console.log(stage_id,'-- stage_id')
+		function getNewCaseStage(){
+			$.ajax({
+				url:$plRoute+'/getNewCaseStage',
+				type:"GET",
+				dataType:"json",
+				data:'',
+				headers:{Authorization:"Bearer "+tokenID.token},
+				async:true,
+				success:function(rs){
+					console.log(rs);
+					if(rs)  $('#case_stage_fromStage,#case_stage_toStage').html('<option selected data-status="'+rs.stage_name+'" value="'+rs.stage_id+'">'+rs.stage_name+'</option>');
+				}
+			});
+		}
+		
+		function checkRoleAuthurize(stage_id,callback){
 			$.ajax({
 				url: $plRoute+'/sectionRole',
 				type : 'GET',
 				dataType : "json",
-				data : {stage_id:stage_id},
+				data : {stage_id : stage_id},
 				async:true,
 				headers:{Authorization:"Bearer "+tokenID.token},
 				success : function(rs) {
-			//getAjax($plRoute+'/sectionRole','get',{stage_id:stage_id},function(rs){
-					console.log(rs);
-					
+					console.log(rs,'checkRoleAuthurize');
 					$.each(rs.section,function(){
 						if(this.section_id == 'patient' || this.section_id == 'patient_case' || this.section_id == 'case_coordinate'){
 							if(this.add_flag == 1 && this.edit_flag == 1){
@@ -1485,23 +1606,59 @@ $(document).ready(function() {
 						if(this.download_flag == 1)	$('#'+this.section_id).find('.btn-download').show();
 					});
 					$('body .notHide').show();
-					
-					if($.inArray(rs.stageRole.role_id, rs.userRole)!= -1){
-						$('#case_stage').find('.input_control').removeAttr('disabled');
-					}else{
-						$('#case_stage').find('.input_control').attr('disabled',true);
-					}
+					 if(!$.isEmptyObject(rs.stageRole)){
+						if($.inArray(rs.stageRole.role_id, rs.userRole)!= -1){
+							$('#case_stage').find('.input_control').removeAttr('disabled');
+						}else{
+							$('#case_stage').find('.input_control').attr('disabled',true);
+						}
+					} 
 					if($.inArray(22312, rs.userRole)== -1){
 						$('#case_social_media').find('.case_social_media_username,.case_social_media_password').hide();
 						$('#case_social_media').find('.modal-add,.modal-edit,.btn-edit').hide();
 					}
 					$('#case_stage_notification').multiselect("refresh");
+					if(callback) callback();
 				}
 			});
-			
 		}
 		
-		$('#btnModalSubmit').click(function(){
+		$('.num').keydown(function(e){
+			 if ($.inArray(e.key, ['0','1','2','3','4','5','6','7','8','9'])== -1){e.preventDefault()};
+		});
+		
+		$('#followupSubmit').click(function(){
+			var followup = [];
+			$('#case_followup table tbody tr').each(function(i,v){
+				followup.push({
+					followup_id		:$(this).data('id')?$(this).data('id'):'',
+					case_id			:$('#patient_case').data('id')?$('#patient_case').data('id'):'',
+					procedure_id	:$(this).find('.case_followup_procedure').val(),
+					followup_year 	:$(this).find('.case_followup_year').val()
+				});
+			});
+			console.log(followup,'data followup');
+			$.ajax({
+				url: $plRoute+'/cuFollowup',
+				type : 'POST',
+				dataType : "json",
+				data : {case_id:$("#patient_case").data('id'),case_followup:followup},
+				async:false,
+				headers:{Authorization:"Bearer "+tokenID.token},
+				success : function(rs) {
+					console.log(rs,'followup');
+					if(rs.status = 200){
+						pushData_caseFollowup(rs.data);
+						$("#case_followup").find('.del_rec').show();
+			    		callFlashSlide('สำเร็จ!!  บันทึกข้อมูลเรียบร้อย','success');
+					}else{
+						callFlashSlide('เกิดข้อผิดพลาด !!  ไม่สามารถบันทึกข้อมูลได้','error');
+					}
+			    }
+			});
+		});
+		
+		$('.btnModalSubmit').click(function(){
 			var FormAllData = new FormData();
 			$data = [];
 			$case_id = $('#case_stage').data('id');
@@ -1614,23 +1771,23 @@ $(document).ready(function() {
 			$('#review_image img').attr('src',$host+$(this).data('path'));
 		});
 		
-		function getCurrentStage(stage_id,target){
+		
+		function getCurrentStage(case_stage_id,target){
 			$.ajax({
 				url: $plRoute+'/getStage',
 				type : 'GET',
 				dataType : "json",
-				data : {stage_id:stage_id},
+				data : {case_stage_id:case_stage_id},
 				async:true,
 				headers:{Authorization:"Bearer "+tokenID.token},
 				success : function(rs) {
-				//getAjax($plRoute+'/getStage','get',{stage_id:stage_id},function(rs){
 					console.log(rs,'current Stage');
-					$(target).html('<option selected data-status="'+rs.from_stage.stage_name+'" value="'+rs.from_stage_id+'">'+rs.from_stage.stage_name+'</option>');
-				}			
+					$(target).html('<option selected data-status="'+rs.to_stage.stage_name+'" value="'+rs.to_stage.stage_id+'">'+rs.to_stage.stage_name+'</option>');
+				},error:function(){ console.log('error -> getCurrentStage'); }		
 			});
 		}
 		
-		function getStage(current_stage){
+		function getToStage(current_stage){
 			$.ajax({
 				url: $plRoute+'/action_to',
 				type : 'GET',
@@ -1639,14 +1796,13 @@ $(document).ready(function() {
 				async:true,
 				headers:{Authorization:"Bearer "+tokenID.token},
 				success : function(rs) {
-			//getAjax($plRoute+'/action_to','get',{stage_id:current_stage},function(rs){
 					console.log(rs,'getStage');
 					var html_stage_to = '<option data-status="" value="">บันทึกฉบับร่าง</option>';
 					if(rs.length > 0){
 						$.each(rs,function(){
 							html_stage_to +='<option data-status="'+this.status+'" value="'+this.stage_id+'">'+this.stage_name+'</option>';
 						}); 
-						$('#case_stage').find('.input_control').removeAttr('disabled');
+						//$('#case_stage').find('.input_control').removeAttr('disabled');
 						$('#case_stage_toStage').html(html_stage_to);
 					}
 				}
@@ -1679,7 +1835,7 @@ $(document).ready(function() {
 				$html = '<tr class="" data-id="'+this.patient_media_id+'">'
 					+'<td><select class="patient_social_media_type social input_control">'
 						+'<option value=""> ---- เลือกสื่อ ---- </option>'+$html_social+'</select></td>'
-					+'<td><input type="text" value="'+this.user_link+'" class="patient_social_media_link input_control"></td>'
+					+'<td><input type="text" value="'+this.user_link+'" class="patient_social_media_link input_control"><a href="'+this.user_link+'" target="_blank" class="pull-right">ลิงค์</a></td>'
 					+'<td><input type="number" value="'+this.n_of_follwer+'" class="patient_social_media_follow input_control"></td>'
 					+'<td><button class="btn btn-danger del_rec btn-delete btn-action" style="display:none"><i class="fa fa-trash"></i></button></td></tr>';
 				$('#patient_social_media tbody').append($html);
@@ -1706,7 +1862,7 @@ $(document).ready(function() {
 		};
 		function pushData_patientCase(data){
 			$('#patient_case').data('id',data.case_id);	
-			$('#patient_case_suggesGroup').val(data.suggest_group);
+			/* $('#patient_case_suggesGroup').val(data.suggest_group); */
 			$('#patient_case_suggestedBy').val(data.suggested_by);	
 			$('#patient_case_caseType').val(data.case_type.case_type_id);
 			$('#patient_case_caseGroup').val(data.case_group.case_group_id);
@@ -1726,7 +1882,8 @@ $(document).ready(function() {
 			});
 			$('.view_supervisedBy').append($html);
 		};
-		function pushData_caseFollowup(data){	
+		function pushData_caseFollowup(data){
+			$('#case_followup tbody').html('');
 			$.each(data,function(){
 				$html = '<tr class="" data-id="'+this.followup_id+'">'
 						+'<td><select class="case_followup_procedure procedure input_control">'
@@ -1747,8 +1904,8 @@ $(document).ready(function() {
 								+'<option value=""> ---- เลือกประเภทส่วนลด ---- </option>'+$html_discountType+'</select></td>'
 							+'<td><input type="number" class="case_price_offer input_control" value="'+this.offer_price+'"></td>'
 							+'<td><input type="number" class="case_price_accept input_control" value="'+this.accept_price+'"></td>'
-							+'<td><div class="case_price_percent input_control"></div></td>'
-							+'<td><div class="case_price_value input_control"></div></td>'
+							+'<td><div class="case_price_percent input_control">0</div></td>'
+							+'<td><div class="case_price_value input_control">0</div></td>'
 							+'<td><input type="text" class="case_price_remark input_control" value="'+this.remark+'"></td>'
 							+'<td><button class="btn btn-danger del_rec btn-delete btn-action" style="display:none" ><i class="fa fa-trash"></i></button></td></tr>';
 				$('#case_price tbody').append($html);
@@ -1763,7 +1920,7 @@ $(document).ready(function() {
 				$html = '<tr class="" data-id="'+this.case_media_id+'"> '
 					+'<td><select class="case_social_media_social social input_control"> '
 						+'<option value=""> ---- เลือกสื่อ ---- </option>'+$html_social+'</select></td> '
-					+'<td><input type="text" class="case_social_media_link input_control" value="'+this.link+'"></td>'
+					+'<td><input type="text" class="case_social_media_link input_control" value="'+this.link+'"><a href="'+this.link+'" target="_blank" class="pull-right">ลิงค์</a></td>'
 					+'<td><input type="text" class="case_social_media_username input_control" value="'+this.usr_name+'"></td>'
 					+'<td><input type="text" class="case_social_media_password input_control" value="'+this.pwd+'"></td>'
 					+'<td><input type="text" class="case_social_media_remark input_control" value="'+this.note+'"></td>'
@@ -1791,7 +1948,7 @@ $(document).ready(function() {
 					+'<td><input type="text" class="case_appointment_date datetimepicker input_control" value="'+paresDateToDate(this.appointment_date.split(' ')[0])+' '+this.appointment_date.split(' ')[1].substr(0, 5)+'"></td>'
 					+'<td><select class="case_appointment_doctor doctor input_control">'
 						+'<option value=""> ---- เลือกหมอ ---- </option>'+$html_doctor+'</select></td>'
-					+'<td><input class="case_appointment_supervised user input_control" type="text" ></td>'
+					+'<td><input class="case_appointment_supervised  input_control" type="text" ></td>'
 					+'<td><label class="label-control"><input class="case_appointment_isVdoProduct" type="checkbox"> ถ่าย VDO</label>'
 						+'<label class="label-control"><input class="case_appointment_isVdoRh" type="checkbox"> RH VDO</label>'
 						+'<label class="label-control"><input class="case_appointment_isPictureProduct" type="checkbox"> ถ่ายภาพ</label>'
@@ -1902,7 +2059,7 @@ $(document).ready(function() {
 							+'<td><select class="case_pr_pr pr input_control">'
 								+'<option value=""> ---- เลือกรายการประชาสัมพันธ์ ---- </option>'+$html_pr+'</select></td>'
 							+'<td><input type="text" class="case_pr_planDate datepicker input_control" value="'+paresDateToDate(this.pr_plan_date)+'" readonly></td>'
-							+'<td width="150px"><label><input type="checkbox" class="case_pr_isPicture input_control"> รูปภาพ</label> 		  ' 
+							+'<td><label><input type="checkbox" class="case_pr_isPicture input_control"> รูปภาพ</label> 		  ' 
 								+'<label class="label-control"><input type="checkbox" class="case_pr_isVdo input_control"> วีดีโอ(selfie)</label>'
 								+'<label class="label-control"><input type="checkbox" class="case_pr_isInstragram input_control"> live Instragram</label> '   
 								+'<label class="label-control"><input type="checkbox" class="case_pr_isFacebook input_control"> live Facebook</label></td>'
@@ -1926,13 +2083,13 @@ $(document).ready(function() {
 				$html = '<tr data-id="'+this.case_article_id+'">'
 							+'<td><input class="case_article_name input_control" type="text"  value="'+this.article_name+'"></td>'
 							+'<td><select class="case_article_type_id article input_control">'
-								+'<option value=""> ---- เลือกบทความ ---- </option>'+$html_articleType+'</select></td>'
+								+'<option value=""> ---- เลือกรีวิว ---- </option>'+$html_articleType+'</select></td>'
 							+'<td><input class="case_article_writer user input_control" type="text" data-user="'+this.writer.userId+'" value="'+this.writer.firstName+' '+this.writer.lastName+'"></td>'
 							+'<td><input type="text" class="case_article_writingStartDate datepicker input_control" value="'+paresDateToDate(this.writing_start_date)+'" readonly></td>'
 							+'<td><input type="text" class="case_article_writingEndDate datepicker input_control" value="'+writing_end_date+'" readonly></td>'
 							+'<td><input type="text" class="case_article_planDate datepicker input_control" value="'+paresDateToDate(this.plan_date)+'" readonly></td>'
 							+'<td><input class="case_article_upload storeFile input_control" multiple type="file"></td>'
-							+'<td width="150px">'
+							+'<td>'
 								+'<button class="btn btn-danger del_rec btn-delete btn-action"  style="display:none"><i class="fa fa-trash"></i></button>'
 							+'<input class="case_contract_file_name_check" type="hidden"></td></tr>';
 				$('#case_article tbody').append($html);
@@ -1963,14 +2120,14 @@ $(document).ready(function() {
 				}
 				var to_user_name = this.to_user_name?this.to_user_name:'';
 				$html = '<tr data-id="'+this.case_stage_id+'">'
-							+'<td><label class="label-control">'+formatDateDMY(this.created_dttm.split(' ')[0])+' '+this.created_dttm.split(' ')[1]+'</label></td>'
-							+'<td><label class="label-control">'+this.from_stage_name	+'</label></td>'
-							+'<td><label class="label-control">'+this.from_user_name	+'</label></td>'
-							+'<td><label class="label-control">'+this.to_stage_name		+'</label></td>'
-							+'<td><label class="label-control">'+to_user_name			+'</label></td>'
-							+'<td><label class="label-control">'+this.remark			+'</label></td>'
-							+'<td><label class="label-control">'+html_alert				+'</label></td>'
-							+'<td>';
+							+'<td><label class="label-control"> &nbsp;'+formatDateDMY(this.created_dttm.split(' ')[0])+' '+this.created_dttm.split(' ')[1]+'</label></td>'
+							+'<td><label class="label-control"> &nbsp;'+this.from_stage_name	+'</label></td>'
+							+'<td><label class="label-control"> &nbsp;'+this.from_user_name	+'</label></td>'
+							+'<td><label class="label-control"> &nbsp;'+this.to_stage_name		+'</label></td>'
+							+'<td><label class="label-control"> &nbsp;'+to_user_name			+'</label></td>'
+							+'<td><label class="label-control"> &nbsp;'+this.remark			+'</label></td>'
+							+'<td><label class="label-control"> &nbsp;'+html_alert				+'</label></td>'
+							+'<td>&nbsp;';
 				if(this.docs.length > 0){
 					$html += '<center><button type="button" class="btn btn-primary input-sm downloadfileCaseHistory" title="ดาวห์โหลด" data-placement="top"><i class="fa fa-download"></i></button>'+
 	                '</center></td>';
@@ -1986,6 +2143,8 @@ $(document).ready(function() {
 			$('.bubble').remove();
 			$('.wrap').removeData('id').find('tbody').html('');
 			$('.btn-action,#information_errors').hide();
+			$('.patientSubmit').removeClass('show');
+			$('.btn-collapse.open').click();
 			$('.input_control').attr('disabled','disabled');
 			$('#profileImage,#review_image img').attr('src','');
 			$('#case_stage_notification').val('').multiselect("refresh");
@@ -2062,14 +2221,14 @@ $(document).ready(function() {
 				case_group_id	:$('#patient_case_caseGroup').val(),
 				doctor_id		:$('#patient_case_doctor').val(),
 				vn_no			:$.trim($('#patient_case_vn').val()),
-				suggest_group	:$.trim($('#patient_case_suggesGroup').val()),
+				/* suggest_group	:$.trim($('#patient_case_suggesGroup').val()), */
 				suggested_by	:$.trim($('#patient_case_suggestedBy').val()),
 				supervised_by	:supervised,
 				is_good_case	:$('#patient_case_isGood').prop('checked')?1:0,
 				is_bad_case		:$('#patient_case_isBad').prop('checked')?1:0,
 				is_good_review	:$('#patient_case_isGoodReview').prop('checked')?1:0,
 				remark			:$.trim($('#patient_case_remark').val()),
-                stage_id 		:$('#case_stage_toStage').val()==''?$('#case_stage_fromStage').val():$('#case_stage_toStage').val(),
+                //stage_id 		:$('#case_stage_toStage').val()==''?$('#case_stage_fromStage').val():$('#case_stage_toStage').val(),
                 status 			:$('#case_stage_toStage').val()==''?$('#case_stage_fromStage option:selected').text():$("#case_stage_toStage option:selected").data('status')
 			}
 		}
@@ -2215,8 +2374,8 @@ $(document).ready(function() {
 				from_user_id	:userId,
 				to_user_id		:$('#case_stage_toUser').val(),
 				to_stage_id		:$('#case_stage_toStage').val()==''?$('#case_stage_fromStage').val():$('#case_stage_toStage').val(),
-				plan_date		:formatDateYMD($('#case_stage_actualDate').text()),
-				actual_date		:formatDateYMD($('#case_stage_planDate').val()),
+				plan_date		:formatDateYMD($('#case_stage_planDate').val()),
+				actual_date		:formatDateYMD($('#case_stage_actualDate').text()),
 				status			:$('#case_stage_toStage').val()==''?$('#case_stage_fromStage option:selected').text():$("#case_stage_toStage option:selected").data('status'),
 				remark			:$.trim($('#case_stage_remark').val())
 			}
@@ -2229,12 +2388,18 @@ $(document).ready(function() {
 			$data['case_stage']['alerts'] = $('#case_stage_notification').val();
 		}	
 		
+		$('body').on('click','.btn-collapse', function(event){
+			console.log('click collapse');
+			$(this).toggleClass("open");
+			$(this).closest('.wrap').find('.content_field').toggleClass("collapse");
+		});
+		
 		$('body').on('click','.del_rec',function(){
 			$('#confrimModal').modal('show');
 			var thiss = $(this);
 			$('#btnConfirmOK').one('click',function(){
 				getAjax($plRoute+'/delRec','post',{id:thiss.closest('tr').data('id'),method:thiss.closest('.wrap').attr('id')},function(rs){
-					console.log(rs);
+					console.log(rs,'del_rec');
 					$('#confrimModal').modal('hide');
 					if(rs.status == 200){
 						thiss.closest('tr').remove();
@@ -2285,7 +2450,7 @@ $(document).ready(function() {
 			$.each($('#fileForm').prop('files'),function(i,v){
 				formData.append('file[]',this);
 			});
-			formData.append('folder_id',$('.folderList').val());
+			formData.append('folder_id',$('#ModalImportForm .folderList').val());
 			formData.append('case_id',$('#patient_case').data('id'));
 			$.ajax({
 			    url:$plRoute+'/importFile',
@@ -2412,7 +2577,32 @@ $(document).ready(function() {
 			});
 		});
 		
-		$('body').on('focusout','.user',function(){	$(this).val($(this).data('userName'));	});
+		$('body').on('keyup','.case_appointment_supervised',function(){
+			var search =  $(this).val();
+			$(this).autocomplete({
+				minLength: 3,
+				delay: 100,
+				source: function (request, response) {
+			        getAjax($plRoute+"/getSupervisedUser",'get',{search:search,case_id:$('#patient_case').data('id')},function(rs){
+			        	console.log(rs,'supervised');
+			        	response( $.map( rs, function( item ) {
+			                var object = new Object();
+			                  object.id = item.userId;
+			                  object.value = item.firstName +' '+ item.lastName;
+			                  return object ;
+			            }));
+			        });    
+			    },
+			    select: function (event, ui) {
+			    	$(this).data('user',ui.item.id);
+			    	$(this).data('userName',ui.item.value);
+			    }
+			});
+		});
+		
+		$('body').on('focusout','.user',function(){	
+			$.trim($(this).val()) != ''? $(this).val($(this).data('userName')) : $(this).val('').data('userName','').data('user','');
+		});
 		
 		$('body').on('keyup','.case_price_offer,.case_price_accept',function(){
 			$(this).closest('tr').find('.case_price_value').text(($(this).closest('tr').find(".case_price_offer").val()-$(this).closest('tr').find('.case_price_accept').val()).toFixed(2));
@@ -2459,7 +2649,6 @@ $(document).ready(function() {
 					folder_parent_id	:	$('#addFolder .main_folder').val(),
 					case_id				:	$('#patient_case').data('id'),
 			}
-			console.log(folder);
 			getAjax($plRoute+"/makeDirectory",'post',folder,function(rs){
 				console.log(rs);
 				if(rs.status == 200){
@@ -2475,16 +2664,46 @@ $(document).ready(function() {
 			getAjax($plRoute+"/getFolder/"+$('#patient_case').data('id'),'get','',function(rs){
 		        console.log(rs);
 		        var html_temp ='';
-		        $.each(rs,function(){
-					html_temp +='<option data-folderName="'+this.folder_name+'" value="'+this.folder_id+'">'+this.folder_screen_name+'</option>';
-					if(this.sub_folder){
-						$.each(this.sub_folder,function(){
-							if(this.case_folder)
-							html_temp +='<option data-folderName="'+this.folder_name+'" value="'+this.folder_id+'">&nbsp;&nbsp;&nbsp;&nbsp;'+this.folder_screen_name+'</option>';
-						});
-					}
-		        }); 
+		        if(rs){
+			        $.each(rs,function(){
+						html_temp +='<option data-folderName="'+this.folder_name+'" value="'+this.folder_id+'">'+this.folder_screen_name+'</option>';
+						if(this.sub_folder){
+							$.each(this.sub_folder,function(){
+								if(this.case_folder)
+								html_temp +='<option data-folderName="'+this.folder_name+'" value="'+this.folder_id+'">&nbsp;&nbsp;&nbsp;&nbsp;'+this.folder_screen_name+'</option>';
+							});
+						}
+			        }); 
+		        }
 				$('#ModalImportForm .folderList').html( html_temp );
+			}); 
+		});
+		
+		$('#btndeleteFolder').click(function(){
+			getAjax($plRoute+"/getFolder/"+$('#patient_case').data('id'),'get','',function(rs){
+		        console.log(rs);
+		        var html_temp = '';
+				$.each(rs,function(){
+					
+					html_temp +='<ul class="wrap_folder"><li class="folder parent" data-folder_id="'+this.folder_id+'">'
+					+'<div href="#" onclick="return false;" class="folder_toggle folder_name" title="'+this.folder_screen_name+'">'+this.folder_screen_name+'</div>'
+					+'<div style="float:right;"class="wrap_option"></div>'
+					+'<button class=" btn btn-danger del-folder btn-delete btn-action pull-right"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div></li>';
+					
+					if(this.sub_folder){
+						html_temp +='<ul class="wrap_folder">';
+						$.each(this.sub_folder,function(){
+								isNotHide = this.user_id == userId?'notHide':'';
+								var isPass = this.is_pass==1?'checked':'';
+								html_temp 	+='<li class="folder" data-folder_id="'+this.folder_id+'" >'
+								+'<div href="#" onclick="return false;" class="folder_name" title="'+this.folder_screen_name+'">'+this.folder_screen_name+'</div>'
+								+'<div style="float:right;"class="">'
+								+'<button class=" btn btn-danger del-folder btn-delete btn-action pull-right"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div>';		
+								
+						});	html_temp +='</ul>';
+					}	html_temp +='</li></ul>';
+				}); 
+				$('#deleteFolderForm .folderList >li > ul').html( html_temp );
 			}); 
 		});
 		
@@ -2538,7 +2757,7 @@ $(document).ready(function() {
 					if(rs.status == 200){
 						var f_pass = rs.data[0].f_pass!==null?rs.data[0].f_pass:0;
 						var f_all = rs.data[0].f_all!==null?parseInt(rs.data[0].f_all):0;
-						if(f_pass == 0 && f_all == 0) total = 0;
+						if(f_pass == 0 && f_all == 0) total = (0).toFixed(2);
 						else total = ((f_pass*100)/f_all).toFixed(2);
 					}
 					thiss.closest('li.parent').find('.volume').text(total);
@@ -2565,7 +2784,8 @@ $(document).ready(function() {
 				getAjax($plRoute+"/destoryFolder",'post',{folder_id:thiss.closest('li').data('folder_id'),case_id:$('#patient_case').data('id')},function(rs){
 					console.log(rs,'del-folder');
 					if(rs.status==200){ 
-						thiss.closest('ul.wrap_folder').remove();
+						$('[data-folder_id="'+thiss.closest('li').data('folder_id')+'"]').remove();
+						//thiss.closest('ul.wrap_folder').remove();
 						callFlashSlide('ลบไฟล์สำเร็จ' ,'success');
 					}else if(rs.status==400){
 						callFlashSlide(rs.message ,'error');
@@ -2595,14 +2815,23 @@ $(document).ready(function() {
 			$css = '<style>@media  only screen and (max-width: 979px){'
 				+'table, thead, tbody, th, td, tr { display: block; border-radius: 0 !important;}'
 				+'thead tr { position: absolute;top: -9999px;left: -9999px;}'
-				+'tr { border-bottom: 15px solid white; }'
+				+'tr { border-bottom: 15px solid transparent; }'
 				+'td { border-top: 1px solid #eee !important; border: none;border-bottom: 1px solid #eee; position: relative;padding: 5px !important; padding-left: 50% !important; }'
 				+'td:before { position: absolute;top: 6px;left: 6px;width: 45%; padding-right: 10px; white-space: nowrap;}';
-				$('.responsive-table table').each(function(){
+				$('.responsive-table:not(.none) table').each(function(){
+					var thiss = $(this);
 					$(this).find('thead > tr > th').each(function(i,v){
-						$css += 'td:nth-of-type('+i+'):before { content: "'+$(v).text()+'"; }';
+						$css += '#'+thiss.closest('.wrap').attr('id')+' tbody tr td:nth-of-type('+(i+1)+'):before { content: "'+$(v).text()+'"; }';
 					});
 				});
+				$css +='#workflow tbody tr td:nth-of-type(1):before { content: "วันเวลา"; }'
+					+'#workflow tbody tr td:nth-of-type(2):before { content: "จาก"; }'
+					+'#workflow tbody tr td:nth-of-type(3):before { content: "ผู้รับผิดชอบ"; }'
+					+'#workflow tbody tr td:nth-of-type(4):before { content: "ถึง"; }'
+					+'#workflow tbody tr td:nth-of-type(5):before { content: "ผู้รับผิดชอบ"; }'
+					+'#workflow tbody tr td:nth-of-type(6):before { content: "หมายเหตุ"; }'
+					+'#workflow tbody tr td:nth-of-type(7):before { content: "แจ้งเตือน"; }'
+					+'#workflow tbody tr td:nth-of-type(8):before { content: "เอกสารแนบ"; }';
 				$css +='</style>';
 				$('head').append($css);
 		}
@@ -2666,61 +2895,58 @@ $(document).ready(function() {
 			console.log(data,'getFolder');
 			var html_temp = '';
 			$.each(data,function(){
-				if(this.case_folder!=null){
-					var isOpen = this.case_folder.is_open==1?'active':'';
-					var isClose = this.case_folder.is_open==0?'active':'';
-					var volume_tik = this.case_folder.is_open==1?'block':'none';
-					var isNotHide = this.user_id == userId?'notHide':'';
-					html_temp +='<ul class="wrap_folder"><li class="folder parent" data-folder_id="'+this.folder_id+'">'
-					+'<div href="#" onclick="return false;" class="folder_toggle folder_name" title="'+this.folder_screen_name+'">'+this.folder_screen_name+'</div>'
-					+'<a href="#" onclick="return false;" class="fa fa-edit btn-edit btn-action btn_editFolder" data-target="#editFolder" data-toggle="modal" ></a>'
-					+'<div style="float:right;"class="wrap_option">'
-						+'<div class="wrap_volume " style="display:'+volume_tik+'"><span class="volume_title">ปริมาณรูป&nbsp;&nbsp;</span><span class="volume"></span>&nbsp;%</div>'
-						+'<div class="btn-group " data-toggle="buttons-radio">'
-							+'<button type="button" data-value="1" class="btnIsOpen btn btn-other btn-action '+isOpen+' ">เปิด</button>'
-							+'<button type="button" data-value="0" class="btnIsOpen btn btn-other btn-action '+isClose+' ">ปิด</button>'
-						+'</div><button class=" btn btn-danger del-folder btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div>';
-					if(this.case_file!=null){
-						html_temp +='<ul>';
-						$.each(this.case_file,function(){
-							var fileType = '';
-							isNotHide = this.user_id == userId?'notHide':'';
-							if(this.file_name)	fileType = this.file_name.split('.')[this.file_name.split('.').length-1];
-							html_temp 	+='<li class="file type-'+fileType+'" data-file_id="'+this.file_id+'" data-path="'+this.image_path+'" >'
-							+'<div href="#" class="file_name" onclick="return false;" title="'+this.file_name+'">'+this.file_name+'</div>'
-							+'<a target="_blank" href="'+$host+this.image_path+'" download class="fa fa-download btn-download btn-action" download ></a>'
-							+'<div style="float:right;"class=""><button class=" btn btn-danger del-file btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div></li>';		
-						});	html_temp +='</ul>';
-					}
-					if(this.sub_folder!=null){
-						html_temp +='<ul class="wrap_folder">';
-						$.each(this.sub_folder,function(){
-							if(this.case_folder){
-								isNotHide = this.user_id == userId?'notHide':'';
-								var isPass = this.case_folder.is_pass==1?'checked':'';
-								html_temp 	+='<li class="folder" data-folder_id="'+this.folder_id+'" >'
-								+'<div href="#" onclick="return false;" class="folder_name" title="'+this.folder_screen_name+'">'+this.folder_screen_name+'</div>'
-								+'<a href="#" onclick="return false;" class="fa fa-edit btn-edit btn-action btn_editFolder" data-target="#editFolder" data-toggle="modal"></a>'
-								+'<div style="float:right;"class="">'
-								+'<label class="control-label wrap_isPass"><input type="checkbox" '+isPass+' class="isPass btn-action btn-other">&nbsp;&nbsp;ผ่าน</label>'
-								+'<button class=" btn btn-danger del-folder btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div></li>';		
-								
-								if(this.case_file!=null){
-									html_temp +='<ul>';
-									$.each(this.case_file,function(){
-										var fileType = '';
-										isNotHide = this.user_id == userId?'notHide':'';
-										if(this.file_name)	fileType = this.file_name.split('.')[this.file_name.split('.').length-1];
-										html_temp 	+='<li class="file  type-'+fileType+'" data-file_id="'+this.file_id+'" data-path="'+this.image_path+'" >'
-										+'<div href="#" class="file_name" onclick="return false;"  title="'+this.file_name+'">'+this.file_name+'</div>'
-										+'<a target="_blank" href="'+$host+this.image_path+'" class="fa fa-download btn-download btn-action" download ></a>'
-										+'<div style="float:right;"class=""><button class=" btn btn-danger del-file btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div></li>';		
-									});	html_temp +='</ul>';
-								}
-							}
-						});	html_temp +='</ul>';
-					}	html_temp +='</li></ul>';
+				var isOpen = this.is_open==1?'active':'';
+				var isClose = this.is_open==0?'active':'';
+				var volume_tik = this.is_open==1?'block':'none';
+				var isNotHide = this.user_id == userId?'notHide':'';
+				html_temp +='<ul class="wrap_folder"><li class="folder parent" data-folder_id="'+this.folder_id+'">'
+				+'<div href="#" onclick="return false;" class="folder_toggle folder_name" title="'+this.folder_screen_name+'">'+this.folder_screen_name+'</div>'
+				+'<a href="#" onclick="return false;" class="fa fa-edit btn-edit btn-action btn_editFolder" data-target="#editFolder" data-toggle="modal" ></a>'
+				+'<div style="float:right;"class="wrap_option">'
+					+'<div class="wrap_volume " style="display:'+volume_tik+'"><span class="volume_title">ปริมาณรูป&nbsp;&nbsp;</span><span class="volume">0.00</span>&nbsp;%</div>'
+					+'<div class="btn-group " data-toggle="buttons-radio">'
+						+'<button type="button" data-value="1" class="btnIsOpen btn btn-other btn-action '+isOpen+' ">เปิด</button>'
+						+'<button type="button" data-value="0" class="btnIsOpen btn btn-other btn-action '+isClose+' ">ปิด</button>'
+					+'</div></div></li>';
+				if(this.caseFile){
+					html_temp +='<ul>';
+					$.each(this.caseFile,function(){
+						var fileType = '';
+						isNotHide = this.user_id == userId?'notHide':'';
+						if(this.file_name)	fileType = this.file_name.split('.')[this.file_name.split('.').length-1];
+						html_temp 	+='<li class="file type-'+fileType+'" data-file_id="'+this.file_id+'" data-path="'+this.image_path+'" >'
+						+'<div href="#" class="file_name" onclick="return false;" title="'+this.file_name+'">'+this.file_name+'</div>'
+						+'<a target="_blank" href="'+$host+this.image_path+'" download class="fa fa-download btn-download btn-action" download ></a>'
+						+'<div style="float:right;"class=""><button class=" btn btn-danger del-file btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div>';		
+					});	html_temp +='</ul>';
 				}
+				if(this.subFolder){
+					html_temp +='<ul class="wrap_folder">';
+					$.each(this.subFolder,function(){
+							isNotHide = this.user_id == userId?'notHide':'';
+							var isPass = this.is_pass==1?'checked':'';
+							html_temp 	+='<li class="folder" data-folder_id="'+this.folder_id+'" >'
+							+'<div href="#" onclick="return false;" class="folder_name" title="'+this.folder_screen_name+'">'+this.folder_screen_name+'</div>'
+							+'<a href="#" onclick="return false;" class="fa fa-edit btn-edit btn-action btn_editFolder" data-target="#editFolder" data-toggle="modal"></a>'
+							+'<div style="float:right;"class="">'
+							+'<label class="control-label wrap_isPass"><input type="checkbox" '+isPass+' class="isPass btn-action btn-other">&nbsp;&nbsp;ผ่าน</label></div></li>';		
+							
+							if(this.caseFile){
+								html_temp +='<ul>';
+								$.each(this.caseFile,function(){
+									var fileType = '';
+									isNotHide = this.user_id == userId?'notHide':'';
+									if(this.file_name)	fileType = this.file_name.split('.')[this.file_name.split('.').length-1];
+									html_temp 	+='<li class="file  type-'+fileType+'" data-file_id="'+this.file_id+'" data-path="'+this.image_path+'" >'
+									+'<div href="#" class="file_name" onclick="return false;"  title="'+this.file_name+'">'+this.file_name+'</div>'
+									+'<a target="_blank" href="'+$host+this.image_path+'" class="fa fa-download btn-download btn-action" download ></a>'
+									+'<div style="float:right;"class=""><button class=" btn btn-danger del-file btn-delete btn-action pull-right '+isNotHide+'"  data-target="#confrimModal" data-toggle="modal">ลบ</button></div></li>';		
+								});	html_temp +='</ul>';
+							}
+						
+					});	html_temp +='</ul>';
+				}	html_temp +='</li></ul>';
+			
 			}); 
 			$('#list >li > ul').html(html_temp);
 			$('.volume').each(function(){

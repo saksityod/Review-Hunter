@@ -42,3 +42,6 @@ span.red{ color:red; }
     
     
     .ui-datepicker{z-index:1251 !important;}
+    .aui .table{	border-radius: 0 !important;	margin:0 !important;}
+.aui .table thead th{     background: steelblue !important; color:white !important;}
+.aui .table tbody td{ background:white !important;}

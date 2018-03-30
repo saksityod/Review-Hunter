@@ -73,7 +73,7 @@
 }
 .list_tree li {
 	font-size: 12px;
-	    margin-top: 10px;
+	    margin-top: 10px !important;
 	    width: 100% !important;
     display: inline-block;
 }
@@ -162,13 +162,12 @@
 			    white-space: nowrap;
 			    overflow: hidden;
 			    text-overflow: ellipsis;}
-.wrap_button{    display: inline;}
+.wrap_button{    display: flow-root;padding-top:15px}
 .file_name:hover{ cursor:pointer}
 .ui_tpicker_hour,.ui_tpicker_minute{ width :70px}	
 .ui_tpicker_minute_slider,.ui_tpicker_hour_slider{ width :60px}
 .aui input[readonly]{ background:white;cursor:pointer}
 
-.aui .btn{   margin-top: 15px; }
 	.folder a{ padding-left:10px}
 	.case_list .btn {	margin-bottom: 10px;	}
 	.btn-collapse{
@@ -183,7 +182,7 @@
 	    border-left: 5px solid cadetblue;
 	    font-size: 15px;
     }
-    .aui .table{	border-radius: 0;	margin:0}
+
     .content_field{     padding: 0px 10px;
 	    background: rgba(200, 250, 250, 0.1);
 	    box-shadow: rgb(170, 170, 170) 0px 0px 4px -1px inset; }
@@ -726,7 +725,7 @@
 											
 										</tbody>
 									</table>
-									<div class="row-fluid">
+									<div class="wrap_button">
 										<button class="btn btn-primary modal-add btn-action pull-right" id="followupSubmit">บันทึก</button>
 									</div>
 								</div>
@@ -819,7 +818,7 @@
 						<h4 class=" ">การประสานงานคลินิก &nbsp;&nbsp;&nbsp;&nbsp; 
 							<div class="btn-collapse pull-right" ><i class="fa icon-chevron-down"></i></div>
 						</h4>
-						<div class="content_field collapse" id="collapse_case_coordinate" style="display: inline-block;">
+						<div class="content_field collapse" id="collapse_case_coordinate" style="display: flow-root;">
 							<br/>
 						</div>
 					</div>
@@ -1039,8 +1038,9 @@
 					
 					<!-- case_stage -->
 					<div class="row-fluid wrap" id="case_stage">
-						<h4 class=" ">Workflow  &nbsp;&nbsp;&nbsp;&nbsp;</h4>
+						<h4 class=" ">Workflow</h4>
 						<div class="content_field">
+							<br/>
 							<div class="row-fluid">
 								<div class="form-group span4">
 									<label class="input_control ">จากขั้นตอน : <span class="redFont ">*</span></label>
@@ -1210,7 +1210,7 @@
 				</div>
 				<div class="modal-footer">
 					<button data-dismiss="modal" class="btn btn-danger btnCancle"
-						type="button">Cancel</button>
+						type="button">ปิด</button>
 				</div>
 			</div>
 		</div>
@@ -1650,6 +1650,7 @@ $(document).ready(function() {
 					if(rs.status = 200){
 						pushData_caseFollowup(rs.data);
 						$("#case_followup").find('.del_rec').show();
+						$("#case_followup").find('.modal-edit').trigger('click');
 			    		callFlashSlide('สำเร็จ!!  บันทึกข้อมูลเรียบร้อย','success');
 					}else{
 						callFlashSlide('เกิดข้อผิดพลาด !!  ไม่สามารถบันทึกข้อมูลได้','error');
@@ -2429,7 +2430,6 @@ $(document).ready(function() {
 		});
 		
 		$('body').on("click", ".del-tr", function(){ this.closest('tr').remove(); });
-		
 			
 		$('body').on('click','.modal-edit',function(){
 			var elm_parent = $(this).closest('.wrap'); 

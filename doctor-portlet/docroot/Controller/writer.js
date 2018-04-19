@@ -12,6 +12,26 @@ $(document).ready(function(){
 			
 			$('.dropify').dropify();
 			
+			$html_articleSocialMedia = '';
+			$.ajax({
+				url:restfulURL+"/"+serviceName+"/writer/getSocialMedia",
+				type:"get",
+				dataType:"json",
+				async:true,
+				data:'',
+				headers:{Authorization:"Bearer "+tokenID.token},
+				success:function(rs){
+					console.log(rs);
+					if(rs.status==200) {
+						if(rs.articleSocialMedia){
+							$.each(rs.articleSocialMedia,function(){
+								$html_articleSocialMedia +='<option value="'+this.social_media_id+'">'+this.social_media_name+'</option>';
+							});
+						}
+					}
+				}
+			});
+			
 			function onload() {
 				$("#author").val(userId+'-'+screenName);
 				$("#article_code").val("ระบบจะทำการเพิ่มให้อัตโนมัติ");
@@ -20,6 +40,7 @@ $(document).ready(function(){
 				$("#plan_date").val("");
 				$("#actual_date").val("");
 				GlobalWriterID = null;
+				
 			}
 			 
 			function DropDownCurrentStep(trueOrfalse) {
@@ -276,6 +297,17 @@ $(document).ready(function(){
 				var to_stage_status = $("#to_step").val().split("-");
 				to_stage_status = (to_stage_status == '') ? '' : to_stage_status[1];
 				
+				var social_media = [];
+				$('#article_social_media table tbody tr').each(function(){
+					social_media.push({
+						article_social_media_id : $(this).data('id')?$(this).data('id'):null,
+						article_id 				: article_id,
+						social_media_id 		: $(this).find('.article_social_media_social').val(),
+						user_link 				: $(this).find('.article_social_media_link').val() !=''?$(this).find('.article_social_media_link').val():null,
+						n_of_follower 			: $(this).find('.article_social_media_follow').val(),
+					});
+				});
+				
 				var data_value = {
 						"article_id":article_id,
 						"article_name":$("#article_name").val(),
@@ -300,7 +332,8 @@ $(document).ready(function(){
 						"writing_end_date":writing_end_date,
 						"actual_date":actual_date,
 						"status":to_stage_status,
-						"remark":$("#remark").val()
+						"remark":$("#remark").val(),
+						"social_media":social_media
 				}
 				
 				var datafile = new FormData();
@@ -331,6 +364,7 @@ $(document).ready(function(){
 					headers:{Authorization:"Bearer "+tokenID.token},
 					data:datafile,
 					success:function(data){
+						console.log(data,'cu');
 						if(data.status==200) {
 							callFlashSlide('บักทึกข้อมูลสำเร็จ!','success');
 							$("#ModalWriter").modal('hide');
@@ -352,7 +386,7 @@ $(document).ready(function(){
 						headers:{Authorization:"Bearer "+tokenID.token},
 						data:{"article_id":article_id},
 						success:function(data){
-							//console.log(data,'GetDataEdit')
+							console.log(data,'GetDataEdit')
 							
 							//console.log(data['article'][0]['workflow_actual_date'],'datetestww');
 							$("#article_code").val(data['article'][0]['article_code']);
@@ -380,9 +414,49 @@ $(document).ready(function(){
 							
 							list_doc_file(data['article']);
 							list_article_history(data['article_history']);
+							get_social_list(data['social']);
 						}
 					})
 			}
+			function get_social_list(data){
+				$('#article_social_media table tbody').html('');
+				$.each(data,function(){
+					$html ='<tr class="" data-id="'+this.article_social_media_id+'">'
+								+'<td><select class="article_social_media_social social form" disabled> <option value=""> ---- เลือกสื่อ ---- </option>'+$html_articleSocialMedia+'</select></td>' 
+								+'<td><input type="text" class="article_social_media_link form" placeholder="ลิงค์" value="'+this.user_link+'" disabled></td>'
+								+'<a href="'+this.user_link+'" target="_blank" class="pull-right">ลิงค์</a>'
+								+'<td><input type="number" class="article_social_media_follow form" placeholder="จำนวน Follow" value="'+this.n_of_follwer+'" disabled></td>'
+								+'<td><button class="btn btn-danger del_rec btn-action form" disabled><i class="fa fa-trash"></i></button></td></tr>';
+					$('#article_social_media table tbody').append($html);
+					$('#article_social_media table tbody tr').last().find('.article_social_media_social').val(this.social_media_id);
+				});
+			}
+			
+			$('body').on('click','.del_rec',function(){
+				$('#confrimModal').modal('show');
+				var thiss = $(this);
+				$('#btnConfirmDelFile').one('click',function(){
+					$.ajax({
+						url:restfulURL+"/"+serviceName+"/writer/delRec",
+						type:"post",
+						data:{id:thiss.closest('tr').data('id')},
+						dataType:"json",
+						async:false,
+						headers:{Authorization:"Bearer "+tokenID.token},
+						success:function(rs){
+							console.log(rs,'del_rec');
+							$('#confrimModal').modal('hide');
+							if(rs.status == 200){
+								thiss.closest('tr').remove();
+								callFlashSlide('ลบข้อมูลเรียบร้อย!!','success');
+							}else{
+								callFlashSlide('ไม่สามารถลบไฟล์ได้!!','error');
+							}
+						}
+					});
+				});
+			});
+			
 			
 			function list_article_history(data) {
 				
@@ -555,6 +629,7 @@ $(document).ready(function(){
 			}
 			
 			function clearDataIsEmpty() {
+				$('.btn-action').hide();
 				GlobalCurrentStageID = null;
 				$('#file').val("");
 				$(".btnModalClose").click();
@@ -569,6 +644,7 @@ $(document).ready(function(){
 				$("#workflow_history").empty();
 				$('#span_doc_path').empty();
 				$("#information_errors").hide();
+				$('#article_social_media table tbody').html('');
 			}
 			
 			function BTNcheckSubmitForm(checkrolesIDbtn) {
@@ -791,6 +867,7 @@ $(document).ready(function(){
 				clearDataIsEmpty();
 				onload();
 				setDataAddAndEdit(false);
+				$('.modal-add').show();
 			});
 			
 			$("#btn_modal_submit").click(function() {
@@ -809,6 +886,7 @@ $(document).ready(function(){
 				$('#file').val("");
 				$(".btnModalClose").click();
 				$(".dropify-clear").click();
+				$(".modal-cancel").hide(); 
 				GlobalWriterID = ufile[1];
 				if(ufile[0]=='downloadfile') {
 					downloadfileFN(GlobalWriterID);
@@ -816,6 +894,7 @@ $(document).ready(function(){
 					GetDataEdit(GlobalWriterID);
 					setDataAddAndEdit(true);
 				}
+				$('.modal-add,.modal-edit').show();
 			});
 			
 			$('#btnConfirmOK2').click(function() {
@@ -901,6 +980,80 @@ $(document).ready(function(){
 				}
 			}
 			
+
+			 $('.modal-add').click(function(){	
+				$(this).closest('.wrap').find('table tbody').append($(this).data('tr'));
+				$(this).closest('.wrap').find('tr.dump_tr').last().find('.social').html($html_articleSocialMedia);
+			});
+			 
+
+				$('body').on('click','.modal-edit',function(){
+					var elm_parent = $(this).closest('.wrap'); 
+					elm_parent.find('.modal-cancel').show();
+					$(this).hide();
+					elm_parent.find('.form').removeAttr('disabled');
+					
+				});
+				$('body').on('click','.modal-cancel',function(){
+					var elm_parent = $(this).closest('.wrap'); 
+					elm_parent.find('.modal-edit').show();
+					$(this).hide();
+					elm_parent.find('.form').attr('disabled','disabled');
+				});
+				$('body').on("click", ".del-tr", function(){ this.closest('tr').remove(); });
+				
+				$('body').on('click','.del_rec',function(){
+					var thiss = $(this);
+					$('#confrimModalDelFile').modal({
+				    	backdrop: 'static',
+				      	keyboard: false
+				    }).one('click', '#btnConfirmDelFile', function(e) {
+				    	$.ajax({
+							url:restfulURL+"/"+serviceName+"/writer/list_user_alert",
+							type:"get",
+							dataType:"json",
+							async:true,
+							headers:{Authorization:"Bearer "+tokenID.token},
+							success:function(data){
+							}
+						});
+				    	$('#confrimModalDelFile').modal('hide');
+					});
+				});
+				
+				function pushData_caseSocialMedia(data){	
+					$.each(data,function(){
+						$html = '<tr class="" data-id="'+this.case_media_id+'"> '
+							+'<td><select class="article_social_media_social social input_control"> '
+								+'<option value=""> ---- เลือกสื่อ ---- </option>'+$html_articleSocialMedia+'</select></td> '
+							+'<td><input type="text" class="article_social_media_link input_control" value="'+this.link+'"><a href="'+this.link+'" target="_blank" class="pull-right">ลิงค์</a></td>'
+							+'<td><input type="text" class="article_social_media_username input_control" value="'+this.usr_name+'"></td>'
+							+'<td><input type="text" class="article_social_media_password input_control" value="'+this.pwd+'"></td>'
+							+'<td><input type="text" class="article_social_media_remark input_control" value="'+this.note+'"></td>'
+							+'<td><button class="btn btn-danger del_rec btn-delete btn-action"  style="display:none"><i class="fa fa-trash"></i></button></td></tr>';
+						$('#article_social_media tbody').append($html);
+						$('#article_social_media tbody tr:last-child').find('.article_social_media_social').val(this.social_media_id);
+					});
+				};
+				
+				function getData_caseSocial(){	
+					var channel = [];
+					$('#article_social_media table tbody tr').each(function(i,v){
+						channel.push({
+							case_media_id 		:$(this).data("id")?$(this).data("id"):'',
+							case_id 			:$("#patient_case").data("id")?$("#patient_case").data("id"):'',
+							social_media_id 	:$('.case_social_media_social ').val(),
+							link 				:$.trim($(this).find('.case_social_media_link').val()),
+							usr_name 			:$.trim($(this).find('.case_social_media_username').val()),
+							pwd					:$.trim($(this).find('.case_social_media_password').val()),
+							note 				:$.trim($(this).find('.case_social_media_remark').val())
+						});
+					});
+					return channel; 
+				}
+				
 		 }// end if
 	 }// end if
+	 
+	 
 });// end document

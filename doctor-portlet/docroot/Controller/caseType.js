@@ -10,6 +10,7 @@ $(document).ready(function() {
 		
 		//clear modal
 		$("#btn_add").click(function(){
+			$('#modalAdd').modal({backdrop: 'static', keyboard: false});
 			clearModal();
 			$("#add_is_active").prop('checked',true);
 			$("#information_errors").hide();
@@ -40,6 +41,7 @@ $(document).ready(function() {
 		/*	get data to modal for edit*/
 		$('#table_'+$appName).on('click','.edit', function(e){
 			$("#information_errors_update").hide();
+			$('#modalAdd').modal({backdrop: 'static', keyboard: false});
 			
 			$id = $(this).attr('data-id');
 			$url =$plRoute+"/getOne/"+$id;
@@ -136,7 +138,7 @@ function getList($perpage,$page){
 							+'data-trigger="focus" tabindex="0" data-html="true"'
 							+'data-toggle="popover" data-placement="top"'
 							+'data-content="'
-								+'<button class=\'btn btn-warning btn-xs btn-gear edit\' data-target=#modalEdit data-toggle=\'modal\' data-id=\''+this.case_type_id+'\'>แก้ไข</button>'
+								+'<button class=\'btn btn-warning btn-xs btn-gear edit\' data-id=\''+this.case_type_id+'\'>แก้ไข</button>'
 								+'<button class=\'btn btn-danger btn-xs btn-gear del\' data-target=#confrimModal data-toggle=\'modal\' data-id=\''+this.case_type_id+'\' style=\'margin-left: 15px\'>ลบ</button>">'
 						+'</i></td>'
 					+'</tr>';

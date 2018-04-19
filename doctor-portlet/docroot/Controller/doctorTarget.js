@@ -78,6 +78,7 @@ $(document).ready(function() {
 		
 		$("#btn_search").click(function(){ getList($perpage,1,getDataToAjax()); });
 		$("#btn_add").click(function(){
+			$('#ModalEdit').modal({backdrop: 'static', keyboard: false});
 			$("#from_year").html(getyear($current_year,$current_year+20));
 			$("#from_doctor_name").prop("disabled",false);
 			$("#information_errors").hide();
@@ -178,6 +179,7 @@ $(document).ready(function() {
 		$("html").on('click','.edit',function(){
 			$("#information_errors").hide();
 			$("#from_doctor_name").prop("disabled",true);
+			$('#ModalEdit').modal({backdrop: 'static', keyboard: false});
 			
 			getAjax($plRoute+"/get_target",'get',{doctor_target_id:$(this).data('target_id')},function(rs){
 				$('#ModalEdit').data('target_id',rs.data.doctor_target_id);
@@ -207,6 +209,7 @@ $(document).ready(function() {
 		$("html").on('click','.view',function(){
 			$("input.view-disabled").attr("disabled", true);
 			$("select.view-disabled").attr("disabled", true);
+			$('#ModalView').modal({backdrop: 'static', keyboard: false});
 			
 			getAjax($plRoute+"/get_target",'get',{doctor_target_id:$(this).data('target_id')},function(rs){
 				$('#ModalView').data('target_id',rs.data.doctor_target_id);
@@ -390,15 +393,15 @@ $(document).ready(function() {
 							/* +'<td style="vertical-align: middle;">'+$i+'</td>' */
 							+'<td style="vertical-align: middle;">'+v.doctor.doctor_name+'</td>'
 							+'<td style="vertical-align: middle;">'+v.doctor_procedure.medical_procedure.procedure_name+'</td>'
-							+'<td style="vertical-align: middle;">'+v.year+'</td>'
+							+'<td style="vertical-align: middle;">'+((v.year)+543)+'</td>'
 							+'<td style="vertical-align: middle;text-align:right">'+$temp_arr[$data.month]+'</td>'
 							+'<td style="padding-left:18px">'
 								+'<i class="fa fa-cog font-gear popover-edit-del"'
 									+'data-trigger="focus" tabindex="0" data-html="true"'
 									+'data-toggle="popover" data-placement="top"'
 									+'data-content=" '
-										+'<button class=\'btn btn-primary btn-xs btn-gear view\'data-target_id=\''+v.doctor_target_id+'\' data-target=#ModalView data-toggle=\'modal\' style=\'z-index:9999 \'>ดู</button> '
-										+'<button class=\'btn btn-warning btn-xs btn-gear edit\'data-target_id=\''+v.doctor_target_id+'\' data-target=#ModalEdit data-toggle=\'modal\' style=\'z-index:9999;margin-left: 15px\' '+$is_disabled+'>แก้ไข</button> '
+										+'<button class=\'btn btn-primary btn-xs btn-gear view\'data-target_id=\''+v.doctor_target_id+'\' style=\'z-index:9999 \'>ดู</button> '
+										+'<button class=\'btn btn-warning btn-xs btn-gear edit\'data-target_id=\''+v.doctor_target_id+'\' style=\'z-index:9999;margin-left: 15px\' '+$is_disabled+'>แก้ไข</button> '
 										+'<button class=\'btn btn-danger btn-xs btn-gear del\'data-target_id=\''+v.doctor_target_id+'\' data-target=#confrimModal data-toggle=\'modal\' style=\'z-index:9999;margin-left: 15px\' '+$is_disabled+'>ลบ</button>""'
 								+'</i></td></tr>';
 						$html+= $temp;

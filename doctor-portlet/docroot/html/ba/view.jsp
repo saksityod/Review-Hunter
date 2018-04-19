@@ -555,7 +555,7 @@
 										<tr>
 											<th>ประเภท <span class="redFont ">*</span></th>
 											<th>บัญชีผู้ใช้งาน/ลิ้งค์ <span class="redFont ">*</span></th>
-											<th>จำนวน Follower <span class="redFont ">*</span></th>
+											<th>จำนวน Follower <span class=""></span></th>
 											<th width="20px"></th>
 										</tr>
 									</thead>
@@ -614,10 +614,10 @@
 						<div class="content_field collapse" id="collapse_patient_case">
 							<br/>	
 							<div class="row-fluid">
-								<!-- <div class="form-group span3">
+								<div class="form-group span3">
 									<label class=" ">กลุ่มที่แนะนำ: </label>
 									<input type="text" id="patient_case_suggesGroup" class="input_control" placeholder="กลุ่มแนะนำ">
-								</div> -->
+								</div>
 								<div class="form-group span3">
 									<label class=" ">แนะนำโดย: </label>
 									<input type="text" id="patient_case_suggestedBy" class="input_control" placeholder="แนะนำโดย">
@@ -707,6 +707,7 @@
 												<option value=""> ---- เลือกหัตถการ ---- </option></select></td>
 											<td><select class="case_followup_year next_year">
 												<option value=""> ---- เลือกปี ---- </option></select></td>
+											<td><input type="text" class="case_followup_remark" placeholder="หมายเหตุ"></td>
 											<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
 										</tr>'>เพิ่ม</button>
 									<button class="btn btn-warning modal-edit btn-action " style="display: inline-block;">แก้ไข</button>
@@ -718,6 +719,7 @@
 											<tr>
 												<th>ชื่อหัตถการ <span class="redFont ">*</span></th>
 												<th>ปีที่ควรทำ <span class="redFont ">*</span></th>
+												<th>หมายเหตุ</th>
 												<th width="20px"></th>
 											</tr>
 										</thead>
@@ -1051,8 +1053,8 @@
 									<select id="case_stage_toStage"  class="input_control "></select>
 								</div>
 								<div class="form-group span4">
-									<label class=" ">ส่งถึง: (Auto complete)</label>
-									<select id="case_stage_toUser" class=" input_control"></select>
+									<label class=" ">ส่งถึง:  <span class="redFont ">*</span></label>
+									<select id="case_stage_toUser" class=" input_control"><option value="">-- เลือกส่งถึง --</option></select>
 								</div>	
 							</div>
 							<div class="row-fluid">
@@ -1604,18 +1606,26 @@ $(document).ready(function() {
 						
 						if(this.upload_flag == 1)	$('#'+this.section_id).find('.btn-upload').show();
 						if(this.download_flag == 1)	$('#'+this.section_id).find('.btn-download').show();
+						
+						if(this.add_flage == 1 || this.edit_flag == 1 || this.delete_flag == 1){
+							$('#'+this.section_id).find('.btn-collapse').not('.open').click();
+						}
+						
 					});
 					$('body .notHide').show();
-					 if(!$.isEmptyObject(rs.stageRole)){
+					if(!$.isEmptyObject(rs.stageRole)){
 						if($.inArray(rs.stageRole.role_id, rs.userRole)!= -1){
 							$('#case_stage').find('.input_control').removeAttr('disabled');
 						}else{
 							$('#case_stage').find('.input_control').attr('disabled',true);
 						}
 					} 
+					 
+					 /* check -> MP Social Media role(22312)*/
 					if($.inArray(22312, rs.userRole)== -1){
 						$('#case_social_media').find('.case_social_media_username,.case_social_media_password').hide();
 						$('#case_social_media').find('.modal-add,.modal-edit,.btn-edit').hide();
+						$('#case_social_media').find('.btn-collapse').hasClass('open').click();
 					}
 					$('#case_stage_notification').multiselect("refresh");
 					if(callback) callback();
@@ -1634,7 +1644,8 @@ $(document).ready(function() {
 					followup_id		:$(this).data('id')?$(this).data('id'):'',
 					case_id			:$('#patient_case').data('id')?$('#patient_case').data('id'):'',
 					procedure_id	:$(this).find('.case_followup_procedure').val(),
-					followup_year 	:$(this).find('.case_followup_year').val()
+					followup_year 	:$(this).find('.case_followup_year').val(),
+					remark 			:$(this).find('.case_followup_remark').val()
 				});
 			});
 			console.log(followup,'data followup');
@@ -1717,7 +1728,7 @@ $(document).ready(function() {
 		});
 		
 		$('#case_stage_toStage').change(function(){
-			var html_send_to = '';
+			var html_send_to = '<option value="">-- เลือกส่งถึง --</option>';
 			if($(this).val()!=''){
 				getAjax($plRoute+'/sendTo','get',{stage_id:$(this).val()},function(rs){
 					console.log(rs,'action #case_stage_toStage');
@@ -1727,6 +1738,8 @@ $(document).ready(function() {
 						}); 
 					}
 				})
+			}else{
+				html_send_to ='<option data-email="'+'mail'+'" value="'+userId+'">'+screenName+'</option>';
 			}
 			$('#case_stage_toUser').html(html_send_to);
 		});
@@ -1863,7 +1876,7 @@ $(document).ready(function() {
 		};
 		function pushData_patientCase(data){
 			$('#patient_case').data('id',data.case_id);	
-			/* $('#patient_case_suggesGroup').val(data.suggest_group); */
+			$('#patient_case_suggesGroup').val(data.suggest_group);
 			$('#patient_case_suggestedBy').val(data.suggested_by);	
 			$('#patient_case_caseType').val(data.case_type.case_type_id);
 			$('#patient_case_caseGroup').val(data.case_group.case_group_id);
@@ -1891,6 +1904,7 @@ $(document).ready(function() {
 							+'<option value=""> ---- เลือกหัตถการ ---- </option>'+$html_procedure+'</select></td>'
 						+'<td><select class="case_followup_year next_year input_control">'
 							+'<option value=""> ---- เลือกปี ---- </option>'+getyear($current_year,$current_year+10)+'</select></td>'
+						+'<td><input type="text" class="case_followup_remark input_control" value="'+this.remark+'" placeholder="หมายเหตุ"></td>'
 						+'<td><button class="btn btn-danger del_rec btn-delete btn-action"  style="display:none"><i class="fa fa-trash"></i></button></td></tr>';
 				$('#case_followup tbody').append($html);
 				getBasicData($('#case_followup tbody'));
@@ -2140,7 +2154,8 @@ $(document).ready(function() {
 		
 		function clearAll(){
 			clearModal();
-			$('#list >li > ul,#case_stage_toUser,#case_stage_upload').html('');
+			$('#list >li > ul,#case_stage_upload').html('');
+			$('#case_stage_toUser').html('<option data-email="'+'mail'+'" value="'+userId+'">'+screenName+'</option>');
 			$('.bubble').remove();
 			$('.wrap').removeData('id').find('tbody').html('');
 			$('.btn-action,#information_errors').hide();
@@ -2222,7 +2237,7 @@ $(document).ready(function() {
 				case_group_id	:$('#patient_case_caseGroup').val(),
 				doctor_id		:$('#patient_case_doctor').val(),
 				vn_no			:$.trim($('#patient_case_vn').val()),
-				/* suggest_group	:$.trim($('#patient_case_suggesGroup').val()), */
+				suggest_group	:$.trim($('#patient_case_suggesGroup').val()),
 				suggested_by	:$.trim($('#patient_case_suggestedBy').val()),
 				supervised_by	:supervised,
 				is_good_case	:$('#patient_case_isGood').prop('checked')?1:0,
@@ -2240,7 +2255,8 @@ $(document).ready(function() {
 					followup_id		:$(this).data('id')?$(this).data('id'):'',
 					case_id			:$('#patient_case').data('id')?$('#patient_case').data('id'):'',
 					procedure_id	:$(this).find('.case_followup_procedure').val(),
-					followup_year 	:$(this).find('.case_followup_year').val()
+					followup_year 	:$(this).find('.case_followup_year').val(),
+					remark 			:$(this).find('.case_followup_remark').val()
 				});
 			});
 			$data['case_followup'] =followup;
@@ -2617,7 +2633,7 @@ $(document).ready(function() {
 				$('.patient_case_supervisedBy').each(function(){
 					supervisedBy+='|'+$(this).data('user');
 				})
-		        getAjax($plRoute+"/getUser",'get',{search:$('#patient_case_supervisedBy').val(),user:supervisedBy},function(rs){
+		        getAjax($plRoute+"/getUser",'get',{search:$('#patient_case_supervisedBy').val(),user:supervisedBy,method:'admin'},function(rs){
 		        	response( $.map( rs, function( item ) {
 		                var object = new Object();
 		                  object.id = item.userId;
@@ -2743,14 +2759,14 @@ $(document).ready(function() {
 			});
 		});
 		
-		function getFolderSummary(folder_id,thiss){
+		function getFolderSummary(folder_id,thiss,case_id){
 			var total = 0;
 			$.ajax({
 				url:$plRoute+"/getFolderSummary",
 				type:"GET",
 				dataType:"json",
-				data:{folder_id:folder_id},
-				async:true,
+				data:{folder_id:folder_id,case_id:case_id},
+				async:false,
 				headers:{Authorization:"Bearer "+tokenID.token},
 				success: function(rs) {
 					console.log(rs,'getFolderSummary');
@@ -2760,18 +2776,20 @@ $(document).ready(function() {
 						if(f_pass == 0 && f_all == 0) total = (0).toFixed(2);
 						else total = ((f_pass*100)/f_all).toFixed(2);
 					}
-					thiss.closest('li.parent').find('.volume').text(total);
+					console.log(total,'total');
+					thiss.closest('.wrap_folder_parent').find('.volume').text(total);
+					console.log(thiss.closest('.wrap_folder_parent').find('.volume'));
 				}
 			});
 		}
 		
 		$("body").on('click','.isPass',function(e){
 			var thiss = $(this);
-			var folder_id = $(this).closest('li').data('folder_id');
+			var folder_id = $(this).closest('li.folder').data('folder_id');
 			getAjax($plRoute+"/updateFolder",'post',{case_id:$('#patient_case').data('id'),folder_id:folder_id,is_pass:$(this).prop('checked')?1:0},function(rs){
 				console.log(rs,'updateFolder');
 				if(rs.status == 200){
-					getFolderSummary(folder_id,thiss);
+					getFolderSummary(folder_id,thiss,$('#patient_case').data('id'));
 				}else{
 					e.preventDefault();
 				}
@@ -2899,7 +2917,7 @@ $(document).ready(function() {
 				var isClose = this.is_open==0?'active':'';
 				var volume_tik = this.is_open==1?'block':'none';
 				var isNotHide = this.user_id == userId?'notHide':'';
-				html_temp +='<ul class="wrap_folder"><li class="folder parent" data-folder_id="'+this.folder_id+'">'
+				html_temp +='<ul class="wrap_folder wrap_folder_parent"><li class="folder parent" data-folder_id="'+this.folder_id+'">'
 				+'<div href="#" onclick="return false;" class="folder_toggle folder_name" title="'+this.folder_screen_name+'">'+this.folder_screen_name+'</div>'
 				+'<a href="#" onclick="return false;" class="fa fa-edit btn-edit btn-action btn_editFolder" data-target="#editFolder" data-toggle="modal" ></a>'
 				+'<div style="float:right;"class="wrap_option">'
@@ -2950,7 +2968,7 @@ $(document).ready(function() {
 			}); 
 			$('#list >li > ul').html(html_temp);
 			$('.volume').each(function(){
-				getFolderSummary($(this).closest('li.parent').data('folder_id'),$(this));
+				getFolderSummary($(this).closest('li.parent').data('folder_id'),$(this),$('#patient_case').data('id'));
 			});
 		}
 		

@@ -21,6 +21,7 @@ $(document).ready(function() {
 		
 		//clear modal
 		$("#btn_add").click(function(){
+			$('#modalAdd').modal({backdrop: 'static', keyboard: false});
 			clearModal();
 			$("#from_is_active").prop('checked',true);
 			$("#information_errors").hide();
@@ -75,7 +76,7 @@ $(document).ready(function() {
 		
 		$('body').on('click','.edit',function(){
 			$("#information_errors").hide();
-			
+			$('#modalAdd').modal({backdrop: 'static', keyboard: false});
 			var id = $(this).data('id');
 			getAjax($plRoute+"/getOne",'get',{id : id},function(rs){
 				if(rs.status == 200){
@@ -114,7 +115,7 @@ $(document).ready(function() {
 									+'data-trigger="focus" tabindex="0" data-html="true"'
 									+'data-toggle="popover" data-placement="top"'
 									+'data-content="'
-										+'<button class=\'btn btn-warning btn-xs btn-gear edit\' data-target=#modalAdd data-toggle=\'modal\' data-id=\''+this.case_group_id+'\'>แก้ไข</button>'
+										+'<button class=\'btn btn-warning btn-xs btn-gear edit\'  data-id=\''+this.case_group_id+'\'>แก้ไข</button>'
 										+'<button class=\'btn btn-danger btn-xs btn-gear del\' data-target=#confrimModal data-toggle=\'modal\' data-id=\''+this.case_group_id+'\' style=\'margin-left: 15px\'>ลบ</button>">'
 								+'</i></td>'
 							+'</tr>';

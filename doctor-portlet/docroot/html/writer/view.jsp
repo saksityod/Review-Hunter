@@ -432,6 +432,9 @@
 }
 </style>
  -->
+<style>
+.redFont{     float: inherit !important; }
+</style>	
 <div id="container1">
 	<!--  nav bar -->
 	<div class='row-fluid'>
@@ -711,8 +714,44 @@
 					</div>
 				</div>
 				
+				<br/>
+				<br/>
+				<!-- case_social_media -->
+				<div class="row-fluid wrap" id="article_social_media">
+					<h3 class="">ช่องทางลงสื่อ</h3>
+					<div class="content_field " >
+						<div class="wrap_button">
+							<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
+									<td><select class="article_social_media_social social">
+										<option value=""> ---- เลือกสื่อ ---- </option></select></td>
+									<td><input type="text" class="article_social_media_link" placeholder="ลิงค์"></td>
+									<td><input type="number" class="article_social_media_follow" placeholder="จำนวน Follow"></td>
+									<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
+								</tr>'>เพิ่ม</button>
+							<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
+							<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
+						</div>
+						<div class="responsive-table">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>ประเภท <span class="redFont ">*</span></th>
+										<th>ลิงค์ <span class="redFont ">*</span></th>
+										<th>จำนวน Follow</th>
+										<th width="20px"></th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+				<br/>
+				<br/>
 				<div class="row-fluid">
-					<p class="lead">Workflow</p>
+					<h3 class="">Workflow</h3>
 					<div class="row-fluid">
 						<div class="span5 form-horizontal p-t-xxs">
 							<div class="form-group p-xxs">

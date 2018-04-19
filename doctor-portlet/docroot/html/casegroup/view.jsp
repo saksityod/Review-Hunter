@@ -59,7 +59,7 @@
 			<div class="row-fluid">
 				<div id="width-100-persen" class=" m-b-xs">
 					<br>
-					<button class="btn btn-success" data-target=#modalAdd data-toggle='modal' data-type="add" id="btn_add">
+					<button class="btn btn-success" data-type="add" id="btn_add">
 						<i class="fa fa-plus"></i> เพิ่ม
 					</button>
 					<br><br>
@@ -125,8 +125,7 @@
 			<div class="modal-content bounceInRight">
 				<div class="modal-header"
 					style="background-color: rgb(0, 206, 215); border-color: rgb(0, 206, 215);">
-					<button data-dismiss="modal" class="close" type="button"
-						style="padding-top: 5px">
+					<button data-dismiss="modal" class="close" type="button" style="padding-top: 5px" data-backdrop="static" data-keyboard="false">
 						<span aria-hidden="true"><i class='fa fa-times'></i></span><span
 							class="sr-only"></span>
 					</button>
@@ -199,12 +198,12 @@
 						<span aria-hidden="true"><i class='fa fa-times'></i></span><span
 							class="sr-only">Close</span>
 					</button>
-					<h5 class="modal-title">Confirm Dialog</h5>
+					<h5 class="modal-title">ยืนยันการลบข้อมูล</h5>
 				</div>
 				<div class="modal-body">
 					<div class="form-kpi-mangement">
 						<div class="form-kpi-label" align="center">
-							<label>Confirm to Delete Data?</label>
+							<label>คุณต้องการลบข้อมูลนี้หรือไม่?</label>
 							<div id="inform_on_confirm" class='information'></div>
 						</div>
 					</div>

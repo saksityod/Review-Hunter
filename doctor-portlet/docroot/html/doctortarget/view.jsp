@@ -124,8 +124,7 @@
 		<div class="ibox-title"
 			style="background-color: rgb(0, 206, 215); border-color: rgb(0, 206, 215)">
 			<h5>เป้าหมายของแพทย์ <button type="button" name="btn_add" id="btn_add"
-							class="btn btn-success input-sm " style="margin-left: 5px;"
-							data-target=#ModalEdit data-toggle='modal'>
+							class="btn btn-success input-sm " style="margin-left: 5px;">
 							<i class="fa fa-plus"></i>&nbsp;เพิ่ม
 						</button></h5>
 			

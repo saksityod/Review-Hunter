@@ -9,6 +9,11 @@ $(document).ready(function(){
 			var GlobalStageID;
 			var GlobalCurrentStageID;
 			var GlobalDataWriter;
+			var rolesArray = [];
+			
+			for (var i = 0;  i < roles.length; i++ ) {
+				rolesArray.push(roles[i]['roleId']);
+			}
 			
 			$('.dropify').dropify();
 			
@@ -303,8 +308,13 @@ $(document).ready(function(){
 						article_social_media_id : $(this).data('id')?$(this).data('id'):null,
 						article_id 				: article_id,
 						social_media_id 		: $(this).find('.article_social_media_social').val(),
-						user_link 				: $(this).find('.article_social_media_link').val() !=''?$(this).find('.article_social_media_link').val():null,
-						n_of_follower 			: $(this).find('.article_social_media_follow').val(),
+//						user_link 				: $(this).find('.article_social_media_link').val() !=''?$(this).find('.article_social_media_link').val():null,
+//						n_of_follower 			: $(this).find('.article_social_media_follow').val(),
+						
+						link 				:$(this).find('.article_social_media_link').val(),
+						usr_name 			:$.trim($(this).find('.article_social_media_username').val()),
+						pwd					:$.trim($(this).find('.article_social_media_password').val()),
+						note 				:$(this).find('.article_social_media_remark').val(),
 					});
 				});
 				
@@ -420,43 +430,32 @@ $(document).ready(function(){
 			}
 			function get_social_list(data){
 				$('#article_social_media table tbody').html('');
+				var encriptValue = ($.inArray(22309, rolesArray) != -1) ? "text" : "password";
+				console.log(encriptValue,'encriptValue')
 				$.each(data,function(){
-					$html ='<tr class="" data-id="'+this.article_social_media_id+'">'
-								+'<td><select class="article_social_media_social social form" disabled> <option value=""> ---- เลือกสื่อ ---- </option>'+$html_articleSocialMedia+'</select></td>' 
-								+'<td><input type="text" class="article_social_media_link form" placeholder="ลิงค์" value="'+this.user_link+'" disabled></td>'
-								+'<a href="'+this.user_link+'" target="_blank" class="pull-right">ลิงค์</a>'
-								+'<td><input type="number" class="article_social_media_follow form" placeholder="จำนวน Follow" value="'+this.n_of_follwer+'" disabled></td>'
-								+'<td><button class="btn btn-danger del_rec btn-action form" disabled><i class="fa fa-trash"></i></button></td></tr>';
+					$html = '<tr class="" data-id="'+this.article_social_media_id+'"> '
+						+'<td><select class="article_social_media_social social form" disabled> '
+							+'<option value=""> ---- เลือกสื่อ ---- </option>'+$html_articleSocialMedia+'</select></td> '
+						+'<td><input type="text" class="article_social_media_link form" value="'+this.link+'" disabled><a href="https://'+this.link+'" target="_blank" class="pull-right">ลิงค์</a></td>'
+						+'<td><input type="'+encriptValue+'" class="article_social_media_username form_encript" value="'+this.usr_name+'" disabled></td>'
+						+'<td><input type="'+encriptValue+'" class="article_social_media_password form_encript" value="'+this.pwd+'" disabled></td>'
+						+'<td><input type="text" class="article_social_media_remark form" value="'+this.note+'" disabled></td>'
+						+'<td><button class="btn btn-danger del_rec btn-action form" disabled><i class="fa fa-trash"></i></button></td></tr>';
 					$('#article_social_media table tbody').append($html);
 					$('#article_social_media table tbody tr').last().find('.article_social_media_social').val(this.social_media_id);
 				});
+				
+//				$.each(data,function(){
+//					$html ='<tr class="" data-id="'+this.article_social_media_id+'">'
+//								+'<td><select class="article_social_media_social social form" disabled> <option value=""> ---- เลือกสื่อ ---- </option>'+$html_articleSocialMedia+'</select></td>' 
+//								+'<td><input type="text" class="article_social_media_link form" placeholder="ลิงค์" value="'+this.user_link+'" disabled></td>'
+//								+'<a href="'+this.user_link+'" target="_blank" class="pull-right">ลิงค์</a>'
+//								+'<td><input type="number" class="article_social_media_follow form" placeholder="จำนวน Follow" value="'+this.n_of_follwer+'" disabled></td>'
+//								+'<td><button class="btn btn-danger del_rec btn-action form" disabled><i class="fa fa-trash"></i></button></td></tr>';
+//					$('#article_social_media table tbody').append($html);
+//					$('#article_social_media table tbody tr').last().find('.article_social_media_social').val(this.social_media_id);
+//				});
 			}
-			
-			$('body').on('click','.del_rec',function(){
-				$('#confrimModal').modal('show');
-				var thiss = $(this);
-				$('#btnConfirmDelFile').one('click',function(){
-					$.ajax({
-						url:restfulURL+"/"+serviceName+"/writer/delRec",
-						type:"post",
-						data:{id:thiss.closest('tr').data('id')},
-						dataType:"json",
-						async:false,
-						headers:{Authorization:"Bearer "+tokenID.token},
-						success:function(rs){
-							console.log(rs,'del_rec');
-							$('#confrimModal').modal('hide');
-							if(rs.status == 200){
-								thiss.closest('tr').remove();
-								callFlashSlide('ลบข้อมูลเรียบร้อย!!','success');
-							}else{
-								callFlashSlide('ไม่สามารถลบไฟล์ได้!!','error');
-							}
-						}
-					});
-				});
-			});
-			
 			
 			function list_article_history(data) {
 				
@@ -980,44 +979,107 @@ $(document).ready(function(){
 				}
 			}
 			
-
-			 $('.modal-add').click(function(){	
-				$(this).closest('.wrap').find('table tbody').append($(this).data('tr'));
-				$(this).closest('.wrap').find('tr.dump_tr').last().find('.social').html($html_articleSocialMedia);
-			});
+			console.log(rolesArray);
+			
+			if($.inArray(22312, rolesArray) != -1 || $.inArray(22311, rolesArray) != -1 || $.inArray(22310, rolesArray) != -1) {
+				$('#btn_add_social').show();
+				$('#btn_edit_social').show();
+			} else {
+				if($.inArray(22309, rolesArray) != -1) {
+					$('#btn_edit_social').show();
+				} else {
+					$('#btn_edit_social').hide();
+				}
+				$('#btn_add_social').hide();
+			}
+			
+			 $('.modal-add').click(function(){
+					$(this).closest('.wrap').find('table tbody').append($(this).data('tr'));
+					$(this).closest('.wrap').find('tr.dump_tr').last().find('.social').html($html_articleSocialMedia);
+					if($.inArray(22312, rolesArray) != -1) {
+						//show all
+					} else if($.inArray(22311, rolesArray) != -1 || $.inArray(22310, rolesArray) != -1) {
+						$(this).closest('.wrap').find('tr.dump_tr').last().find('.article_social_media_username').attr('disabled', true);
+						$(this).closest('.wrap').find('tr.dump_tr').last().find('.article_social_media_password').attr('disabled', true);
+					}
+			 });
 			 
-
 				$('body').on('click','.modal-edit',function(){
 					var elm_parent = $(this).closest('.wrap'); 
 					elm_parent.find('.modal-cancel').show();
 					$(this).hide();
-					elm_parent.find('.form').removeAttr('disabled');
 					
+					if($.inArray(22309, rolesArray) != -1) {
+						elm_parent.find('.form_encript').removeAttr('disabled');
+					}
+					
+					if($.inArray(22311, rolesArray) != -1 || $.inArray(22310, rolesArray) != -1) {
+						elm_parent.find('.form').removeAttr('disabled');
+					}
+					
+					if($.inArray(22312, rolesArray) != -1) {
+						elm_parent.find('.form,.form_encript').removeAttr('disabled');
+					}
 				});
+				
 				$('body').on('click','.modal-cancel',function(){
 					var elm_parent = $(this).closest('.wrap'); 
 					elm_parent.find('.modal-edit').show();
 					$(this).hide();
-					elm_parent.find('.form').attr('disabled','disabled');
+					elm_parent.find('.form,.form_encript').attr('disabled','disabled');
 				});
+				
 				$('body').on("click", ".del-tr", function(){ this.closest('tr').remove(); });
 				
-				$('body').on('click','.del_rec',function(){
+//				$('body').on('click','.del_rec',function(){
+//					$('#confrimModal').modal('show');
+//					var thiss = $(this);
+//					$('#btnConfirmDelFile').one('click',function(){
+//						$.ajax({
+//							url:restfulURL+"/"+serviceName+"/writer/delRec",
+//							type:"post",
+//							data:{id:thiss.closest('tr').data('id')},
+//							dataType:"json",
+//							async:false,
+//							headers:{Authorization:"Bearer "+tokenID.token},
+//							success:function(rs){
+//								console.log(rs,'del_rec');
+//								$('#confrimModal').modal('hide');
+//								if(rs.status == 200){
+//									thiss.closest('tr').remove();
+//									callFlashSlide('ลบข้อมูลเรียบร้อย!!','success');
+//								}else{
+//									callFlashSlide('ไม่สามารถลบไฟล์ได้!!','error');
+//								}
+//							}
+//						});
+//					});
+//				});
+				
+				$('body').on('click','.del_rec',function() {
 					var thiss = $(this);
-					$('#confrimModalDelFile').modal({
+					$('#confrimModalDelData').modal({
 				    	backdrop: 'static',
 				      	keyboard: false
-				    }).one('click', '#btnConfirmDelFile', function(e) {
+				    }).one('click', '#btnConfirmDelData', function(e) {
 				    	$.ajax({
-							url:restfulURL+"/"+serviceName+"/writer/list_user_alert",
-							type:"get",
+							url:restfulURL+"/"+serviceName+"/writer/delRec",
+							type:"post",
+							data:{id:thiss.closest('tr').data('id')},
 							dataType:"json",
-							async:true,
+							async:false,
 							headers:{Authorization:"Bearer "+tokenID.token},
-							success:function(data){
+							success:function(rs){
+								console.log(rs,'del_rec');
+								$('#confrimModalDelData').modal('hide');
+								if(rs.status == 200){
+									thiss.closest('tr').remove();
+									callFlashSlide('ลบข้อมูลเรียบร้อย!!','success');
+								}else{
+									callFlashSlide('ไม่สามารถลบไฟล์ได้!!','error');
+								}
 							}
 						});
-				    	$('#confrimModalDelFile').modal('hide');
 					});
 				});
 				

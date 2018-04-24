@@ -721,25 +721,40 @@
 					<h3 class="">ช่องทางลงสื่อ</h3>
 					<div class="content_field " >
 						<div class="wrap_button">
-							<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
-									<td><select class="article_social_media_social social">
-										<option value=""> ---- เลือกสื่อ ---- </option></select></td>
-									<td><input type="text" class="article_social_media_link" placeholder="ลิงค์"></td>
-									<td><input type="number" class="article_social_media_follow" placeholder="จำนวน Follow"></td>
-									<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
-								</tr>'>เพิ่ม</button>
-							<button class="btn btn-warning modal-edit btn-action ">แก้ไข</button>
+<%-- 							<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr"> --%>
+<!-- 									<td><select class="article_social_media_social social"> -->
+<!-- 										<option value=""> ---- เลือกสื่อ ---- </option></select></td> -->
+<!-- 									<td><input type="text" class="article_social_media_link" placeholder="ลิงค์"></td> -->
+<!-- 									<td><input type="number" class="article_social_media_follow" placeholder="จำนวน Follow"></td> -->
+<!-- 									<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td> -->
+<%-- 								</tr>'>เพิ่ม</button> --%>
+								<span id="btn_add_social">
+								<button class="btn btn-success modal-add btn-action" data-tr='<tr class="dump_tr">
+										<td><select class="article_social_media_social social">
+											<option value=""> ---- เลือกสื่อ ---- </option></select></td>
+										<td><input type="text" class="article_social_media_link" placeholder="ลิงค์"></td>
+										<td><input type="text" class="article_social_media_username" placeholder="Username"></td>
+										<td><input type="text" class="article_social_media_password" placeholder="Password"></td>
+										<td><input type="text" class="article_social_media_remark" placeholder="หมายเหตุ"></td>
+										<td><button class="btn btn-danger del-tr btn-action"><i class="fa fa-times-circle"></i></button></td>
+									</tr>'>เพิ่ม</button>
+								</span>
+							<span id="btn_edit_social">
+								<button class="btn btn-warning modal-edit btn-action">แก้ไข</button>
+							</span>
 							<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
 						</div>
 						<div class="responsive-table">
 							<table class="table table-bordered">
 								<thead>
-									<tr>
-										<th>ประเภท <span class="redFont ">*</span></th>
-										<th>ลิงค์ <span class="redFont ">*</span></th>
-										<th>จำนวน Follow</th>
-										<th width="20px"></th>
-									</tr>
+										<tr>
+											<th>ประเภท <span class="redFont ">*</span></th>
+											<th>ลิงค์ <span class="redFont ">*</span></th>
+											<th>Username</th>
+											<th>Password</th>
+											<th>หมายเหตุ</th>
+											<th width="20px"></th>
+										</tr>
 								</thead>
 								<tbody>
 								</tbody>
@@ -1092,5 +1107,47 @@
 </div>
 <!-- Modal Confirm End -->
 
+<!-- Modal Confirm Start -->
+<div aria-hidden="true" role="dialog" tabindex="-1" id="confrimModalDelData"
+	class="modal inmodal in"
+	style="width: 400px; left: calc; display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content  bounceInRight">
+			<div class="modal-header"
+				style="background-color: rgb(0, 206, 215); border-color: rgb(0, 206, 215);">
+				<button data-dismiss="modal" class="close" type="button"
+					style="padding-top: 3px">
+					<span aria-hidden="true"><i class='fa fa-times'></i></span><span
+						class="sr-only">Close</span>
+				</button>
+				<h5 class="modal-title">ยืนยันการลบข้อมูล</h5>
+			</div>
+			<div class="modal-body">
+				
+				<div class="form-kpi-mangement">
+					<div class="form-kpi-label" align="center">
+						<label>คุณต้องการลบข้อมูลนี้หรือไม่?</label>
+					</div>
+				</div>
+
+			</div><!-- modal body -->
+			<div class="modal-footer">
+				<div align="center">
+					<button class="btn btn-success" id="btnConfirmDelData" type="button">
+						&nbsp;&nbsp;<i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+					</button>
+					&nbsp;&nbsp;
+					<button data-dismiss="modal" class="btn btn-danger" type="button" id="btnCancelDelData" >
+						<i class="fa fa-times-circle"></i>&nbsp;Cancel
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal Confirm End -->
+
 <input type="hidden" name="id" id="id" value="">
 <input type="hidden" name="action" id="action" value="add">
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->

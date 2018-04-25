@@ -21,6 +21,8 @@
 		<portlet id="status_review_report"></portlet>
 		<portlet id="writer_report"></portlet>
 		<portlet id="writer_review_report"></portlet>
+		<portlet id="case-supervised-report"></portlet>
+		<portlet id="case-social-report"></portlet>
 	</category>
 	<category name="category.sample">
 		

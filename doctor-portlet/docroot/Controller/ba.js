@@ -250,7 +250,7 @@ $(document).ready(function() {
 					if($.inArray(22312, rs.userRole)== -1){
 						$('#case_social_media').find('.case_social_media_username,.case_social_media_password').hide();
 						$('#case_social_media').find('.modal-add,.modal-edit,.btn-edit').hide();
-						$('#case_social_media').find('.btn-collapse').hasClass('open').click();
+						$('#case_social_media').find('.btn-collapse.open').click();
 					}
 					$('#case_stage_notification').multiselect("refresh");
 					if(callback) callback();
@@ -342,7 +342,7 @@ $(document).ready(function() {
 			    		getList(1);
 			    		$('#modalAdd').modal('hide');
 			    	}else if(rs.status==400){
-			    		callFlashSlide('ไม่สามารถบันทึกข้อมูลได้!!  กรุณาตรวจกรอกข้อมูล','error');
+			    		callFlashSlide('ไม่สามารถบันทึกข้อมูลได้!!  กรุณาตรวจสอบข้อมูล','error');
 			    		validatetorInformation(validatetor(rs.errors));
 			    	}
 			    },

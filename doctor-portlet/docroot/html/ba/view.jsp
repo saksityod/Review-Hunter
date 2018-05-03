@@ -718,7 +718,7 @@
 										<thead>
 											<tr>
 												<th>ชื่อหัตถการ <span class="redFont ">*</span></th>
-												<th>ปีที่ควรทำ </th>
+												<th>ปีที่ควรทำ <span class="redFont ">*</span></th>
 												<th>หมายเหตุ</th>
 												<th width="20px"></th>
 											</tr>

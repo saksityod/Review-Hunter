@@ -269,40 +269,40 @@
 								<tr class="tr-table-case">
 
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="view-disabled" id="form-case-month11" style="width: 85%;" min="0"/>
+										<input type="number" value="0" class="view-disabled" id="form-case-month-v1" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="view-disabled" id="form-case-month22" style="width: 85%;" min="0"/>
+										<input type="number" value="0" class="view-disabled" id="form-case-month-v2" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="view-disabled" id="form-case-month33" style="width: 85%;" min="0"/>
+										<input type="number" value="0" class="view-disabled" id="form-case-month-v3" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="view-disabled" id="form-case-month44" style="width: 85%;" min="0"/>
+										<input type="number" value="0" class="view-disabled" id="form-case-month-v4" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="view-disabled" id="form-case-month55" style="width: 85%;" min="0"/>
+										<input type="number" value="0" class="view-disabled" id="form-case-month-v5" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="view-disabled" id="form-case-month66" style="width: 85%;" min="0"/>
+										<input type="number" value="0" class="view-disabled" id="form-case-month-v6" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="view-disabled" id="form-case-month77" style="width: 85%;" min="0"/>
+										<input type="number" value="0" class="view-disabled" id="form-case-month-v7" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="view-disabled" id="form-case-month88" style="width: 85%;" min="0"/>
+										<input type="number" value="0" class="view-disabled" id="form-case-month-v8" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="view-disabled" id="form-case-month99" style="width: 85%;" min="0"/>
+										<input type="number" value="0" class="view-disabled" id="form-case-month-v9" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="view-disabled" id="form-case-month100" style="width: 85%;" min="0"/>
+										<input type="number" value="0" class="view-disabled" id="form-case-month-v10" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="view-disabled" id="form-case-month111" style="width: 85%;" min="0"/>
+										<input type="number" value="0" class="view-disabled" id="form-case-month-v11" style="width: 85%;" min="0"/>
 									</td>
 									<td style="vertical-align: middle;">
-										<input type="number" value="0" class="view-disabled" id="form-case-month122" style="width: 85%;" min="0"/>
+										<input type="number" value="0" class="view-disabled" id="form-case-month-v12" style="width: 85%;" min="0"/>
 									</td>
 
 								</tr>

@@ -214,22 +214,23 @@ $(document).ready(function() {
 			getAjax($plRoute+"/get_target",'get',{doctor_target_id:$(this).data('target_id')},function(rs){
 				$('#ModalView').data('target_id',rs.data.doctor_target_id);
 				if(rs.status == 200){
+					//console.log(rs.data);
 					$("#from_doctor_namee").val(rs.data.doctor.doctor_name).data('doctor_id',rs.data.doctor.doctor_id).data('doctor_name',rs.data.doctor.doctor_name);
 					$("#case_categoryy").val(rs.data.case_type.case_type);
 					$("#from_medical_proceduree").val(rs.data.doctor_procedure.medical_procedure.procedure_name);
 					$("#from_yearr").html(getyear($current_year-10,$current_year+10)).val(rs.data.year);
-					$('#form-case-month11').val(rs.data.target_month1);
-					$('#form-case-month22').val(rs.data.target_month2);
-					$('#form-case-month33').val(rs.data.target_month3);
-					$('#form-case-month44').val(rs.data.target_month4);
-					$('#form-case-month55').val(rs.data.target_month5);
-					$('#form-case-month66').val(rs.data.target_month6);
-					$('#form-case-month77').val(rs.data.target_month7);
-					$('#form-case-month88').val(rs.data.target_month8);
-					$('#form-case-month99').val(rs.data.target_month9);
-					$('#form-case-month100').val(rs.data.target_month10);
-					$('#form-case-month111').val(rs.data.target_month11);
-					$('#form-case-month122').val(rs.data.target_month12);
+					$('#form-case-month-v1').val(rs.data.target_month1);
+					$('#form-case-month-v2').val(rs.data.target_month2);
+					$('#form-case-month-v3').val(rs.data.target_month3);
+					$('#form-case-month-v4').val(rs.data.target_month4);
+					$('#form-case-month-v5').val(rs.data.target_month5);
+					$('#form-case-month-v6').val(rs.data.target_month6);
+					$('#form-case-month-v7').val(rs.data.target_month7);
+					$('#form-case-month-v8').val(rs.data.target_month8);
+					$('#form-case-month-v9').val(rs.data.target_month9);
+					$('#form-case-month-v10').val(rs.data.target_month10);
+					$('#form-case-month-v11').val(rs.data.target_month11);
+					$('#form-case-month-v12').val(rs.data.target_month12);
 				}
 				
 			});
@@ -331,6 +332,9 @@ $(document).ready(function() {
 							"confirm_check_target": confirm_check_target
 						  }
 				}
+				
+				//console.log($data);
+				
 				getAjax($plRoute+"/cru",'post',$data,callback);
 				
 				target_id_confirm = null;

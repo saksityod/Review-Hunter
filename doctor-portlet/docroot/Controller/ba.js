@@ -11,7 +11,7 @@ $(document).ready(function() {
 		var n_id = 0;
 		var d = new Date();
 	    var toDay = d.getDate() + '/'+ (d.getMonth() + 1) + '/'+ (d.getFullYear() + 543);
-		
+	    
 		getAjax($plRoute+'/getOnLoad','get',{userId:$('#userId_portlet').val()},function(rs){
 			console.log(rs);
 			setCssTableRespornsive();
@@ -410,6 +410,100 @@ $(document).ready(function() {
 			$('#review_image img').attr('src',$host+$(this).data('path'));
 		});
 		
+		function timeHour() {
+			var hrmlHour = '';
+				hrmlHour +='<option value="00">00</option>';
+				hrmlHour +='<option value="01">01</option>';
+				hrmlHour +='<option value="02">02</option>';
+				hrmlHour +='<option value="03">03</option>';
+				hrmlHour +='<option value="04">04</option>';
+				hrmlHour +='<option value="05">05</option>';
+				hrmlHour +='<option value="06">06</option>';
+				hrmlHour +='<option value="07">07</option>';
+				hrmlHour +='<option value="08">08</option>';
+				hrmlHour +='<option value="09">09</option>';
+				hrmlHour +='<option value="10">10</option>';
+				hrmlHour +='<option value="11">11</option>';
+				hrmlHour +='<option value="12">12</option>';
+				hrmlHour +='<option value="13">13</option>';
+				hrmlHour +='<option value="14">14</option>';
+				hrmlHour +='<option value="15">15</option>';
+				hrmlHour +='<option value="16">16</option>';
+				hrmlHour +='<option value="17">17</option>';
+				hrmlHour +='<option value="18">18</option>';
+				hrmlHour +='<option value="19">19</option>';
+				hrmlHour +='<option value="20">20</option>';
+				hrmlHour +='<option value="21">21</option>';
+				hrmlHour +='<option value="22">22</option>';
+				hrmlHour +='<option value="23">23</option>';
+			return hrmlHour;
+		}
+		
+		function timeMinute() {
+			var htmlHour = '';
+				htmlHour +='<option value="00">00</option>';
+				htmlHour +='<option value="01">01</option>';
+				htmlHour +='<option value="02">02</option>';
+				htmlHour +='<option value="03">03</option>';
+				htmlHour +='<option value="04">04</option>';
+				htmlHour +='<option value="05">05</option>';
+				htmlHour +='<option value="06">06</option>';
+				htmlHour +='<option value="07">07</option>';
+				htmlHour +='<option value="08">08</option>';
+				htmlHour +='<option value="09">09</option>';
+				htmlHour +='<option value="10">10</option>';
+				htmlHour +='<option value="11">11</option>';
+				htmlHour +='<option value="12">12</option>';
+				htmlHour +='<option value="13">13</option>';
+				htmlHour +='<option value="14">14</option>';
+				htmlHour +='<option value="15">15</option>';
+				htmlHour +='<option value="16">16</option>';
+				htmlHour +='<option value="17">17</option>';
+				htmlHour +='<option value="18">18</option>';
+				htmlHour +='<option value="19">19</option>';
+				htmlHour +='<option value="20">20</option>';
+				htmlHour +='<option value="21">21</option>';
+				htmlHour +='<option value="22">22</option>';
+				htmlHour +='<option value="23">23</option>';
+				htmlHour +='<option value="24">24</option>';
+				htmlHour +='<option value="25">25</option>';
+				htmlHour +='<option value="26">26</option>';
+				htmlHour +='<option value="27">27</option>';
+				htmlHour +='<option value="28">28</option>';
+				htmlHour +='<option value="29">29</option>';
+				htmlHour +='<option value="30">30</option>';
+				htmlHour +='<option value="31">31</option>';
+				htmlHour +='<option value="32">32</option>';
+				htmlHour +='<option value="33">33</option>';
+				htmlHour +='<option value="34">34</option>';
+				htmlHour +='<option value="35">35</option>';
+				htmlHour +='<option value="36">36</option>';
+				htmlHour +='<option value="37">37</option>';
+				htmlHour +='<option value="38">38</option>';
+				htmlHour +='<option value="39">39</option>';
+				htmlHour +='<option value="40">40</option>';
+				htmlHour +='<option value="41">41</option>';
+				htmlHour +='<option value="42">42</option>';
+				htmlHour +='<option value="43">43</option>';
+				htmlHour +='<option value="44">44</option>';
+				htmlHour +='<option value="45">45</option>';
+				htmlHour +='<option value="46">46</option>';
+				htmlHour +='<option value="47">47</option>';
+				htmlHour +='<option value="48">48</option>';
+				htmlHour +='<option value="49">49</option>';
+				htmlHour +='<option value="50">50</option>';
+				htmlHour +='<option value="51">51</option>';
+				htmlHour +='<option value="52">52</option>';
+				htmlHour +='<option value="53">53</option>';
+				htmlHour +='<option value="54">54</option>';
+				htmlHour +='<option value="55">55</option>';
+				htmlHour +='<option value="56">56</option>';
+				htmlHour +='<option value="57">57</option>';
+				htmlHour +='<option value="58">58</option>';
+				htmlHour +='<option value="59">59</option>';
+			return htmlHour;
+		}
+		
 		
 		function getCurrentStage(case_stage_id,target){
 			$.ajax({
@@ -579,13 +673,14 @@ $(document).ready(function() {
 			$('.case_coordinate').val(coordinate).multiselect("refresh");
 			
 		};
-		function pushData_caseAppointment(data){	
+		
+		function pushData_caseAppointment(data){
 			$.each(data,function(){
 				console.log(paresDateToDate(this.appointment_date.split(' ')[0])+' '+this.appointment_date.split(' ')[1],'pushData_caseAppointment');
 				$html = '<tr data-id="'+this.appointment_id+'"></td> '
 					+'<td><select class="case_appointment_type appointment input_control">'
-						+'<option value=""> ---- เลือกสื่อ ---- </option>'+$html_appointment+'</select></td> '
-					+'<td><input type="text" class="case_appointment_date datetimepicker input_control" value="'+paresDateToDate(this.appointment_date.split(' ')[0])+' '+this.appointment_date.split(' ')[1].substr(0, 5)+'"></td>'
+						+'<option value=""> ---- เลือก ---- </option>'+$html_appointment+'</select></td> '
+					+'<td><input type="text" class="case_appointment_date datetimepicker input_control" value="'+paresDateToDate(this.appointment_date.split(' ')[0])+'" style="width:30%;"> เวลา <select class="case_appointment_timeH input_control" style="width: 22% !important;">"'+timeHour+'"</select> : <select class="case_appointment_timeM input_control" style="width: 22% !important;">"'+timeMinute+'"</select></td>'
 					+'<td><select class="case_appointment_doctor doctor input_control">'
 						+'<option value=""> ---- เลือกหมอ ---- </option>'+$html_doctor+'</select></td>'
 					+'<td><input class="case_appointment_supervised  input_control" type="text" ></td>'
@@ -599,6 +694,8 @@ $(document).ready(function() {
 				$('#case_appointment tbody').append($html);
 				getBasicData($('#case_appointment tbody'));
 				getDateTimePicker('#case_appointment tbody tr:last-child .datetimepicker');
+				$('#case_appointment tbody tr:last-child').find('.case_appointment_timeH').val(this.appointment_date.split(' ')[1].substr(0, 2));
+				$('#case_appointment tbody tr:last-child').find('.case_appointment_timeM').val(this.appointment_date.split(':')[1]);
 				$('#case_appointment tbody tr:last-child').find('.case_appointment_type').val(this.appointment_type_id);
 				$('#case_appointment tbody tr:last-child').find('.case_appointment_doctor').val(this.doctor_id);
 				if(this.supervised_by){
@@ -613,39 +710,18 @@ $(document).ready(function() {
 			});
 		};
 		function getDatePicker(selector){
-			$(selector).datepicker({ 
-				changeMonth: true, 
-			  	changeYear: true,
-			  	yearRange: ($current_year-50)+":"+($current_year+50),
-			  	dateFormat: 'dd/mm/yy', 
-			  	isBuddhist: true, 
-				closeText:"สำเร็จ",
-				currentText:'วันที่ปัจจุบัน',
-			  	defaultDate: toDay,dayNames: ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'],
-              	dayNamesMin: ['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'],
-              	monthNames: ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
-              	monthNamesShort: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.']
-              });
+			$(selector).datepicker({
+				format: 'dd/mm/yyyy',
+	            language: 'th',            
+	            thaiyear: true              
+	        }).keydown(function(e){e.preventDefault();});
 		}
 		function getDateTimePicker(selector){
-			$(selector).datetimepicker({ 
-				use24hours: true,
-				changeMonth: true, 
-			  	changeYear: true,
-			  	yearRange: ($current_year-50)+":"+($current_year+50),
-			  	dateFormat: 'dd/mm/yy', 
-			  	isBuddhist: true, 
-				controlType: 'select',
-				oneLine: true,
-				timeFormat: 'HH:mm',
-				timeText:'เวลา',
-				closeText:"สำเร็จ",
-				currentText:'วันที่ปัจจุบัน',
-			  	defaultDate: toDay,dayNames: ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'],
-              	dayNamesMin: ['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'],
-              	monthNames: ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
-              	monthNamesShort: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.']
-              });
+			$(selector).datepicker({
+				format: 'dd/mm/yyyy',
+	            language: 'th',            
+	            thaiyear: true              
+	        }).keydown(function(e){e.preventDefault();});
 		}
 		function pushData_caseContact(data){	
 			$.each(data,function(i,v){
@@ -934,8 +1010,14 @@ $(document).ready(function() {
 		function getData_caseAppointment(){
 			var appointment = [];
 			$('#case_appointment table tbody tr').each(function(i,v){
-				var ori_date = $(this).find(".case_appointment_date").val().split(' ');
-				var appoint_dateTime = formatDateYMD(ori_date[0])+' '+ori_date[1];
+				var ori_date = $(this).find(".case_appointment_date").val();
+				var ori_timeH = $(this).find(".case_appointment_timeH").val();
+				var ori_timeM = $(this).find(".case_appointment_timeM").val();
+				var appoint_dateTime = formatDateYMD(ori_date)+' '+ori_timeH+':'+ori_timeM;
+				
+//				var ori_date = $(this).find(".case_appointment_date").val().split(' ');
+//				var appoint_dateTime = formatDateYMD(ori_date[0])+' '+ori_date[1];
+				
 				appointment.push({
 					appointment_id 		:$(this).data("id")?$(this).data("id"):'',
 					case_id 			:$("#patient_case").data("id")?$("#patient_case").data("id"):'',
@@ -1423,19 +1505,21 @@ $(document).ready(function() {
 		
 		$("body").on('click','.del-folder',function(e){
 			var thiss = $(this);
-			$('#btnConfirmOK').one("click", function( e ) {
-				getAjax($plRoute+"/destoryFolder",'post',{folder_id:thiss.closest('li').data('folder_id'),case_id:$('#patient_case').data('id')},function(rs){
-					console.log(rs,'del-folder');
-					if(rs.status==200){ 
-						$('[data-folder_id="'+thiss.closest('li').data('folder_id')+'"]').remove();
-						//thiss.closest('ul.wrap_folder').remove();
-						callFlashSlide('ลบไฟล์สำเร็จ' ,'success');
-					}else if(rs.status==400){
-						callFlashSlide(rs.message ,'error');
-					}
-					$('#confrimModal').modal('hide');
-				});
-			});
+			console.log(thiss);
+			
+//			$('#btnConfirmOK').one("click", function( e ) {
+//				getAjax($plRoute+"/destoryFolder",'post',{folder_id:thiss.closest('li').data('folder_id'),case_id:$('#patient_case').data('id')},function(rs){
+//					console.log(rs,'del-folder');
+//					if(rs.status==200){ 
+//						$('[data-folder_id="'+thiss.closest('li').data('folder_id')+'"]').remove();
+//						thiss.closest('ul.wrap_folder').remove();
+//						callFlashSlide('ลบไฟล์สำเร็จ' ,'success');
+//					}else if(rs.status==400){
+//						callFlashSlide(rs.message ,'error');
+//					}
+//					$('#confrimModal').modal('hide');
+//				});
+//			});
 		});
 		
 		$("body").on('click','.del-file',function(e){
@@ -1491,35 +1575,21 @@ $(document).ready(function() {
 			last_tr.find('.next_year').append(getyear($current_year,$current_year+10));
 			last_tr.find('.reverse_year').append(getyear($current_year-30,$current_year+1));
 			last_tr.find('.appointment').append($html_appointment);
-			last_tr.find('.datepicker').datepicker({ 
-				changeMonth: true, 
-			  	changeYear: true,
-			  	dateFormat: 'dd/mm/yy', 
-			  	isBuddhist: true, 
-				closeText:"สำเร็จ",
-				currentText:'วันที่ปัจจุบัน',
-			  	defaultDate: toDay,dayNames: ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'],
-              	dayNamesMin: ['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'],
-              	monthNames: ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
-              	monthNamesShort: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.']
-              }); 
-			last_tr.find('.datetimepicker').datetimepicker({ 
-				use24hours: true,
-				changeMonth: true, 
-			  	changeYear: true,
-			  	dateFormat: 'dd/mm/yy', 
-			  	isBuddhist: true, 
-				controlType: 'select',
-				oneLine: true,
-				timeFormat: 'HH:mm',
-				timeText:'เวลา',
-				closeText:"สำเร็จ",
-				currentText:'วันที่ปัจจุบัน',
-			  	defaultDate: toDay,dayNames: ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'],
-              	dayNamesMin: ['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'],
-              	monthNames: ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
-              	monthNamesShort: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.']
-              });
+			last_tr.find('.datepicker').datepicker({
+				format: 'dd/mm/yyyy',
+	            language: 'th',            
+	            thaiyear: true              
+	        }).keydown(function(e){e.preventDefault();});
+			
+			last_tr.find('.datetimepicker').datepicker({
+				format: 'dd/mm/yyyy',
+	            language: 'th',            
+	            thaiyear: true              
+	        }).keydown(function(e){e.preventDefault();});
+			
+			last_tr.find('.case_appointment_timeH').append(timeHour());
+			last_tr.find('.case_appointment_timeM').append(timeMinute());
+			
 			last_tr.find('.no').text(last_tr.closest("tbody").children('tr').length);
 			
 			// new files

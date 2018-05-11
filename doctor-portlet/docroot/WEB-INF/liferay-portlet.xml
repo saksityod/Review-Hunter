@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
-
+ 
 <liferay-portlet-app>   
 	<portlet>                      
 		<portlet-name>doctor</portlet-name>
@@ -190,11 +190,11 @@
 		<header-portlet-css>/css/jquery-ui.css</header-portlet-css>
 		<header-portlet-css>/css/jquery.mloading.css</header-portlet-css>
 		<header-portlet-css>/js/bootstrap-modal/css/bootstrap-modal.css</header-portlet-css>
-		<header-portlet-css>/css/jquery-ui-timepicker-addon.css</header-portlet-css>
 	    <header-portlet-css>/css/tywMain.css</header-portlet-css> 
 	    <header-portlet-css>/css/multi-select.css</header-portlet-css>
 	    <header-portlet-css>/css/bootstrap-multiselect.css</header-portlet-css> 
-		<header-portlet-css>/css/main.css</header-portlet-css> 
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<header-portlet-css>/css/bootstrap-datepicker.css</header-portlet-css> 
         <footer-portlet-javascript>/js/jquery-2.1.1.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.bootpag.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery-ui-1.10.4.min.js</footer-portlet-javascript>
@@ -202,12 +202,12 @@
 		<footer-portlet-javascript>/js/jquery.mloading.js</footer-portlet-javascript> 
 		<footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modalmanager.js</footer-portlet-javascript>	
 	    <footer-portlet-javascript>/js/bootstrap-modal/js/bootstrap-modal.js</footer-portlet-javascript>	 
-		<footer-portlet-javascript>/js/jquery-ui-timepicker-addon.js</footer-portlet-javascript>      
 		<footer-portlet-javascript>/js/bootstrap-multiselect.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.multi-select.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-datepicker-custom.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/Controller/Config.js</footer-portlet-javascript>	      
 	    <footer-portlet-javascript>/Controller/cMain.js</footer-portlet-javascript>	      
-	    <footer-portlet-javascript>/Controller/ba.js</footer-portlet-javascript>
+<!-- 	    <footer-portlet-javascript>/Controller/ba.js</footer-portlet-javascript> -->
 		<css-class-wrapper>ba-portlet</css-class-wrapper> 
 	</portlet>       
 	<portlet> 

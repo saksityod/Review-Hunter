@@ -57,13 +57,13 @@ plid = layout.getPlid();
 						</div>
 						<div class="form-group span3">
 							<label class="label-control" for="">ประเภทเคส</label>
-							<select data-toggle="tooltip" title="ระบุปี"
+							<select data-toggle="tooltip" title="ประเภทเคส"
 								class="input span12 m-b-n" id="case_type" name="case_type">
 							</select>
 						</div>
 						<div class="form-group span3">
 							<label class="label-control" for="">กลุ่มเคส</label>
-							<select data-toggle="tooltip" title="ระบุปี"
+							<select data-toggle="tooltip" title="กลุ่มเคส"
 								class="input span12 m-b-n" id="case_group" name="case_group">
 							</select>
 						</div>

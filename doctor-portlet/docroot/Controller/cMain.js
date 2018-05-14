@@ -34,7 +34,7 @@ function checkSession(paramTokenID){
 		headers:{Authorization:"Bearer "+tokenID.token},
 		async:false,
 		success:function(data){
-			console.log(data)
+			//console.log(data)
 			if(data.status == "200"){
 				$chk = true;
 				userId = data.userID;
@@ -77,7 +77,7 @@ function checkSession(paramTokenID){
 		success:function(data){
 			sessionStorage.setItem("tokenID",data);
 			tokenID = eval("("+ sessionStorage.getItem("tokenID")+")");
-			console.log(data);
+			//console.log(data);
 			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 				$(".aui body *").css({'font-weight':400});
 			} 

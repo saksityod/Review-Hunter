@@ -836,7 +836,7 @@
 										<td><select class="case_appointment_type appointment">
 											<option value=""> ---- เลือก ---- </option></select></td>
 										<td>
-											<input type="text" class="case_appointment_date datetimepicker" readonly  placeholder="หมายเหตุ" style="width:30%;">
+											<input type="text" class="case_appointment_date datetimepicker" readonly  placeholder="ณ วันที่" style="width:30%;">
 											เวลา
 											<select class="case_appointment_timeH" style="width: 22% !important;">
 											</select>
@@ -1395,7 +1395,7 @@ $(document).ready(function() {
 	    var toDay = d.getDate() + '/'+ (d.getMonth() + 1) + '/'+ (d.getFullYear() + 543);
 	    
 		getAjax($plRoute+'/getOnLoad','get',{userId:$('#userId_portlet').val()},function(rs){
-			console.log(rs);
+			//console.log(rs);
 			setCssTableRespornsive();
 			$host = rs.host;
 			$current_year = parseInt(rs.currentDate.split("-")[2])+543;
@@ -1494,7 +1494,7 @@ $(document).ready(function() {
 				async:true,
 				headers:{Authorization:"Bearer "+tokenID.token},
 				success : function(rs) {
-					console.log(rs,'.add_procedure');
+					//console.log(rs,'.add_procedure');
 					if(rs){
 						pushData_patient(rs);
 						if(rs.social) pushData_socialMedia(rs.social);
@@ -1537,7 +1537,7 @@ $(document).ready(function() {
 				headers:{Authorization:"Bearer "+tokenID.token},
 				async:true,
 				success:function(rs){
-					console.log(rs,'.edit');
+					//console.log(rs,'.edit');
 					if(rs){
 						if(rs.patient){
 							pushData_patient(rs.patient);
@@ -1557,7 +1557,7 @@ $(document).ready(function() {
 							if(rs.case_article)		pushData_caseArticle(rs.case_article);
 							if(rs.caseStageHistory)	pushData_workFlow(rs.caseStageHistory);
 							if(rs.case_stage) {
-								console.log(rs.case_stage,'rs.caseStage');
+								//console.log(rs.case_stage,'rs.caseStage');
 								$('#case_stage').data('id',rs.case_stage.case_stage_id).data('stage_id',rs.case_stage.to_stage_id);
 								getCurrentStage(rs.case_stage.case_stage_id,'#case_stage_fromStage');
 								getToStage(rs.case_stage.to_stage_id);
@@ -1584,7 +1584,7 @@ $(document).ready(function() {
 				headers:{Authorization:"Bearer "+tokenID.token},
 				async:true,
 				success:function(rs){
-					console.log(rs);
+					//console.log(rs);
 					if(rs)  $('#case_stage_fromStage,#case_stage_toStage').html('<option selected data-status="'+rs.stage_name+'" value="'+rs.stage_id+'">'+rs.stage_name+'</option>');
 				}
 			});
@@ -1599,7 +1599,7 @@ $(document).ready(function() {
 				async:true,
 				headers:{Authorization:"Bearer "+tokenID.token},
 				success : function(rs) {
-					console.log(rs,'checkRoleAuthurize');
+					//console.log(rs,'checkRoleAuthurize');
 					$.each(rs.section,function(){
 						if(this.section_id == 'patient' || this.section_id == 'patient_case' || this.section_id == 'case_coordinate'){
 							if(this.add_flag == 1 && this.edit_flag == 1){
@@ -1655,7 +1655,7 @@ $(document).ready(function() {
 					remark 			:$(this).find('.case_followup_remark').val()
 				});
 			});
-			console.log(followup,'data followup');
+			//console.log(followup,'data followup');
 			$.ajax({
 				url: $plRoute+'/cuFollowup',
 				type : 'POST',
@@ -1664,7 +1664,7 @@ $(document).ready(function() {
 				async:false,
 				headers:{Authorization:"Bearer "+tokenID.token},
 				success : function(rs) {
-					console.log(rs,'followup');
+					//console.log(rs,'followup');
 					if(rs.status = 200){
 						pushData_caseFollowup(rs.data);
 						$("#case_followup").find('.del_rec').show();
@@ -1699,14 +1699,14 @@ $(document).ready(function() {
 				var id = this.id;
 				if(this.files){
 					$.each(this.files,function(i,v){
-						console.log(this);
+						//console.log(this);
 						FormAllData.append(id+'[]',this);
 					});
 				}
 			});
 			FormAllData.append('formdata', JSON.stringify($data));
 
-			console.log($data,'data');
+			//console.log($data,'data');
 			$.ajax({
 			    url:$plRoute+'/cu',
 			    type:'POST',
@@ -1718,7 +1718,7 @@ $(document).ready(function() {
 			    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
 			    headers:{Authorization:"Bearer "+tokenID.token},
 			    success: function(rs) {
-			    	console.log(rs,'rs cu');
+			    	//console.log(rs,'rs cu');
 			    	if(rs.status==200){
 			    		callFlashSlide('บันทึกข้อมูลสำเร็จ','success');
 			    		getList(1);
@@ -1738,7 +1738,7 @@ $(document).ready(function() {
 			var html_send_to = '<option value="">-- เลือกส่งถึง --</option>';
 			if($(this).val()!=''){
 				getAjax($plRoute+'/sendTo','get',{stage_id:$(this).val()},function(rs){
-					console.log(rs,'action #case_stage_toStage');
+					//console.log(rs,'action #case_stage_toStage');
 					if(rs.length > 0){
 						$.each(rs,function(){
 							html_send_to +='<option data-email="'+this.emailAddress+'" value="'+this.userId+'">'+this.screenName+'</option>';
@@ -1765,7 +1765,7 @@ $(document).ready(function() {
 		$('#btn_case_stage_upload').click(function(){
 			$('#addImage .wrap,#case_stage_upload').html('');
 			getAjax($plRoute+'/getCaseFile','get',{case_id:$('#patient_case').data('id')},function(rs){
-				console.log(rs);
+				//console.log(rs);
 				var html = '<ul class="thumbnails">';
 				if(rs){
 					$.each(rs,function(){
@@ -1896,7 +1896,7 @@ $(document).ready(function() {
 				async:true,
 				headers:{Authorization:"Bearer "+tokenID.token},
 				success : function(rs) {
-					console.log(rs,'current Stage');
+					//console.log(rs,'current Stage');
 					$(target).html('<option selected data-status="'+rs.to_stage.stage_name+'" value="'+rs.to_stage.stage_id+'">'+rs.to_stage.stage_name+'</option>');
 				},error:function(){ console.log('error -> getCurrentStage'); }		
 			});
@@ -1911,7 +1911,7 @@ $(document).ready(function() {
 				async:true,
 				headers:{Authorization:"Bearer "+tokenID.token},
 				success : function(rs) {
-					console.log(rs,'getStage');
+					//console.log(rs,'getStage');
 					var html_stage_to = '<option data-status="" value="">บันทึกฉบับร่าง</option>';
 					if(rs.length > 0){
 						$.each(rs,function(){
@@ -2058,7 +2058,7 @@ $(document).ready(function() {
 		
 		function pushData_caseAppointment(data){
 			$.each(data,function(){
-				console.log(paresDateToDate(this.appointment_date.split(' ')[0])+' '+this.appointment_date.split(' ')[1],'pushData_caseAppointment');
+				//console.log(paresDateToDate(this.appointment_date.split(' ')[0])+' '+this.appointment_date.split(' ')[1],'pushData_caseAppointment');
 				$html = '<tr data-id="'+this.appointment_id+'"></td> '
 					+'<td><select class="case_appointment_type appointment input_control">'
 						+'<option value=""> ---- เลือก ---- </option>'+$html_appointment+'</select></td> '
@@ -2194,7 +2194,7 @@ $(document).ready(function() {
 				getBasicData($('#case_article tbody'));
 				getDatePicker('#case_article tbody tr:last-child .datepicker');
 				$('#case_article tbody tr:last-child').find('.case_article_type_id').val(this.article_type_id);
-				console.log(this.case_article_doc);
+				//console.log(this.case_article_doc);
 				if(this.case_article_doc!=null){
 					$.each(this.case_article_doc,function(){
 						var fileName = '';
@@ -2495,7 +2495,7 @@ $(document).ready(function() {
 		}	
 		
 		$('body').on('click','.btn-collapse', function(event){
-			console.log('click collapse');
+			//console.log('click collapse');
 			$(this).toggleClass("open");
 			$(this).closest('.wrap').find('.content_field').toggleClass("collapse");
 		});
@@ -2505,7 +2505,7 @@ $(document).ready(function() {
 			var thiss = $(this);
 			$('#btnConfirmOK').one('click',function(){
 				getAjax($plRoute+'/delRec','post',{id:thiss.closest('tr').data('id'),method:thiss.closest('.wrap').attr('id')},function(rs){
-					console.log(rs,'del_rec');
+					//console.log(rs,'del_rec');
 					$('#confrimModal').modal('hide');
 					if(rs.status == 200){
 						thiss.closest('tr').remove();
@@ -2522,7 +2522,7 @@ $(document).ready(function() {
 			$('#confrimModal').modal('show');
 			$('#btnConfirmOK').one('click',function(){
 				getAjax($plRoute+'/deleteFile','post',{method:elm_file.closest('.wrap').attr('id'),file_id:elm_file.data('id')},function(rs){
-					console.log(rs);
+					//console.log(rs);
 					$('#confrimModal').modal('hide');
 					if(rs.status == 200){
 						elm_file.remove();
@@ -2551,10 +2551,17 @@ $(document).ready(function() {
 		});
 		
 		$('#importsubmitForm').on('click',function(){
+			
+			if($('#fileForm').prop('files').length==0) {
+				callFlashSlide('กรุณาเลือกไฟล์','Error');
+				return false;
+			}
+			
 			var formData = new FormData();
 			$.each($('#fileForm').prop('files'),function(i,v){
 				formData.append('file[]',this);
 			});
+			
 			formData.append('folder_id',$('#ModalImportForm .folderList').val());
 			formData.append('case_id',$('#patient_case').data('id'));
 			$.ajax({
@@ -2568,7 +2575,7 @@ $(document).ready(function() {
 			    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
 			    headers:{Authorization:"Bearer "+tokenID.token},
 			    success: function(rs) {
-			    	console.log(rs);
+			    	////console.log(rs);
 		    		$('#ModalImportForm').modal('hide');
 			    	$('#fileForm').val('');
 			    	if(rs.status==200){
@@ -2592,7 +2599,7 @@ $(document).ready(function() {
 				dataType: 'json',
 				headers:{Authorization:"Bearer "+tokenID.token},
 				success: function(rs){
-					console.log(rs);
+					//console.log(rs);
 					if(rs['status']==200){
 						window.open($host+rs.file_path,"_self");
 					}
@@ -2689,7 +2696,7 @@ $(document).ready(function() {
 				delay: 100,
 				source: function (request, response) {
 			        getAjax($plRoute+"/getSupervisedUser",'get',{search:search,case_id:$('#patient_case').data('id')},function(rs){
-			        	console.log(rs,'supervised');
+			        	//console.log(rs,'supervised');
 			        	response( $.map( rs, function( item ) {
 			                var object = new Object();
 			                  object.id = item.userId;
@@ -2749,13 +2756,18 @@ $(document).ready(function() {
 			}); 
 		});
 		$('#btnSubmitAddFolder').on("click", function( e ) {
+			if($.trim($('#folderName').val())=="") {
+				callFlashSlide('ระบุชื่อแฟ้ม','Error');
+				return false;
+			}
+			
 			var folder ={
 					folder_screen_name	:	$.trim($('#folderName').val()),
 					folder_parent_id	:	$('#addFolder .main_folder').val(),
 					case_id				:	$('#patient_case').data('id'),
 			}
 			getAjax($plRoute+"/makeDirectory",'post',folder,function(rs){
-				console.log(rs);
+				//console.log(rs);
 				if(rs.status == 200){
 					callFlashSlide('สร้างแฟ้มข้อมูลสำเร็จ' ,'success');
 					getFolder(rs.data);
@@ -2767,7 +2779,7 @@ $(document).ready(function() {
 		
 		$('#btnUploadFile').click(function(){
 			getAjax($plRoute+"/getFolder/"+$('#patient_case').data('id'),'get','',function(rs){
-		        console.log(rs);
+		        //console.log(rs);
 		        var html_temp ='';
 		        if(rs){
 			        $.each(rs,function(){
@@ -2786,7 +2798,7 @@ $(document).ready(function() {
 		
 		$('#btndeleteFolder').click(function(){
 			getAjax($plRoute+"/getFolder/"+$('#patient_case').data('id'),'get','',function(rs){
-		        console.log(rs);
+		        //console.log(rs);
 		        var html_temp = '';
 				$.each(rs,function(){
 					
@@ -2816,7 +2828,7 @@ $(document).ready(function() {
 		$("body").on('click','.btnIsOpen:not(.active)',function(e){
 			var thiss = $(this);
 			getAjax($plRoute+"/updateFolder",'post',{case_id:$('#patient_case').data('id'),folder_id:$(this).closest('li.folder').data('folder_id'),is_open:$(this).data('value')},function(rs){
-				console.log(rs);
+				//console.log(rs);
 				if(rs.status == 200){
 					thiss.closest('li').find('.wrap_volume').toggle();
 				}else{
@@ -2830,12 +2842,12 @@ $(document).ready(function() {
 			$('#edit_folderName').val('');
 			$('#btnSubmitEditFolder').one('click',function(){
 				var folder_name =  $.trim($('#edit_folderName').val());
-				console.log($.trim($('#edit_folderName').val()));
+				//console.log($.trim($('#edit_folderName').val()));
 				if(folder_name != ''){
 					var folder_id =  thiss.closest('li.folder').data('folder_id');
 					var case_id =  $('#patient_case').data('id');
 					getAjax($plRoute+"/updateFolder",'post',{case_id:case_id,folder_id:folder_id,folder_name:folder_name},function(rs){
-						console.log(rs,'updateFolder');
+						//console.log(rs,'updateFolder');
 						if(rs.status == 200){
 							callFlashSlide('แก้ไขแฟ้มข้อมูลสำเร็จ' ,'success');
 							thiss.closest('li.folder').find('.folder_name').text(rs.data);
@@ -2858,16 +2870,16 @@ $(document).ready(function() {
 				async:false,
 				headers:{Authorization:"Bearer "+tokenID.token},
 				success: function(rs) {
-					console.log(rs,'getFolderSummary');
+					//console.log(rs,'getFolderSummary');
 					if(rs.status == 200){
 						var f_pass = rs.data[0].f_pass!==null?rs.data[0].f_pass:0;
 						var f_all = rs.data[0].f_all!==null?parseInt(rs.data[0].f_all):0;
 						if(f_pass == 0 && f_all == 0) total = (0).toFixed(2);
 						else total = ((f_pass*100)/f_all).toFixed(2);
 					}
-					console.log(total,'total');
+					//console.log(total,'total');
 					thiss.closest('.wrap_folder_parent').find('.volume').text(total);
-					console.log(thiss.closest('.wrap_folder_parent').find('.volume'));
+					//console.log(thiss.closest('.wrap_folder_parent').find('.volume'));
 				}
 			});
 		}
@@ -2876,7 +2888,7 @@ $(document).ready(function() {
 			var thiss = $(this);
 			var folder_id = $(this).closest('li.folder').data('folder_id');
 			getAjax($plRoute+"/updateFolder",'post',{case_id:$('#patient_case').data('id'),folder_id:folder_id,is_pass:$(this).prop('checked')?1:0},function(rs){
-				console.log(rs,'updateFolder');
+				//console.log(rs,'updateFolder');
 				if(rs.status == 200){
 					getFolderSummary(folder_id,thiss,$('#patient_case').data('id'));
 				}else{
@@ -2892,7 +2904,7 @@ $(document).ready(function() {
 			
 			$('#btnConfirmOK').one("click", function( e ) {
 				getAjax($plRoute+"/destoryFolder",'post',{folder_id:thiss.closest('li').data('folder_id'),case_id:$('#patient_case').data('id')},function(rs){
-					console.log(rs,'del-folder');
+					//console.log(rs,'del-folder');
 					if(rs.status==200){ 
 						$('[data-folder_id="'+thiss.closest('li').data('folder_id')+'"]').remove();
 						$('[data-folder_id="'+thiss.closest('ul').data('folder_id')+'"]').remove();
@@ -2910,7 +2922,7 @@ $(document).ready(function() {
 			var thiss = $(this);
 			$('#btnConfirmOK').one("click", function( e ) {
 				getAjax($plRoute+"/deleteFile",'post',{file_id:thiss.closest('li').data('file_id'),method:thiss.closest('.wrap').attr('id')},function(rs){
-					console.log(rs,'deleteFile');
+					//console.log(rs,'deleteFile');
 					if(rs.status==200){ 
 						callFlashSlide('ลบไฟล์สำเร็จ' ,'success');
 						thiss.closest('li').remove();
@@ -2989,7 +3001,7 @@ $(document).ready(function() {
 		}
 
 		function getFolder(data){
-			console.log(data,'getFolder');
+			//console.log(data,'getFolder');
 			var html_temp = '';
 			$.each(data,function(){
 				var isOpen = this.is_open==1?'active':'';
@@ -3111,7 +3123,7 @@ $(document).ready(function() {
 						
 					}
 			getAjax($plRoute+"/getCaseList?page="+page,'get',$data,function(rs){
-				console.log(rs);
+				//console.log(rs);
 				 var html_temp = '';
 				 if(rs.data.length >0){
 					 $.each(rs.data,function(i,v){

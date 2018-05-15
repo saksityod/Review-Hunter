@@ -90,6 +90,12 @@ $(document).ready(function() {
 	 		});
 	 		
 	 		$("#time").click(function() {
+	 			$('.datepicker').datepicker({
+					format: 'dd/mm/yyyy',
+					todayBtn: true,
+		            language: 'th',            
+		            thaiyear: true              
+		        }).datepicker("setDate", "0").keydown(function(e){e.preventDefault();});
 	 			swapFN(this.id);
 	 			generateStartEndDate($(this).val());
 	 		});

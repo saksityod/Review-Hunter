@@ -504,11 +504,11 @@
 							</div>
 							<div class="form-group span3">
 								<label class=" ">โทรศัพท์มือถือ : <span class="redFont ">*</span></label>
-								<input type="text" id="patient_mobile" class=" input_control" placeholder="โทรศัพท์มือถือ">
+								<input type="number" id="patient_mobile" class=" input_control" min="0" value="" placeholder="โทรศัพท์มือถือ">
 							</div>
 							<div class="form-group span3">
 								<label class="">โทรศัพท์บ้าน : </label>
-								<input type="text" id="patient_telNo" class=" input_control" placeholder="โทรศัพท์บ้าน">
+								<input type="number" id="patient_telNo" class=" input_control" min="0" value="" placeholder="โทรศัพท์บ้าน">
 							</div>
 						</div>
 						<div class="row-fluid">
@@ -649,7 +649,7 @@
 							<div class="row-fluid">
 								<div class="form-group span3">
 									<label class=" ">กลุ่มที่เลข VN : </label>
-									<input type="text" id="patient_case_vn" class=" input_control num" placeholder="ตัวเลขเท่านั้น">
+									<input type="number" id="patient_case_vn" class=" input_control num" min="0" value="" placeholder="ตัวเลขเท่านั้น">
 								</div>
 								<div class="form-group span3">
 									<label class=" ">หัตถการ : <span class="redFont ">*</span></label>
@@ -2237,6 +2237,8 @@ $(document).ready(function() {
 		
 		function clearAll(){
 			clearModal();
+			$("#patient_hnNo").val("");
+			$("#patient_zipcode").empty();
 			$('#list >li > ul,#case_stage_upload').html('');
 			$('#case_stage_toUser').html('<option data-email="'+'mail'+'" value="'+userId+'">'+screenName+'</option>');
 			$('.bubble').remove();

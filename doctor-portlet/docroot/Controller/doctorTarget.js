@@ -387,8 +387,8 @@ $(document).ready(function() {
 							return false;
 						}
 					});
-					
 					$.each(rs.data,function(i,v){
+						//console.log(v);
 						$temp_arr =[0,v.target_month1,v.target_month2,v.target_month3,v.target_month4,
 									v.target_month5,v.target_month6,v.target_month7,v.target_month8,
 									v.target_month9,v.target_month10,v.target_month11,v.target_month12];
@@ -396,7 +396,7 @@ $(document).ready(function() {
 						$temp = '<tr>'
 							/* +'<td style="vertical-align: middle;">'+$i+'</td>' */
 							+'<td style="vertical-align: middle;">'+v.doctor.doctor_name+'</td>'
-							+'<td style="vertical-align: middle;">'+v.doctor_procedure.medical_procedure.procedure_name+'</td>'
+							+'<td style="vertical-align: middle;">'+v.medical_procedure.procedure_name+'</td>'
 							+'<td style="vertical-align: middle;">'+((v.year)+543)+'</td>'
 							+'<td style="vertical-align: middle;text-align:right">'+$temp_arr[$data.month]+'</td>'
 							+'<td style="padding-left:18px">'

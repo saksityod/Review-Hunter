@@ -217,7 +217,7 @@ $(document).ready(function() {
 					//console.log(rs.data);
 					$("#from_doctor_namee").val(rs.data.doctor.doctor_name).data('doctor_id',rs.data.doctor.doctor_id).data('doctor_name',rs.data.doctor.doctor_name);
 					$("#case_categoryy").val(rs.data.case_type.case_type);
-					$("#from_medical_proceduree").val(rs.data.doctor_procedure.medical_procedure.procedure_name);
+					$("#from_medical_proceduree").val(rs.data.procedure_id);
 					$("#from_yearr").html(getyear($current_year-10,$current_year+10)).val(rs.data.year);
 					$('#form-case-month-v1').val(rs.data.target_month1);
 					$('#form-case-month-v2').val(rs.data.target_month2);

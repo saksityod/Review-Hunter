@@ -100,6 +100,10 @@ $(document).ready(function() {
 	 			var url_report_jasper = restfulURL+"/"+serviceName+"/report/api_report?template_name=report-8&template_format=pdf&used_connection=1&inline=1&data="+JSON.stringify(parameter);
 	 			$('#iFrame_report').attr('src',url_report_jasper);
 	 		});
+	 		
+	 		if($("#year").val()==null) {
+	 			$("#btn_search").attr('disabled',true);
+	 		}
 		}
 	}
 });

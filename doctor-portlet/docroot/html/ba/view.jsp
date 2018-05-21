@@ -258,6 +258,11 @@
 		padding-right: 5%;
 	}
 }
+.numberNotIcon[type=number]::-webkit-inner-spin-button, 
+.numberNotIcon[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
 
 </style>
 <input type="hidden" id="user_portlet" name="user_portlet"
@@ -442,7 +447,7 @@
 						<div class="row-fluid">
 							<div class="form-group span3">
 								<label>เลข HN: </label>
-								<input type="number" id="patient_hnNo"  class=" input_control" placeholder="ตัวเลขเท่านั้น" min="0" value="">
+								<input type="number" id="patient_hnNo"  class="input_control numberNotIcon" placeholder="ตัวเลขเท่านั้น" min="0" value="">
 							</div>
 							<div class="form-group span3">
 								<label class=" ">ชื่อ : <span class="redFont ">*</span></label>
@@ -504,11 +509,11 @@
 							</div>
 							<div class="form-group span3">
 								<label class=" ">โทรศัพท์มือถือ : <span class="redFont ">*</span></label>
-								<input type="number" id="patient_mobile" class=" input_control" min="0" value="" placeholder="โทรศัพท์มือถือ">
+								<input type="number" id="patient_mobile" class="input_control numberNotIcon" min="0" value="" placeholder="โทรศัพท์มือถือ">
 							</div>
 							<div class="form-group span3">
 								<label class="">โทรศัพท์บ้าน : </label>
-								<input type="number" id="patient_telNo" class=" input_control" min="0" value="" placeholder="โทรศัพท์บ้าน">
+								<input type="number" id="patient_telNo" class="input_control numberNotIcon" min="0" value="" placeholder="โทรศัพท์บ้าน">
 							</div>
 						</div>
 						<div class="row-fluid">
@@ -649,7 +654,7 @@
 							<div class="row-fluid">
 								<div class="form-group span3">
 									<label class=" ">กลุ่มที่เลข VN : </label>
-									<input type="number" id="patient_case_vn" class="input_control" min="0" value="" placeholder="ตัวเลขเท่านั้น">
+									<input type="number" id="patient_case_vn" class="input_control numberNotIcon" min="0" value="" placeholder="ตัวเลขเท่านั้น">
 								</div>
 								<div class="form-group span3">
 									<label class=" ">หัตถการ : <span class="redFont ">*</span></label>
@@ -2237,8 +2242,8 @@ $(document).ready(function() {
 		
 		function clearAll(){
 			clearModal();
-			$("#patient_hnNo").val("");
-			$("#patient_zipcode").empty();
+			$("#patient_hnNo,#patient_mobile,#patient_telNo,#patient_case_vn").val("");
+			$("#patient_zipcode,.yearOld").empty();
 			$('#list >li > ul,#case_stage_upload').html('');
 			$('#case_stage_toUser').html('<option data-email="'+'mail'+'" value="'+userId+'">'+screenName+'</option>');
 			$('.bubble').remove();

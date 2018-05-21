@@ -44,7 +44,7 @@ plid = layout.getPlid();
 		<div class="span12">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<h5>รายงานการลงรูปของเคส</h5>
+					<h5>รายงานการส่งรูปของเคส</h5>
 				</div>
 				<!-- search -->
 				<div class="ibox-content breadcrumbs2">

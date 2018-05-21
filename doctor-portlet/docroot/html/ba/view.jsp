@@ -649,7 +649,7 @@
 							<div class="row-fluid">
 								<div class="form-group span3">
 									<label class=" ">กลุ่มที่เลข VN : </label>
-									<input type="number" id="patient_case_vn" class=" input_control num" min="0" value="" placeholder="ตัวเลขเท่านั้น">
+									<input type="number" id="patient_case_vn" class="input_control" min="0" value="" placeholder="ตัวเลขเท่านั้น">
 								</div>
 								<div class="form-group span3">
 									<label class=" ">หัตถการ : <span class="redFont ">*</span></label>

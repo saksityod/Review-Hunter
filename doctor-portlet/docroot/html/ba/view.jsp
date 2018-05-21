@@ -2780,7 +2780,7 @@ $(document).ready(function() {
 		});
 		
 		$('#btnUploadFile').click(function(){
-			getAjax($plRoute+"/getFolder/"+$('#patient_case').data('id'),'get','',function(rs){
+			getAjax($plRoute+"/getFolder2/"+$('#patient_case').data('id'),'get','',function(rs){
 		        //console.log(rs);
 		        var html_temp ='';
 		        if(rs){

@@ -436,7 +436,7 @@ $(document).ready(function(){
 					$html = '<tr class="" data-id="'+this.article_social_media_id+'"> '
 						+'<td><select class="article_social_media_social social form" disabled> '
 							+'<option value=""> ---- เลือกสื่อ ---- </option>'+$html_articleSocialMedia+'</select></td> '
-						+'<td><input type="text" class="article_social_media_link form" value="'+this.link+'" disabled><a href="https://'+this.link+'" target="_blank" class="pull-right">ลิงค์</a></td>'
+						+'<td><input type="text" class="article_social_media_link form" value="'+this.link+'" disabled><a href="'+this.link+'" target="_blank" class="pull-right">ลิงค์</a></td>'
 						+'<td><input type="'+encriptValue+'" class="article_social_media_username form_encript" value="'+this.usr_name+'" disabled></td>'
 						+'<td><input type="'+encriptValue+'" class="article_social_media_password form_encript" value="'+this.pwd+'" disabled></td>'
 						+'<td><input type="text" class="article_social_media_remark form" value="'+this.note+'" disabled></td>'

@@ -749,7 +749,7 @@
 								<thead>
 										<tr>
 											<th>ประเภท <span class="redFont ">*</span></th>
-											<th>ลิงค์ <span class="redFont ">*</span></th>
+											<th>ลิงค์  (ตัวอย่าง https://www.facebook.com)<span class="redFont ">*</span></th>
 											<th>Username</th>
 											<th>Password</th>
 											<th>หมายเหตุ</th>

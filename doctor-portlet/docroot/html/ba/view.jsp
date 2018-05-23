@@ -1712,6 +1712,7 @@ $(document).ready(function() {
 			FormAllData.append('formdata', JSON.stringify($data));
 
 			//console.log($data,'data');
+			
 			$.ajax({
 			    url:$plRoute+'/cu',
 			    type:'POST',
@@ -1799,6 +1800,7 @@ $(document).ready(function() {
 		
 		function timeHour() {
 			var hrmlHour = '';
+				hrmlHour +='<option value="">เลือก</option>';
 				hrmlHour +='<option value="00">00</option>';
 				hrmlHour +='<option value="01">01</option>';
 				hrmlHour +='<option value="02">02</option>';
@@ -1828,6 +1830,7 @@ $(document).ready(function() {
 		
 		function timeMinute() {
 			var htmlHour = '';
+				htmlHour +='<option value="">เลือก</option>';
 				htmlHour +='<option value="00">00</option>';
 				htmlHour +='<option value="01">01</option>';
 				htmlHour +='<option value="02">02</option>';
@@ -2626,6 +2629,9 @@ $(document).ready(function() {
 			var today = new Date(($current_date.split('/')[2]),$current_date.split('/')[1],$current_date.split('/')[0]);
 			var bDate = new Date($(this).val().split('/')[2],$(this).val().split('/')[1],$(this).val().split('/')[0]);
 			var age = Math.floor((today - bDate) / (365.25 * 24 * 60 * 60 * 1000));
+			if(age<=0) {
+				age = "";
+			}
 			$('.yearOld').text(age);	
 		})
 	    

@@ -26,7 +26,7 @@ $(document).ready(function(){
 				data:'',
 				headers:{Authorization:"Bearer "+tokenID.token},
 				success:function(rs){
-					console.log(rs);
+					//console.log(rs);
 					if(rs.status==200) {
 						if(rs.articleSocialMedia){
 							$.each(rs.articleSocialMedia,function(){
@@ -374,7 +374,7 @@ $(document).ready(function(){
 					headers:{Authorization:"Bearer "+tokenID.token},
 					data:datafile,
 					success:function(data){
-						console.log(data,'cu');
+						//console.log(data,'cu');
 						if(data.status==200) {
 							callFlashSlide('บักทึกข้อมูลสำเร็จ!','success');
 							$("#ModalWriter").modal('hide');
@@ -396,7 +396,7 @@ $(document).ready(function(){
 						headers:{Authorization:"Bearer "+tokenID.token},
 						data:{"article_id":article_id},
 						success:function(data){
-							console.log(data,'GetDataEdit')
+							//console.log(data,'GetDataEdit')
 							
 							//console.log(data['article'][0]['workflow_actual_date'],'datetestww');
 							$("#article_code").val(data['article'][0]['article_code']);
@@ -431,7 +431,7 @@ $(document).ready(function(){
 			function get_social_list(data){
 				$('#article_social_media table tbody').html('');
 				var encriptValue = ($.inArray(22309, rolesArray) != -1) ? "text" : "password";
-				console.log(encriptValue,'encriptValue')
+				//console.log(encriptValue,'encriptValue')
 				$.each(data,function(){
 					$html = '<tr class="" data-id="'+this.article_social_media_id+'"> '
 						+'<td><select class="article_social_media_social social form" disabled> '
@@ -590,7 +590,7 @@ $(document).ready(function(){
 						TRTDHTML +=
 			                '<tr>'+
 			                '<td "'+TRTDClass+'">' + value.article_code +'</td>'+
-			                '<td "'+TRTDClass+'">' + value.writer +'</td>'+
+			                '<td "'+TRTDClass+'">' + value.writer.split("-")[1]+'</td>'+
 			                '<td "'+TRTDClass+'">' + value.procedure_name +'</td>'+
 			                '<td "'+TRTDClass+'">' + value.doctor_name +'</td>'+
 			                '<td "'+TRTDClass+'">' + formatDateDMY(value.writing_start_date) +'</td>'+
@@ -979,7 +979,7 @@ $(document).ready(function(){
 				}
 			}
 			
-			console.log(rolesArray);
+			//console.log(rolesArray);
 			
 			if($.inArray(22312, rolesArray) != -1 || $.inArray(22311, rolesArray) != -1 || $.inArray(22310, rolesArray) != -1) {
 				$('#btn_add_social').show();
@@ -1070,7 +1070,7 @@ $(document).ready(function(){
 							async:false,
 							headers:{Authorization:"Bearer "+tokenID.token},
 							success:function(rs){
-								console.log(rs,'del_rec');
+								//console.log(rs,'del_rec');
 								$('#confrimModalDelData').modal('hide');
 								if(rs.status == 200){
 									thiss.closest('tr').remove();

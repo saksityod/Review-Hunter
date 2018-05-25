@@ -723,7 +723,7 @@
 										<thead>
 											<tr>
 												<th>ชื่อหัตถการ <span class="redFont ">*</span></th>
-												<th>ปีที่ควรทำ <span class="redFont ">*</span></th>
+												<th>ปีที่ควรทำ</th>
 												<th>หมายเหตุ</th>
 												<th width="20px"></th>
 											</tr>
@@ -1660,7 +1660,9 @@ $(document).ready(function() {
 					remark 			:$(this).find('.case_followup_remark').val()
 				});
 			});
+			
 			//console.log(followup,'data followup');
+			
 			$.ajax({
 				url: $plRoute+'/cuFollowup',
 				type : 'POST',
@@ -1670,12 +1672,14 @@ $(document).ready(function() {
 				headers:{Authorization:"Bearer "+tokenID.token},
 				success : function(rs) {
 					//console.log(rs,'followup');
-					if(rs.status = 200){
+					if(rs.status == 200){
 						pushData_caseFollowup(rs.data);
 						$("#case_followup").find('.del_rec').show();
 						$("#case_followup").find('.modal-edit').trigger('click');
 			    		callFlashSlide('สำเร็จ!!  บันทึกข้อมูลเรียบร้อย','success');
-					}else{
+					}else if(rs.status == 400){
+						callFlashSlide('กรุณาระบุหัตถการ !!','error');
+					} else {
 						callFlashSlide('เกิดข้อผิดพลาด !!  ไม่สามารถบันทึกข้อมูลได้','error');
 					}
 			    }

@@ -609,13 +609,11 @@ $(document).ready(function(){
 			
 			function setDataAddAndEdit(trueOrfalse) {
 				$('#alert_multi').multiselect({
-					  enableFiltering: true,  
-					  maxHeight: 200,
-					  onChange: function() {
-					  }
+					  enableFiltering: true,
+					  maxHeight: 200
 				});
 				
-				$('#alert_multi').val("").multiselect('refresh');
+				$('#alert_multi').val("").multiselect('rebuild');
 				
 				DropDownCurrentStep(trueOrfalse);
 				DropDownToStep();

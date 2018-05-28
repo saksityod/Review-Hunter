@@ -1480,7 +1480,8 @@ $(document).ready(function() {
 			$('.multiple').multiSelect();
 			$('.datepicker').keydown(function(e){e.preventDefault();});
 			$('#case_stage_notification').multiselect({
-		        includeSelectAllOption: false,
+				enableFiltering: true,
+				includeSelectAllOption: false,
 		        maxHeight: 200
 		    });
 		});
@@ -1639,7 +1640,7 @@ $(document).ready(function() {
 						$('#case_social_media').find('.modal-add,.modal-edit,.btn-edit').hide();
 						$('#case_social_media').find('.btn-collapse.open').click();
 					}
-					$('#case_stage_notification').multiselect("refresh");
+					$('#case_stage_notification').multiselect("rebuild");
 					if(callback) callback();
 				}
 			});
@@ -2260,7 +2261,7 @@ $(document).ready(function() {
 			$('.btn-collapse.open').click();
 			$('.input_control').attr('disabled','disabled');
 			$('#profileImage,#review_image img').attr('src','');
-			$('#case_stage_notification').val('').multiselect("refresh");
+			$('#case_stage_notification').val('').multiselect("rebuild");
 			$('.storeFile').val('');
 			$('.case_coordinate').attr('disabled','disabled').multiselect("refresh");
 			$('#patient_amphur,#patient_district').html('');

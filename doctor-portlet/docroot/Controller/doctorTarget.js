@@ -82,6 +82,7 @@ $(document).ready(function() {
 			$("#from_year").html(getyear($current_year,$current_year+20));
 			$("#from_doctor_name").prop("disabled",false);
 			$("#information_errors").hide();
+			clearAlertMulti();
 		});
 		
 		var target_id_confirm = null;
@@ -180,6 +181,7 @@ $(document).ready(function() {
 			$("#information_errors").hide();
 			$("#from_doctor_name").prop("disabled",true);
 			$('#ModalEdit').modal({backdrop: 'static', keyboard: false});
+			clearAlertMulti();
 			
 			getAjax($plRoute+"/get_target",'get',{doctor_target_id:$(this).data('target_id')},function(rs){
 				$('#ModalEdit').data('target_id',rs.data.doctor_target_id);
@@ -285,13 +287,7 @@ $(document).ready(function() {
 					$html += "<option value= "+v.userId+"|"+v.emailAddress+">"+v.screenName+"</option>";
 				});
 				
-				$("#alert_multi").html($html).multiselect({
-					includeSelectAllOption: true,
-			        maxHeight: 200,
-			        onChange: function() {
-			            //console.log($('#alert_multi').val());
-			        }
-			    });
+				$("#alert_multi").html($html);
 				
 			});
 			
@@ -339,7 +335,6 @@ $(document).ready(function() {
 				
 				target_id_confirm = null;
 				confirm_check_target = null;
-				$("#alert_multi").multiselect('refresh');
 		}
 		
 		function validation(selector){
@@ -420,6 +415,14 @@ $(document).ready(function() {
 		}
 		
 		
+		function clearAlertMulti() {
+			$("#alert_multi").multiselect({
+				enableFiltering: true,
+				includeSelectAllOption: true,
+		        maxHeight: 200
+		    });
+			$("#alert_multi").val("").multiselect('rebuild');
+		}
 	
 	}
 });

@@ -434,7 +434,250 @@
  -->
 <style>
 .redFont{     float: inherit !important; }
-</style>	
+</style>
+
+<style>
+	select{ width: 96% !important;}
+	.case_list{     border: 1px solid darkgray; }
+	.edit-list{ margin:10px}
+	.row-fluid {	margin-button: 10px;	}
+	/* .modal-body > div{margin-top:20px}
+	.modal-body > div{display:none;} */
+	.aui hr{ margin:10px 0 20px}
+
+.list_tree{ padding-top:15px !important; }
+.list_tree, .list_tree ul {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  list-style-type: none;
+  margin-left:0;
+  padding-left:15px;
+}
+.list_tree li ul li:before {
+    color: orange;
+    font-size: 25px;
+    padding-right: 10px;
+    float: left;
+}
+.list_tree li ul li.folder:before {
+	font-family: FontAwesome;
+    content: "\f07b";
+    float: left;
+}
+.list_tree li ul li.file:before {
+	font-family: FontAwesome;
+    content: "\f15b";
+    color: #0aba1d;
+    font-size: 20px;
+    float: left;
+}
+.list_tree li ul li.file.type-jpg:before,
+.list_tree li ul li.file.type-png:before,
+.list_tree li ul li.file.type-jpeg:before {
+	font-family: FontAwesome;
+    content: "\f1c5";
+}
+.list_tree > li:before {
+    font-family: FontAwesome;
+    content: "\f015";
+    color:skyblue;
+    font-size: 40px;
+    padding-right: 10px;
+}
+.list_tree li {
+	font-size: 12px;
+	    margin-top: 10px !important;
+	    width: 100% !important;
+    display: inline-block;
+}
+.list_tree > li > ul > li > ul > li > ul > li{     display: flex !important;	}
+
+/* UL Layer 1 Rules 
+#nestedlist {
+  list-style-image:url(http://placehold.it/5x15/ff0000);
+  font-size: 20px;
+  font-weight:bold;
+}
+
+/* UL Layer 2 Rules 
+#nestedlist ul {
+  list-style-image:url(http://placehold.it/5x15/00ff00);
+  font-size: 18px;
+  font-weight: normal;
+  margin-top: 3px;
+}
+
+/* UL Layer 3 Rules 
+#nestedlist ul ul {
+  list-style-image:url(http://placehold.it/5x15/0000ff);
+  font-size: 16px;
+}
+
+/* UL 4 Rules 
+#nestedlist ul ul ul {
+  list-style-image:url(http://placehold.it/5x15/ffff00);
+  font-size: 14px;
+}
+*/
+
+.ms-container .ms-selectable li.ms-elem-selectable, .ms-container .ms-selection li.ms-elem-selection{
+	font-size:10px;
+    line-height: 1.2;
+}
+.ms-container .ms-selectable li.ms-elem-selectable:before{
+	content: "-";
+	padding-right:10px;
+	padding-top: 5px;
+}
+.add_supervisedBy{
+	position: absolute;
+    margin-left: 10px;
+    font-size: 25px;
+}
+.patient_case_supervisedBy{
+    margin-left: 20px;
+    margin-bottom: 5px;
+    padding: 5px;
+    width: max-content;
+    float: left;
+    padding-right: 10px;
+    margin-top: 20px;
+}	
+.remove_supervisedBy{	margin-left: 5px;	}
+#fileForm {
+	 width: 100%;
+	 height: 100%;
+}
+.coordinate_group{ margin-bottom:15px}
+.ui-autocomplete{ z-index:1099 !important}
+.aui li{ margin-top: 5px;}
+.aui .btn.active, .aui .btn:active{ background: #0044cc ;color:white  ;}
+.case_list {	margin-bottom: 20px;	}
+.wrap{	margin-bottom: 20px;	}
+.stage_upload_img{	 }
+.stage_upload_img.active{filter:opacity(30%);border : 5px solid blue!important}
+.redFont{ float:inherit; line-height: initial;}
+.hr1{     margin: 5px 0 !important; }
+.wrap_option{ display: inline-flex;}
+.btn-group { display: inline-flex; padding-right:0px }
+.wrap_volume { padding-right: 40px; }
+.del-folder,.btn-delete{ padding: 3px 10px !important;}
+	.aui .wrap_isPass{ display: inline-flex;    margin-right: 40px; }
+	.aui .btn-group, .aui .button-holder{ display: inline-flex; }
+.ms-container{ width:auto !important }
+.file_name{	float: left;
+			    max-width: 250px;
+			    white-space: nowrap;
+			    overflow: hidden;
+			    text-overflow: ellipsis; }
+.folder_name{float: left;
+			    max-width: 250px;
+			    white-space: nowrap;
+			    overflow: hidden;
+			    text-overflow: ellipsis;}
+.wrap_button{    display: flow-root;padding-top:15px}
+.file_name:hover{ cursor:pointer}
+.ui_tpicker_hour,.ui_tpicker_minute{ width :70px}	
+.ui_tpicker_minute_slider,.ui_tpicker_hour_slider{ width :60px}
+.aui input[readonly]{ background:white;cursor:pointer}
+
+	.folder a{ padding-left:10px}
+	.case_list .btn {	margin-bottom: 10px;	}
+	.btn-collapse{
+	    padding: 0px 10px;
+	    cursor: pointer;
+    }
+    .btn-collapse.open .icon-chevron-down:before{	content:"\f077";	}
+    .wrap h4{
+        background: aliceblue;
+	    margin: 0px;
+	    padding:15px;
+	    border-left: 5px solid cadetblue;
+	    font-size: 15px;
+    }
+
+    .content_field{     padding: 0px 10px;
+	    background: rgba(200, 250, 250, 0.1);
+	    box-shadow: rgb(170, 170, 170) 0px 0px 4px -1px inset; }
+	    
+.list_tree li li:hover, .list_tree li ul li:hover {
+    background: aliceblue;
+}
+.responsive-table{ padding-top:15px; padding-bottom:15px; }
+@media  only screen and (max-width: 979px){
+	td{ border-top:0px !important; }
+	.file .file_name,.file .folder_name{ white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+	
+	.file_name{	padding-left:0px; max-width: 200px;}
+	.folder_name{padding-left:0px;max-width: 205px;}
+	.aui body{	padding:0;	}
+
+	.aui button,.aui .btn{
+	    font-size: 15px !important;
+	    width: auto !important;
+    	padding: 5px !important;
+    	margin-right:5px;
+    	margin-top:0px;
+    	display: initial;
+	}
+	.aui .btnIsOpen{	margin:0px	}
+	/* .aui input,.aui select{
+	    font-size: 13px !important;
+	    width: auto !important;
+	    display: inline-block !important;
+	} */
+	.aui input,.aui select,.aui .input_control{
+	    font-size: 13px !important;
+    	padding: 5px 5px !important;
+	}
+	.aui input[type='file']{
+	    font-size: 13px !important;
+	    width: auto !important;
+    	padding: 0 5px !important;
+	    display: inline-block !important;
+	}
+	.aui .case_list{	padding:10px;	}
+	.aui .wrap_button{	display:inline-flex;	}
+	.aui .responsive-table {
+	    width: 100%;
+	    margin-bottom: 15px;
+	    overflow: hidden;
+	}
+	.aui .table-bordered{	border:0px !important	}
+	.aui .label-control{	width: max-content;	}
+	.list_tree, .list_tree ul{ 
+		padding-left: 8px;
+	    text-indent: 0; 
+	}
+	.volume_title{ display:none}
+	.wrap_volume{ padding-right: 10px; }
+	.list_tree {	padding-left:0	}
+	.list_tree li {	font-size: 12px;	}
+	.list_tree > li:before{     font-size: 15px; }
+	.list_tree li ul li:before{ font-size: 15px; }
+	.list_tree li ul li.file:before{  font-size: 10px; }
+	.btn-group { display: inline-flex; padding-right:5px }
+	.aui .wrap_isPass{     margin-right: 20px; }
+	.patient_case_supervisedBy{	 margin-top: 0px;	}		
+}
+@media  only screen and (max-width: 767px){
+
+	.aui .portlet-content .form-group[class*="span"], 
+	.aui .portlet-content .form-group.uneditable-input[class*="span"], 
+	.aui .portlet-content .row-fluid .form-group[class*="span"], 
+	.aui .modal .row-fluid .form-group[class*="span"]{
+		float: left !important;
+		width: 50% !important;
+		padding-right: 5%;
+	}
+}
+.numberNotIcon[type=number]::-webkit-inner-spin-button, 
+.numberNotIcon[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+</style>
+	
 <div id="container1">
 	<!--  nav bar -->
 	<div class='row-fluid'>
@@ -633,7 +876,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row-fluid">
+				<div class="row-fluid" style="margin-bottom: 5px;">
 					<div class="span5 form-horizontal p-t-xxs">
 						<div class="form-group p-xxs">
 							<label class="control-label">ประเภทบทความ<span style="color:red;">*</span>:</label>
@@ -698,7 +941,7 @@
 						<div class="form-group p-xxs">
 							<label class="control-label">บทความที่มีอยู่: </label>
 							<div class="controls">
-								<span id="span_doc_path">sdwdsdw.pdf
+								<span id="span_doc_path">
 								</span>
 							</div>
 						</div>
@@ -744,7 +987,7 @@
 							</span>
 							<button class="btn btn-danger modal-cancel btn-action pull-right">ยกเลิก</button> 
 						</div>
-						<div class="responsive-table">
+						<div class="responsive-table" style="overflow: auto;">
 							<table class="table table-bordered">
 								<thead>
 										<tr>

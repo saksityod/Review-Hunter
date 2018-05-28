@@ -491,7 +491,7 @@ $(document).ready(function(){
 						if(value['doc_file']!=null) {
 							var doc_file = (value['doc_file'].length>25) ? value['doc_file'].substring(0,25) + "..." : value['doc_file'];
 							//console.log(doc_file,'doc_file')
-							doc_path_file += '<span title="'+value['doc_file']+'">'+doc_file+'</span><span id="'+value['article_doc_id']+'" class="doc_file_del"><a href="#" style="color:red;" title="ลบ">x</a></span><br/>';
+							doc_path_file += '<span title="'+value['doc_file']+'">'+doc_file+'</span> <span id="'+value['article_doc_id']+'" class="doc_file_del"><a href="#" style="color:red;" title="ลบ">x</a></span><br/>';
 						}
 				    });
 					$('#span_doc_path').html(doc_path_file);

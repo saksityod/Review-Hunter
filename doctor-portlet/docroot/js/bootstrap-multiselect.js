@@ -1033,7 +1033,7 @@
                             }
 
                         }, this));
-                        this.$filter.find('.input-group').append(clearBtn);
+                        //this.$filter.find('.input-group').append(clearBtn);
                     }
 
                     this.$ul.prepend(this.$filter);

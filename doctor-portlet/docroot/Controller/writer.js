@@ -609,6 +609,7 @@ $(document).ready(function(){
 			
 			function setDataAddAndEdit(trueOrfalse) {
 				$('#alert_multi').multiselect({
+					  enableFiltering: true,  
 					  maxHeight: 200,
 					  onChange: function() {
 					  }
@@ -848,18 +849,18 @@ $(document).ready(function(){
 				todayBtn: true,
 	            language: 'th',            
 	            thaiyear: true              
-	        }).datepicker("setDate", "0").keydown(function(e){e.preventDefault();});
+	        });
 				
 			$("#btn_search").click(function(){
-				if($("#search_start_date").val()=='') {
-					$("#search_start_date").focus();
-					callFlashSlide('โปรดระบุจากวันที่!','warning')
-				}else if($("#search_end_date").val()=='') {
-					$("#search_end_date").focus();
-					callFlashSlide('โปรดระบุถึงวันที่!','warning')
-				} else {
+//				if($("#search_start_date").val()=='') {
+//					$("#search_start_date").focus();
+//					callFlashSlide('โปรดระบุจากวันที่!','warning')
+//				}else if($("#search_end_date").val()=='') {
+//					$("#search_end_date").focus();
+//					callFlashSlide('โปรดระบุถึงวันที่!','warning')
+//				} else {
 					getData();
-				}
+//				}
 			});
 			
 			$("#btn_add").click(function() {

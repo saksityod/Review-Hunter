@@ -667,23 +667,6 @@ $(document).ready(function(){
 					}
 				});
 			}
-			
-			function delDocFile(article_doc_id,article_id) {
-				$.ajax({
-					url:restfulURL+"/"+serviceName+"/writer/del_doc_file",
-					type:"post",
-					dataType:"json",
-					async:true,
-					data:{"article_doc_id":article_doc_id,"article_id":article_id},
-					headers:{Authorization:"Bearer "+tokenID.token},
-					success:function(data){
-						if(data.status==200) {
-							callFlashSlide("ลบข้อมูล สำเร็จ.",'success');
-							list_doc_file(data.article);
-						}
-					}
-				});
-			}
 				
 			//Autocomeplete
 			$("#search_article_code").autocomplete({
@@ -916,13 +899,33 @@ $(document).ready(function(){
 			
 			$("#span_doc_path").on("click",'.doc_file_del',function() {
 				var doc_id = $(this).attr('id');
-				$('#confrimModalDelFile').modal({
-			    	backdrop: 'static',
+				$(this).parent().parent().parent().children().click();
+				 
+				$("#confrimModalDelFile").modal({
+					backdrop: 'static',
 			      	keyboard: false
-			    }).one('click', '#btnConfirmDelFile', function(e) {
-			    	delDocFile(doc_id,GlobalWriterID);
-			    	$('#confrimModalDelFile').modal('hide');
-			    });
+				});
+				
+				$(document).off("click","#btnConfirmDelFile");
+				$(document).on("click","#btnConfirmDelFile",function(){
+					$.ajax({
+						url:restfulURL+"/"+serviceName+"/writer/del_doc_file",
+						type:"post",
+						dataType:"json",
+						async:true,
+						data:{"article_doc_id":doc_id,"article_id":GlobalWriterID},
+						headers:{Authorization:"Bearer "+tokenID.token},
+						success:function(data){
+							if(data.status==200) {
+								callFlashSlide("ลบข้อมูล สำเร็จ.",'success');
+								list_doc_file(data.article);
+								$("#confrimModalDelFile").modal('hide');
+							} else {
+								callFlashSlide("ไม่สามารถลบข้อมูลได้.",'error');
+							}
+						}
+					});
+				});
 			});
 				
 			var files;
@@ -1056,15 +1059,21 @@ $(document).ready(function(){
 //				});
 				
 				$('body').on('click','.del_rec',function() {
-					var thiss = $(this);
-					$('#confrimModalDelData').modal({
-				    	backdrop: 'static',
+					var dataid = $(this).closest('tr').data('id');
+					var datatr = $(this).closest('tr');
+					$(this).parent().parent().parent().children().click();
+					 
+					$("#confrimModalDelData").modal({
+						backdrop: 'static',
 				      	keyboard: false
-				    }).one('click', '#btnConfirmDelData', function(e) {
-				    	$.ajax({
+					});
+					
+					$(document).off("click","#btnConfirmDelData");
+					$(document).on("click","#btnConfirmDelData",function(){
+						$.ajax({
 							url:restfulURL+"/"+serviceName+"/writer/delRec",
 							type:"post",
-							data:{id:thiss.closest('tr').data('id')},
+							data:{id:dataid},
 							dataType:"json",
 							async:false,
 							headers:{Authorization:"Bearer "+tokenID.token},
@@ -1072,7 +1081,7 @@ $(document).ready(function(){
 								//console.log(rs,'del_rec');
 								$('#confrimModalDelData').modal('hide');
 								if(rs.status == 200){
-									thiss.closest('tr').remove();
+									datatr.remove();
 									callFlashSlide('ลบข้อมูลเรียบร้อย!!','success');
 								}else{
 									callFlashSlide('ไม่สามารถลบไฟล์ได้!!','error');

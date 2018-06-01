@@ -41,7 +41,7 @@ $(document).ready(function() {
 		/*	get data to modal for edit*/
 		$('#table_'+$appName).on('click','.edit', function(e){
 			$("#information_errors_update").hide();
-			$('#modalAdd').modal({backdrop: 'static', keyboard: false});
+			$('#modalEdit').modal({backdrop: 'static', keyboard: false});
 			
 			$id = $(this).attr('data-id');
 			$url =$plRoute+"/getOne/"+$id;

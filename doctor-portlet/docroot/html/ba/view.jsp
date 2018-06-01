@@ -2449,7 +2449,8 @@ $(document).ready(function() {
 					is_group_post 		:$(this).find(".case_contract_isGroupPost").prop("checked")==true?1:0,
 					is_send_picture 	:$(this).find(".case_contract_isSendPicture").prop("checked")==true?1:0,
 					is_other 			:$(this).find(".case_contract_isOther").prop("checked")==true?1:0,
-					file_name_check 	:$(this).find(".case_contract_file_name_check").val()
+					file_name_check 	:$(this).find(".case_contract_upload").attr('id')?$(this).find(".case_contract_upload").attr('id'):''
+					//file_name_check 	:$(this).find(".case_contract_file_name_check").val()
 				});
 			});
 			$data['case_contract'] =contract;
@@ -2483,7 +2484,8 @@ $(document).ready(function() {
 					writing_start_date	:formatDateYMD($(this).find('.case_article_writingStartDate').val()),
 					writing_end_date 	:formatDateYMD($(this).find('.case_article_writingEndDate').val()),
 					plan_date 			:formatDateYMD($(this).find('.case_article_planDate').val()),
-					file_name_check 	:$(this).find(".case_contract_file_name_check").val()
+					file_name_check 	:$(this).find(".case_article_upload").attr('id')?$(this).find(".case_article_upload").attr('id'):''
+					//file_name_check 	:$(this).find(".case_contract_file_name_check").val()
 				});
 			});
 			$data['case_article'] =article;
@@ -2515,15 +2517,60 @@ $(document).ready(function() {
 			$(this).closest('.wrap').find('.content_field').toggleClass("collapse");
 		});
 		
-		$('body').on('click','.del_rec',function(){
-			$('#confrimModal').modal('show');
-			var thiss = $(this);
-			$('#btnConfirmOK').one('click',function(){
-				getAjax($plRoute+'/delRec','post',{id:thiss.closest('tr').data('id'),method:thiss.closest('.wrap').attr('id')},function(rs){
+// 		$('body').on('click','.del_rec',function(){
+// 			$('#confrimModal').modal('show');
+// 			var thiss = $(this);
+// 			$('#btnConfirmOK').one('click',function(){
+// 				getAjax($plRoute+'/delRec','post',{id:thiss.closest('tr').data('id'),method:thiss.closest('.wrap').attr('id')},function(rs){
+// 					//console.log(rs,'del_rec');
+// 					$('#confrimModal').modal('hide');
+// 					if(rs.status == 200){
+// 						thiss.closest('tr').remove();
+// 						callFlashSlide('ลบข้อมูลเรียบร้อย!!','success');
+// 					}else{
+// 						callFlashSlide('ไม่สามารถลบไฟล์ได้!!','error');
+// 					}
+// 				});
+// 			});
+// 		});
+		
+// 		$('body').on('click','.remove_file', function () {
+// 			var elm_file = $(this).parent();
+// 			$('#confrimModal').modal('show');
+// 			$('#btnConfirmOK').one('click',function(){
+// 				getAjax($plRoute+'/deleteFile','post',{method:elm_file.closest('.wrap').attr('id'),file_id:elm_file.data('id')},function(rs){
+// 					//console.log(rs);
+// 					$('#confrimModal').modal('hide');
+// 					if(rs.status == 200){
+// 						elm_file.remove();
+// 						callFlashSlide('ลบข้อมูลเรียบร้อย!!','success');
+// 					}else{
+// 						callFlashSlide('ไม่สามารถลบไฟล์ได้!!','error');
+// 					}
+// 				});
+// 			});
+// 		});
+		
+		$('body').on('click','.del_rec',function() {
+			var dataid = $(this).closest('tr').data('id');
+			var datamethod = $(this).closest('.wrap').attr('id');
+			var datatr = $(this).closest('tr');
+			
+			$(this).parent().parent().parent().children().click();
+			 
+			$("#confrimModal").modal({
+				backdrop: 'static',
+		      	keyboard: false
+			});
+			
+			$(document).off("click","#btnConfirmOK");
+			$(document).on("click","#btnConfirmOK",function(){
+				
+				getAjax($plRoute+'/delRec','post',{id:dataid,method:datamethod},function(rs){
 					//console.log(rs,'del_rec');
 					$('#confrimModal').modal('hide');
 					if(rs.status == 200){
-						thiss.closest('tr').remove();
+						datatr.remove();
 						callFlashSlide('ลบข้อมูลเรียบร้อย!!','success');
 					}else{
 						callFlashSlide('ไม่สามารถลบไฟล์ได้!!','error');
@@ -2533,14 +2580,24 @@ $(document).ready(function() {
 		});
 		
 		$('body').on('click','.remove_file', function () {
-			var elm_file = $(this).parent();
-			$('#confrimModal').modal('show');
-			$('#btnConfirmOK').one('click',function(){
-				getAjax($plRoute+'/deleteFile','post',{method:elm_file.closest('.wrap').attr('id'),file_id:elm_file.data('id')},function(rs){
+			var dataid = $(this).parent().data('id');
+			var datamethod = $(this).parent().closest('.wrap').attr('id');
+			var datatr = $(this).parent();
+			
+			$(this).parent().parent().parent().children().click();
+			 
+			$("#confrimModal").modal({
+				backdrop: 'static',
+		      	keyboard: false
+			});
+			
+			$(document).off("click","#btnConfirmOK");
+			$(document).on("click","#btnConfirmOK",function(){
+				getAjax($plRoute+'/deleteFile','post',{method:datamethod,file_id:dataid},function(rs){
 					//console.log(rs);
 					$('#confrimModal').modal('hide');
 					if(rs.status == 200){
-						elm_file.remove();
+						datatr.remove();
 						callFlashSlide('ลบข้อมูลเรียบร้อย!!','success');
 					}else{
 						callFlashSlide('ไม่สามารถลบไฟล์ได้!!','error');
@@ -2915,17 +2972,56 @@ $(document).ready(function() {
 			});
 		});
 		
-		$("body").on('click','.del-folder',function(e){
-			var thiss = $(this);
-			//thiss.closest('ul').remove();
-			//console.log($('[data-folder_id="'+thiss.closest('li').data('folder_id')+'"]').remove());
+// 		$("body").on('click','.del-folder',function(e){
+// 			var thiss = $(this);
+// 			//thiss.closest('ul').remove();
+// 			//console.log($('[data-folder_id="'+thiss.closest('li').data('folder_id')+'"]').remove());
 			
-			$('#btnConfirmOK').one("click", function( e ) {
-				getAjax($plRoute+"/destoryFolder",'post',{folder_id:thiss.closest('li').data('folder_id'),case_id:$('#patient_case').data('id')},function(rs){
+// 			$('#btnConfirmOK').one("click", function( e ) {
+// 				getAjax($plRoute+"/destoryFolder",'post',{folder_id:thiss.closest('li').data('folder_id'),case_id:$('#patient_case').data('id')},function(rs){
+// 					//console.log(rs,'del-folder');
+// 					if(rs.status==200){ 
+// 						$('[data-folder_id="'+thiss.closest('li').data('folder_id')+'"]').remove();
+// 						$('[data-folder_id="'+thiss.closest('ul').data('folder_id')+'"]').remove();
+// 						//thiss.closest('ul.wrap_folder').remove();
+// 						callFlashSlide('ลบไฟล์สำเร็จ' ,'success');
+// 					}else if(rs.status==400){
+// 						callFlashSlide(rs.message ,'error');
+// 					}
+// 					$('#confrimModal').modal('hide');
+// 				});
+// 			});
+// 		});
+
+// 		$("body").on('click','.del-file',function(e){
+// 			var thiss = $(this);
+// 			$('#btnConfirmOK').one("click", function( e ) {
+// 				getAjax($plRoute+"/deleteFile",'post',{file_id:thiss.closest('li').data('file_id'),method:thiss.closest('.wrap').attr('id')},function(rs){
+// 					//console.log(rs,'deleteFile');
+// 					if(rs.status==200){ 
+// 						callFlashSlide('ลบไฟล์สำเร็จ' ,'success');
+// 						thiss.closest('li').remove();
+// 					}else{
+// 						callFlashSlide('เกิดข้อผิดพลาด !! ไม่สามารถลบไฟล์ได้' ,'error');
+// 					}
+// 					$('#confrimModal').modal('hide');
+// 				});
+// 			});
+// 		});
+		
+		$("body").on('click','.del-folder',function(e){
+			var dataid = $(this).closest('li').data('folder_id');
+			var dataul = $(this).closest('ul').data('folder_id');
+			
+			$(this).parent().parent().parent().children().click();
+			
+			$(document).off("click","#btnConfirmOK");
+			$(document).on("click","#btnConfirmOK",function(e){
+				getAjax($plRoute+"/destoryFolder",'post',{folder_id:dataid,case_id:$('#patient_case').data('id')},function(rs){
 					//console.log(rs,'del-folder');
 					if(rs.status==200){ 
-						$('[data-folder_id="'+thiss.closest('li').data('folder_id')+'"]').remove();
-						$('[data-folder_id="'+thiss.closest('ul').data('folder_id')+'"]').remove();
+						$('[data-folder_id="'+dataid+'"]').remove();
+						$('[data-folder_id="'+dataul+'"]').remove();
 						//thiss.closest('ul.wrap_folder').remove();
 						callFlashSlide('ลบไฟล์สำเร็จ' ,'success');
 					}else if(rs.status==400){
@@ -2937,13 +3033,19 @@ $(document).ready(function() {
 		});
 		
 		$("body").on('click','.del-file',function(e){
-			var thiss = $(this);
-			$('#btnConfirmOK').one("click", function( e ) {
-				getAjax($plRoute+"/deleteFile",'post',{file_id:thiss.closest('li').data('file_id'),method:thiss.closest('.wrap').attr('id')},function(rs){
+			var dataid = $(this).closest('li').data('file_id');
+			var datamethod = $(this).closest('.wrap').attr('id');
+			var datali = $(this).closest('li');
+			
+			$(this).parent().parent().parent().children().click();
+			
+			$(document).off("click","#btnConfirmOK");
+			$(document).on("click","#btnConfirmOK",function(e){
+				getAjax($plRoute+"/deleteFile",'post',{file_id:dataid,method:datamethod},function(rs){
 					//console.log(rs,'deleteFile');
 					if(rs.status==200){ 
 						callFlashSlide('ลบไฟล์สำเร็จ' ,'success');
-						thiss.closest('li').remove();
+						datali.remove();
 					}else{
 						callFlashSlide('เกิดข้อผิดพลาด !! ไม่สามารถลบไฟล์ได้' ,'error');
 					}
